@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">DxWorkspace</string>
+    <string name="title_intro_app">Giải pháp không gian làm việc số cho doanh nghiệp</string>
+    <string name="please_enter_info">Email</string>
+    <string name="user_name">Email</string>
+    <string name="password">Mật khẩu</string>
+    <string name="login">Đăng nhập</string>
+    <string name="portal">Portal</string>
+    <string name="forget_password">Quên mật khẩu ?</string>
+
 </resources>

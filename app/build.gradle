@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk compile_version
 
     defaultConfig {
         applicationId "com.example.test.dxworkspace"
-        minSdk 24
-        targetSdk 32
+        minSdk min_sdk_version
+        targetSdk target_version
         versionCode 1
         versionName "1.0"
 
@@ -35,23 +35,25 @@ android {
     }
     def API_END_POINT = "API_END_POINT"
     def AUTH_FIREBASE = "AUTH_FIREBASE"
-    
+
 
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.10.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.core:core-ktx:1.6.10'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10"
+    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // dagger
@@ -60,11 +62,12 @@ dependencies {
     implementation 'com.google.dagger:dagger-android-support:2.35.1'
     kapt 'com.google.dagger:dagger-compiler:2.35.1'
     kapt 'com.google.dagger:dagger-android-processor:2.35.1'
+    kapt "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.4.2"
 
     // coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-native-mt'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0-native-mt'
-    implementation 'androidx.core:core-ktx:1.5.0'
+    implementation 'androidx.core:core-ktx:1.6.0'
 
     // okHTTP
     implementation 'com.facebook.stetho:stetho:1.6.0'

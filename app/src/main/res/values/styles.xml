@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/sp_color_main</item>
+        <item name="colorPrimaryDark">@color/sp_color_main</item>
+        <item name="colorAccent">@color/sp_color_main</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    // style text
+
+    <style name="DXFont">
+    <item name="android:textStyle">normal</item>
+    <item name="android:fontFamily">@font/roboto_regular</item>
+  </style>
+
+  <style name="DXFont.TextSemiBold13">
+    <item name="fontFamily">@font/roboto_semibold</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/_13ssp</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="DXFont.Text13">
+    <item name="android:textSize">@dimen/_13sdp</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textColor">@color/clr_main_dark</item>
+  </style>
+
+  <style name="DXFont.Text13.Bold">
+    <item name="fontFamily">@font/roboto_bold</item>
+  </style>
+
+  <style name="DXFont.TextItalicBold13">
+    <item name="fontFamily">@font/roboto_bold_italic</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/_13sdp</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="DXFont.Text12">
+    <item name="android:textSize">@dimen/_12sdp</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="DXFont.Text12.Bold">
+    <item name="fontFamily">@font/roboto_bold_italic</item>
+  </style>
+
+  <style name="DXFont.Text12.Regular">
+    <item name="fontFamily">@font/roboto_regular</item>
+  </style>
+
+  <style name="DXFont.Text12.Light">
+    <item name="fontFamily">@font/roboto_light</item>
+  </style>
+
+  <style name="DXFont.Text11">
+    <item name="android:textSize">@dimen/_11sdp</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="DXFont.Text11.Light">
+    <item name="fontFamily">@font/roboto_light</item>
+  </style>
+
+  <style name="DXFont.Text11.Regular">
+    <item name="fontFamily">@font/roboto_regular</item>
+  </style>
+
+  <style name="DXFont.Text11.Italic">
+    <item name="fontFamily">@font/roboto_italic</item>
+  </style>
+
+  <style name="DXFont.Text12.Italic">
+    <item name="fontFamily">@font/roboto_italic</item>
+    <item name="android:textSize">@dimen/_12ssp</item>
+  </style>
+
+  <style name="DXFont.TextRegular13">
+    <item name="fontFamily">@font/roboto_regular</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/_13ssp</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="DXFont.TextRegular12">
+    <item name="fontFamily">@font/roboto_regular</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/_12ssp</item>
+    <item name="android:textColor">@color/clr_main_dark</item>
+  </style>
+
+  <style name="DXFont.TextRegular8">
+    <item name="fontFamily">@font/roboto_regular</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/sp_text_size_normal</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="DXFont.TextRegular10">
+    <item name="fontFamily">@font/roboto_regular</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/sp_text_size_normal</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="DXFont.TextRegular11">
+    <item name="fontFamily">@font/roboto_regular</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/_11ssp</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="DXFont.TextSemiBold11">
+    <item name="fontFamily">@font/roboto_semibold</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/_11ssp</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+
+
+
+  <style name="SPPriceMenuItem">
+    <item name="android:fontFamily">@font/roboto_light</item>
+    <item name="android:textColor">@color/sp_color_black</item>
+    <item name="android:textSize">@dimen/_11sdp</item>
+  </style>
+
+  <style name="SPPriceMenuItem.Italic">
+    <item name="android:textStyle">italic</item>
+  </style>
+
+  <style name="SPPriceMenuItem.Regular">
+    <item name="android:textStyle">normal</item>
+  </style>
+
+  <style name="Font">
+    <item name="android:textStyle">normal</item>
+    <item name="android:fontFamily">@font/roboto_regular</item>
+    <item name="android:textSize">@dimen/_13ssp</item>
+  </style>
+
+  <style name="Font.TextRegular13">
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="Font.TextRegular13New">
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+    <item name="android:textAllCaps">false</item>
+  </style>
+  <style name="Font.TextRegular13Dark">
+    <item name="android:textColor">@color/clr_main_dark</item>
+  </style>
+
+  <style name="DXFont.TextRegular13.White">
+    <item name="android:textColor">@color/white</item>
+  </style>
+
+  <style name="Font.TextBold13">
+    <item name="android:fontFamily">@font/roboto_bold</item>
+    <item name="android:textColor">@color/clr_main_dark</item>
+  </style>
+
+  <style name="Font.TextBold13.White">
+    <item name="android:textColor">@color/white</item>
+  </style>
+
+  <style name="Font.TextSemiBold13">
+    <item name="fontFamily">@font/roboto_semibold</item>
+    <item name="android:textColor">@color/clr_main_dark</item>
+  </style>
+
+  <style name="Font.TextSemiBold13Dark">
+    <item name="fontFamily">@font/roboto_semibold</item>
+    <item name="android:textColor">@color/clr_main_dark</item>
+  </style>
+
+  <style name="Font.TextBold12">
+    <item name="fontFamily">@font/roboto_bold</item>
+    <item name="android:textSize">@dimen/_12ssp</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="Font.TextSemiBold12">
+    <item name="fontFamily">@font/roboto_semibold</item>
+    <item name="android:textSize">@dimen/_12ssp</item>
+    <item name="android:textColor">@color/clr_main_dark</item>
+  </style>
+
+  <style name="Font.TextSemiBold13.White">
+    <item name="fontFamily">@font/roboto_semibold</item>
+    <item name="android:textColor">@color/white</item>
+  </style>
+
+  <style name="Font.Text14">
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/_14sdp</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="Font.Text14.Bold">
+    <item name="android:fontFamily">@font/roboto_bold</item>
+  </style>
+
+  <style name="Font.Text11">
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/_11ssp</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="Font.Text11.Light">
+    <item name="android:fontFamily">@font/roboto_light</item>
+  </style>
+
+  <style name="Font.Text11.Light.Italic">
+    <item name="android:textStyle">italic</item>
+  </style>
+
+  <style name="Font.Text12">
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/_12sdp</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="Font.TextLight13">
+    <item name="android:fontFamily">@font/roboto_light</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="Font.Text12.Light">
+    <item name="android:fontFamily">@font/roboto_light</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="Font.Text12.Light.Sub">
+    <item name="android:textColor">@color/text_sub_color</item>
+  </style>
+
+  <style name="TextRegular13" parent="Font.TextRegular13">
+    <item name="android:textSize">@dimen/_13ssp</item>
+  </style>
+
+  <style name="Font.TextRegular12">
+    <item name="fontFamily">@font/roboto_regular</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/_12ssp</item>
+    <item name="android:textColor">@color/clr_main_dark</item>
+  </style>
+
+  <style name="Font.TextRegular12.Sub">
+    <item name="android:textColor">@color/text_sub_color</item>
+  </style>
+
+  <style name="Font.TextRegular13.Sub">
+    <item name="android:textColor">@color/text_sub_color</item>
+  </style>
+
+  <style name="Font.TextRegular8">
+    <item name="fontFamily">@font/roboto_regular</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/_8sdp</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="Font.TextRegular8.Sub">
+    <item name="android:textColor">@color/text_sub_color</item>
+  </style>
+
+  <style name="Font.TextRegular10">
+    <item name="fontFamily">@font/roboto_regular</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/_10sdp</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="Font.TextRegular10.Sub">
+    <item name="android:textColor">@color/text_sub_color</item>
+  </style>
+
+  <style name="Font.TextRegular11">
+    <item name="fontFamily">@font/roboto_regular</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/_11ssp</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <style name="Font.TextRegular11.Sub">
+    <item name="android:textColor">@color/text_sub_color</item>
+  </style>
+
+  <style name="Font.TextSemiBold11">
+    <item name="fontFamily">@font/roboto_semibold</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">@dimen/_11sdp</item>
+    <item name="android:textColor">@color/ebony_clay_dark</item>
+  </style>
+
+  <!--  <style name="LoginFormEditText" parent="TextDefault">-->
+  <!--    <item name="android:fontFamily">@font/roboto_regular</item>-->
+  <!--    <item name="android:textSize">@dimen/_12sdp</item>-->
+  <!--    <item name="android:textColorHint">@color/ebony_clay</item>-->
+  <!--    <item name="android:maxLines">1</item>-->
+  <!--  </style>-->
+
+  <style name="LineDefault">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">1dp</item>
+    <item name="android:background">@color/clr_line_store_list</item>
+  </style>
+
+  <style name="TextTitleNotice" parent="Font.TextSemiBold13">
+    <item name="android:gravity">center</item>
+    <item name="android:textSize">@dimen/_16ssp</item>
+  </style>
+
+
+  <style name="SPFont.Title" parent="DXFont.TextSemiBold13">
+    <item name="android:textSize">@dimen/_13sdp</item>
+    <item name="android:textColor">@color/clr_main_dark</item>
+  </style>
+
+  <style name="ButtonSecond" parent="Font.TextSemiBold13">
+    <item name="android:textAllCaps">false</item>
+    <item name="android:background">@drawable/bg_second</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">@dimen/_40sdp</item>
+    <item name="android:textColor">@color/white</item>
+  </style>
+
+  <style name="LoginFormEditText" parent="Font.TextRegular13">
+    <item name="android:fontFamily">@font/roboto_regular</item>
+    <item name="android:background">@drawable/bg_login_form_edt</item>
+    <item name="android:drawablePadding">@dimen/_8sdp</item>
+    <item name="android:paddingStart">@dimen/_8sdp</item>
+    <item name="android:paddingEnd">@dimen/_8sdp</item>
+    <item name="android:textColorHint">@color/clr_hint_edt</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:textColor">@color/clr_main_dark</item>
+    <item name="android:layout_height">@dimen/_40sdp</item>
+  </style>
+
+</resources>

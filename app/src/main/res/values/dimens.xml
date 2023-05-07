@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="sp_margin_dialog_out">@dimen/_45sdp</dimen>
+    <dimen name="conner_small">@dimen/_5sdp</dimen>
+    <dimen name="conner_medium">20dp</dimen>
+
+    <dimen name="margin_normal">@dimen/_5sdp</dimen>
+    <dimen name="margin_default">@dimen/_7sdp</dimen>
+    <dimen name="margin_medium">@dimen/_10sdp</dimen>
+    <dimen name="margin_large">@dimen/_15sdp</dimen>
+    <dimen name="margin_huge">@dimen/_20sdp</dimen>
+
+    <dimen name="sp_text_size_normal">@dimen/_8ssp</dimen>
+    <dimen name="sp_text_size_medium">@dimen/_10ssp</dimen>
+    <dimen name="sp_text_size_large">@dimen/_12ssp</dimen>
+    <dimen name="sp_text_size_big">@dimen/_16ssp</dimen>
+    <dimen name="sp_text_size_title_bar">@dimen/_13ssp</dimen>
+</resources>

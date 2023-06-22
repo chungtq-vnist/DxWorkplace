@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white">
+
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:src="@drawable/ic_compelete"
+            />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:paddingHorizontal="@dimen/_2sdp"
+            android:paddingVertical="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_height="wrap_content"
+            style="@style/Font.TextRegular13"
+            tools:text="UT + FT Module quản trị hệ thống"
+            android:gravity="start"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:id="@+id/tvCode"
+            android:layout_weight="1.2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/Font.TextRegular13"
+            tools:text="15:30\n20-03-2023"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:paddingVertical="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_1sdp"
+            />
+
+    </LinearLayout>
+</layout>

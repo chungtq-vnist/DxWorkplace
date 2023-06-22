@@ -1,0 +1,203 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true">
+
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <FrameLayout
+                android:id="@+id/frameToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/heigt_toolbar">
+
+                <TextView
+                    style="@style/Font.TextSemiBold13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/title_choose_time"
+                    android:textColor="@color/black" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_8sdp"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_16sdp"
+                    android:src="@drawable/ic_close_new"
+                    android:tint="@color/color_online_bill" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivDone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|end"
+                    android:padding="@dimen/_8sdp"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_16sdp"
+                    android:src="@drawable/ic_done"
+                    android:tint="@color/color_online_bill" />
+            </FrameLayout>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:background="@color/clr_bg_new"
+            android:elevation="@dimen/_2sdp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/_13sdp"
+                android:paddingTop="@dimen/_16sdp"
+                android:paddingEnd="@dimen/_13sdp"
+                android:paddingBottom="@dimen/_13sdp">
+
+                <RelativeLayout
+                    android:id="@+id/rl_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_42sdp"
+                    android:background="@drawable/bg_edt_main_new"
+                    android:paddingHorizontal="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_4sdp">
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/tv_title_start"
+                        style="@style/Font.TextRegular13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/title_time_start"
+                        android:textColor="@color/color_online_bill" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <TextView
+
+                            style="@style/Font.TextRegular10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/title_time_start"
+                            android:textColor="@color/color_online_bill" />
+
+                        <TextView
+                            android:id="@+id/tvStartTime"
+                            style="@style/Font.TextRegular11"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:textColor="@color/black"
+                            tools:text="02/02/2020" />
+
+                    </LinearLayout>
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_calender_new">
+
+                    </androidx.appcompat.widget.AppCompatImageView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_end"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_42sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:background="@drawable/bg_edt_main_new"
+                    android:paddingHorizontal="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_4sdp">
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/tv_title_end"
+                        style="@style/Font.TextRegular13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/title_end_date"
+                        android:textColor="@color/color_online_bill" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <TextView
+
+                            style="@style/Font.TextRegular10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/title_end_date"
+                            android:textColor="@color/color_online_bill" />
+
+                        <TextView
+                            android:id="@+id/tvEndTime"
+                            style="@style/Font.TextRegular11"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_title_end"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:textColor="@color/black"
+                            tools:text="02/02/2020" />
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_calender_new">
+
+                    </androidx.appcompat.widget.AppCompatImageView>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:background="@color/color_bg_start_login_method"
+        android:paddingVertical="@dimen/_2sdp">
+
+
+        <RelativeLayout
+            android:id="@+id/rlTimeSheet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:background="@drawable/bg_task_action"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/tvUserName"
+                style="@style/DXFont.TextSemiBold13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="@dimen/_4sdp"
+                tools:text="Nguyen van a" />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                style="@style/DXFont.TextSemiBold13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:textColor="@color/sp_color_green"
+                tools:text=" Được chấp nhận" />
+
+
+            <TextView
+                android:id="@+id/tvTimeSheet"
+                style="@style/DXFont.TextRegular12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvUserName"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                tools:text="Cập nhật HDSD cho sdflkjdsf sdfjklsdfgj kldfhjgjkdfhg kjdfhgjkhdfs jk" />
+        </RelativeLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

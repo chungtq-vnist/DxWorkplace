@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/_4sdp"
+        android:background="@drawable/bg_dialog"
+        >
+
+        <TextView
+            android:id="@+id/tvTimeSelect"
+            style="@style/Font.TextBold13"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_4sdp"
+            android:textSize="@dimen/_16sdp"
+            android:textColor="@color/azure_radiance"
+            tools:text="06-2023" />
+        <View
+            android:id="@+id/viewTop"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintTop_toBottomOf="@id/tvTimeSelect"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/azure_radiance"/>
+
+
+
+        <NumberPicker
+            android:id="@+id/pickerMonth"
+            app:layout_constraintTop_toBottomOf="@id/viewTop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/pickerYear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            />
+        <NumberPicker
+            android:id="@+id/pickerYear"
+            app:layout_constraintTop_toBottomOf="@id/viewTop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/pickerMonth"
+            app:layout_constraintBottom_toBottomOf="@id/pickerMonth"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+
+            />
+
+        <View
+            android:id="@+id/viewBot"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@id/pickerMonth"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/azure_radiance"/>
+
+        <TextView
+            android:id="@+id/tvDone"
+            style="@style/Font.TextRegular13"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewBot"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="@dimen/_8sdp"
+            android:textSize="@dimen/_16sdp"
+            android:textColor="@color/azure_radiance"
+            android:text="Done"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -8,13 +8,16 @@ import android.net.NetworkRequest
 import android.os.Build
 import android.util.Log
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.example.test.dxworkspace.core.di.component.AppComponent
 import com.example.test.dxworkspace.core.di.component.DaggerAppComponent
+import com.example.test.dxworkspace.presentation.utils.common.Constants
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventStateNetwork
 
 import com.example.test.dxworkspace.presentation.utils.event.EventSyncMessage
 import com.example.test.dxworkspace.presentation.utils.event.StateNetwork
+import com.facebook.stetho.Stetho
 import dagger.android.AndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.DaggerApplication
@@ -37,9 +40,19 @@ class DxApplication : DaggerApplication(), HasAndroidInjector, LifecycleObserver
 //        return androidInjector
 //    }
 
+    fun observerLifecycle() {
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+    }
+
+    fun unObserverLifecycle() {
+        ProcessLifecycleOwner.get().lifecycle.removeObserver(this)
+    }
+
     companion object {
         private lateinit var instance: DxApplication
 
+        var stateWork = Constants.STATE_WORK.STATE_NONE
+        var stateWorkNext = Constants.STATE_WORK.STATE_NONE
 
         @JvmStatic
         fun getInstance() = instance
@@ -98,7 +111,9 @@ class DxApplication : DaggerApplication(), HasAndroidInjector, LifecycleObserver
         }
         val cm = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
         cm?.registerNetworkCallback(builder.build(), callback)
-
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this)
+        }
     }
 
     fun checkNetWorkChanged() {

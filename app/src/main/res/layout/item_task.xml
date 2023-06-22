@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white">
+
+        <View
+            android:id="@+id/viewStatus"
+            android:layout_width="@dimen/_3sdp"
+            android:layout_height="match_parent"
+            android:background="@color/sp_color_green"
+            />
+        <TextView
+            android:id="@+id/tvTaskName"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:paddingHorizontal="@dimen/_2sdp"
+            android:paddingVertical="@dimen/_8sdp"
+            android:layout_height="wrap_content"
+            style="@style/Font.TextRegular13"
+            tools:text="UT + FT Module quản trị hệ thống"
+            android:gravity="start"
+            />
+        <TextView
+            android:id="@+id/tvTimeStart"
+            android:layout_weight="1.2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/Font.TextRegular13"
+            tools:text="15:30\n20-03-2023"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_1sdp"
+            />
+        <TextView
+            android:id="@+id/tvTimeEnd"
+            android:layout_weight="1.2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/Font.TextRegular13"
+            android:paddingStart="@dimen/_1sdp"
+            android:paddingVertical="@dimen/_8sdp"
+            android:gravity="center"
+            tools:text="15:30\n20-03-2023"
+            />
+
+    </LinearLayout>
+</layout>

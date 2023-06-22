@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <androidx.appcompat.widget.AppCompatImageView
+      style="@style/DashDivider"
+      android:layout_marginStart="@dimen/_10sdp"
+      android:layout_marginTop="@dimen/_6sdp"
+      android:layout_marginEnd="@dimen/_10sdp"
+      android:layout_marginBottom="@dimen/_6sdp"
+      app:srcCompat="@drawable/bg_dash_divider" />
+</layout>

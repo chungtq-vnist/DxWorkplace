@@ -15,4 +15,15 @@
     <dimen name="sp_text_size_large">@dimen/_12ssp</dimen>
     <dimen name="sp_text_size_big">@dimen/_16ssp</dimen>
     <dimen name="sp_text_size_title_bar">@dimen/_13ssp</dimen>
+    <dimen name="text_size_fab">16sp</dimen>
+    <dimen name="otp_view_item_size">48dp</dimen>
+    <dimen name="otp_view_item_radius">5dp</dimen>
+    <dimen name="otp_view_item_spacing">5dp</dimen>
+    <dimen name="otp_view_item_line_width">2dp</dimen>
+    <dimen name="otp_view_cursor_width">2dp</dimen>
+    <dimen name="_5dp">5dp</dimen>
+    <dimen name="eleven_width">5dp</dimen>
+    <dimen name="size_icon_menu">@dimen/_12sdp</dimen>
+    <dimen name="rounder_im">@dimen/_8sdp</dimen>
+    <dimen name="heigt_toolbar">@dimen/_40sdp</dimen>
 </resources>

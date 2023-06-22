@@ -7,5 +7,25 @@
     <string name="login">Đăng nhập</string>
     <string name="portal">Portal</string>
     <string name="forget_password">Quên mật khẩu ?</string>
+    <string name="error_notification">Có lỗi xảy ra!</string>
+    <string name="title_choose_time">Chọn khoảng thời gian</string>
+    <string name="title_time_start">Thời gian bắt đầu</string>
+    <string name="title_end_date">Thời gian kết thúc</string>
+    <string name="title_detail_task">Chi tiết công việc</string>
+    <string name="tv_title_chart_plan_status">Đồ thị kế hoạch sản xuất theo trạng thái</string>
+    <string name="tv_title_chart_plan_progress">Đồ thị lệnh sản xuất theo tiến độ</string>
+    <string name="tv_title_chart_command_status">Đồ thị lệnh sản xuất theo trạng thái</string>
+    <string name="tv_title_chart_command_progress">Đồ thị kế hoạch sản xuất theo tiến độ</string>
+    <string name="tv_title_chart_request_status">Đồ thị đề nghị theo trạng thái</string>
+    <string name="tv_title_chart_request_type">Đồ thị đề nghị theo mục đích </string>
+    <string name="title_status_plan">Trạng thái kế hoạch</string>
+    <string name="title_progress_plan">Tiến độ kế hoạch</string>
+    <string name="title_status_command">Trạng thái lệnh</string>
+    <string name="title_progress_command">Tiến độ lệnh</string>
+    <string name="title_status_request">Trạng thái yêu cầu</string>
+    <string name="title_type_request">Loại yêu cầu</string>
+    <string name="title_nodata_plan">Không có kế hoạch sản xuất nào!</string>
+    <string name="title_nodata_command">Không có lệnh sản xuất nào!</string>
+    <string name="title_nodata_request">Không có đề nghị nào!</string>
 
 </resources>

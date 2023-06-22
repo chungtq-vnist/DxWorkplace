@@ -32,6 +32,10 @@
     <item name="android:textColor">@color/clr_main_dark</item>
   </style>
 
+  <style name="DialogProcessStyle" parent="AppTheme">
+    <item name="android:windowBackground">@android:color/transparent</item>
+  </style>
+
   <style name="DXFont.Text13.Bold">
     <item name="fontFamily">@font/roboto_bold</item>
   </style>
@@ -362,4 +366,33 @@
     <item name="android:layout_height">@dimen/_40sdp</item>
   </style>
 
+  <style name="DashDivider">
+    <item name="android:layerType">software</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">@dimen/_5sdp</item>
+    <item name="android:layout_marginStart">@dimen/_10sdp</item>
+    <item name="android:layout_marginEnd">@dimen/_10sdp</item>
+  </style>
+
+  <style name="ImageToolbar">
+    <item name="android:layout_width">@dimen/_36sdp</item>
+    <item name="android:layout_height">?actionBarSize</item>
+    <item name="android:padding">@dimen/_9sdp</item>
+    <item name="android:adjustViewBounds">true</item>
+    <item name="srcCompat">@drawable/ic_back_main</item>
+  </style>
+  <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+    <item name="cornerSize">50%</item>
+  </style>
+
+  <style name="SheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+    <!--<item name="android:windowCloseOnTouchOutside">false</item>-->
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:colorBackground">@android:color/transparent</item>
+    <item name="android:backgroundDimEnabled">true</item>
+    <item name="android:backgroundDimAmount">0.3</item>
+    <item name="android:windowFrame">@null</item>
+    <item name="android:windowIsFloating">true</item>
+  </style>
 </resources>

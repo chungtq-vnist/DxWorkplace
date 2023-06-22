@@ -12,6 +12,8 @@ import android.view.*
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.example.test.dxworkspace.core.extensions.observe
+import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.google.gson.Gson
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -104,14 +106,47 @@ abstract class BaseFragment< V : ViewDataBinding> : DaggerFragment() , ViewTreeO
 //        }
 //    }
 
+    fun onBackPress(){
+        activity?.onBackPressed()
+    }
+
+    fun showToast(event: EventToast) {
+        activity?.let {
+            if (it is BaseActivity<*>) {
+                it.showToast(event)
+            }
+        }
+    }
+
     protected fun popToInclusive(clazz: Class<*>) {
         if (activity is BaseActivity<*>) {
             (activity as BaseActivity<*>).popToInclusive(clazz)
         }
     }
 
+    protected fun <VM : BaseViewModel> observeLoading(viewModel: VM) {
+        observe(viewModel.isLoading, {
+            if (it == true) {
+                showDialogProcess()
+            } else {
+                hiddenDialogProcess()
+            }
+        })
+    }
+
     fun currentFragment(containerId: Int) = if (activity is BaseActivity<*>) {
         (activity as BaseActivity<*>).currentFragment(containerId)
     } else null
 
+    fun showDialogProcess() {
+        if (activity is BaseActivity<*>) {
+            (activity as BaseActivity<*>).showDialogProcess()
+        }
+    }
+
+    fun hiddenDialogProcess() {
+        if (activity is BaseActivity<*>) {
+            (activity as BaseActivity<*>).hiddenDialogProcess()
+        }
+    }
 }

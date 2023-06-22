@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/ln_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_bg_start_login_method"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/viewBottom"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="@dimen/_8sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_8sdp">
+
+            <TextView
+                android:id="@+id/tvTime"
+                style="@style/Font.TextRegular13"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:gravity="center"
+                tools:text="2/3/2023" />
+
+            <TextView
+                android:id="@+id/tvCode"
+                style="@style/Font.TextRegular13"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_weight="1.4"
+                android:ellipsize="end"
+                android:gravity="center"
+                tools:text="012345678901234567890123456789" />
+
+            <TextView
+                android:id="@+id/tvCreator"
+                style="@style/Font.TextRegular13"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:layout_weight="1"
+                tools:text="Nguyen van A" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</layout>

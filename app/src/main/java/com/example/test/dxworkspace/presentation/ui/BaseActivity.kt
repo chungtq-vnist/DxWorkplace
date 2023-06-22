@@ -10,10 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.test.dxworkspace.R
 import com.example.test.dxworkspace.core.extensions.justTry
+import com.example.test.dxworkspace.core.extensions.observe
+import com.example.test.dxworkspace.presentation.ui.dialog.DialogProcess
 import com.example.test.dxworkspace.presentation.ui.widgets.Boast
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventSyncMessage
-import com.example.test.dxworkspace.presentation.utils.event.SPEventToastOrder
+import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.google.gson.Gson
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
@@ -27,6 +29,8 @@ abstract class BaseActivity<V : ViewDataBinding> : DaggerAppCompatActivity() {
     lateinit var gson: Gson
 
     lateinit var binding: V
+
+    private var dialogProcess: DialogProcess? = null
 
     @LayoutRes
     protected abstract fun getLayoutId(): Int
@@ -47,6 +51,16 @@ abstract class BaseActivity<V : ViewDataBinding> : DaggerAppCompatActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    protected fun <VM : BaseViewModel> observeLoading(viewModel: VM) {
+        observe(viewModel.isLoading, {
+            if (it == true) {
+                showDialogProcess()
+            } else {
+                hiddenDialogProcess()
+            }
+        })
     }
 
     override fun onResume() {
@@ -72,9 +86,9 @@ abstract class BaseActivity<V : ViewDataBinding> : DaggerAppCompatActivity() {
     }
 
     // ham bat su kien tu broadcast receiver
-    fun onBusEvent(event: EventSyncMessage) {
-
-    }
+//    fun onBusEvent(event: EventSyncMessage) {
+//
+//    }
 
     @Throws
     open fun openFragment(
@@ -133,7 +147,7 @@ abstract class BaseActivity<V : ViewDataBinding> : DaggerAppCompatActivity() {
 
     fun currentFragment(containerId: Int) = supportFragmentManager.findFragmentById(containerId)
 
-    fun showToast(event: SPEventToastOrder) {
+    fun showToast(event: EventToast) {
         val inflater = layoutInflater
 
         val layout =
@@ -147,4 +161,17 @@ abstract class BaseActivity<V : ViewDataBinding> : DaggerAppCompatActivity() {
         Boast.makeCustom(this, layout).show(cancelCurrent = true)
     }
 
+    fun showDialogProcess() {
+        justTry {
+            if (dialogProcess == null) {
+                dialogProcess = DialogProcess(this)
+            }
+            dialogProcess?.show()
+        }
+    }
+
+
+    fun hiddenDialogProcess() {
+        dialogProcess?.dismiss()
+    }
 }

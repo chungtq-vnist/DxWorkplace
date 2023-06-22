@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_header_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_6sdp"
+        android:background="@color/azure_radiance_10_alpha"
+        app:layout_constraintTop_toTopOf="parent">
+
+      <TextView
+          android:id="@+id/tvCompanyName"
+          style="@style/Font.TextSemiBold11"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_marginStart="@dimen/_10sdp"
+          android:layout_marginTop="@dimen/_12sdp"
+          android:layout_marginEnd="@dimen/_10sdp"
+          android:ellipsize="end"
+          android:maxLines="3"
+          android:textAllCaps="true"
+          android:textColor="@color/clr_main_dark"
+          android:textSize="@dimen/_15ssp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:text="Công ty Cổ phần Công nghệ An toàn thông tin và Truyền thông Việt Nam" />
+
+
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/_10sdp"
+          android:layout_marginEnd="@dimen/_10sdp"
+          android:orientation="vertical"
+          app:layout_constraintBottom_toBottomOf="@id/img_avatar_user"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toEndOf="@id/img_avatar_user"
+          app:layout_constraintTop_toTopOf="@id/img_avatar_user">
+
+        <TextView
+            android:id="@+id/tvUserName"
+            style="@style/Font.TextSemiBold13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/clr_main_dark"
+            tools:text="Le Xuan Hung" />
+
+        <TextView
+            android:id="@+id/tvRoleName"
+            style="@style/Font.TextRegular11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="@color/clr_otp"
+            tools:text="Admin" />
+
+      </LinearLayout>
+
+      <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/layout_divider"
+          style="@style/DashDivider"
+          android:layout_width="match_parent"
+          android:layout_marginStart="@dimen/_10sdp"
+          android:layout_marginTop="@dimen/_10sdp"
+          android:layout_marginEnd="@dimen/_10sdp"
+          app:layout_constraintTop_toBottomOf="@id/tvCompanyName"
+          app:srcCompat="@drawable/bg_dash_divider" />
+
+
+      <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/img_avatar_user"
+          android:layout_width="@dimen/_45sdp"
+          android:layout_height="@dimen/_45sdp"
+          android:layout_below="@id/layout_divider"
+          android:layout_marginStart="@dimen/_10sdp"
+          android:layout_marginTop="@dimen/_10sdp"
+          android:layout_marginBottom="@dimen/_10sdp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/layout_divider" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvMenu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/lineBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_header_menu"
+        tools:itemCount="4" />
+
+
+    <View
+        android:id="@+id/lineBottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/clr_line_new"
+        app:layout_constraintBottom_toTopOf="@id/layoutLogout" />
+    <!--Footer-->
+    <LinearLayout
+        android:id="@+id/layoutLogout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_6sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+      <androidx.appcompat.widget.AppCompatImageView
+          android:layout_width="@dimen/_20sdp"
+          android:layout_height="@dimen/_20sdp"
+          app:srcCompat="@drawable/ic_logout_menu" />
+
+      <TextView
+          style="@style/Font.TextRegular13"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/_10sdp"
+          android:gravity="center_vertical|start"
+          android:text="Log out"
+          android:textColor="@color/clr_main_dark" />
+    </LinearLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

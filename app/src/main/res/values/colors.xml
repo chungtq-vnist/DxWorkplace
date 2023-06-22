@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="sp_color_main" >#8315F0</color>
-
+    <color name="transparent">#00000000</color>
     //clone color
     <color name="black_effective">#2a2a2a</color>
     <color name="sp_color_red">#F23434</color>
@@ -21,6 +21,7 @@
     <color name="sp_color_noti_red">#BF0711</color>
     <color name="sp_color_noti_yellow">#FF9100</color>
     <color name="bg_img">#B1AFAF</color>
+    <color name="text_color">#212B35</color>
 
     <color name="sp_color_white">#FFFFFF</color>
     <color name="sp_color_gray_light">#E7E9EB</color>
@@ -49,6 +50,7 @@
     <!--  <color name="color_title_dialog">#212B35</color>-->
     <color name="color_title_dialog">@color/clr_main_dark</color>
     <color name="color_divider">#C4CDD5</color>
+    <color name="color_divider2">#f4f6f8</color>
     <color name="color_selected">#212B35</color>
     <color name="color_unselected">#80212B35</color>
     <color name="color_item_take_away">#FF5900</color>
@@ -165,6 +167,8 @@
     <color name="sp_color_title_qr_order">#8894AB</color>
     <color name= "color_title_evaluation_form">#F6F7FB</color>
     <color name="big_stone">#182537</color>
+    <color name="raven">#747C87</color>
+
     <color name="color_rcv_revenue">#F2F9FF</color>
     <color name="clr_variant_select">#CCE7FF</color>
     <color name= "color_bg_tag_not_selected">#eeefef</color>

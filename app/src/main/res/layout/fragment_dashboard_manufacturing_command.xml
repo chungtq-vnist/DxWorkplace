@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <FrameLayout
+            android:id="@+id/frameChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingStart="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chartCommand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/_100sdp"
+                />
+        </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/tvTitleChart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/DXFont.TextRegular12"
+            app:layout_constraintTop_toBottomOf="@id/frameChart"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Đồ thị lệnh sản xuất theo trạng thái "
+            />
+
+        <View
+            android:id="@+id/viewMid"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_4sdp"
+            android:background="@color/color_divider"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleChart"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

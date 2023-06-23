@@ -41,6 +41,7 @@ import java.util.*
 import javax.inject.Inject
 import android.os.Looper
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingFragment
+import com.example.test.dxworkspace.presentation.ui.home.report.financial.ReportFinancialFragment
 
 
 class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
@@ -200,7 +201,9 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                         postNormal(EventNextHome(ManufacturingWorkFragment::class.java))
                     }
                     "/manufacturing-dashboard" -> postNormal(EventNextHome(DashboardControlManufacturingFragment::class.java))
-
+                    "/manage-manufacturing-command" -> postNormal(EventNextHome(
+                        ReportFinancialFragment::class.java
+                    ))
                 }
             }
 

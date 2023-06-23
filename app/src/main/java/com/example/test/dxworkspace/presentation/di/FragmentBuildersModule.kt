@@ -6,6 +6,7 @@ import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardManufacturingRequestFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.dialog.RangeDateSelectFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingWorkFragment
+import com.example.test.dxworkspace.presentation.ui.home.report.financial.ReportFinancialFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.TimeSheetFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.WorkplaceFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.detail_task.DetailTaskFragment
@@ -45,4 +46,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeRangeDateSelectFragment(): RangeDateSelectFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeReportFinancialFragment(): ReportFinancialFragment
 }

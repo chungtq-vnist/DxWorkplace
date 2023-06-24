@@ -41,6 +41,7 @@ import java.util.*
 import javax.inject.Inject
 import android.os.Looper
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.quality.DashboardQualityManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.financial.ReportFinancialFragment
 
 
@@ -204,7 +205,13 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                     "/manage-manufacturing-command" -> postNormal(EventNextHome(
                         ReportFinancialFragment::class.java
                     ))
+                    "/manufacturing-dashboard-quality" -> postNormal(EventNextHome(
+                        DashboardQualityManufacturingFragment::class.java
+                    ))
                 }
+                handlerPostDelay({
+                    binding!!.layoutDrawer.closeDrawer(GravityCompat.START)
+                }, 100)
             }
 
         }
@@ -293,6 +300,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             }
             genMenuModel()
             Log.d("KGM", "list menu  : ${listMenu.toString()}")
+            addTempMenu()
             menuAdapter.items = listMenu
         }
     }
@@ -386,6 +394,15 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                 }
             }
         }
+    }
+
+    fun addTempMenu(){
+        listMenu.add(
+            MenuModel(
+                id = "asjkld", category = "manufacturing-management" ,level = 3 , iconStart = R.drawable.ic_home ,
+                desc = "Báo cáo chất lượng sản xuất", url = "/manufacturing-dashboard-quality"
+            )
+        )
     }
 
 

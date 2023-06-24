@@ -138,6 +138,17 @@ interface DxApi : LoginApi {
     ) : Call<DashboardManufacturingRequestByTypeRaw>
 
 
+    @GET("/manufacturing-dashboard/get-goods-manufacturing-report")
+    fun getReportGoodsQuality(
+        @Query("currentRole") curRole : String ,
+        @Query("manufacturingWorks") work : List<String>?,
+        @Query("fromDate") fromDate : String? ,
+        @Query("toDate") toDate : String? ,
+        @Query("fromDateCompare") fromDateCompare : String ? ,
+        @Query("toDateCompare") toDateCompare : String? ,
+    ) : Call<DashboardManufacturingQualityGoodsRaw>
+
+
 
 
 }

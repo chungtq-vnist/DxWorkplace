@@ -5,6 +5,8 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -97,3 +99,58 @@ fun String.convertMonthYear() : String{
     return "$year-$month"
 }
 
+
+fun handlerPostDelay(action: () -> Unit, delay: Long = 0L) {
+    Looper.myLooper()?.let {
+        Handler(it).postDelayed({
+            action()
+        }, delay)
+    }
+}
+fun roundPercent(a: Int, b: Int): Double {
+    return if (b != 0) {
+        val result = (a.toDouble() / b.toDouble()) * 100
+        val roundedResult = (result * 100).toLong() / 100.0
+        roundedResult
+    } else {
+        0.00
+    }
+}
+
+fun getTextValueChart(str: String): String {
+    var result = str.trim()
+    if (result.length > 13) {
+        var int = 0
+        if (result.contains(" ")) {
+            "$result ".toCharArray().map {
+                if (it == ' ') {
+                    int += 1
+                }
+            }
+        }
+        result = if (int > 2 && result.indexOf(
+                ' ',
+                result.indexOf(' ', result.indexOf(' ') + 1) + 1
+            ) > 0
+        )
+            result.substring(
+                0,
+                result.indexOf(' ', result.indexOf(' ', result.indexOf(' ') + 1) + 1)
+            )
+        else {
+            str.substring(0, 13)
+        }
+
+        if (result.length < str.length)
+            result = "$result..."
+    }
+
+    return result
+}
+fun View.show() {
+    visibility = View.VISIBLE
+}
+
+fun View.hide() {
+    visibility = View.GONE
+}

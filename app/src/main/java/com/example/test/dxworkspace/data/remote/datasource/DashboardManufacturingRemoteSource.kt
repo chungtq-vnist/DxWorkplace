@@ -14,7 +14,12 @@ class DashboardManufacturingRemoteSource @Inject constructor(val api: DxApi) {
     fun getNumberOfCommandByStatus(role: String, work: List<String>?, from: String?, to: String?) =
         api.getNumberOfCommandByStatus(role, work, from, to)
 
-    fun getNumberOfCommandByProgress(role: String, work: List<String>?, from: String?, to: String?) =
+    fun getNumberOfCommandByProgress(
+        role: String,
+        work: List<String>?,
+        from: String?,
+        to: String?
+    ) =
         api.getNumberOfCommandByProgress(role, work, from, to)
 
 
@@ -23,4 +28,14 @@ class DashboardManufacturingRemoteSource @Inject constructor(val api: DxApi) {
 
     fun getNumberOfRequestByType(role: String, work: List<String>?, from: String?, to: String?) =
         api.getNumberOfRequestByType(role, work, from, to)
+
+    fun getReportGoodsQuality(
+        role: String,
+        work: List<String>?,
+        from: String?,
+        to: String?,
+        fromCompare: String?,
+        toCompare: String?
+    ) = api.getReportGoodsQuality(role,work,from,to,fromCompare,toCompare)
+
 }

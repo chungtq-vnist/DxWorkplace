@@ -21,7 +21,7 @@ class DashboardControlManufacturingViewModel @Inject constructor(
     private val getNumberOfCommandByStatusUseCase: GetNumberOfCommandByStatusUseCase,
     private val getNumberOfRequestByStatusUseCase: GetNumberOfRequestByStatusUseCase,
     private val getNumberOfRequestByTypeUseCase: GetNumberOfRequestByTypeUseCase,
-
+    private val getReportGoodsQualityUseCase: GetReportGoodsQualityUseCase
 ) : BaseViewModel() {
 
     var listManufacturingWorks = MutableLiveData<List<ManufacturingWorkEntity>>()
@@ -35,6 +35,14 @@ class DashboardControlManufacturingViewModel @Inject constructor(
     var numberOfRequestByStatus = MutableLiveData<DashboardManufacturingRequestByStatus>()
     var numberOfRequestByType = MutableLiveData<DashboardManufacturingRequestByType>()
 
+    var listGoods = MutableLiveData<List<QualityGoodsCompare>>()
+    var listGoodsCompare = MutableLiveData<List<QualityGoods>>()
+    val optionSelect: MutableLiveData<String> = MutableLiveData()
+    val valueSelect: MutableLiveData<String> = MutableLiveData()
+    fun setDataSelect(row: String?, money: String?) {
+        valueSelect.value = money ?: "0"
+        optionSelect.value = row ?: "-1"
+    }
 
 
     var listWorksSelected = mutableListOf<ManufacturingWorkSelect>()
@@ -109,5 +117,25 @@ class DashboardControlManufacturingViewModel @Inject constructor(
             })
         }
     }
+
+    fun getReportGoodsQuality(
+        role: String,
+        work: List<String>?,
+        from: String?,
+        to: String?,
+        fromCompare: String?,
+        toCompare: String?
+    ) {
+        getReportGoodsQualityUseCase(ModelRequestDashboardGoodQuality(role,work,from,to,fromCompare,toCompare)){
+            it.either({
+                handleFailure(it)
+            },{
+                listGoods.value = it
+            })
+
+        }
+    }
+
+
 
 }

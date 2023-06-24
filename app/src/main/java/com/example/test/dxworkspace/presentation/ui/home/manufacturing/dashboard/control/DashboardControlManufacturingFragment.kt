@@ -12,6 +12,7 @@ import com.example.test.dxworkspace.presentation.ui.BaseFragment
 import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.dialog.DialogSelectManufacturingWork
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.dialog.RangeDateSelectFragment
+import com.example.test.dxworkspace.presentation.ui.timepicker.RangeTimeSelectFragment
 import com.example.test.dxworkspace.presentation.utils.common.postNormal
 import com.example.test.dxworkspace.presentation.utils.common.registerGreen
 import com.example.test.dxworkspace.presentation.utils.common.unregisterGreen
@@ -102,11 +103,11 @@ class DashboardControlManufacturingFragment : BaseFragment<FragmentDashboardCont
             })
             viewModel.getAllManufacturingWorkCanManage()
             btnMenuMore.setOnClickListener {
-                showDialogSelectWorks(if (viewModel.listWorksSelected.isEmpty()) viewModel.listAllWorks else viewModel.listWorksSelected)
+                showDialogSelectWorks(if (homeViewModel.listWorksSelected.isEmpty()) viewModel.listAllWorks else homeViewModel.listWorksSelected)
             }
             tvRangeTime.text = homeViewModel.fromDate + " - " + homeViewModel.toDate
             rlRangeTime.setOnClickListener {
-                postNormal(EventNextHome(RangeDateSelectFragment::class.java))
+                postNormal(EventNextHome(RangeTimeSelectFragment::class.java))
             }
         }
     }

@@ -22,6 +22,9 @@
     <color name="sp_color_noti_yellow">#FF9100</color>
     <color name="bg_img">#B1AFAF</color>
     <color name="text_color">#212B35</color>
+    <color name="clr_text_sub">#617395</color>
+    <color name="clr_desc">#FF4D4D</color>
+    <color name="clr_asc">#00B14F</color>
 
     <color name="sp_color_white">#FFFFFF</color>
     <color name="sp_color_gray_light">#E7E9EB</color>

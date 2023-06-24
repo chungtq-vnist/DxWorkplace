@@ -55,3 +55,12 @@ data class ModelRequestDashboardPlan(
     var fromDate : String? ,
     var toDate : String?
 )
+
+data class ModelRequestDashboardGoodQuality(
+    var role : String ,
+    var works : List<String>? ,
+    var fromDate : String? ,
+    var toDate : String?,
+    var fromDateCompare : String? ,
+    var toDateCompare : String?
+)

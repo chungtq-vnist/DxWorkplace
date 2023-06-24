@@ -17,7 +17,7 @@ class DashboardManufacturingRepositoryImpl @Inject constructor(
     val gson: Gson,
     val dashboardManufacturingRemoteSource: DashboardManufacturingRemoteSource
 ) : DashboardManufacturingRepository {
-    override fun getNumberOfPlanByStatus(
+    override suspend fun getNumberOfPlanByStatus(
         role: String,
         work: List<String>?,
         from: String?,
@@ -37,7 +37,7 @@ class DashboardManufacturingRepositoryImpl @Inject constructor(
         )
     }
 
-    override fun getNumberOfPlanByProgress(
+    override suspend fun getNumberOfPlanByProgress(
         role: String,
         work: List<String>?,
         from: String?,
@@ -57,7 +57,7 @@ class DashboardManufacturingRepositoryImpl @Inject constructor(
         )
     }
 
-    override fun getNumberOfCommandByStatus(
+    override suspend fun getNumberOfCommandByStatus(
         role: String,
         work: List<String>?,
         from: String?,
@@ -77,7 +77,7 @@ class DashboardManufacturingRepositoryImpl @Inject constructor(
         )
     }
 
-    override fun getNumberOfCommandByProgress(
+    override suspend fun getNumberOfCommandByProgress(
         role: String,
         work: List<String>?,
         from: String?,
@@ -97,7 +97,7 @@ class DashboardManufacturingRepositoryImpl @Inject constructor(
         )
     }
 
-    override fun getNumberOfRequestByStatus(
+    override suspend fun getNumberOfRequestByStatus(
         role: String,
         work: List<String>?,
         from: String?,
@@ -116,7 +116,7 @@ class DashboardManufacturingRepositoryImpl @Inject constructor(
             }, DashboardManufacturingRequestByStatus()
         )    }
 
-    override fun getNumberOfRequestByType(
+    override suspend fun getNumberOfRequestByType(
         role: String,
         work: List<String>?,
         from: String?,
@@ -134,4 +134,21 @@ class DashboardManufacturingRepositoryImpl @Inject constructor(
                 } else DashboardManufacturingRequestByType()
             }, DashboardManufacturingRequestByType()
         )    }
+
+    override  suspend  fun getReportGoodsQuality(
+        role: String,
+        work: List<String>?,
+        from: String?,
+        to: String?,
+        fromCompare: String?,
+        toCompare: String?
+    ): Either<Failure, DashboardManufacturingQualityGoodsContent> {
+        return requestApi(dashboardManufacturingRemoteSource.getReportGoodsQuality(
+            role, work, from, to, fromCompare, toCompare
+        ) , {
+            if (it.success == true) {
+                it.content ?: DashboardManufacturingQualityGoodsContent()
+            } else DashboardManufacturingQualityGoodsContent()
+        } , DashboardManufacturingQualityGoodsContent())
+    }
 }

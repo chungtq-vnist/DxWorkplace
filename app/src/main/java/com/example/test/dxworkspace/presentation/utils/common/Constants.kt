@@ -37,4 +37,32 @@ object Constants {
     const val TIMERID_COUNTING = "TIMERID__COUNTING"
     const val START_TIME_COUNT = "START_TIME_COUNT"
     const val END_TIME_COUNT = "END_TIME_COUNT"
+
+    object DatePicker {
+        val START_TIME: String by lazyOf("START_TIME")
+        val END_TIME: String by lazyOf("END_TIME")
+        val QUICK_TODAY: String by lazyOf("QUICK_TODAY")
+        val QUICK_YESTERDAY: String by lazyOf("QUICK_YESTERDAY")
+        val COMPARE_PRE_DAY: String by lazyOf("COMPARE_PRE_DAY")
+        val COMPARE_SAME_WEEKDAY: String by lazyOf("COMPARE_SAME_WEEKDAY")
+
+        val QUICK_THIS_WEEK: String by lazyOf("QUICK_THIS_WEEK")
+        val QUICK_PRE_WEEK: String by lazyOf("QUICK_PRE_WEEK")
+        val QUICK_7_DAY: String by lazyOf("QUICK_7_DAY")
+        val COMPARE_PERIOD_WEEK: String by lazyOf("COMPARE_PERIOD_WEEK")
+        val COMPARE_4_WEEKDAY: String by lazyOf("COMPARE_4_WEEKDAY")
+
+        val QUICK_THIS_MONTH: String by lazyOf("QUICK_THIS_MONTH")
+        val QUICK_PRE_MONTH: String by lazyOf("QUICK_PRE_MONTH")
+        val QUICK_30_DAY: String by lazyOf("QUICK_30_DAY")
+        val COMPARE_PERIOD_MONTH: String by lazyOf("COMPARE_PERIOD_MONTH")
+        val COMPARE_SAME_MONTH: String by lazyOf("COMPARE_SAME_MONTH")
+
+        val QUICK_365_DAY: String by lazyOf("QUICK_365_DAY")
+        val QUICK_THIS_YEAR: String by lazyOf("QUICK_THIS_YEAR")
+        val QUICK_PRE_YEAR: String by lazyOf("QUICK_PRE_YEAR")
+        val COMPARE_PERIOD_YEAR: String by lazyOf("COMPARE_PERIOD_YEAR")
+
+        val OTHER: String by lazyOf("OTHER")
+    }
 }

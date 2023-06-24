@@ -18,6 +18,7 @@
     <string name="tv_title_chart_command_progress">Đồ thị kế hoạch sản xuất theo tiến độ</string>
     <string name="tv_title_chart_request_status">Đồ thị đề nghị theo trạng thái</string>
     <string name="tv_title_chart_request_type">Đồ thị đề nghị theo mục đích </string>
+    <string name="tv_title_chart_quality">Đồ thị % chất lượng sản xuất các sản phẩm</string>
     <string name="title_status_plan">Trạng thái kế hoạch</string>
     <string name="title_progress_plan">Tiến độ kế hoạch</string>
     <string name="title_status_command">Trạng thái lệnh</string>
@@ -27,5 +28,7 @@
     <string name="title_nodata_plan">Không có kế hoạch sản xuất nào!</string>
     <string name="title_nodata_command">Không có lệnh sản xuất nào!</string>
     <string name="title_nodata_request">Không có đề nghị nào!</string>
+    <string name="title_nodata_report">Không có dữ liệu!</string>
+    <string name="title_percent_average">Trung bình</string>
 
 </resources>

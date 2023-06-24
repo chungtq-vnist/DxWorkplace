@@ -5,26 +5,26 @@ import com.example.test.dxworkspace.core.extensions.Either
 import com.example.test.dxworkspace.data.entity.dashboard_manufacturing.*
 
 interface DashboardManufacturingRepository {
-    fun getNumberOfPlanByStatus(
+    suspend fun getNumberOfPlanByStatus(
         role: String,
         work: List<String>?,
         from: String?,
         to: String?
     ): Either<Failure, DashboardManufacturingPlanByStatus>
-    fun getNumberOfPlanByProgress(
+   suspend fun getNumberOfPlanByProgress(
         role: String,
         work: List<String>?,
         from: String?,
         to: String?
     ): Either<Failure, DashboardManufacturingPlanByProgress>
 
-    fun getNumberOfCommandByStatus(
+   suspend fun getNumberOfCommandByStatus(
         role: String,
         work: List<String>?,
         from: String?,
         to: String?
     ): Either<Failure, DashboardManufacturingCommandByStatus>
-    fun getNumberOfCommandByProgress(
+   suspend fun getNumberOfCommandByProgress(
         role: String,
         work: List<String>?,
         from: String?,
@@ -32,16 +32,25 @@ interface DashboardManufacturingRepository {
     ): Either<Failure, DashboardManufacturingCommandByProgress>
 
 
-    fun getNumberOfRequestByStatus(
+   suspend fun getNumberOfRequestByStatus(
         role: String,
         work: List<String>?,
         from: String?,
         to: String?
     ): Either<Failure, DashboardManufacturingRequestByStatus>
-    fun getNumberOfRequestByType(
+   suspend fun getNumberOfRequestByType(
         role: String,
         work: List<String>?,
         from: String?,
         to: String?
     ): Either<Failure, DashboardManufacturingRequestByType>
+
+   suspend fun getReportGoodsQuality(
+        role: String,
+        work: List<String>?,
+        from: String?,
+        to: String?,
+        fromCompare : String? ,
+        toCompare : String?
+    ) : Either<Failure,DashboardManufacturingQualityGoodsContent>
 }

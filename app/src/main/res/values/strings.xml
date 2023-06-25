@@ -14,6 +14,7 @@
     <string name="title_detail_task">Chi tiết công việc</string>
     <string name="tv_title_chart_plan_status">Đồ thị kế hoạch sản xuất theo trạng thái</string>
     <string name="tv_title_chart_financial_status">Đồ thị doanh thu, chi phí, lợi nhuận </string>
+    <string name="tv_title_chart_sale_status">Đồ thị kinh doanh tổng quan </string>
     <string name="tv_title_chart_plan_progress">Đồ thị lệnh sản xuất theo tiến độ</string>
     <string name="tv_title_chart_command_status">Đồ thị lệnh sản xuất theo trạng thái</string>
     <string name="tv_title_chart_command_progress">Đồ thị kế hoạch sản xuất theo tiến độ</string>
@@ -32,5 +33,6 @@
     <string name="title_nodata_report">Không có dữ liệu!</string>
     <string name="title_percent_average">Trung bình</string>
     <string name="title_dashboard">Tổng quan</string>
+    <string name="note_dashboard">Dữ liệu được so sánh trong khoảng từ %s đến %s với khoảng từ %s đến %s  </string>
 
 </resources>

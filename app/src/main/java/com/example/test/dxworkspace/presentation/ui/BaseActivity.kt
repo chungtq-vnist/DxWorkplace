@@ -174,4 +174,8 @@ abstract class BaseActivity<V : ViewDataBinding> : DaggerAppCompatActivity() {
     fun hiddenDialogProcess() {
         dialogProcess?.dismiss()
     }
+
+    fun hideKeyboard(){
+        com.example.test.dxworkspace.presentation.utils.common.hideKeyboard(this)
+    }
 }

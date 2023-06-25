@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.example.test.dxworkspace.core.exception.Failure
 import com.example.test.dxworkspace.core.extensions.Either
 import com.example.test.dxworkspace.data.entity.report.FinancialReportContentResponse
+import com.example.test.dxworkspace.data.entity.report.SaleReportContentResponse
 import com.example.test.dxworkspace.data.remote.api.requestApi
 import com.example.test.dxworkspace.data.remote.datasource.DashboardManufacturingRemoteSource
 import com.example.test.dxworkspace.data.remote.datasource.ReportRemoteSource
@@ -35,4 +36,20 @@ class ReportRepositoryImpl @Inject constructor(
         )
     }
 
+    override suspend fun getSaleReport(
+        from: String?,
+        to: String?,
+        fromCompare: String?,
+        toCompare: String?
+    ): Either<Failure, SaleReportContentResponse> {
+        return requestApi(
+            reportRemoteSource.getSaleReport(from, to, fromCompare, toCompare),
+            {
+                if (it.success) {
+                    it.content ?: SaleReportContentResponse()
+                } else SaleReportContentResponse()
+            },
+            SaleReportContentResponse()
+        )
+    }
 }

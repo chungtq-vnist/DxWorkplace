@@ -101,6 +101,7 @@ class ReportFinancialFragment : BaseFragment<FragmentReportFinancialBinding>() {
             pullToRefresh.setOnRefreshListener {
                 getReportData()
             }
+            binding?.tvRangeTime?.text = homeViewModel.fromDate + " - " + homeViewModel.toDate
             tvRangeTime.setOnClickListener {
                 postNormal(EventNextHome(RangeTimeSelectFragment::class.java))
             }
@@ -169,17 +170,17 @@ class ReportFinancialFragment : BaseFragment<FragmentReportFinancialBinding>() {
         val chart = binding!!.chart
         val dataNow = viewModel.financialData.value!!
         val dataPre = viewModel.financialDataCompare.value!!
-//        val barEntriesRevenue = mutableListOf<BarEntry>()
-//        barEntriesRevenue.add(BarEntry(2f,(dataNow.revenue ?: 0L).toFloat()))
-//        barEntriesRevenue.add(BarEntry(1f,(dataPre.revenue ?: 0L).toFloat()))
-//
-//        val barEntriesExpense = mutableListOf<BarEntry>()
-//        barEntriesExpense.add(BarEntry(2f,(dataNow.expense ?: 0L).toFloat()))
-//        barEntriesExpense.add(BarEntry(1f,(dataPre.expense ?: 0L).toFloat()))
-//
-//        val barEntriesProfit = mutableListOf<BarEntry>()
-//        barEntriesProfit.add(BarEntry(2f,(dataNow.profit ?: 0L).toFloat()))
-//        barEntriesProfit.add(BarEntry(1f,(dataPre.profit ?: 0L).toFloat()))
+        val barEntriesRevenue = mutableListOf<BarEntry>()
+        barEntriesRevenue.add(BarEntry(2f,(dataNow.revenue ?: 0L).toFloat()))
+        barEntriesRevenue.add(BarEntry(1f,(dataPre.revenue ?: 0L).toFloat()))
+
+        val barEntriesExpense = mutableListOf<BarEntry>()
+        barEntriesExpense.add(BarEntry(2f,(dataNow.expense ?: 0L).toFloat()))
+        barEntriesExpense.add(BarEntry(1f,(dataPre.expense ?: 0L).toFloat()))
+
+        val barEntriesProfit = mutableListOf<BarEntry>()
+        barEntriesProfit.add(BarEntry(2f,(dataNow.profit ?: 0L).toFloat()))
+        barEntriesProfit.add(BarEntry(1f,(dataPre.profit ?: 0L).toFloat()))
 //
 //
         val listStringXAxis = when(homeViewModel.typeTimeReport){
@@ -187,17 +188,17 @@ class ReportFinancialFragment : BaseFragment<FragmentReportFinancialBinding>() {
             else -> listOf<String>("Kỳ trước","Kỳ này")
         }
 
-        val barEntriesRevenue = mutableListOf<BarEntry>()
-        barEntriesRevenue.add(BarEntry(1f,10000000.toFloat()))
-        barEntriesRevenue.add(BarEntry(2f,2000000.toFloat()))
-
-        val barEntriesExpense = mutableListOf<BarEntry>()
-        barEntriesExpense.add(BarEntry(1f,5000000.toFloat()))
-        barEntriesExpense.add(BarEntry(2f,1200000.toFloat()))
-
-        val barEntriesProfit = mutableListOf<BarEntry>()
-        barEntriesProfit.add(BarEntry(1f,3400000.toFloat()))
-        barEntriesProfit.add(BarEntry(2f, (-1200000).toFloat()))
+//        val barEntriesRevenue = mutableListOf<BarEntry>()
+//        barEntriesRevenue.add(BarEntry(1f,10000000.toFloat()))
+//        barEntriesRevenue.add(BarEntry(2f,2000000.toFloat()))
+//
+//        val barEntriesExpense = mutableListOf<BarEntry>()
+//        barEntriesExpense.add(BarEntry(1f,5000000.toFloat()))
+//        barEntriesExpense.add(BarEntry(2f,1200000.toFloat()))
+//
+//        val barEntriesProfit = mutableListOf<BarEntry>()
+//        barEntriesProfit.add(BarEntry(1f,3400000.toFloat()))
+//        barEntriesProfit.add(BarEntry(2f, (-1200000).toFloat()))
 
         val barDataSetRevenue = BarDataSet(barEntriesRevenue,"Doanh thu")
         val barDataSetExpense = BarDataSet(barEntriesExpense,"Chi phí")
@@ -233,6 +234,9 @@ class ReportFinancialFragment : BaseFragment<FragmentReportFinancialBinding>() {
         listItem.add(CompareModel((dataNow.cancelOrderMoney ?: 0.0),dataPre.cancelOrderMoney ?: 0.0,"money","Tiền hủy đơn",R.drawable.ic_money))
         listItem.add(CompareModel((dataNow.profit ?: 0.0),dataPre.profit ?: 0.0,"money","Lợi nhuận",R.drawable.ic_money))
         adapter.items = listItem
+        binding?.tvNote?.text = getString(R.string.note_dashboard,"${homeViewModel.fromDate}" ,"${homeViewModel.toDate}" ,"${homeViewModel.fromDateCompare}",
+            homeViewModel.toDateCompare
+        )
     }
 
 // set up linechart
@@ -301,11 +305,6 @@ class ReportFinancialFragment : BaseFragment<FragmentReportFinancialBinding>() {
 //        binding!!.chart.setData(data)
 //        binding!!.chart.invalidate()
 //    }
-    private val colors = intArrayOf(
-        ColorTemplate.VORDIPLOM_COLORS[0],
-        ColorTemplate.VORDIPLOM_COLORS[1],
-        ColorTemplate.VORDIPLOM_COLORS[2]
-    )
 
 
 }

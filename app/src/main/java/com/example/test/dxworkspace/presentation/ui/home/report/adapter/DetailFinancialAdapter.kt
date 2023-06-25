@@ -3,11 +3,13 @@ package com.example.test.dxworkspace.presentation.ui.home.report.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.test.dxworkspace.R
 import com.example.test.dxworkspace.databinding.ItemDetailDashboardBinding
 import com.example.test.dxworkspace.databinding.ItemDetailDashboardHeaderBinding
 import com.example.test.dxworkspace.presentation.model.menu.CompareModel
 import com.example.test.dxworkspace.presentation.utils.common.formatMoney
 import com.example.test.dxworkspace.presentation.utils.common.hide
+import com.example.test.dxworkspace.presentation.utils.common.show
 
 class DetailFinancialAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -19,6 +21,7 @@ class DetailFinancialAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             field = value
             notifyDataSetChanged()
         }
+
     override fun getItemViewType(position: Int): Int {
         return when (position) {
             0 -> TYPE_HEADER
@@ -53,10 +56,39 @@ class DetailFinancialAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 (holder as DetailNormalViewHolder).binding.apply {
                     tvRevenueTitle.text = item.title
                     ivTypeRevenue.setImageResource(item.iconId)
-                    ivUp1.hide()
-                    ivUp2.hide()
-                    tvCollected.hide()
-                    tvMoneyRevenue.text = if( item.type == "money") formatMoney(item.now) else item.now.toInt().toString()
+//                    ivUp1.hide()
+//                    ivUp2.hide()
+//                    tvCollected.hide()
+                    tvMoneyRevenue.text =
+                        if (item.type == "money") formatMoney(item.now) else item.now.toInt()
+                            .toString()
+                    val percent =
+                        if (item.compare == 0.0 && item.now != 0.0) 1000.0 else if (item.compare == 0.0 && item.now == 0.0) 100.0
+                        else ((item.now / item.compare) * 10000).toLong() / 100.0
+                    if (percent == 1000.0) {
+                        ivUp1.show()
+                        ivUp2.show()
+                        ivUp1.setImageResource(R.drawable.ic_up)
+                        ivUp2.setImageResource(R.drawable.ic_up)
+                        tvCollected.hide()
+                    } else if (percent > 100.0) {
+                        ivUp1.show()
+                        ivUp2.hide()
+                        tvCollected.show()
+                        ivUp1.setImageResource(R.drawable.ic_up)
+                        tvCollected.text = "${percent - 100} %"
+                    } else if (percent < 100.0) {
+                        ivUp1.show()
+                        ivUp2.hide()
+                        tvCollected.show()
+                        ivUp1.setImageResource(R.drawable.ic_down)
+                        tvCollected.text = "${100.0 - percent} %"
+                    } else {
+                        ivUp1.hide()
+                        ivUp2.hide()
+                        tvCollected.show()
+                        tvCollected.text = "--"
+                    }
                 }
 //                with(holder.itemView) {
 //

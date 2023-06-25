@@ -43,6 +43,7 @@ import android.os.Looper
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.quality.DashboardQualityManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.financial.ReportFinancialFragment
+import com.example.test.dxworkspace.presentation.ui.home.report.sale.ReportSaleFragment
 
 
 class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
@@ -220,6 +221,9 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                     "/manufacturing-dashboard" -> postNormal(EventNextHome(DashboardControlManufacturingFragment::class.java))
                     "/manage-manufacturing-command" -> postNormal(EventNextHome(
                         ReportFinancialFragment::class.java
+                    ))
+                    "/manage-manufacturing-plan" -> postNormal(EventNextHome(
+                        ReportSaleFragment::class.java
                     ))
                     "/manufacturing-dashboard-quality" -> postNormal(EventNextHome(
                         DashboardQualityManufacturingFragment::class.java

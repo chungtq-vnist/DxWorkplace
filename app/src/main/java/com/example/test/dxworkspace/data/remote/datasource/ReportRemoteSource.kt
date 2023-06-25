@@ -11,4 +11,11 @@ class ReportRemoteSource @Inject constructor(val api: DxApi) {
         fromCompare: String?,
         toCompare: String?
     ) = api.getFinancialReport(from, to, fromCompare, toCompare)
+
+    fun getSaleReport(
+        from: String?,
+        to: String?,
+        fromCompare: String?,
+        toCompare: String?
+    ) = api.getSaleReport(from,to, fromCompare,toCompare)
 }

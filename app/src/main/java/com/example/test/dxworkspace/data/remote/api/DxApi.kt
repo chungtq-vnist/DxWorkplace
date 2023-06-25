@@ -3,6 +3,7 @@ package com.example.test.dxworkspace.data.remote.api
 import com.example.test.dxworkspace.data.entity.dashboard_manufacturing.*
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkResponseRaw
 import com.example.test.dxworkspace.data.entity.report.FinancialReportResponseRaw
+import com.example.test.dxworkspace.data.entity.report.SaleReportResponseRaw
 import com.example.test.dxworkspace.data.entity.task.*
 import com.example.test.dxworkspace.data.entity.timesheet.StartTimeModel
 import com.example.test.dxworkspace.data.entity.timesheet.StopTimeModel
@@ -155,5 +156,14 @@ interface DxApi : LoginApi {
         @Query("fromDateCompare") fromDateCompare : String ? ,
         @Query("toDateCompare") toDateCompare : String?
     ) : Call<FinancialReportResponseRaw>
+
+
+    @GET("/sale-report")
+    fun getSaleReport(
+        @Query("fromDate") fromDate : String? ,
+        @Query("toDate") toDate : String? ,
+        @Query("fromDateCompare") fromDateCompare : String ? ,
+        @Query("toDateCompare") toDateCompare : String?
+    ) : Call<SaleReportResponseRaw>
 
 }

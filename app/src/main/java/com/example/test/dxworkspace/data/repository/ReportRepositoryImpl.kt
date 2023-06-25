@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.example.test.dxworkspace.core.exception.Failure
 import com.example.test.dxworkspace.core.extensions.Either
 import com.example.test.dxworkspace.data.entity.report.FinancialReportContentResponse
+import com.example.test.dxworkspace.data.entity.report.PlanCompletedOnScheduleContent
 import com.example.test.dxworkspace.data.entity.report.SaleReportContentResponse
 import com.example.test.dxworkspace.data.remote.api.requestApi
 import com.example.test.dxworkspace.data.remote.datasource.DashboardManufacturingRemoteSource
@@ -50,6 +51,23 @@ class ReportRepositoryImpl @Inject constructor(
                 } else SaleReportContentResponse()
             },
             SaleReportContentResponse()
+        )
+    }
+
+    override suspend fun getNumberPlanCompletedOnSchedule(
+        from: String?,
+        to: String?,
+        fromCompare: String?,
+        toCompare: String?
+    ): Either<Failure, PlanCompletedOnScheduleContent> {
+        return requestApi(
+            reportRemoteSource.getNumberPlanCompletedOnSchedule(from, to, fromCompare, toCompare),
+            {
+                if (it.success) {
+                    it.content ?: PlanCompletedOnScheduleContent()
+                } else PlanCompletedOnScheduleContent()
+            },
+            PlanCompletedOnScheduleContent()
         )
     }
 }

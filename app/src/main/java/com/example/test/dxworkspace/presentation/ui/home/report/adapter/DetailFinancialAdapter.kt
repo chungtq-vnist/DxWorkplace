@@ -60,8 +60,8 @@ class DetailFinancialAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 //                    ivUp2.hide()
 //                    tvCollected.hide()
                     tvMoneyRevenue.text =
-                        if (item.type == "money") formatMoney(item.now) else item.now.toInt()
-                            .toString()
+                        if (item.type == "money") formatMoney(item.now) else if(item.type == "value") item.now.toInt().toString() else "${item.now} %"
+
                     val percent =
                         if (item.compare == 0.0 && item.now != 0.0) 1000.0 else if (item.compare == 0.0 && item.now == 0.0) 100.0
                         else ((item.now / item.compare) * 10000).toLong() / 100.0

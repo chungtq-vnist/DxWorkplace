@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBack"
+            style="@style/ImageToolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvHeaderToolbar"
+            style="@style/Font.TextSemiBold13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:includeFontPadding="false"
+            android:text="Báo cáo sản xuất tổng quan"
+            android:textColor="@color/clr_main_dark"
+            app:layout_constraintBottom_toBottomOf="@id/ivBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RelativeOverlap" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnMenuMore"
+            style="@style/ImageToolbar"
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_menu_more"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/ivBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/rlRangeTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingTop="@dimen/_4sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivBack">
+
+            <ImageView
+                android:id="@+id/ivRangeTime"
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/tvRangeTime"
+                android:layout_alignTop="@id/tvRangeTime"
+                android:layout_alignBottom="@id/tvRangeTime"
+                android:src="@drawable/ic_select_calendar" />
+
+            <TextView
+                android:id="@+id/tvRangeTime"
+                style="@style/Font.TextRegular13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:text="16/6/2023 - 20/6/2023"
+                android:textColor="@color/clr_blue_new"
+                android:textSize="@dimen/_12ssp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/tvRangeTime"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="@color/clr_line_new" />
+
+        </RelativeLayout>
+
+
+
+        <View
+            android:id="@+id/viewTop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/clr_line_new"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rlRangeTime" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/pull_to_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/viewTop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white">
+
+                    <FrameLayout
+                        android:id="@+id/frameChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:paddingEnd="@dimen/_8sdp"
+                        android:paddingBottom="@dimen/_8sdp"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.github.mikephil.charting.charts.BarChart
+                            android:id="@+id/chart"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/_255sdp" />
+
+                        <TextView
+                            android:id="@+id/tvTitleNoData"
+                            style="@style/DXFont.TextRegular12"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/title_nodata_plan"
+                            android:textSize="@dimen/_16ssp"
+                            android:visibility="gone" />
+                    </FrameLayout>
+
+
+                    <TextView
+                        android:id="@+id/tvTitleChart"
+                        style="@style/Font.TextBold12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/_4sdp"
+                        android:text="@string/tv_title_chart_manufacturing"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/frameChart" />
+
+                    <View
+                        android:id="@+id/viewMid"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_4sdp"
+                        android:background="@color/color_divider"
+                        app:layout_constraintTop_toBottomOf="@id/tvTitleChart" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcvSale"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/viewMid"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:background="@color/white"
+                        android:nestedScrollingEnabled="false"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="5" />
+                    <TextView
+                        android:id="@+id/tvNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Font.Text11.Light.Italic"
+                        app:layout_constraintTop_toBottomOf="@id/rcvSale"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:paddingHorizontal="@dimen/_8sdp"
+                        tools:text="@string/note_dashboard"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

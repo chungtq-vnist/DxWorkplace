@@ -100,6 +100,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         sharedPreferences[Constants.APLogin.CURRENT_ROLE_ID] = loginResult.user.roles[0].roleId.id
         sharedPreferences[Constants.APLogin.CURRENT_PAGE] = "/home"
         sharedPreferences[Constants.APLogin.LOGIN_RESPONSE_INFO] = gson.toJson(loginResult)
+        sharedPreferences[Constants.TASK_ID_COUNTING] = ""
+        sharedPreferences[Constants.START_TIME_COUNT] = ""
+        sharedPreferences[Constants.TIMERID_COUNTING] = ""
+        sharedPreferences[Constants.IS_COUNTING] = false
         val intent = Intent(this, HomeActivity::class.java)
 
         startActivity(intent)

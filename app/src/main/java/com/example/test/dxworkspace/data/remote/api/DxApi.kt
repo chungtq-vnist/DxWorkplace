@@ -2,9 +2,8 @@ package com.example.test.dxworkspace.data.remote.api
 
 import com.example.test.dxworkspace.data.entity.dashboard_manufacturing.*
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkResponseRaw
-import com.example.test.dxworkspace.data.entity.task.TaskDetailResponseRaw
-import com.example.test.dxworkspace.data.entity.task.TaskResponseRaw
-import com.example.test.dxworkspace.data.entity.task.TimeSheetResponseRaw
+import com.example.test.dxworkspace.data.entity.report.FinancialReportResponseRaw
+import com.example.test.dxworkspace.data.entity.task.*
 import com.example.test.dxworkspace.data.entity.timesheet.StartTimeModel
 import com.example.test.dxworkspace.data.entity.timesheet.StopTimeModel
 import com.example.test.dxworkspace.data.entity.version.VersionDiffResponseRaw
@@ -71,7 +70,7 @@ interface DxApi : LoginApi {
     fun startTimer(
         @Path("id") id : String,
         @Body start : StartTimeModel
-    ) : Call<TaskDetailResponseRaw>
+    ) : Call<StartTimeSheetLogResponseRaw>
 
     @POST("performtask/tasks/{id}/timesheet-logs/stop-timer")
     fun stopTimer(
@@ -83,7 +82,7 @@ interface DxApi : LoginApi {
     fun postAction(
         @Path("id") id : String,
         @Body body : RequestBody
-    ) : Call<TimeSheetResponseRaw>
+    ) : Call<CreateTaskActionResponseRaw>
 
     // manufacturing dashboard
     @GET("/manufacturing-dashboard/get-number-plans-by-status")
@@ -149,6 +148,12 @@ interface DxApi : LoginApi {
     ) : Call<DashboardManufacturingQualityGoodsRaw>
 
 
-
+    @GET("/report/financial-report")
+    fun getFinancialReport(
+        @Query("fromDate") fromDate : String? ,
+        @Query("toDate") toDate : String? ,
+        @Query("fromDateCompare") fromDateCompare : String ? ,
+        @Query("toDateCompare") toDateCompare : String?
+    ) : Call<FinancialReportResponseRaw>
 
 }

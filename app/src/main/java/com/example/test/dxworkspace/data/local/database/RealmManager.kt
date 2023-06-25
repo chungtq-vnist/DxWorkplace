@@ -31,7 +31,6 @@ class RealmManager {
 
         fun closeDb(){
             if(instance != null) {
-                instance?.close()
                 instance = null
             }
         }

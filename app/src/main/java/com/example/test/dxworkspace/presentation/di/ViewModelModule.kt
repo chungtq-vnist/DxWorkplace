@@ -7,6 +7,7 @@ import com.example.test.dxworkspace.core.di.viewmodel.ViewModelKey
 import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingViewModel
+import com.example.test.dxworkspace.presentation.ui.home.report.ReportViewModel
 import com.example.test.dxworkspace.presentation.ui.home.workplace.WorkplaceViewModel
 import com.example.test.dxworkspace.presentation.ui.login.LoginViewModel
 import dagger.Binds
@@ -44,5 +45,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(DashboardControlManufacturingViewModel::class)
     abstract fun bindsDashboardControlManufacturingViewModel(workplaceViewModel: DashboardControlManufacturingViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReportViewModel::class)
+    abstract fun bindsReportViewModel(workplaceViewModel: ReportViewModel) : ViewModel
 
 }

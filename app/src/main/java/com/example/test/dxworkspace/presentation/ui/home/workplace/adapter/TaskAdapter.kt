@@ -40,7 +40,30 @@ class TaskAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 class TaskViewHolder(val binding : ItemTaskBinding) : RecyclerView.ViewHolder(binding.root){
     fun bind(item : TaskModel){
         binding.apply {
-            viewStatus.setBackgroundColor(if(item.progress > 90) viewStatus.context.getColor(R.color.clr_green) else viewStatus.context.getColor(R.color.red) )
+//            viewStatus.setBackgroundColor(if(item.status == "finished") viewStatus.context.getColor(R.color.clr_green) else viewStatus.context.getColor(R.color.red) )
+            viewStatus.setBackgroundColor(
+                when (item.priority) {
+                    1 -> {
+                        viewStatus.context.getColor(R.color.clr_green)
+                    }
+                    2 -> {
+                        viewStatus.context.getColor(R.color.rajah)
+                    }
+                    3 -> {
+
+                        viewStatus.context.getColor(R.color.azure_radiance)
+                    }
+                    4 -> {
+                        viewStatus.context.getColor(R.color.clr_cancel_kitchen)
+                    }
+                    5 -> {
+                        viewStatus.context.getColor(R.color.color_item_delivery)
+                    }
+                    else -> {
+                        viewStatus.context.getColor(R.color.clr_green)
+                    }
+                }
+            )
             tvTaskName.text = item.name
             tvTimeStart.text = getTimeDDMMYYYYHHMMFromString(item.startDate)
             tvTimeEnd.text = getTimeDDMMYYYYHHMMFromString(item.endDate)

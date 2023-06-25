@@ -49,7 +49,12 @@ class GetTaskByTypeUseCase  @Inject constructor(
                 listTask.addAll(e4.getValue().content.tasks ?: emptyList())
                 total+=e4.getValue().content.totalCount
             }
-            Either.Right(TaskResponseRaw(true, content = TaskResponseContent(listTask,1,total)))
+            val listAll = mutableListOf<TaskModel>()
+            for (i in 0 until listTask.size){
+                val t = listTask[i]
+                if (listAll.find { it._id == t._id } == null) listAll.add(t)
+            }
+            Either.Right(TaskResponseRaw(true, content = TaskResponseContent(listAll,1,total)))
         }
 
 

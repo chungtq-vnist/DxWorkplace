@@ -8,6 +8,7 @@ import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.quality.DashboardQualityManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingWorkFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.financial.ReportFinancialFragment
+import com.example.test.dxworkspace.presentation.ui.home.workplace.SelectRoleFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.TimeSheetFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.WorkplaceFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.detail_task.DetailTaskFragment
@@ -69,4 +70,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeotherFragment(): OtherFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSelectRoleFragment(): SelectRoleFragment
 }

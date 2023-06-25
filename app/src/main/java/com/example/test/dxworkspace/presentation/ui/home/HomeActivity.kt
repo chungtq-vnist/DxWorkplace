@@ -70,6 +70,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             WorkplaceFragment::class.java,
 
         )
+        DxApplication.stateWork = Constants.STATE_WORK.STATE_NONE
         checkVersion()
 //        viewModel.checkVersion {
 //            EventBus.getDefault().post(EventSyncMessage(EventSyncMessage.SYNC_FIRST))

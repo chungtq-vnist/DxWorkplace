@@ -43,3 +43,9 @@ data class TimeSheetResponseRaw(
     val messages : List<String> = emptyList(),
     val content : List<TimeSheetLog>? = listOf()
 )
+
+data class CreateTaskActionResponseRaw(
+    val success : Boolean = false,
+    val messages : List<String> = emptyList(),
+    val content : List<TaskAction>? = listOf()
+)

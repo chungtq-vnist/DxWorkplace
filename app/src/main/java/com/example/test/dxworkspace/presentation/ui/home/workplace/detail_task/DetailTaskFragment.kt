@@ -21,6 +21,7 @@ import com.example.test.dxworkspace.data.local.preferences.AppPreferences.get
 import com.example.test.dxworkspace.data.local.preferences.AppPreferences.set
 import com.example.test.dxworkspace.domain.repository.ConfigRepository
 import com.example.test.dxworkspace.presentation.ui.home.workplace.adapter.TaskTimeSheetLogAdapter
+import com.example.test.dxworkspace.presentation.utils.common.clearText
 import com.example.test.dxworkspace.presentation.utils.common.getTextz
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
@@ -156,7 +157,11 @@ class DetailTaskFragment : BaseFragment<FragmentDetailTaskBinding>() {
             }
             ivSendAction.setOnClickListener {
                 if(edtAddAction.getTextz().isNotEmpty()) viewModel.postAction(viewModel.taskSelected.value?._id ?: "" , configRepository.getUser().id,edtAddAction.getTextz(),viewModel.taskSelected.value?.timesheetLogs?.size ?: 0)
+                edtAddAction.clearText()
+                hideKeyboard()
+
             }
+            rlTimeSheet.isVisible = task.status != "finished" && task.status != "canceled"
         }
     }
 }

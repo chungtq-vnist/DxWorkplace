@@ -63,3 +63,8 @@ fun convertToDate(dateString: String): Date? {
        Date()
     }
 }
+
+fun getDateYYYYMMDDHHMMSS(date : Date) : String  {
+    val df = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    return df.format(date)
+}

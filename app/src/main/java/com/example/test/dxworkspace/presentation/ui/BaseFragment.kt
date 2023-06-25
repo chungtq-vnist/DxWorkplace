@@ -149,4 +149,13 @@ abstract class BaseFragment< V : ViewDataBinding> : DaggerFragment() , ViewTreeO
             (activity as BaseActivity<*>).hiddenDialogProcess()
         }
     }
+
+    fun hideKeyboard() {
+        activity?.let {
+            if (it is BaseActivity<*>) {
+                it.hideKeyboard()
+            }
+        }
+    }
+
 }

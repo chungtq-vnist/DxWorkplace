@@ -10,6 +10,7 @@ import android.os.Looper
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -18,6 +19,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test.dxworkspace.R
 import com.example.test.dxworkspace.presentation.utils.common.decorator.LinearMarginDecoration
+import java.text.NumberFormat
+import java.util.*
 
 
 fun RecyclerView.addDefaultDecorator(margin: Int = resources.getDimensionPixelOffset(R.dimen._8sdp)) {
@@ -153,4 +156,57 @@ fun View.show() {
 
 fun View.hide() {
     visibility = View.GONE
+}
+
+fun formatMoney(
+    value: Any,
+    isAcceptZero: Boolean = true,
+    isAcceptMinus: Boolean = true,
+): String {
+    var moneyFormat = "đ"
+    try {
+        val formatMoney: NumberFormat = NumberFormat.getCurrencyInstance(Locale.CANADA)
+        val moneyFormatted: String = formatMoney.format(value)
+        if (moneyFormatted.startsWith("-") && !isAcceptMinus) {
+            if (isAcceptZero) {
+                return "0 $moneyFormat"
+            } else {
+                return ""
+            }
+        } else {
+            var valueFinal = moneyFormatted.replace("$", "")
+            return if (valueFinal == "0") {
+                if (isAcceptZero) {
+                    "0 $moneyFormat"
+                } else {
+                    ""
+                }
+            } else {
+                if (valueFinal.contains('.')) {
+                    val position = valueFinal.lastIndexOf(".")
+                    val checkZero = valueFinal.substring(position, valueFinal.length)
+                    if (checkZero.trim().toDouble() == 0.0) {
+                        valueFinal = valueFinal.removeRange(
+                            position,
+                            valueFinal.length
+                        )
+                    }
+                }
+                "$valueFinal $moneyFormat"
+            }
+        }
+    } catch (ignore: Exception) {
+        return "0 $moneyFormat"
+    }
+}
+
+fun hideKeyboard(activity: Activity) {
+    val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    //Find the currently focused view, so we can grab the correct window token from it.
+    var view = activity.currentFocus
+    //If no view currently has focus, create a new one, just so we can grab a window token from it
+    if (view == null) {
+        view = View(activity)
+    }
+    imm.hideSoftInputFromWindow(view.windowToken, 0)
 }

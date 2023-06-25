@@ -1,12 +1,12 @@
 package com.example.test.dxworkspace.data.entity.timesheet
 
 data class StopTimeModel(
-    val autoStopped : Int? ,
-    val description : String? ,
-     val employee: String? ,
-    val startedAt : String? ,
-    val stoppedAt : String? ,
-    val timesheetLog : String? ,
-    val taskActionStartTimer : String?,  // id lay ra cua lan bam gio nay
-    val type : String?
+    var autoStopped : Int? ,
+    var description : String? ,
+    var employee: String? ,
+    var startedAt : String? ,
+    var stoppedAt : String? ,
+    var timesheetLog : String? ,
+    var taskActionStartTimer : String?,  // id lay ra cua lan bam gio nay
+    var type : String?
 )

@@ -59,11 +59,98 @@
             android:layout_margin="@dimen/_8sdp"
             />
 
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cbSelected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:padding="@dimen/_4sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            android:text="Hẹn giờ kết thúc bấm giờ"
+            style="@style/Font.TextRegular13"
+            android:button="@drawable/custom_multi_checkbox"
+            />
+        <RelativeLayout
+            android:id="@+id/rlSelectTime"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/cbSelected"
+            android:visibility="gone"
+            android:background="@drawable/bg_edit_text">
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:background="@color/clr_line_new" />
+
+            <LinearLayout
+                android:id="@+id/llDayStart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@id/view1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_start_time_new">
+
+                </androidx.appcompat.widget.AppCompatImageView>
+
+                <TextView
+                    android:id="@+id/tvDayStart"
+                    style="@style/Font.TextRegular13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:textColor="@color/clr_main_dark"
+                    tools:text="15/03/2021" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llHourStart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/view1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_end_time_new">
+
+                </androidx.appcompat.widget.AppCompatImageView>
+
+                <TextView
+                    android:id="@+id/tvHourStart"
+                    style="@style/Font.TextRegular13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:textColor="@color/clr_main_dark"
+                    tools:text="15/03/2021" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvAction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tvName"
+            app:layout_constraintTop_toBottomOf="@id/rlSelectTime"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="@dimen/_8sdp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

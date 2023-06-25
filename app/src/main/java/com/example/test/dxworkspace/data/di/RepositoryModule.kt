@@ -48,4 +48,8 @@ class RepositoryModule {
     @Singleton
     fun providesDashboardManufacturingRepository(repository : DashboardManufacturingRepositoryImpl) : DashboardManufacturingRepository = repository
 
+    @Provides
+    @Singleton
+    fun providesReportRepository(repository : ReportRepositoryImpl) : ReportRepository = repository
+
 }

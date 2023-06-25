@@ -132,6 +132,13 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                 if (it == true) {
                     sharedPreferences[Constants.APLogin.IS_LOGGED] = false
                     RealmManager.closeDb()
+                    sharedPreferences[Constants.APLogin.TOKEN] = ""
+                    sharedPreferences[Constants.APLogin.IS_LOGGED] = false
+                    sharedPreferences[Constants.APLogin.CURRENT_USER] = ""
+                    sharedPreferences[Constants.APLogin.CURRENT_ROLE] = ""
+                    sharedPreferences[Constants.APLogin.CURRENT_ROLE_ID] = ""
+                    sharedPreferences[Constants.APLogin.CURRENT_PAGE] = ""
+                    sharedPreferences[Constants.APLogin.LOGIN_RESPONSE_INFO] = ""
                     val intent = Intent(activity, SplashActivity::class.java)
                     startActivity(intent)
                     activity?.finishAffinity()
@@ -195,6 +202,15 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                 if (menu.iconEnd != 0) {
                     menu.isExpand = !menu.isExpand
                     menuAdapter.onExpandMenu(menu)
+                } else {
+                    when(menu.url){
+                        "/change-role" -> {
+                            postNormal(EventNextHome(SelectRoleFragment::class.java))
+                        }
+                    }
+                    handlerPostDelay({
+                        binding!!.layoutDrawer.closeDrawer(GravityCompat.START)
+                    }, 100)
                 }
             } else if (menu.level == 3) {
                 when (menu.url) {
@@ -311,6 +327,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
         binding?.apply {
             layoutLeftMenu.tvCompanyName.text = company.name
             layoutLeftMenu.tvUserName.text = configRepository.getUser().name
+            layoutLeftMenu.tvRoleName.text = configRepository.getCurrentRole().name
             layoutLeftMenu.imgAvatarUser
             layoutLeftMenu.imgAvatarUser.apply {
                 Glide.with(this)
@@ -401,6 +418,12 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             MenuModel(
                 id = "asjkld", category = "manufacturing-management" ,level = 3 , iconStart = R.drawable.ic_home ,
                 desc = "Báo cáo chất lượng sản xuất", url = "/manufacturing-dashboard-quality"
+            )
+        )
+        listMenu.add(
+            MenuModel(
+                id = "change_role", category = "setting_app" ,level = 2 , iconStart = R.drawable.ic_change_role ,
+                desc = "Chuyển vai trò", url = "/change-role"
             )
         )
     }

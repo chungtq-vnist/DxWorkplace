@@ -134,6 +134,7 @@ class DashboardQualityManufacturingFragment : BaseFragment<FragmentDashboardQual
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
+            tvRangeTime.text = homeViewModel.fromDate + " - " + homeViewModel.toDate
             rlRangeTime.setOnClickListener {
                 postNormal(EventNextHome(RangeTimeSelectFragment::class.java))
             }

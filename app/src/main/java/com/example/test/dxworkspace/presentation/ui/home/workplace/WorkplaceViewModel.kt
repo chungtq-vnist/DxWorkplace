@@ -17,7 +17,6 @@ import com.example.test.dxworkspace.domain.usecase.task.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class WorkplaceViewModel @Inject constructor(
     private val getLinksCanAccessUseCase: GetLinksCanAccessUseCase,
     private val logoutUseCase: LogoutUseCase,
@@ -35,6 +34,7 @@ class WorkplaceViewModel @Inject constructor(
     var taskIdTimer = ""
     var startDate = ""
     var endDate = ""
+    val stopSuccess = MutableLiveData<Boolean>()
     fun getLinksCanAccess(){
         getLinksCanAccessUseCase(UseCase.None()){
             it.either({
@@ -84,15 +84,20 @@ class WorkplaceViewModel @Inject constructor(
     fun startTimer(taskId : String,userId:String){
         startTimerUseCase(Pair(taskId,userId)){
             it.either({},{
-                sharedPreferences[Constants.TIMERID_COUNTING] = it.content.timesheetLogs.first()._id
+                sharedPreferences[Constants.TIMERID_COUNTING] = it.content?.timesheetLogs?.first()?._id
             })
         }
     }
 
-    fun stopTimer(taskId : String , p : StopTimeModel){
-        stopTimerUseCase(Pair(taskId,p)){
-            it.either({},{
-
+    fun stopTimer(taskId: String, p: StopTimeModel) {
+        showLoading(true)
+        stopTimerUseCase(Pair(taskId, p)) {
+            it.either({
+                showLoading(false)
+                handleFailure(it)
+            }, {
+                showLoading(false)
+                stopSuccess.value = true
             })
         }
     }
@@ -102,7 +107,8 @@ class WorkplaceViewModel @Inject constructor(
             it.either({},
                 {
                     val t = taskSelected.value
-                    t?.timesheetLogs = it.content ?: listOf()
+                    val listaction = t?.taskActions?.toMutableList()
+                    t?.taskActions = it
                     taskSelected.value = t!!
                 })
         }

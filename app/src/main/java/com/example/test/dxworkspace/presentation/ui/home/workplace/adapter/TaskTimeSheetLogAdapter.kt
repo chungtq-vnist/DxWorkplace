@@ -42,7 +42,7 @@ class TaskTimeSheetViewHolder(val binding: ItemTimesheetLogBinding) : RecyclerVi
     fun bind(item: TimeSheetLog) {
         binding.apply {
             tvUserName.text = item.creator?.name
-            tvTimeSheet.text = getTimeDDMMYYYYHHMMFromStringOneLine(item.startedAt) + " - " + getTimeDDMMYYYYHHMMFromStringOneLine(item.startedAt)
+            tvTimeSheet.text = getTimeDDMMYYYYHHMMFromStringOneLine(item.startedAt) + " - " + getTimeDDMMYYYYHHMMFromStringOneLine(item.stoppedAt ?: item.startedAt)
         }
     }
 }

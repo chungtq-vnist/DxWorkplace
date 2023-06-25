@@ -22,8 +22,8 @@ data class TaskModel(
     var confirmedByEmployees : List<String> = emptyList(), // những người đã xác nhận công việc
     var progress : Int = 0 , // % hoan thanh cong viec
     var point : Int = -1 ,
-    var timesheetLogs : List<TimeSheetLog> = emptyList(),
-    var taskActions : List<TaskAction> = emptyList(), // cac hoat dong cua task
+//    var timesheetLogs : List<TimeSheetLog> = emptyList(),
+//    var taskActions : List<TaskAction> = emptyList(), // cac hoat dong cua task
     var estimateNormalTime : Int? = 0,
     var estimateOptimisticTime : Long? = 0L,
     var estimateNormalCost :  Long? = 0L,

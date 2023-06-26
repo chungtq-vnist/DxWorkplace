@@ -26,35 +26,35 @@ class GetTaskByTypeUseCase  @Inject constructor(
             val listTask = mutableListOf<TaskModel>()
             var total = 0
             val res1 = async {  taskRepository.getTask(TaskType.RESPONSIBLE,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
-            val res2 =  async {  taskRepository.getTask(TaskType.ACCOUNTABLE,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
-            val res3 =  async {  taskRepository.getTask(TaskType.CONSULTED,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
-            val res4 =  async {  taskRepository.getTask(TaskType.INFORMED,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
+//            val res2 =  async {  taskRepository.getTask(TaskType.ACCOUNTABLE,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
+//            val res3 =  async {  taskRepository.getTask(TaskType.CONSULTED,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
+//            val res4 =  async {  taskRepository.getTask(TaskType.INFORMED,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
             val e1 = res1.await()
-            val e2 = res2.await()
-            val e3 = res3.await()
-            val e4 = res4.await()
+//            val e2 = res2.await()
+//            val e3 = res3.await()
+//            val e4 = res4.await()
             if(e1.isRight){
                 listTask.addAll(e1.getValue().content.tasks ?: emptyList())
                 total+=e1.getValue().content.totalCount
             }
-            if(e2.isRight){
-                listTask.addAll(e2.getValue().content.tasks ?: emptyList())
-                total+=e2.getValue().content.totalCount
-            }
-            if(e3.isRight){
-                listTask.addAll(e3.getValue().content.tasks ?: emptyList())
-                total+=e3.getValue().content.totalCount
-            }
-            if(e4.isRight){
-                listTask.addAll(e4.getValue().content.tasks ?: emptyList())
-                total+=e4.getValue().content.totalCount
-            }
+//            if(e2.isRight){
+//                listTask.addAll(e2.getValue().content.tasks ?: emptyList())
+//                total+=e2.getValue().content.totalCount
+//            }
+//            if(e3.isRight){
+//                listTask.addAll(e3.getValue().content.tasks ?: emptyList())
+//                total+=e3.getValue().content.totalCount
+//            }
+//            if(e4.isRight){
+//                listTask.addAll(e4.getValue().content.tasks ?: emptyList())
+//                total+=e4.getValue().content.totalCount
+//            }
             val listAll = mutableListOf<TaskModel>()
             for (i in 0 until listTask.size){
                 val t = listTask[i]
                 if (listAll.find { it._id == t._id } == null) listAll.add(t)
             }
-            Either.Right(TaskResponseRaw(true, content = TaskResponseContent(listAll,1,total)))
+            Either.Right(TaskResponseRaw(true, content = TaskResponseContent(listAll.filter { it.status != "finished" && it.status != "canceled" },1,total)))
         }
 
 

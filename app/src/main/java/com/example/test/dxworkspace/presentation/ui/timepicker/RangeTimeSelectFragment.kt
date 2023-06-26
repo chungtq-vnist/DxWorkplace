@@ -29,9 +29,6 @@ class RangeTimeSelectFragment : BaseFragment<FragmentTimeReportPickerBinding>() 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = viewModel(viewModelFactory){
-
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -86,25 +83,31 @@ class RangeTimeSelectFragment : BaseFragment<FragmentTimeReportPickerBinding>() 
                 onBackPress()
             }
         }
-//        initCurrentPager()
+        initCurrentPager()
     }
 
     fun initCurrentPager(){
         when(viewModel.typeTimeReport){
             Constants.DatePicker.QUICK_TODAY, Constants.DatePicker.QUICK_YESTERDAY -> {
-                binding!!.viewPager.setCurrentItem(0, true)
+                binding!!.viewPager.setCurrentItem(0, false)
+                binding!!.tabs.getTabAt(0)?.select()
             }
             Constants.DatePicker.QUICK_THIS_WEEK, Constants.DatePicker.QUICK_PRE_WEEK, Constants.DatePicker.QUICK_7_DAY -> {
-                binding!!.viewPager.setCurrentItem(1, true)
+                binding!!.viewPager.setCurrentItem(1, false)
+                binding!!.tabs.getTabAt(1)?.select()
+
             }
             Constants.DatePicker.QUICK_THIS_MONTH, Constants.DatePicker.QUICK_PRE_MONTH, Constants.DatePicker.QUICK_30_DAY -> {
-                binding!!.viewPager.setCurrentItem(2, true)
+                binding!!.viewPager.setCurrentItem(2, false)
+                binding!!.tabs.getTabAt(2)?.select()
+
             }
 //            Constants.DatePicker.QUICK_THIS_YEAR, Constants.DatePicker.QUICK_PRE_YEAR, Constants.DatePicker.QUICK_365_DAY -> {
 //                binding!!.viewPager.setCurrentItem(3, true)
 //            }
             Constants.DatePicker.OTHER -> {
-                binding!!.viewPager.setCurrentItem(3, true)
+                binding!!.viewPager.setCurrentItem(3, false)
+                binding!!.tabs.getTabAt(3)?.select()
             }
         }
     }

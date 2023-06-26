@@ -69,6 +69,7 @@ class WeekFragment : BaseFragment<FragmentWeekBinding>() {
         if (binding!!.cbSevenDay.isChecked) {
             // trả về 2 cặp Pair(start , to ) , cặp đầu có to là ngày hiện tại , start là 6 ngày trước  , biểu diễn dưới dạng "dd-MM-yyyy"
             // cặp sau cũng có to là ngày trước của ngày start ở cặp đầu , start là 6 ngày trước
+            homeViewModel.typeTimeReport = Constants.DatePicker.QUICK_7_DAY
             val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
             val currentDate = Date()
 
@@ -95,6 +96,7 @@ class WeekFragment : BaseFragment<FragmentWeekBinding>() {
         } else if(binding!!.cbThisWeek.isChecked){
             // trả về 2 cặp Pair(start , to ) , cặp đầu có to là ngày hiện tại , start là ngày đầu tiên của tuần hiện tại  , biểu diễn dưới dạng "dd-MM-yyyy"
             // cặp sau có to là ngày cuối cùng của tuần trước  , start là ngày đầu tiên của tuần trước
+            homeViewModel.typeTimeReport = Constants.DatePicker.QUICK_THIS_WEEK
             val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
             val currentDate = Date()
 
@@ -121,6 +123,7 @@ class WeekFragment : BaseFragment<FragmentWeekBinding>() {
             println("from ${homeViewModel.fromDate} to ${homeViewModel.toDate}")
             println("from compare ${homeViewModel.fromDateCompare} to compare ${homeViewModel.toDateCompare}")
         } else {
+            homeViewModel.typeTimeReport = Constants.DatePicker.QUICK_PRE_WEEK
             val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
             val currentDate = Date()
 

@@ -220,13 +220,13 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                         postNormal(EventNextHome(ManufacturingWorkFragment::class.java))
                     }
                     "/manufacturing-dashboard" -> postNormal(EventNextHome(DashboardControlManufacturingFragment::class.java))
-                    "/manage-manufacturing-command" -> postNormal(EventNextHome(
+                    "/report_financial" -> postNormal(EventNextHome(
                         ReportFinancialFragment::class.java
                     ))
-                    "/manage-manufacturing-plan" -> postNormal(EventNextHome(
+                    "/report_sale" -> postNormal(EventNextHome(
                         ReportSaleFragment::class.java
                     ))
-                    "/manage-manufacturing-mill" -> postNormal(EventNextHome(
+                    "/report_manufacturing" -> postNormal(EventNextHome(
                         ReportManufacturingFragment::class.java
                     ))
                     "/manufacturing-dashboard-quality" -> postNormal(EventNextHome(
@@ -434,6 +434,31 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                 desc = "Chuyển vai trò", url = "/change-role"
             )
         )
+        listMenu.add(1,
+            MenuModel(
+                id = "report_overview", category = "report_overview" ,level = 2 , iconStart = R.drawable.ic_home ,
+                desc = "Báo cáo tổng quan", url = "" , iconEnd = R.drawable.ic_down_menu
+            )
+        )
+        listMenu.add(2,
+            MenuModel(
+                id = "report_financial", category = "report_overview" ,level = 3 , iconStart = R.drawable.ic_money ,
+                desc = "Báo cáo tài chính", url = "/report_financial"
+            )
+        )
+        listMenu.add(2,
+            MenuModel(
+                id = "report_sale", category = "report_overview" ,level = 3 , iconStart = R.drawable.ic_money ,
+                desc = "Báo cáo kinh doanh", url = "/report_sale"
+            )
+        )
+        listMenu.add(2,
+            MenuModel(
+                id = "report_manufacturing", category = "report_overview" ,level = 3 , iconStart = R.drawable.ic_money ,
+                desc = "Báo cáo sản xuất", url = "/report_manufacturing"
+            )
+        )
+
     }
 
 

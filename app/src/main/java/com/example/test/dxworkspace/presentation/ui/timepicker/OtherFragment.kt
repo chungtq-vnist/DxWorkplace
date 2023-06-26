@@ -7,6 +7,7 @@ import com.example.test.dxworkspace.R
 import com.example.test.dxworkspace.databinding.FragmentOtherBinding
 import com.example.test.dxworkspace.presentation.ui.BaseFragment
 import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
+import com.example.test.dxworkspace.presentation.utils.common.Constants
 import com.example.test.dxworkspace.presentation.utils.convertToDate
 import java.text.SimpleDateFormat
 import java.util.*
@@ -80,9 +81,23 @@ class OtherFragment : BaseFragment<FragmentOtherBinding>() {
     }
 
     fun getRangeTimeSelected(){
+        homeViewModel.typeTimeReport = Constants.DatePicker.OTHER
         homeViewModel.fromDate = fromDate
         homeViewModel.toDate = toDate
-        homeViewModel.isCompare = false
+        homeViewModel.isCompare = true
+        val format = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+
+        val calendarA = Calendar.getInstance()
+        calendarA.time = format.parse(fromDate)
+        val calendarB = Calendar.getInstance()
+        calendarB.time = format.parse(toDate)
+        val range = calendarB.timeInMillis - calendarA.timeInMillis
+        calendarA.add(Calendar.DAY_OF_MONTH, -1)
+        val toDateCompare = format.format(calendarA.time)
+        calendarB.timeInMillis = calendarA.timeInMillis - range
+        val fromDateCompare = format.format(calendarB.time)
+        homeViewModel.fromDateCompare = fromDateCompare
+        homeViewModel.toDateCompare = toDateCompare
     }
 
 }

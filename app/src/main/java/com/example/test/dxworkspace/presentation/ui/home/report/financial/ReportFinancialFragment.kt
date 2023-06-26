@@ -171,16 +171,16 @@ class ReportFinancialFragment : BaseFragment<FragmentReportFinancialBinding>() {
         val dataNow = viewModel.financialData.value!!
         val dataPre = viewModel.financialDataCompare.value!!
         val barEntriesRevenue = mutableListOf<BarEntry>()
-        barEntriesRevenue.add(BarEntry(2f,(dataNow.revenue ?: 0L).toFloat()))
         barEntriesRevenue.add(BarEntry(1f,(dataPre.revenue ?: 0L).toFloat()))
+        barEntriesRevenue.add(BarEntry(2f,(dataNow.revenue ?: 0L).toFloat()))
 
         val barEntriesExpense = mutableListOf<BarEntry>()
-        barEntriesExpense.add(BarEntry(2f,(dataNow.expense ?: 0L).toFloat()))
         barEntriesExpense.add(BarEntry(1f,(dataPre.expense ?: 0L).toFloat()))
+        barEntriesExpense.add(BarEntry(2f,(dataNow.expense ?: 0L).toFloat()))
 
         val barEntriesProfit = mutableListOf<BarEntry>()
-        barEntriesProfit.add(BarEntry(2f,(dataNow.profit ?: 0L).toFloat()))
         barEntriesProfit.add(BarEntry(1f,(dataPre.profit ?: 0L).toFloat()))
+        barEntriesProfit.add(BarEntry(2f,(dataNow.profit ?: 0L).toFloat()))
 //
 //
         val listStringXAxis = when(homeViewModel.typeTimeReport){

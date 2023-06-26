@@ -69,6 +69,7 @@ class MonthFragment : BaseFragment<FragmentMonthBinding>() {
         if(binding!!.cbThirtyDay.isChecked){
             // trả về 2 cặp Pair(start , to ) , cặp đầu có to là ngày hiện tại , start là 29 ngày trước  , biểu diễn dưới dạng "dd-MM-yyyy"
             // cặp sau cũng có to là ngày trước của ngày start ở cặp đầu , start là 29 ngày trước
+            homeViewModel.typeTimeReport = Constants.DatePicker.QUICK_30_DAY
             val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
             val currentDate = Date()
 
@@ -97,6 +98,7 @@ class MonthFragment : BaseFragment<FragmentMonthBinding>() {
         } else if(binding!!.cbThisMonth.isChecked){
             // trả về 2 cặp Pair(start , to ) , cặp đầu có to là ngày hiện tại , start là ngày đầu tiên của tháng hiện tại  , biểu diễn dưới dạng "dd-MM-yyyy"
             // cặp sau  có start  là ngày đầu tiên của tháng trước , end là ngày cuối của tháng trước
+            homeViewModel.typeTimeReport = Constants.DatePicker.QUICK_THIS_MONTH
             val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
             val currentDate = Date()
             val calendar = Calendar.getInstance()
@@ -124,6 +126,7 @@ class MonthFragment : BaseFragment<FragmentMonthBinding>() {
             println("from compare ${homeViewModel.fromDateCompare} to compare ${homeViewModel.toDateCompare}")
 
         } else {
+            homeViewModel.typeTimeReport = Constants.DatePicker.QUICK_PRE_MONTH
             val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
             val currentDate = Date()
             val calendar = Calendar.getInstance()

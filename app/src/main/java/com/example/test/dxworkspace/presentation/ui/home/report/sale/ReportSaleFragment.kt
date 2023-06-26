@@ -100,6 +100,7 @@ class ReportSaleFragment : BaseFragment<FragmentReportSaleBinding>() {
             pullToRefresh.setOnRefreshListener {
                 getReportData()
             }
+            binding?.tvRangeTime?.text = homeViewModel.fromDate + " - " + homeViewModel.toDate
             tvRangeTime.setOnClickListener {
                 postNormal(EventNextHome(RangeTimeSelectFragment::class.java))
             }
@@ -183,50 +184,50 @@ class ReportSaleFragment : BaseFragment<FragmentReportSaleBinding>() {
         val chart = binding!!.chart
         val dataNow = viewModel.saleData.value!!
         val dataPre = viewModel.saleDataCompare.value!!
-//        val barEntriesRevenue = mutableListOf<BarEntry>()
-//        barEntriesRevenue.add(BarEntry(2f,(dataNow.revenue ?: 0L).toFloat()))
-//        barEntriesRevenue.add(BarEntry(1f,(dataPre.revenue ?: 0L).toFloat()))
-//
-//        var maxOfRightAxis = 20
-//
-//        val barEntriesNumberOrder = mutableListOf<BarEntry>()
-//        barEntriesNumberOrder.add(BarEntry(2f,(dataNow.numberOrder ?: 0L).toFloat()))
-//        barEntriesNumberOrder.add(BarEntry(1f,(dataPre.numberOrder ?: 0L).toFloat()))
-//
-//        val barEntriesNewQuote = mutableListOf<BarEntry>()
-//        barEntriesNewQuote.add(BarEntry(2f,(dataNow.numberNewQuote ?: 0L).toFloat()))
-//        barEntriesNewQuote.add(BarEntry(1f,(dataPre.numberNewQuote ?: 0L).toFloat()))
-//
-//        val barEntriesNewOrder = mutableListOf<BarEntry>()
-//        barEntriesNewOrder.add(BarEntry(2f,(dataNow.numberNewOrder ?: 0L).toFloat()))
-//        barEntriesNewOrder.add(BarEntry(1f,(dataPre.numberNewOrder ?: 0L).toFloat()))
-//        maxOfRightAxis = maxOf(dataNow.numberOrder,dataNow.numberNewOrder,dataNow.numberNewQuote,dataPre.numberOrder
-//        ,dataPre.numberNewOrder , dataPre.numberNewQuote).toInt()
-//
+        val barEntriesRevenue = mutableListOf<BarEntry>()
+        barEntriesRevenue.add(BarEntry(1f,(dataPre.revenue ?: 0L).toFloat()))
+        barEntriesRevenue.add(BarEntry(2f,(dataNow.revenue ?: 0L).toFloat()))
+
+        var maxOfRightAxis = 20
+
+        val barEntriesNumberOrder = mutableListOf<BarEntry>()
+        barEntriesNumberOrder.add(BarEntry(1f,(dataPre.numberOrder ?: 0L).toFloat()))
+        barEntriesNumberOrder.add(BarEntry(2f,(dataNow.numberOrder ?: 0L).toFloat()))
+
+        val barEntriesNewQuote = mutableListOf<BarEntry>()
+        barEntriesNewQuote.add(BarEntry(1f,(dataPre.numberNewQuote ?: 0L).toFloat()))
+        barEntriesNewQuote.add(BarEntry(2f,(dataNow.numberNewQuote ?: 0L).toFloat()))
+
+        val barEntriesNewOrder = mutableListOf<BarEntry>()
+        barEntriesNewOrder.add(BarEntry(1f,(dataPre.numberNewOrder ?: 0L).toFloat()))
+        barEntriesNewOrder.add(BarEntry(2f,(dataNow.numberNewOrder ?: 0L).toFloat()))
+        maxOfRightAxis = maxOf(dataNow.numberOrder,dataNow.numberNewOrder,dataNow.numberNewQuote,dataPre.numberOrder
+        ,dataPre.numberNewOrder , dataPre.numberNewQuote).toInt()
+
 //
         val listStringXAxis = when(homeViewModel.typeTimeReport){
             Constants.DatePicker.QUICK_THIS_MONTH -> listOf<String>("Kỳ trước","Kỳ này")
             else -> listOf<String>("Kỳ trước","Kỳ này")
         }
 
-        val barEntriesRevenue = mutableListOf<BarEntry>()
-        barEntriesRevenue.add(BarEntry(2f,1200000.toFloat()))
-        barEntriesRevenue.add(BarEntry(1f,1000000.toFloat()))
-
-        var maxOfRightAxis = 20
-
-        val barEntriesNumberOrder = mutableListOf<BarEntry>()
-        barEntriesNumberOrder.add(BarEntry(2f,40.toFloat()))
-        barEntriesNumberOrder.add(BarEntry(1f,50.toFloat()))
-
-        val barEntriesNewQuote = mutableListOf<BarEntry>()
-        barEntriesNewQuote.add(BarEntry(2f,120.toFloat()))
-        barEntriesNewQuote.add(BarEntry(1f,90.toFloat()))
-
-        val barEntriesNewOrder = mutableListOf<BarEntry>()
-        barEntriesNewOrder.add(BarEntry(2f,20.toFloat()))
-        barEntriesNewOrder.add(BarEntry(1f,30.toFloat()))
-        maxOfRightAxis = 200
+//        val barEntriesRevenue = mutableListOf<BarEntry>()
+//        barEntriesRevenue.add(BarEntry(2f,1200000.toFloat()))
+//        barEntriesRevenue.add(BarEntry(1f,1000000.toFloat()))
+//
+//        var maxOfRightAxis = 20
+//
+//        val barEntriesNumberOrder = mutableListOf<BarEntry>()
+//        barEntriesNumberOrder.add(BarEntry(2f,40.toFloat()))
+//        barEntriesNumberOrder.add(BarEntry(1f,50.toFloat()))
+//
+//        val barEntriesNewQuote = mutableListOf<BarEntry>()
+//        barEntriesNewQuote.add(BarEntry(2f,120.toFloat()))
+//        barEntriesNewQuote.add(BarEntry(1f,90.toFloat()))
+//
+//        val barEntriesNewOrder = mutableListOf<BarEntry>()
+//        barEntriesNewOrder.add(BarEntry(2f,20.toFloat()))
+//        barEntriesNewOrder.add(BarEntry(1f,30.toFloat()))
+//        maxOfRightAxis = 200
 
         val barDataSetRevenue = BarDataSet(barEntriesRevenue,"Doanh thu")
         val barDataSetOrder = BarDataSet(barEntriesNumberOrder,"Số đơn")

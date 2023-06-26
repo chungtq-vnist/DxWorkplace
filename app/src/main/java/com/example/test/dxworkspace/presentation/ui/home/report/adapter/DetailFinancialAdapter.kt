@@ -76,17 +76,21 @@ class DetailFinancialAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         ivUp2.hide()
                         tvCollected.show()
                         ivUp1.setImageResource(R.drawable.ic_up)
-                        tvCollected.text = "${percent - 100} %"
+                        tvCollected.text = String.format("%.2f",(percent - 100.0)) + " %"
+                        tvCollected.setTextColor( tvCollected.context.resources.getColor(R.color.clr_asc))
                     } else if (percent < 100.0) {
                         ivUp1.show()
                         ivUp2.hide()
                         tvCollected.show()
                         ivUp1.setImageResource(R.drawable.ic_down)
-                        tvCollected.text = "${100.0 - percent} %"
+                        tvCollected.text = String.format("%.2f",(100.0 - percent)) +" %"
+                        tvCollected.setTextColor( tvCollected.context.resources.getColor(R.color.clr_desc))
+
                     } else {
                         ivUp1.hide()
                         ivUp2.hide()
                         tvCollected.show()
+                        tvCollected.setTextColor( tvCollected.context.resources.getColor(R.color.clr_desc))
                         tvCollected.text = "--"
                     }
                 }

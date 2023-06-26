@@ -53,17 +53,18 @@ class DayFragment : BaseFragment<FragmentDayBinding>() {
     }
 
     fun getRangeTimeSelected(){
-        if(binding!!.cbToday.isChecked){
-            // trả về 2 cặp Pair(start , to ) , cặp đầu có start và to bằng nhau và có giá trị là ngày hôm nay , biểu diễn dưới dạng "dd-MM-yyyy"
-            // cặp sau cũng có start và to băng nhau nhưng có giá trị bằng ngày hôm qua
-        } else {
-            // trả về 2 cặp Pair(start , to ) , cặp đầu có start và to bằng nhau và có giá trị là ngày hôm  , biểu diễn dưới dạng "dd-MM-yyyy"
-            // cặp sau cũng có start và to băng nhau nhưng có giá trị bằng ngày hôm kia
-        }
+//        if(binding!!.cbToday.isChecked){
+//            // trả về 2 cặp Pair(start , to ) , cặp đầu có start và to bằng nhau và có giá trị là ngày hôm nay , biểu diễn dưới dạng "dd-MM-yyyy"
+//            // cặp sau cũng có start và to băng nhau nhưng có giá trị bằng ngày hôm qua
+//        } else {
+//            // trả về 2 cặp Pair(start , to ) , cặp đầu có start và to bằng nhau và có giá trị là ngày hôm  , biểu diễn dưới dạng "dd-MM-yyyy"
+//            // cặp sau cũng có start và to băng nhau nhưng có giá trị bằng ngày hôm kia
+//        }
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
         val calendar = Calendar.getInstance()
 
         if (binding!!.cbToday.isChecked) {
+            homeViewModel.typeTimeReport = Constants.DatePicker.QUICK_TODAY
             val today = dateFormat.format(calendar.time)
             calendar.add(Calendar.DAY_OF_MONTH, -1)
             val yesterday = dateFormat.format(calendar.time)
@@ -74,6 +75,7 @@ class DayFragment : BaseFragment<FragmentDayBinding>() {
             println("from ${homeViewModel.fromDate} to ${homeViewModel.toDate}")
             println("from compare ${homeViewModel.fromDateCompare} to compare ${homeViewModel.toDateCompare}")
         } else {
+            homeViewModel.typeTimeReport = Constants.DatePicker.QUICK_YESTERDAY
             calendar.add(Calendar.DAY_OF_MONTH, -1)
             val today = dateFormat.format(calendar.time)
             calendar.add(Calendar.DAY_OF_MONTH, -1)

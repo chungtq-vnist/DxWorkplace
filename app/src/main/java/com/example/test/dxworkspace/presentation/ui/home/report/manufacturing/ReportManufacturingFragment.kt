@@ -195,15 +195,6 @@ class ReportManufacturingFragment : BaseFragment<FragmentReportManufacturingBind
         val barEntriesRevenue = mutableListOf<BarEntry>()
         barEntriesRevenue.add(
             BarEntry(
-                2f,
-                roundPercent(
-                    dataPlanNow.numberPlanCompleted ?: 0,
-                    dataPlanNow.numberPlanNeedCompleted ?: 0
-                ).toFloat()
-            )
-        )
-        barEntriesRevenue.add(
-            BarEntry(
                 1f,
                 roundPercent(
                     dataPlanPre.numberPlanCompleted ?: 0,
@@ -211,6 +202,16 @@ class ReportManufacturingFragment : BaseFragment<FragmentReportManufacturingBind
                 ).toFloat()
             )
         )
+        barEntriesRevenue.add(
+            BarEntry(
+                2f,
+                roundPercent(
+                    dataPlanNow.numberPlanCompleted ?: 0,
+                    dataPlanNow.numberPlanNeedCompleted ?: 0
+                ).toFloat()
+            )
+        )
+
 
         val listGoodsCompare = viewModel.listGoods.value ?: listOf<QualityGoodsCompare>()
         listChart =
@@ -281,10 +282,13 @@ class ReportManufacturingFragment : BaseFragment<FragmentReportManufacturingBind
 
         binding?.rcvSale?.adapter = adapter
         adapter.items = listItem
+        binding?.tvNote?.text = getString(R.string.note_dashboard,"${homeViewModel.fromDate}" ,"${homeViewModel.toDate}" ,"${homeViewModel.fromDateCompare}",
+            homeViewModel.toDateCompare
+        )
 
         val barEntriesExpense = mutableListOf<BarEntry>()
-        barEntriesExpense.add(BarEntry(2f, percentAverage.toFloat()))
         barEntriesExpense.add(BarEntry(1f, percentAverageCompare.toFloat()))
+        barEntriesExpense.add(BarEntry(2f, percentAverage.toFloat()))
 
 //
         val listStringXAxis = when (homeViewModel.typeTimeReport) {

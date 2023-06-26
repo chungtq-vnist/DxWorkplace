@@ -35,7 +35,25 @@
   <style name="DialogProcessStyle" parent="AppTheme">
     <item name="android:windowBackground">@android:color/transparent</item>
   </style>
-
+  <style name="SPInputTextLayout" parent="Font.TextRegular13">
+    <item name="android:background">@drawable/bg_border_gray_new</item>
+    <item name="hintTextColor">@color/hint_text</item>
+    <item name="android:gravity">center</item>
+    <item name="android:paddingLeft">@dimen/_10sdp</item>
+    <item name="android:paddingRight">@dimen/_5dp</item>
+    <item name="android:paddingTop">@dimen/_5dp</item>
+    <item name="android:paddingBottom">@dimen/_5dp</item>
+    <item name="boxBackgroundMode">filled</item>
+    <item name="boxStrokeWidth">0dp</item>
+    <item name="boxStrokeColor">@null</item>
+    <item name="boxStrokeWidthFocused">0dp</item>
+  </style>
+  <style name="TextInputEditTextWithLine" parent="Font.TextRegular13">
+    <item name="android:textColor">@color/text_color</item>
+    <item name="android:paddingStart">0dp</item>
+    <item name="android:paddingEnd">0dp</item>
+    <item name="android:paddingTop">@dimen/_15sdp</item>
+  </style>
   <style name="DXFont.Text13.Bold">
     <item name="fontFamily">@font/roboto_bold</item>
   </style>

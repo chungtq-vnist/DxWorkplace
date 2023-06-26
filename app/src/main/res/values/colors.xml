@@ -32,6 +32,9 @@
     <color name="sp_color_black_opacity_50">#80212B35</color>
     <color name="sp_color_black_opacity_80">#CC212B35</color>
     <color name="sp_color_black_alpha">#c8212B35</color>
+    <color name="ed_input">#E8EAEB</color>
+    <color name="hint_text">#A3A8AF</color>
+    <color name="background">#f4f6f8</color>
 
     <color name="sp_color_background_guide">#600F1637</color>
     <color name="sp_color_background_button_dialog">#0088ff</color>

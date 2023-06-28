@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test.dxworkspace.R
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkEntity
+import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkModel
 import com.example.test.dxworkspace.data.entity.task.TaskModel
 import com.example.test.dxworkspace.databinding.ItemManufacturingWorkBinding
 import com.example.test.dxworkspace.databinding.ItemTaskBinding
@@ -12,13 +13,13 @@ import com.example.test.dxworkspace.presentation.ui.home.workplace.adapter.TaskV
 import com.example.test.dxworkspace.presentation.utils.getTimeDDMMYYYYHHMMFromString
 
 class ManufacturingWorkAdapter  : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var items : MutableList<ManufacturingWorkEntity> = mutableListOf()
+    var items : MutableList<ManufacturingWorkModel> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    var onClick :((ManufacturingWorkEntity) -> Unit)? = null
+    var onClick :((String) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return WorkViewHolder(ItemManufacturingWorkBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
@@ -28,7 +29,7 @@ class ManufacturingWorkAdapter  : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         (holder as WorkViewHolder).apply {
             bind(item)
             binding.root.setOnClickListener {
-                onClick?.invoke(item)
+                onClick?.invoke(item._id)
             }
         }
     }
@@ -38,7 +39,7 @@ class ManufacturingWorkAdapter  : RecyclerView.Adapter<RecyclerView.ViewHolder>(
     }
 }
 class WorkViewHolder(val binding : ItemManufacturingWorkBinding) : RecyclerView.ViewHolder(binding.root){
-    fun bind(item : ManufacturingWorkEntity){
+    fun bind(item : ManufacturingWorkModel){
         binding.apply {
             tvName.text = item.name
             tvCode.text = item.code

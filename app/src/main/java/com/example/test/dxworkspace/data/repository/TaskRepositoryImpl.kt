@@ -67,4 +67,14 @@ class TaskRepositoryImpl @Inject constructor(
         )
     }
 
+    override suspend fun requestToCloseTask(
+        id: String,
+        body: RequestCloseTask
+    ): Either<Failure, TaskDetailResponseRaw> {
+        return requestApi(
+            taskRemoteSource.requestToCloseTask(id,body),
+            TaskDetailResponseRaw()
+        )
+    }
+
 }

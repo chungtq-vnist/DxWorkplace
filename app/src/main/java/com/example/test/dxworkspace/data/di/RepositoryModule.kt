@@ -52,4 +52,11 @@ class RepositoryModule {
     @Singleton
     fun providesReportRepository(repository : ReportRepositoryImpl) : ReportRepository = repository
 
+
+    @Provides
+    @Singleton
+    fun providesManufacturingManagerRepository(repository : ManufacturingManagerRepositoryImpt) : ManufacturingManagerRepository = repository
+
+
+
 }

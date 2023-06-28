@@ -16,11 +16,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test.dxworkspace.R
 import com.example.test.dxworkspace.presentation.utils.common.decorator.LinearMarginDecoration
 import java.text.NumberFormat
 import java.util.*
+import javax.inject.Qualifier
 
 
 fun RecyclerView.addDefaultDecorator(margin: Int = resources.getDimensionPixelOffset(R.dimen._8sdp)) {

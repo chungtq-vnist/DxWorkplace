@@ -85,6 +85,7 @@
                         android:layout_marginBottom="@dimen/_5sdp"
                         android:background="@color/transparent"
                         android:hint="Mã nhà máy"
+                        tools:text="ajklsdlaskd"
                         android:inputType="textCapSentences"
                         android:maxLength="50"
                         android:textColor="@color/text_color" />
@@ -118,39 +119,36 @@
                     android:id="@+id/tilOrganization"
                     style="@style/SPInputTextLayout"
                     android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:background="@drawable/bg_border_gray_new"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_height="@dimen/_40sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilName">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <AutoCompleteTextView
                         android:id="@+id/edtOrganization"
                         style="@style/TextInputEditTextWithLine"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:hint="Các role có quyền quản lý"
-                        android:imeOptions="actionDone"
-                        android:inputType="text|textCapSentences"
-                        android:maxLength="50"
-                        android:singleLine="true"
+                        android:hint="Đơn vị liên kết"
+                        android:imeOptions="actionNone"
+                        android:inputType="none"
                         tools:maxLines="1"
                         tools:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_8sdp"
-                    android:src="@drawable/ic_arrow_right_new"
-                    app:layout_constraintTop_toTopOf="@id/tilOrganization"
+                    android:src="@drawable/ic_expand_down"
                     app:layout_constraintBottom_toBottomOf="@id/tilOrganization"
-                    app:layout_constraintEnd_toEndOf="@id/tilOrganization"/>
+                    app:layout_constraintEnd_toEndOf="@id/tilOrganization"
+                    app:layout_constraintTop_toTopOf="@id/tilOrganization" />
 
                 <View
                     android:id="@+id/view1"
@@ -166,30 +164,35 @@
                     android:id="@+id/lnManager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_margin="@dimen/_10sdp"
+                    android:orientation="vertical"
                     app:layout_constraintTop_toBottomOf="@id/view1">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Chức vụ trưởng đơn vị "
-                    style="@style/Font.TextBold13"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:text="QD nha may thuoc bot : Ngyuen van a"
-                        style="@style/Font.TextRegular13"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Chức vụ phó đơn vị "
-                    style="@style/Font.TextBold13"/>
                     <TextView
+                        style="@style/Font.TextBold13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:text="QD nha may thuoc bot : Ngyuen van a"
-                        style="@style/Font.TextRegular13"/>
+                        android:text="Chức vụ trưởng đơn vị " />
+                    <ListView
+                        android:id="@+id/rcvCaptain"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        />
+
+                    <TextView
+                        style="@style/Font.TextBold13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Chức vụ phó đơn vị "
+                        android:visibility="gone" />
+
+                    <TextView
+                        style="@style/Font.TextRegular13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:text="QD nha may thuoc bot : Ngyuen van a" />
 
                 </LinearLayout>
 
@@ -197,10 +200,10 @@
                     android:id="@+id/tilManagerOther"
                     style="@style/SPInputTextLayout"
                     android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_height="@dimen/_40sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/lnManager">
@@ -228,9 +231,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:src="@drawable/ic_arrow_right_new"
-                    app:layout_constraintTop_toTopOf="@id/tilManagerOther"
                     app:layout_constraintBottom_toBottomOf="@id/tilManagerOther"
-                    app:layout_constraintEnd_toEndOf="@id/tilManagerOther"/>
+                    app:layout_constraintEnd_toEndOf="@id/tilManagerOther"
+                    app:layout_constraintTop_toTopOf="@id/tilManagerOther" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilPhone"
@@ -297,33 +300,41 @@
                         android:background="@color/transparent"
                         android:hint="Số ca làm việc"
                         android:inputType="number"
-                        android:maxLength="5"
+                        android:maxLength="1"
                         android:textColor="@color/text_color" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/tvStatus"
                     style="@style/Font.TextRegular13"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/bg_border_gray_new"
+                    android:drawableEnd="@drawable/ic_arrow_down_new"
                     android:gravity="center_vertical"
                     android:paddingStart="@dimen/_8sdp"
                     android:paddingEnd="@dimen/_8sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:drawableEnd="@drawable/ic_arrow_down_new"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:background="@drawable/bg_border_gray_new"
                     android:text="Trạng thái"
+                    android:spinnerMode="dropdown"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilNumberShift" />
-
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:src="@drawable/ic_expand_down"
+                    app:layout_constraintBottom_toBottomOf="@id/tvStatus"
+                    app:layout_constraintEnd_toEndOf="@id/tvStatus"
+                    app:layout_constraintTop_toTopOf="@id/tvStatus" />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilDes"
                     style="@style/SPInputTextLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -337,16 +348,11 @@
                         android:layout_marginBottom="@dimen/_5sdp"
                         android:background="@color/transparent"
                         android:hint="Mô tả"
-                        android:inputType="textCapSentences"
+                        android:inputType="textCapSentences|textMultiLine"
                         android:maxLength="200"
+                        android:maxLines="3"
                         android:textColor="@color/text_color" />
                 </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-
-
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -358,26 +364,25 @@
             android:id="@+id/lnSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:background="@color/white"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:id="@+id/btnSave"
                 style="@style/Font.TextBold13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginVertical="@dimen/_6sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_5dp"
-                android:paddingVertical="@dimen/_10sdp"
-                android:enabled="false"
-                android:background="@drawable/selector_save_default"
+                android:layout_weight="1"
+                android:background="@drawable/bg_blue_create"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:text="Lưu" />
+                android:paddingVertical="@dimen/_10sdp"
+                android:text="Lưu"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 

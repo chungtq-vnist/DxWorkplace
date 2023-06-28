@@ -3,6 +3,7 @@ package com.example.test.dxworkspace.data.remote.datasource
 import com.example.test.dxworkspace.data.entity.component.ComponentResponseRaw
 import com.example.test.dxworkspace.data.entity.login.LoginRequestRaw
 import com.example.test.dxworkspace.data.entity.login.LoginResponseRaw
+import com.example.test.dxworkspace.data.entity.task.RequestCloseTask
 import com.example.test.dxworkspace.data.entity.timesheet.StartTimeModel
 import com.example.test.dxworkspace.data.entity.timesheet.StopTimeModel
 import com.example.test.dxworkspace.data.entity.version.VersionResponseRaw
@@ -27,5 +28,7 @@ class TaskRemoteSource @Inject constructor(val api: DxApi) {
     fun stopTimer(id : String , p : StopTimeModel) = api.stopTimer(id,p)
 
     fun postAction(id : String , body : RequestBody) = api.postAction(id, body)
+
+    fun requestToCloseTask(id : String , body : RequestCloseTask) = api.requestCloseTask(id,body)
 
 }

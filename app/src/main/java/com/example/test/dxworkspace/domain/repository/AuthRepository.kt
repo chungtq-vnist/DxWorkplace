@@ -6,7 +6,9 @@ import com.example.test.dxworkspace.data.entity.component.ComponentEntity
 import com.example.test.dxworkspace.data.entity.link.LinkEntity
 import com.example.test.dxworkspace.data.entity.login.LoginRequestRaw
 import com.example.test.dxworkspace.data.entity.login.LoginResponseRaw
+import com.example.test.dxworkspace.data.entity.role.RoleEntity
 import com.example.test.dxworkspace.data.entity.user.UserEntity
+import com.example.test.dxworkspace.data.entity.version.VersionDiff
 
 interface AuthRepository : Repository {
     fun login(param : LoginRequestRaw) : Either<Failure, LoginResponseRaw>
@@ -23,5 +25,10 @@ interface AuthRepository : Repository {
 
     suspend fun getUserProfile(userId : String)
 
+    suspend fun getAllRolesRemote() : Either<Failure,Boolean>
+
+    suspend fun handleCompareVersionRole(versionDiff: VersionDiff)
+
+     fun getAllRolesDb(dbName: String) : List<RoleEntity>
 
 }

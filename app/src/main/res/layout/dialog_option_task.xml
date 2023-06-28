@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_border_gray_new"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_8sdp">
+            <TextView
+                android:id="@+id/tvClose"
+                style="@style/Font.TextRegular13"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+
+                android:gravity="center_vertical"
+                android:text="Yêu cầu kết thúc công việc"
+                android:textAllCaps="false"
+                android:textColor="@color/sp_color_strong_red" />
+            <TextView
+                android:id="@+id/tvReOpen"
+                style="@style/Font.TextRegular13"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+
+                android:gravity="center_vertical"
+                android:text="Yêu cầu mở lại công việc" />
+        </LinearLayout>
+    </FrameLayout>
+
+</layout>

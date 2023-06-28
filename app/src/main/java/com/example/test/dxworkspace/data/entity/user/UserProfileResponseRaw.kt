@@ -18,4 +18,8 @@ data class UserProfileResponse(
     val email :String ="",
     val avatar : String = "",
     val roles : MutableList<RoleResponseRaw> = mutableListOf(),
-)
+){
+    override fun toString(): String {
+        return name
+    }
+}

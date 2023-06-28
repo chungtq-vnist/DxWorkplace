@@ -28,7 +28,8 @@ data class TaskModelDetail(
     var estimateNormalCost :  Long? = 0L,
     var actualCost :  Long? = 0L,
     var actualStartDate : String? = "",
-    var actualEndDate : String? = ""
+    var actualEndDate : String? = "",
+    var requestToCloseTask : RequestToCloseTaskResponse? = RequestToCloseTaskResponse()
 
 )
 

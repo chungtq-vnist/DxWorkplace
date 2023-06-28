@@ -6,6 +6,10 @@ import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardManufacturingRequestFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.dialog.RangeDateSelectFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.quality.DashboardQualityManufacturingFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.mill.ManufacturingMillDetailFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.mill.ManufacturingMillFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ChooseRoleFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingWorkDetailFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingWorkFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.financial.ReportFinancialFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.manufacturing.ReportManufacturingFragment
@@ -81,4 +85,16 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeReportManufacturingFragment(): ReportManufacturingFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeManufacturingWorkDetailFragment(): ManufacturingWorkDetailFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeChooseRoleFragment(): ChooseRoleFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeManufacturingMillFragment(): ManufacturingMillFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeManufacturingMillDetailFragment(): ManufacturingMillDetailFragment
 }

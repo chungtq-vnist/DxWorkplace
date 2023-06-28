@@ -22,6 +22,13 @@ class ManufacturingWorkLocalSource @Inject constructor() {
         return list
     }
 
+
+    fun getByIdLocal(id:String,dbName: String): ManufacturingWorkEntity? {
+        getDatabase(dbName)
+        val list = realm.query<ManufacturingWorkEntity>("_id == $0",id).first().find()
+        return list
+    }
+
     suspend fun save(c: ManufacturingWorkEntity, dbName: String) {
         getDatabase(dbName)
         realm.write {

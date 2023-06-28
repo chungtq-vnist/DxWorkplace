@@ -2,6 +2,8 @@ package com.example.test.dxworkspace.data.local.datasource
 
 import com.example.test.dxworkspace.data.entity.component.ComponentEntity
 import com.example.test.dxworkspace.data.entity.link.LinkEntity
+import com.example.test.dxworkspace.data.entity.manufacturing_command.ManufacturingCommandEntity
+import com.example.test.dxworkspace.data.entity.role.RoleEntity
 import com.example.test.dxworkspace.data.local.database.RealmManager
 import io.realm.kotlin.Realm
 import io.realm.kotlin.UpdatePolicy
@@ -37,5 +39,20 @@ class AuthLocalSource @Inject constructor() {
         }
     }
 
+    suspend fun savesAndDeleteRoles(listComponent: List<RoleEntity>, dbName: String) {
+        getDatabase(dbName)
+        realm.write {
+            val listNow = query<RoleEntity>().find()
+            delete(listNow)
+            for (c in listComponent)
+                copyToRealm(c, UpdatePolicy.ALL)
+        }
+    }
+
+    fun getAllRoleDb(dbName: String): List<RoleEntity> {
+        getDatabase(dbName)
+        val list = realm.query<RoleEntity>().find().toList()
+        return list
+    }
 
 }

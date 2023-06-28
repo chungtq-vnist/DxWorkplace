@@ -9,6 +9,5 @@ class RoleEntity : RealmObject {
     var name : String =""
 //    var parents : MutableList<String> = mutableListOf()
     var createdAt : String =""
-    var updatedAt : String =""
 
 }

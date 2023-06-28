@@ -47,6 +47,7 @@ class ManufacturingWorkRepositoryImpl @Inject constructor(
                         it.manufacturingMills?.map { it._id }?.joinToString(",") ?: ""
                     manageRoles = it.manageRoles?.joinToString(",") ?: ""
                     organizationalUnit = gson.toJson(it.organizationalUnit)
+                    turn = it.turn
                 }
             }
             manufacturingWorkLocalSource.saves(q, configRepository.getDBName())
@@ -97,6 +98,7 @@ class ManufacturingWorkRepositoryImpl @Inject constructor(
                             it.manufacturingMills?.map { it._id }?.joinToString(",") ?: ""
                         manageRoles = it.manageRoles?.joinToString(",") ?: ""
                         organizationalUnit = gson.toJson(it.organizationalUnit)
+                        turn = it.turn
                     }
                 }
                 manufacturingWorkLocalSource.saves(q, configRepository.getDBName())

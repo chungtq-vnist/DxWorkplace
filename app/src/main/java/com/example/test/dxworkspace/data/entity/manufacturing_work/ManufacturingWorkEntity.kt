@@ -18,6 +18,7 @@ class ManufacturingWorkEntity : RealmObject {
     var manufacturingMills : String? = ""
     var manageRoles : String? = ""
     var organizationalUnit : String? = ""
+    var turn : Int? = 0
 }
 
 fun ManufacturingWorkEntity.mapWithName(): ManufacturingWorkSelect {

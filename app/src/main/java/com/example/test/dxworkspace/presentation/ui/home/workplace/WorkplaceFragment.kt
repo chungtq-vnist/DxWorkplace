@@ -42,6 +42,7 @@ import javax.inject.Inject
 import android.os.Looper
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.quality.DashboardQualityManufacturingFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.mill.ManufacturingMillFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.financial.ReportFinancialFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.manufacturing.ReportManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.sale.ReportSaleFragment
@@ -218,6 +219,9 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                 when (menu.url) {
                     "/manage-manufacturing-works" -> {
                         postNormal(EventNextHome(ManufacturingWorkFragment::class.java))
+                    }
+                    "/manage-manufacturing-mill" -> {
+                        postNormal(EventNextHome(ManufacturingMillFragment::class.java))
                     }
                     "/manufacturing-dashboard" -> postNormal(EventNextHome(DashboardControlManufacturingFragment::class.java))
                     "/report_financial" -> postNormal(EventNextHome(

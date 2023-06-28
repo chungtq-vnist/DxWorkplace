@@ -20,4 +20,6 @@ interface TaskRepository : Repository {
     suspend fun stopTimer(id : String , param : StopTimeModel) : Either<Failure , TaskDetailResponseRaw>
 
     suspend fun postComment(id : String , creator : String ,description : String ,index : String): Either<Failure, List<TaskAction>>
+
+    suspend fun requestToCloseTask(id: String , body : RequestCloseTask) : Either<Failure,TaskDetailResponseRaw>
 }

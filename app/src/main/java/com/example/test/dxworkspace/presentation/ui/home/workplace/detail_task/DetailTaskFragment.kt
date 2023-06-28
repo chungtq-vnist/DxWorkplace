@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.test.dxworkspace.R
 import com.example.test.dxworkspace.core.extensions.observe
 import com.example.test.dxworkspace.core.extensions.viewModel
+import com.example.test.dxworkspace.data.entity.task.RequestCloseTask
 import com.example.test.dxworkspace.data.entity.task.TaskModel
 import com.example.test.dxworkspace.data.entity.task.TaskModelDetail
 import com.example.test.dxworkspace.databinding.FragmentDetailTaskBinding
@@ -47,6 +48,10 @@ class DetailTaskFragment : BaseFragment<FragmentDetailTaskBinding>() {
     val taskConsultedEmpl by lazy { TaskResponsibleEmployeeAdapter() }
     val taskTimeSheetAdapter by lazy { TaskTimeSheetLogAdapter() }
     var taskId = ""
+    var popupOption : DialogTaskOption? = null
+    var dialogCloseTask : DialogCloseTask? = null
+    var dialogOpenTask : DialogOpenTask? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         taskId = arguments?.getString("TASK_ID") ?: ""
@@ -75,7 +80,51 @@ class DetailTaskFragment : BaseFragment<FragmentDetailTaskBinding>() {
                 EventBus.getDefault().post(EventUpdate(EventUpdate.UPDATE_TIMER,true))
                 onBackPress()
             }
+            btnMenuMore.setOnClickListener {
+                popupOption = DialogTaskOption(requireContext() , object : DialogTaskOption.OnBillOptionListener {
+                    override fun onCloseTask() {
+                        val t = viewModel.taskSelected.value
+                        if(t != null && t._id.isNotEmpty()){
+                            if(viewModel.taskSelected?.value?.status != "inprocess") showToast(EventToast(0,false,"Task đã được đóng"))
+                            else {
+                                dialogCloseTask = DialogCloseTask(
+                                    requireContext(),
+                                    t.requestToCloseTask?.taskStatus ?: "",
+                                    t.requestToCloseTask?.requestStatus == 1,t.requestToCloseTask
+                                )
+                                dialogCloseTask?.onConfirm = {
+                                    viewModel.requestCloseTask(taskId, it)
+                                }
+                                dialogCloseTask?.showDialog()
+                            }
+                        }
+
+                    }
+
+                    override fun onReOpenTask() {
+                        if(viewModel.taskSelected?.value?.status == "inprocess") showToast(EventToast(0,false,"Task đang được mở"))
+                        else {
+                            dialogOpenTask = DialogOpenTask(requireContext())
+                            dialogOpenTask?.onConfirm = {
+                                viewModel.requestCloseTask(
+                                    taskId,
+                                    RequestCloseTask(type = "open_task_again")
+                                )
+                            }
+                            dialogOpenTask?.showDialog()
+                        }
+                    }
+                })
+                popupOption?.showPopupWindow(it)
+            }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        popupOption?.onDestroy()
+        dialogCloseTask?.onDestroy()
+        dialogOpenTask?.onDestroy()
     }
 
     fun handleTaskSuccess(task: TaskModelDetail) {

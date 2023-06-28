@@ -6,7 +6,8 @@ import com.example.test.dxworkspace.core.di.viewmodel.ViewModelFactory
 import com.example.test.dxworkspace.core.di.viewmodel.ViewModelKey
 import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingViewModel
-import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingViewModel
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.mill.ManufacturingMillViewModel
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingWorkViewModel
 import com.example.test.dxworkspace.presentation.ui.home.report.ReportViewModel
 import com.example.test.dxworkspace.presentation.ui.home.workplace.WorkplaceViewModel
 import com.example.test.dxworkspace.presentation.ui.login.LoginViewModel
@@ -38,8 +39,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ManufacturingViewModel::class)
-    abstract fun bindsManufacturingViewModel(workplaceViewModel: ManufacturingViewModel) : ViewModel
+    @ViewModelKey(ManufacturingWorkViewModel::class)
+    abstract fun bindsManufacturingViewModel(workplaceViewModel: ManufacturingWorkViewModel) : ViewModel
 
     @Binds
     @IntoMap
@@ -50,5 +51,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ReportViewModel::class)
     abstract fun bindsReportViewModel(workplaceViewModel: ReportViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ManufacturingMillViewModel::class)
+    abstract fun bindsManufacturingMillViewModel(workplaceViewModel: ManufacturingMillViewModel) : ViewModel
 
 }

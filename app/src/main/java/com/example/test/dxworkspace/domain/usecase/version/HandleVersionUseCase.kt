@@ -38,20 +38,30 @@ class HandleVersionUseCase @Inject constructor(
 
             versionDiff.forEach { v ->
                 when (v.versionKey) {
-                    Constants.VERSION_KEY.USER_ROLE, Constants.VERSION_KEY.USER, Constants.VERSION_KEY.ROLE -> {
+                    Constants.VERSION_KEY.USER_ROLE, Constants.VERSION_KEY.USER -> {
                         withContext(Dispatchers.IO) {
                             // get user profile
                             authRepository.getUserProfile(userId)
                             versionRepository.saves(version.filter {
                                 listOf(
                                     Constants.VERSION_KEY.USER_ROLE,
-                                    Constants.VERSION_KEY.USER,
-                                    Constants.VERSION_KEY.ROLE
+                                    Constants.VERSION_KEY.USER
                                 ).contains(it.versionKey)
                             }, configRepository.getDBName())
                             EventBus.getDefault().post(EventSyncMessage(EventSyncMessage.SYNC_USER))
                         }
 
+                    }
+                    Constants.VERSION_KEY.ROLE -> {
+                        withContext(Dispatchers.IO){
+                            if(v.versionDB == 0 ){
+                                authRepository.getAllRolesRemote()
+                                versionRepository.save(version.first { it.versionKey == Constants.VERSION_KEY.ROLE },
+                                    configRepository.getDBName())
+                            } else {
+                                authRepository.handleCompareVersionRole(v)
+                            }
+                        }
                     }
                     Constants.VERSION_KEY.COMPONENT, Constants.VERSION_KEY.LINK, Constants.VERSION_KEY.PRIVILEGE -> {
                         withContext(Dispatchers.IO) {

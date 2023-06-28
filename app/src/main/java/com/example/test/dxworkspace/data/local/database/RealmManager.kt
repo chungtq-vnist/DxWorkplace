@@ -2,6 +2,9 @@ package com.example.test.dxworkspace.data.local.database
 
 import com.example.test.dxworkspace.data.entity.component.ComponentEntity
 import com.example.test.dxworkspace.data.entity.link.LinkEntity
+import com.example.test.dxworkspace.data.entity.manufacturing_command.ManufacturingCommandEntity
+import com.example.test.dxworkspace.data.entity.manufacturing_lot.ManufacturingLotEntity
+import com.example.test.dxworkspace.data.entity.manufacturing_mill.ManufacturingMillEntity
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkEntity
 import com.example.test.dxworkspace.data.entity.role.RoleEntity
 import com.example.test.dxworkspace.data.entity.user.UserEntity
@@ -18,7 +21,9 @@ class RealmManager {
                 val config = RealmConfiguration.Builder(
                     schema = setOf(
                         UserEntity::class, ComponentEntity::class, LinkEntity::class,
-                        RoleEntity::class,VersionEntity::class,ManufacturingWorkEntity::class
+                        RoleEntity::class,VersionEntity::class,ManufacturingWorkEntity::class,
+                        ManufacturingMillEntity::class,ManufacturingLotEntity::class,
+                        ManufacturingCommandEntity::class
                     )
                 )
                     .name(dbName)

@@ -15,7 +15,12 @@ data class ManufacturingWorkModel(
     var manufacturingMills : List<ManufacturingMill>? = listOf(),
     var manageRoles : List<String>? = listOf(),
     var organizationalUnit : OrganizationUnit? = null,
-)
+    var turn : Int? = 0
+){
+    override fun toString(): String {
+        return name
+    }
+}
 
 data class ManufacturingMill(
     var _id : String ="",
@@ -29,7 +34,7 @@ data class OrganizationUnit(
     var createdAt : String ="",
     var udpatedAt : String ="",
     var name : String ="",
-    var parent : String? = "",
+//    var parent : String? = "",
     var managers : List<RoleInOrganizationUnit>? = listOf(),
     var employees : List<RoleInOrganizationUnit>? = listOf(),
     var deputyManagers : List<RoleInOrganizationUnit>? = listOf(),

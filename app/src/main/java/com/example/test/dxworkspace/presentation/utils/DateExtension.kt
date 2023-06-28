@@ -16,6 +16,22 @@ fun getTimeInMillisFromString(dateTimeString: String): Long {
 
     return 0
 }
+fun convertToUTCTime(dateTimeString : String): String {
+    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    format.timeZone = TimeZone.getTimeZone("Asia/Ho_Chi_Minh")
+    val formatNew = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
+    try {
+        val date = format.parse(dateTimeString)
+        return formatNew.format(date)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    } finally {
+
+    }
+    return dateTimeString
+}
+
+
 fun getTimeDDMMYYYYHHMMFromString(dateTimeString: String): String {
     val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     val df = SimpleDateFormat("HH:mm \n dd/MM/yy", Locale.getDefault())

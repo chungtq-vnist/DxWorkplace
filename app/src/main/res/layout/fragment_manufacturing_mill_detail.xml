@@ -112,19 +112,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilName">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <AutoCompleteTextView
                         android:id="@+id/edtManufacturingWork"
                         style="@style/TextInputEditTextWithLine"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
                         android:hint="Nhà máy"
                         android:imeOptions="actionDone"
                         android:inputType="text|textCapSentences"
-                        android:maxLength="50"
                         android:singleLine="true"
                         tools:maxLines="1"
                         tools:text="" />
@@ -134,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_8sdp"
-                    android:src="@drawable/ic_arrow_right_new"
+                    android:src="@drawable/ic_expand_down"
                     app:layout_constraintBottom_toBottomOf="@id/tilManufacturingWork"
                     app:layout_constraintEnd_toEndOf="@id/tilManufacturingWork"
                     app:layout_constraintTop_toTopOf="@id/tilManufacturingWork" />
@@ -152,19 +148,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilManufacturingWork">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <AutoCompleteTextView
                         android:id="@+id/edtLeader"
                         style="@style/TextInputEditTextWithLine"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
                         android:hint="Đội trưởng"
                         android:imeOptions="actionDone"
                         android:inputType="text|textCapSentences"
-                        android:maxLength="50"
                         android:singleLine="true"
                         tools:maxLines="1"
                         tools:text="" />
@@ -174,34 +166,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_8sdp"
-                    android:src="@drawable/ic_arrow_right_new"
+                    android:src="@drawable/ic_expand_down"
                     app:layout_constraintBottom_toBottomOf="@id/tilLeader"
                     app:layout_constraintEnd_toEndOf="@id/tilLeader"
                     app:layout_constraintTop_toTopOf="@id/tilLeader" />
 
-                <TextView
+
+                <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/tvStatus"
                     style="@style/Font.TextRegular13"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/bg_border_gray_new"
+                    android:drawableEnd="@drawable/ic_arrow_down_new"
                     android:gravity="center_vertical"
                     android:paddingStart="@dimen/_8sdp"
                     android:paddingEnd="@dimen/_8sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:drawableEnd="@drawable/ic_arrow_down_new"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:background="@drawable/bg_border_gray_new"
                     android:text="Trạng thái"
+                    android:spinnerMode="dropdown"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilLeader" />
+
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilDes"
                     style="@style/SPInputTextLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_60sdp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -211,11 +207,11 @@
                         android:id="@+id/edtDes"
                         style="@style/TextInputEditTextWithLine"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/_5sdp"
                         android:background="@color/transparent"
                         android:hint="Mô tả"
-                        android:inputType="textCapSentences"
+                        android:inputType="textCapSentences|textMultiLine"
                         android:maxLength="200"
                         android:maxLines="4"
                         android:textColor="@color/text_color" />
@@ -241,11 +237,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_6sdp"
-                android:layout_marginStart="@dimen/_5dp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_weight="1"
-                android:background="@drawable/selector_save_default"
-                android:enabled="false"
+                android:background="@drawable/bg_blue_create"
                 android:gravity="center"
                 android:paddingVertical="@dimen/_10sdp"
                 android:text="Lưu"

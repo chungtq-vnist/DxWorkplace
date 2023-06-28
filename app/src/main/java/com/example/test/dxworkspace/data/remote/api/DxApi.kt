@@ -1,10 +1,17 @@
 package com.example.test.dxworkspace.data.remote.api
 
 import com.example.test.dxworkspace.data.entity.dashboard_manufacturing.*
+import com.example.test.dxworkspace.data.entity.manufacturing_command.ManufacturingCommandResponseRaw
+import com.example.test.dxworkspace.data.entity.manufacturing_lot.ManufacturingLotResponseRaw
+import com.example.test.dxworkspace.data.entity.manufacturing_mill.ManufacturingMillByIdResponseRaw
+import com.example.test.dxworkspace.data.entity.manufacturing_mill.ManufacturingMillResponseRaw
+import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkDetailResponseRaw
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkResponseRaw
+import com.example.test.dxworkspace.data.entity.organization_unit.OrganizationUnitResponseRaw
 import com.example.test.dxworkspace.data.entity.report.FinancialReportResponseRaw
 import com.example.test.dxworkspace.data.entity.report.PlanCompletedOnScheduleRaw
 import com.example.test.dxworkspace.data.entity.report.SaleReportResponseRaw
+import com.example.test.dxworkspace.data.entity.role.RoleResponseRawWrap
 import com.example.test.dxworkspace.data.entity.task.*
 import com.example.test.dxworkspace.data.entity.timesheet.StartTimeModel
 import com.example.test.dxworkspace.data.entity.timesheet.StopTimeModel
@@ -48,24 +55,6 @@ interface DxApi : LoginApi {
     @GET("/version/versions")
     fun getAllVersions() : Call<VersionResponseRaw>
 
-    @GET("/manufacturing-works/version")
-    fun getListIdFromVersion(
-        @Query("version") version :Int
-    ) : Call<VersionDiffResponseRaw>
-
-
-
-    //manufacturing
-
-    @GET("/manufacturing-works")
-    fun getAllManufacturingWorks(
-        @Query("currentRole") role : String
-    ) : Call<ManufacturingWorkResponseRaw>
-    @GET("/manufacturing-works/version/ids")
-    fun getManufacturingWorkWithIds(
-        @Query("currentRole") role : String,
-        @Body ids : VersionRequest
-    ) : Call<ManufacturingWorkResponseRaw>
 
 
     @POST("/performtask/tasks/{id}/timesheet-logs/start-timer")
@@ -85,6 +74,12 @@ interface DxApi : LoginApi {
         @Path("id") id : String,
         @Body body : RequestBody
     ) : Call<CreateTaskActionResponseRaw>
+
+    @POST("/performtask/tasks/{id}")
+    fun requestCloseTask(
+        @Path("id") id : String,
+        @Body body : RequestCloseTask
+    ) : Call<TaskDetailResponseRaw>
 
     // manufacturing dashboard
     @GET("/manufacturing-dashboard/get-number-plans-by-status")
@@ -174,4 +169,71 @@ interface DxApi : LoginApi {
         @Query("fromDateCompare") fromDateCompare : String ? ,
         @Query("toDateCompare") toDateCompare : String?
     ) : Call<PlanCompletedOnScheduleRaw>
+
+    @GET("/manufacturing-works/version")
+    fun getListIdFromVersion(
+        @Query("version") version :Int
+    ) : Call<VersionDiffResponseRaw>
+
+    //manufacturing
+
+    @GET("/manufacturing-works")
+    fun getAllManufacturingWorks(
+        @Query("currentRole") role : String
+    ) : Call<ManufacturingWorkResponseRaw>
+    @GET("/manufacturing-works/version/ids")
+    fun getManufacturingWorkWithIds(
+        @Query("currentRole") role : String,
+        @Body ids : VersionRequest
+    ) : Call<ManufacturingWorkResponseRaw>
+
+
+    @GET("/manufacturing-mill")
+    fun getAllManufacturingMills(
+        @Query("page") page : Int = 1,
+        @Query("limit") limit : Int = 100,
+        @Query("currentRole") role : String
+//        -- hiện tại việc get xưởng đang ko cần check gì cả / hoặc là check theo vai trò quản lý
+    // nhà máy
+    ) : Call<ManufacturingMillResponseRaw>
+
+    @GET("/manufacturing-mill/{id}")
+    fun getManufacturingMillById(
+        @Path("id") id : String
+    ) : Call<ManufacturingMillByIdResponseRaw>
+
+    @GET("/lot/get-manufacturing-lot")
+    fun getAllManufacturingLots(
+        @Query("page") page : Int =1 ,
+        @Query("limit") limit : Int = 1000,
+        @Query("currentRole") role : String
+    ) : Call<ManufacturingLotResponseRaw>
+
+    @GET("/manufacturing-command")
+    fun getAllManufacturingCommand(
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 1000,
+        @Query("currentRole") role: String
+    ) : Call<ManufacturingCommandResponseRaw>
+
+    @GET("/manufacturing-works/{id}")
+    fun getManufacturingWorkById(
+        @Path("id") id : String,
+    ) : Call<ManufacturingWorkDetailResponseRaw>
+
+
+
+    @GET("/role/roles")
+    fun getAllRoles(
+    ) : Call<RoleResponseRawWrap>
+
+    @GET("/organizational-units/organizational-units")
+    fun getALlOrganizationUnits(
+
+    ) : Call <OrganizationUnitResponseRaw>
+
+//    @GET("/user/users")
+//    fun getUserInDepartment(
+//        @Query("departmentIds") id : List<String>
+//    ) : Call<>
 }

@@ -3,6 +3,7 @@ package com.example.test.dxworkspace.presentation.ui.home.workplace
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import com.example.test.dxworkspace.data.entity.link.LinkEntity
+import com.example.test.dxworkspace.data.entity.task.RequestCloseTask
 import com.example.test.dxworkspace.data.entity.task.TaskModel
 import com.example.test.dxworkspace.data.entity.task.TaskModelDetail
 import com.example.test.dxworkspace.data.entity.timesheet.StopTimeModel
@@ -26,6 +27,7 @@ class WorkplaceViewModel @Inject constructor(
     private val stopTimerUseCase: StopTimerUseCase,
     private val sharedPreferences: SharedPreferences,
     private val postActionUseCase: PostActionUseCase,
+    private val requestCloseTaskUseCase: RequestCloseTaskUseCase,
     ) : BaseViewModel() {
     val linksCanAccess = MutableLiveData<List<LinkEntity>>()
     val logoutSuccess = MutableLiveData<Boolean>()
@@ -114,5 +116,19 @@ class WorkplaceViewModel @Inject constructor(
         }
     }
 
+    fun requestCloseTask(taskId : String , body : RequestCloseTask){
+        showLoading(true)
+        requestCloseTaskUseCase(Pair(taskId,body)){
+            it.either({
+                showLoading(false)
+                val t = taskSelected.value
+                taskSelected.value = t ?: TaskModelDetail()
+            },{
+                showLoading(false)
+                taskSelected.value = it
+            })
+
+        }
+    }
 
 }

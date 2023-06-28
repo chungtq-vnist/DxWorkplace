@@ -8,8 +8,10 @@ import com.example.test.dxworkspace.data.entity.link.LinkEntity
 import com.example.test.dxworkspace.data.entity.login.LoginRequestRaw
 import com.example.test.dxworkspace.data.entity.login.LoginResponseRaw
 import com.example.test.dxworkspace.data.entity.login.UserResponseRaw
+import com.example.test.dxworkspace.data.entity.role.RoleEntity
 import com.example.test.dxworkspace.data.entity.user.UserEntity
 import com.example.test.dxworkspace.data.entity.user.UserProfileResponseRaw
+import com.example.test.dxworkspace.data.entity.version.VersionDiff
 import com.example.test.dxworkspace.data.local.datasource.AuthLocalSource
 import com.example.test.dxworkspace.data.local.datasource.ComponentLocalSource
 import com.example.test.dxworkspace.data.local.preferences.AppPreferences.set
@@ -126,4 +128,32 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getAllRolesRemote() : Either<Failure,Boolean> {
+        val r = requestApi(
+            loginRemoteSource.getAllRoleRemote(),
+            {
+                if(it.success) it.content else listOf()
+            }, listOf()
+        )
+        if(r.isRight){
+            val q = r.getValue()
+            val t = q.map{
+                RoleEntity().apply {
+                    id= it._id
+                    name = it.name ?: ""
+                    createdAt = it.createdAt
+                }
+            }
+            authLocalSource.savesAndDeleteRoles(t,configRepository.getDBName())
+            return Either.Right(true)
+        } else return Either.Left(Failure.ResponseError())
+    }
+
+    override suspend fun handleCompareVersionRole(versionDiff: VersionDiff) {
+//        TODO("Not yet implemented")
+    }
+
+    override  fun getAllRolesDb(dbName: String): List<RoleEntity> {
+        return authLocalSource.getAllRoleDb(dbName)
+    }
 }

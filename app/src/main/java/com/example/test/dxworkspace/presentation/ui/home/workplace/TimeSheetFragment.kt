@@ -20,9 +20,11 @@ import javax.inject.Inject
 import com.example.test.dxworkspace.data.local.preferences.AppPreferences.get
 import com.example.test.dxworkspace.data.local.preferences.AppPreferences.set
 import com.example.test.dxworkspace.presentation.utils.common.getTextz
+import com.example.test.dxworkspace.presentation.utils.convertToUTCTime
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
+import com.example.test.dxworkspace.presentation.utils.getDateTimer
 import com.example.test.dxworkspace.presentation.utils.getDateYYYYMMDDHHMMSS
 import java.text.SimpleDateFormat
 import java.util.*
@@ -115,8 +117,8 @@ class TimeSheetFragment : BaseFragment<FragmentTimeSheetBinding>() {
                         if(cbSelected.isChecked) 2 else 1,
                         edtDesc.getTextz(),
                         configRepository.getUser().id,
-                        sharedPreferences[Constants.START_TIME_COUNT],
-                        if(cbSelected.isChecked) endTimeSchedule else getDateYYYYMMDDHHMMSS(Date()),
+                        convertToUTCTime(sharedPreferences[Constants.START_TIME_COUNT] ?: getDateTimer()),
+                        if(cbSelected.isChecked) convertToUTCTime(endTimeSchedule) else convertToUTCTime(getDateYYYYMMDDHHMMSS(Date())),
                         sharedPreferences[Constants.TIMERID_COUNTING],
                         action!!.id,
                         null

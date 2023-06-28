@@ -17,4 +17,6 @@ class LoginRemoteSource @Inject constructor(val api : DxApi) {
 
     fun getProfile(userId: String) = api.getProfileUser(userId)
 
+    suspend fun getAllRoleRemote() = api.getAllRoles()
+
 }

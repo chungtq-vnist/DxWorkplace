@@ -40,12 +40,14 @@ import org.greenrobot.eventbus.Subscribe
 import java.util.*
 import javax.inject.Inject
 import android.os.Looper
+import com.example.test.dxworkspace.presentation.model.menu.TaskType
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.quality.DashboardQualityManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.mill.ManufacturingMillFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.financial.ReportFinancialFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.manufacturing.ReportManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.sale.ReportSaleFragment
+import com.example.test.dxworkspace.presentation.ui.home.workplace.adapter.TaskTypeAdapter
 
 
 class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
@@ -59,6 +61,9 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
 
     @Inject
     lateinit var configRepository: ConfigRepository
+
+    val taskTypeAdapter by lazy { TaskTypeAdapter() }
+    var taskTypeFilter = 0
 
     val timer = Timer()
 
@@ -149,9 +154,9 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                     postNormal(EventToast(isFail = true, textId = R.string.error_notification))
                 }
             }
-            observe(listTask) {
+            observe(isLoadTaskSuccess) {
                 binding?.pullToRefresh?.isRefreshing = false
-                taskAdapter.items = it ?: mutableListOf()
+                setupRcvTask()
             }
         }
         observeLoading(viewModel)
@@ -168,6 +173,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
         val year = calendar.get(Calendar.YEAR)
         fromMonth = "$month-$year"
         toMonth = fromMonth
+        setupRcvTaskType()
         binding?.apply {
             tvRangeTime.text = fromMonth + " - " + toMonth
             toolbar.setNavigationOnClickListener {
@@ -187,12 +193,12 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             }
             layoutLeftMenu.rcvMenu.adapter = menuAdapter
             rcvTask.adapter = taskAdapter
-            rcvTask.addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    LinearLayoutManager.VERTICAL
-                )
-            )
+//            rcvTask.addItemDecoration(
+//                DividerItemDecoration(
+//                    requireContext(),
+//                    LinearLayoutManager.VERTICAL
+//                )
+//            )
             tvTimer.setOnClickListener {
                 postNormal(EventNextHome(TimeSheetFragment::class.java))
             }
@@ -253,6 +259,60 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
         }
         getAllTask()
     }
+
+    fun setupRcvTaskType(){
+        val listType = listOf<TaskType>(
+            TaskType(R.drawable.ic_task_todo,"Cần làm ",true),
+        TaskType(R.drawable.ic_task_approve, "Phê duyệt"),
+        TaskType(R.drawable.ic_task_consult, "Tư vấn"),
+        TaskType(R.drawable.ic_task_view, "Giám sát"),
+        TaskType(R.drawable.ic_task_created, "Đã tạo"),
+        )
+        binding?.apply {
+            rcvTaskType.adapter = taskTypeAdapter
+        }
+        taskTypeAdapter.items = listType
+        taskTypeAdapter.onItemClick = object  : OnItemClick {
+            override fun onItemClickListener(view: View, position: Int) {
+                onChangeFilter(position)
+            }
+
+        }
+    }
+
+    fun onChangeFilter(pos : Int){
+        if(pos == taskTypeFilter) return
+        else{
+            taskTypeFilter = pos
+            setupRcvTask()
+        }
+    }
+
+    fun setupRcvTask(){
+        when(taskTypeFilter){
+            0 -> {
+                taskAdapter.items = viewModel.listAllTask0.value ?: mutableListOf()
+            }
+            1 -> {
+                taskAdapter.items = viewModel.listAllTask1.value ?: mutableListOf()
+
+            }
+            2 -> {
+                taskAdapter.items = viewModel.listAllTask2.value ?: mutableListOf()
+
+            }
+            3 -> {
+                taskAdapter.items = viewModel.listAllTask3.value ?: mutableListOf()
+
+            }
+            4 -> {
+                taskAdapter.items = viewModel.listAllTask4.value ?: mutableListOf()
+
+            }
+
+        }
+    }
+
 
     fun startTimer() {
         binding?.tvTimer?.isVisible = true

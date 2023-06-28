@@ -19,42 +19,49 @@ class GetTaskByTypeUseCase  @Inject constructor(
     val taskRepository: TaskRepository,
     val configRepository: ConfigRepository
 )
-    : UseCase<TaskResponseRaw, RequestTaskModel>() {
-    override suspend fun run(params: RequestTaskModel): Either<Failure, TaskResponseRaw> =
+    : UseCase<MutableList<Pair<MutableList<TaskModel>,Int>>, RequestTaskModel>() {
+    override suspend fun run(params: RequestTaskModel): Either<Failure, MutableList<Pair<MutableList<TaskModel>,Int>>> =
 
         coroutineScope {
+            val listData = mutableListOf<Pair<MutableList<TaskModel>,Int>>()
             val listTask = mutableListOf<TaskModel>()
             var total = 0
             val res1 = async {  taskRepository.getTask(TaskType.RESPONSIBLE,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
-//            val res2 =  async {  taskRepository.getTask(TaskType.ACCOUNTABLE,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
-//            val res3 =  async {  taskRepository.getTask(TaskType.CONSULTED,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
-//            val res4 =  async {  taskRepository.getTask(TaskType.INFORMED,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
+            val res2 =  async {  taskRepository.getTask(TaskType.ACCOUNTABLE,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
+            val res3 =  async {  taskRepository.getTask(TaskType.CONSULTED,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
+            val res4 =  async {  taskRepository.getTask(TaskType.INFORMED,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
+            val res5 =  async {  taskRepository.getTask(TaskType.CREATOR,params.user,params.perPage,params.startDate, params.endDate , params.aPeriodOfTime) }
             val e1 = res1.await()
-//            val e2 = res2.await()
-//            val e3 = res3.await()
-//            val e4 = res4.await()
+            val e2 = res2.await()
+            val e3 = res3.await()
+            val e4 = res4.await()
+            val e5 = res5.await()
             if(e1.isRight){
-                listTask.addAll(e1.getValue().content.tasks ?: emptyList())
-                total+=e1.getValue().content.totalCount
+                val l = e1.getValue().content.tasks ?: emptyList()
+                listData.add(Pair(l.toMutableList(),0))
             }
-//            if(e2.isRight){
-//                listTask.addAll(e2.getValue().content.tasks ?: emptyList())
-//                total+=e2.getValue().content.totalCount
-//            }
-//            if(e3.isRight){
-//                listTask.addAll(e3.getValue().content.tasks ?: emptyList())
-//                total+=e3.getValue().content.totalCount
-//            }
-//            if(e4.isRight){
-//                listTask.addAll(e4.getValue().content.tasks ?: emptyList())
-//                total+=e4.getValue().content.totalCount
-//            }
-            val listAll = mutableListOf<TaskModel>()
-            for (i in 0 until listTask.size){
-                val t = listTask[i]
-                if (listAll.find { it._id == t._id } == null) listAll.add(t)
+            if(e2.isRight){
+                val l = e2.getValue().content.tasks ?: emptyList()
+                listData.add(Pair(l.toMutableList(),1))
             }
-            Either.Right(TaskResponseRaw(true, content = TaskResponseContent(listAll.filter { it.status != "finished" && it.status != "canceled" },1,total)))
+            if(e3.isRight){
+                val l = e3.getValue().content.tasks ?: emptyList()
+                listData.add(Pair(l.toMutableList(),2))
+            }
+            if(e4.isRight){
+                val l = e4.getValue().content.tasks ?: emptyList()
+                listData.add(Pair(l.toMutableList(),3))
+            }
+            if(e5.isRight){
+                val l = e5.getValue().content.tasks ?: emptyList()
+                listData.add(Pair(l.toMutableList(),4))
+            }
+//            val listAll = mutableListOf<TaskModel>()
+//            for (i in 0 until listTask.size){
+//                val t = listTask[i]
+//                if (listAll.find { it._id == t._id } == null) listAll.add(t)
+//            }
+            Either.Right(listData)
         }
 
 

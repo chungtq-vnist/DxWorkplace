@@ -85,6 +85,7 @@ class ManufacturingMillDetailFragment : BaseFragment<FragmentManufacturingMillDe
         }
         if (millId.isNotEmpty()) viewModel.getMillById(millId)
         if (homeViewModel.listManufacturingWork.value.isNullOrEmpty()) viewModel.getManufacturingWorks()
+        else viewModel.listWorks.value = homeViewModel.listManufacturingWork.value
     }
 
     fun setData() {
@@ -120,12 +121,13 @@ class ManufacturingMillDetailFragment : BaseFragment<FragmentManufacturingMillDe
         }
     }
 
-    fun setupLeader(){
+    fun setupLeader() {
         binding?.apply {
             val adapter = ArrayAdapter<UserProfileResponse>(
                 requireContext(),
                 android.R.layout.simple_spinner_dropdown_item,
-                listOrganizationUnit.first { work?.organizationalUnit?._id == it._id }.employees?.first()?.users?.map { it.userId } ?: listOf()
+                listOrganizationUnit.firstOrNull { work?.organizationalUnit?._id == it._id }?.employees?.first()?.users?.map { it.userId }
+                    ?: listOf()
             )
             edtLeader.setAdapter(adapter)
             edtLeader.setOnFocusChangeListener { view, b ->

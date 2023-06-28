@@ -55,9 +55,8 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputCode"
-                    style="@style/SPInputTextLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -65,11 +64,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtCode"
-                        style="@style/TextInputEditTextWithLine"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:background="@color/transparent"
                         android:hint="Mã xưởng"
                         android:inputType="textCapSentences"
                         android:maxLength="50"
@@ -79,9 +76,8 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilName"
-                    style="@style/SPInputTextLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -89,11 +85,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtName"
-                        style="@style/TextInputEditTextWithLine"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:background="@color/transparent"
                         android:hint="Tên xưởng"
                         android:inputType="textCapSentences"
                         android:maxLength="50"
@@ -195,7 +189,6 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilDes"
-                    style="@style/SPInputTextLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
@@ -205,11 +198,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtDes"
-                        style="@style/TextInputEditTextWithLine"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:background="@color/transparent"
                         android:hint="Mô tả"
                         android:inputType="textCapSentences|textMultiLine"
                         android:maxLength="200"

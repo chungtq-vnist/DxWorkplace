@@ -35,9 +35,8 @@
                     android:layout_weight="1"
                     android:text="Hôm nay" />
 
-                <androidx.appcompat.widget.AppCompatCheckBox
+                <CheckBox
                     android:id="@+id/cbToday"
-                    style="@style/CustomCheckboxNew"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
@@ -68,9 +67,8 @@
                     android:layout_height="wrap_content"
                     android:text="Hôm qua" />
 
-                <androidx.appcompat.widget.AppCompatCheckBox
+                <CheckBox
                     android:id="@+id/cbYesterday"
-                    style="@style/CustomCheckboxNew"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"

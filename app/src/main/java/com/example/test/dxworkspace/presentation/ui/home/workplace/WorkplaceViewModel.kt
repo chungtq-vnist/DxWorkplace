@@ -31,7 +31,12 @@ class WorkplaceViewModel @Inject constructor(
     ) : BaseViewModel() {
     val linksCanAccess = MutableLiveData<List<LinkEntity>>()
     val logoutSuccess = MutableLiveData<Boolean>()
-    val listTask = MutableLiveData<MutableList<TaskModel>>()
+    val listAllTask0 = MutableLiveData<MutableList<TaskModel>>()
+    val listAllTask1 = MutableLiveData<MutableList<TaskModel>>()
+    val listAllTask2 = MutableLiveData<MutableList<TaskModel>>()
+    val listAllTask3 = MutableLiveData<MutableList<TaskModel>>()
+    val listAllTask4 = MutableLiveData<MutableList<TaskModel>>()
+    val isLoadTaskSuccess = MutableLiveData<Boolean>()
     val taskSelected = MutableLiveData<TaskModelDetail>()
     var taskIdTimer = ""
     var startDate = ""
@@ -62,16 +67,21 @@ class WorkplaceViewModel @Inject constructor(
         getTaskByTypeUseCase(param){
             it.either({
                 showLoading(false)
-                listTask.value = mutableListOf()
+                isLoadTaskSuccess.value = false
             },{
                 showLoading(false)
-                if(it.success) listTask.value = it.content.tasks?.toMutableList()
+                listAllTask0.value = it.find { it.second == 0 }?.first ?: mutableListOf()
+                listAllTask1.value = it.find { it.second == 1 }?.first ?: mutableListOf()
+                listAllTask2.value = it.find { it.second == 2 }?.first ?: mutableListOf()
+                listAllTask3.value = it.find { it.second == 3 }?.first ?: mutableListOf()
+                listAllTask4.value = it.find { it.second == 4 }?.first ?: mutableListOf()
+                isLoadTaskSuccess.value = true
             })
         }
     }
 
     fun getTaskById(id:String){
-        showLoading(true)
+//        showLoading(true)
         getTaskByIdUseCase(id){
             it.either({
                 showLoading(false)

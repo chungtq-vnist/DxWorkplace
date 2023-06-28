@@ -31,17 +31,17 @@
 
             </androidx.appcompat.widget.Toolbar>
 
-            <View
-                android:id="@+id/viewTop"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_below="@id/toolbar"
-                android:background="@color/clr_line_new" />
+<!--            <View-->
+<!--                android:id="@+id/viewTop"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0.5dp"-->
+<!--                android:layout_below="@id/toolbar"-->
+<!--                android:background="@color/clr_line_new" />-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/viewTop"
+                android:layout_below="@id/toolbar"
                 android:background="@color/clr_bg_main">
 
                 <RelativeLayout
@@ -74,10 +74,11 @@
                         android:textSize="@dimen/_12ssp" />
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
+                        android:layout_height="1dp"
                         android:layout_below="@id/tvRangeTime"
                         android:layout_marginTop="@dimen/_4sdp"
-                        android:background="@color/clr_line_new" />
+                        android:visibility="gone"
+                        android:background="@drawable/bg_line_devider_custom" />
 
                 </RelativeLayout>
 
@@ -88,6 +89,7 @@
                     app:layout_constraintTop_toBottomOf="@id/rlRangeTime"
                     app:layout_constraintStart_toStartOf="parent"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:background="@color/white">
                     <TextView
                         android:id="@+id/tvTaskName"
@@ -125,13 +127,77 @@
 
                 </LinearLayout>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    tools:visibility="visible"
+                    app:layout_constraintTop_toBottomOf="@id/rlRangeTime">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:singleLine="true"
+                        android:visibility="gone"
+                        >
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipDo"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:chipBackgroundColor="@color/red"
+                            android:text="TO DO"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipCreated"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:chipBackgroundColor="@color/red"
+                            android:text="CREATED"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipAccount"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:chipBackgroundColor="@color/red"
+                            android:text="APPROVE"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipConfirm"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:chipBackgroundColor="@color/red"
+                            android:text="CONSULT"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipView"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:chipBackgroundColor="@color/red"
+                            android:text="OBSERVER"/>
+                    </com.google.android.material.chip.ChipGroup>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
                 <View
                     android:id="@+id/viewHeader"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/lnHeader"
-                    android:background="@color/clr_line_new" />
+                    android:background="@color/clr_line_new"
+                    android:visibility="gone"/>
 
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                     android:id="@+id/pull_to_refresh"
@@ -142,24 +208,42 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     >
 
-                    <FrameLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcvTaskType"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/rcvTask"
+                            app:layout_constraintWidth_percent="0.25"
+                            android:background="@drawable/bg_border_gray_new"
+                            tools:listitem="@layout/item_task_type"
+                            tools:itemCount="5"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:elevation="@dimen/_4sdp"
+                            />
+
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rcvTask"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@id/viewHeader"
-                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/rcvTaskType"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintWidth_percent="0.75"
+                            android:layout_marginVertical="@dimen/_4sdp"
+                            tools:listitem="@layout/item_task"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-                        <include
-                            android:id="@+id/lnNoData"
-                            layout="@layout/layout_no_task"
-                            android:visibility="gone" />
 
-                    </FrameLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 

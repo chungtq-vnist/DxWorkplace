@@ -97,4 +97,5 @@ object TaskType{
     const val ACCOUNTABLE= "accountable"
     const val CONSULTED= "consulted"
     const val INFORMED ="informed"
+    const val CREATOR = "creator"
 }

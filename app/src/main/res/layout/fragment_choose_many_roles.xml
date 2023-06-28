@@ -32,18 +32,18 @@
             tools:ignore="RelativeOverlap" />
 
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/btnMenuMore"
             style="@style/ImageToolbar"
             android:layout_width="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_gravity="end"
-            android:padding="@dimen/_16sdp"
+            android:padding="@dimen/_18sdp"
             android:src="@drawable/ic_done"
-            android:tint="@color/color_online_bill"
             app:layout_constraintBottom_toBottomOf="@id/ivBack"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/color_online_bill" />
 
         <View
             android:id="@+id/viewTop"

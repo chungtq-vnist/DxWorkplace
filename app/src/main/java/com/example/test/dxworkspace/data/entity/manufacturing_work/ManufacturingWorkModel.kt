@@ -38,7 +38,11 @@ data class OrganizationUnit(
     var managers : List<RoleInOrganizationUnit>? = listOf(),
     var employees : List<RoleInOrganizationUnit>? = listOf(),
     var deputyManagers : List<RoleInOrganizationUnit>? = listOf(),
-    )
+    ){
+    override fun toString(): String {
+        return name
+    }
+}
 
 data class RoleInOrganizationUnit(
     var _id : String ="",

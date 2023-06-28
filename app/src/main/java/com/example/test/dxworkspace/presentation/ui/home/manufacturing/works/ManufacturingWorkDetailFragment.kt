@@ -13,6 +13,7 @@ import com.example.test.dxworkspace.data.entity.manufacturing_work.Manufacturing
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkEntity
 import com.example.test.dxworkspace.data.entity.manufacturing_work.OrganizationUnit
 import com.example.test.dxworkspace.data.entity.role.RoleModel
+import com.example.test.dxworkspace.data.entity.user.UserProfileResponse
 import com.example.test.dxworkspace.databinding.FragmentManufacturingWorkDetailBinding
 import com.example.test.dxworkspace.presentation.ui.BaseFragment
 import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
@@ -42,6 +43,8 @@ class ManufacturingWorkDetailFragment : BaseFragment<FragmentManufacturingWorkDe
 
     @Inject
     lateinit var homeViewModel: HomeViewModel
+
+    var unit : OrganizationUnit? = null
 
     override fun onStart() {
         super.onStart()
@@ -102,9 +105,9 @@ class ManufacturingWorkDetailFragment : BaseFragment<FragmentManufacturingWorkDe
                     ?.toList() ?: listOf()
             )
             rcvCaptain.adapter = arrayAdapter
-            val listData = listOrganizationUnit.map { it.name }
+            val listData = listOrganizationUnit
             val adapter =
-                ArrayAdapter<String>(
+                ArrayAdapter<OrganizationUnit>(
                     requireContext(),
                     android.R.layout.simple_list_item_1,
                     listData
@@ -115,7 +118,10 @@ class ManufacturingWorkDetailFragment : BaseFragment<FragmentManufacturingWorkDe
             }
             edtOrganization.threshold = 1
             edtOrganization.onItemClickListener =
-                AdapterView.OnItemClickListener { p0, p1, p2, p3 -> hideKeyboard() }
+                AdapterView.OnItemClickListener { p0, p1, p2, p3 ->
+                    unit = p0.getItemAtPosition(p2) as OrganizationUnit
+                    hideKeyboard()
+                }
         }
 
         if (workId.isNotEmpty()) viewModel.getWorkById(workId)

@@ -81,6 +81,7 @@ class ManufacturingMillFragment : BaseFragment<FragmentManufacturingMillsBinding
             )
         }
         viewModel.getManufacturingMills()
+        homeViewModel.getAllOrganizationUnit()
     }
 
 }

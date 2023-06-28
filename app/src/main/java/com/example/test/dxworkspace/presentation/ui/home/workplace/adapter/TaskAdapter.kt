@@ -65,7 +65,6 @@ class TaskViewHolder(val binding : ItemTaskBinding) : RecyclerView.ViewHolder(bi
                 }
             )
             tvTaskName.text = item.name
-            tvTimeStart.text = getTimeDDMMYYYYHHMMFromString(item.startDate)
             tvTimeEnd.text = getTimeDDMMYYYYHHMMFromString(item.endDate)
         }
     }

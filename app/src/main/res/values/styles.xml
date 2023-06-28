@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/sp_color_main</item>
-        <item name="colorPrimaryDark">@color/sp_color_main</item>
-        <item name="colorAccent">@color/sp_color_main</item>
+    <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/sp_color_blue</item>
+        <item name="colorPrimaryDark">@color/sp_color_blue</item>
+        <item name="colorAccent">@color/sp_color_blue</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowContentOverlay">@null</item>

@@ -69,13 +69,12 @@
         android:orientation="horizontal"
         android:layout_marginHorizontal="@dimen/_6sdp">
 
-      <androidx.appcompat.widget.AppCompatCheckBox
+      <CheckBox
           android:id="@+id/cbAll"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:checked="false"
           android:clickable="false"
-          android:button="@drawable/custom_multi_checkbox"
           />
 
       <TextView

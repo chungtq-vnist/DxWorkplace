@@ -1,7 +1,9 @@
 package com.example.test.dxworkspace.data.entity.login
 
+import android.os.Parcelable
 import com.example.test.dxworkspace.data.entity.role.RoleEntity
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class LoginResponseRaw(
     val success : Boolean = false,
@@ -27,16 +29,17 @@ data class UserResponseRaw(
     var company : CompanyModel = CompanyModel(),
 
 )
-
+@Parcelize
 data class RoleResponseRaw(
     val roleId : RoleResponse = RoleResponse()
-)
+) : Parcelable
 
+@Parcelize
 data class RoleResponse(
     @SerializedName("_id")
     val id : String = "",
     val name : String ="",
     val parents : List<String> = emptyList(),
 
-)
+) : Parcelable
 

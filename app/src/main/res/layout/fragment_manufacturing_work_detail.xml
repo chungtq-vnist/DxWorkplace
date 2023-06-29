@@ -111,11 +111,10 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilOrganization"
-                    style="@style/SPInputTextLayout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:background="@drawable/bg_border_gray_new"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +123,6 @@
 
                     <AutoCompleteTextView
                         android:id="@+id/edtOrganization"
-                        style="@style/TextInputEditTextWithLine"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -142,7 +140,8 @@
                     android:src="@drawable/ic_expand_down"
                     app:layout_constraintBottom_toBottomOf="@id/tilOrganization"
                     app:layout_constraintEnd_toEndOf="@id/tilOrganization"
-                    app:layout_constraintTop_toTopOf="@id/tilOrganization" />
+                    app:layout_constraintTop_toTopOf="@id/tilOrganization"
+                    android:visibility="gone"/>
 
                 <View
                     android:id="@+id/view1"

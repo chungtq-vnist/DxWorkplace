@@ -50,6 +50,7 @@ class ManufacturingWorkFragment : BaseFragment<FragmentManufacturingWorksBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
+            ivBack.setOnClickListener { onBackPress() }
             rcvWork.adapter = adapter
             rcvWork.addItemDecoration(
                 DividerItemDecoration(

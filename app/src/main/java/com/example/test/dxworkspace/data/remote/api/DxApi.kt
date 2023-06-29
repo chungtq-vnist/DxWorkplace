@@ -8,6 +8,7 @@ import com.example.test.dxworkspace.data.entity.manufacturing_mill.Manufacturing
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkDetailResponseRaw
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkResponseRaw
 import com.example.test.dxworkspace.data.entity.organization_unit.OrganizationUnitResponseRaw
+import com.example.test.dxworkspace.data.entity.project.ProjectResponseRaw
 import com.example.test.dxworkspace.data.entity.report.FinancialReportResponseRaw
 import com.example.test.dxworkspace.data.entity.report.PlanCompletedOnScheduleRaw
 import com.example.test.dxworkspace.data.entity.report.SaleReportResponseRaw
@@ -80,6 +81,32 @@ interface DxApi : LoginApi {
         @Path("id") id : String,
         @Body body : RequestCloseTask
     ) : Call<TaskDetailResponseRaw>
+
+    @GET("/task/task-templates")
+    fun getTemplatesByUserId(
+        @Query("userId")userId : String
+    ) : Call<TaskTemplateResponseRaw>
+
+    @GET("/projects/project")
+    fun getAllProject(
+
+    ) : Call<ProjectResponseRaw>
+
+
+//    @FormUrlEncoded
+//    @POST("/task/tasks")
+//    fun createTask(
+//        @Body body : RequestBody
+//    ) : Call<TaskDetailResponseRaw>
+
+    @FormUrlEncoded
+    @POST("/task/tasks")
+    fun createTask(
+        @FieldMap body : Map<String,String>
+    ) : Call<TaskDetailResponseRaw>
+
+
+
 
     // manufacturing dashboard
     @GET("/manufacturing-dashboard/get-number-plans-by-status")

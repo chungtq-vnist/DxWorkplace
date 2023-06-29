@@ -261,8 +261,22 @@
                     android:layout_marginBottom="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
                     android:visibility="gone"
+                    tools:visibility="visible"
                     android:text="00:00:00"
                     />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnCreateNewTask"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tvTimer"
+                    android:layout_marginBottom="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    app:fabSize="normal"
+                    android:src="@drawable/ic_plus"
+                    />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

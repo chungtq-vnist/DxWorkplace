@@ -96,9 +96,9 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilManufacturingWork"
-                    style="@style/SPInputTextLayout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
@@ -108,13 +108,12 @@
 
                     <AutoCompleteTextView
                         android:id="@+id/edtManufacturingWork"
-                        style="@style/TextInputEditTextWithLine"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="Nhà máy"
                         android:imeOptions="actionDone"
-                        android:inputType="text|textCapSentences"
+                        android:inputType="none"
                         android:singleLine="true"
                         tools:maxLines="1"
                         tools:text="" />
@@ -127,14 +126,15 @@
                     android:src="@drawable/ic_expand_down"
                     app:layout_constraintBottom_toBottomOf="@id/tilManufacturingWork"
                     app:layout_constraintEnd_toEndOf="@id/tilManufacturingWork"
-                    app:layout_constraintTop_toTopOf="@id/tilManufacturingWork" />
+                    app:layout_constraintTop_toTopOf="@id/tilManufacturingWork"
+                    android:visibility="gone"/>
 
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilLeader"
-                    style="@style/SPInputTextLayout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
@@ -144,7 +144,6 @@
 
                     <AutoCompleteTextView
                         android:id="@+id/edtLeader"
-                        style="@style/TextInputEditTextWithLine"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -163,6 +162,7 @@
                     android:src="@drawable/ic_expand_down"
                     app:layout_constraintBottom_toBottomOf="@id/tilLeader"
                     app:layout_constraintEnd_toEndOf="@id/tilLeader"
+                    android:visibility="gone"
                     app:layout_constraintTop_toTopOf="@id/tilLeader" />
 
 

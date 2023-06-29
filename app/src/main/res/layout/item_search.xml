@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+  <merge
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      tools:parentTag="android.widget.FrameLayout">
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edtSearch"
+        style="@style/TextRegular13"
+        android:background="@drawable/bg_edt_search"
+        android:padding="@dimen/_8sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_search_item"
+        android:drawablePadding="@dimen/_8sdp"
+        android:hint="Tìm tên nhân viên"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:textColor="@color/text_color"
+        android:maxLength="30"
+        android:maxLines="1"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_50sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:singleLine="true"
+        android:textColorHint="@color/hint_text"
+        tools:text="@tools:sample/lorem/random" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivClearSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:visibility="gone"
+        android:tint="@color/raven"
+        app:srcCompat="@drawable/ic_clear_search"
+        tools:visibility="visible" />
+  </merge>
+</layout>

@@ -14,9 +14,11 @@ import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.Man
 import com.example.test.dxworkspace.presentation.ui.home.report.financial.ReportFinancialFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.manufacturing.ReportManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.sale.ReportSaleFragment
+import com.example.test.dxworkspace.presentation.ui.home.workplace.ChooseUserFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.SelectRoleFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.TimeSheetFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.WorkplaceFragment
+import com.example.test.dxworkspace.presentation.ui.home.workplace.create_task.CreateTaskFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.detail_task.DetailTaskFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.time_picker.RangeMonthFragment
 import com.example.test.dxworkspace.presentation.ui.timepicker.*
@@ -97,4 +99,10 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeManufacturingMillDetailFragment(): ManufacturingMillDetailFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCreateTaskFragment(): CreateTaskFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeChooseUserFragment(): ChooseUserFragment
 }

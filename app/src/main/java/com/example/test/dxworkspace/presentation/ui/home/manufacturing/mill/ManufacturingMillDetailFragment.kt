@@ -58,10 +58,13 @@ class ManufacturingMillDetailFragment : BaseFragment<FragmentManufacturingMillDe
             observe(millDetail) {
                 mill = it ?: ManufacturingMillModel()
                 setData()
+                work = listWork.firstOrNull { it._id == mill.manufacturingWorks?._id }
+                setupLeader()
             }
             observe(listWorks) {
                 homeViewModel.listManufacturingWork.value = it
                 listWork = it ?: listWork
+                work = listWork.firstOrNull { it._id == mill.manufacturingWorks?._id }
                 setupWork()
                 setupLeader()
             }

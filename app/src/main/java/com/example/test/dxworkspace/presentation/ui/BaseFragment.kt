@@ -10,12 +10,16 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.LayoutRes
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.example.test.dxworkspace.core.extensions.observe
+import com.example.test.dxworkspace.databinding.ItemSearchBinding
 import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.google.gson.Gson
+import com.jakewharton.rxbinding2.widget.RxTextView
 import dagger.android.support.DaggerFragment
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 abstract class BaseFragment< V : ViewDataBinding> : DaggerFragment() , ViewTreeObserver.OnGlobalLayoutListener {
@@ -157,5 +161,19 @@ abstract class BaseFragment< V : ViewDataBinding> : DaggerFragment() , ViewTreeO
             }
         }
     }
+    @SuppressLint("CheckResult")
+    fun search(layoutSearch: ItemSearchBinding, action: (value: String) -> Unit) {
+        RxTextView.textChanges(layoutSearch.edtSearch)
+            .skipInitialValue()
+            .debounce(600, TimeUnit.MILLISECONDS)
+            .map { it.toString().trim() }
+            .subscribe({
+                activity?.runOnUiThread {
+                    layoutSearch.ivClearSearch.isVisible = it.count() > 0
+                    action(it.trim())
+                }
+            }, {
 
+            })
+    }
 }

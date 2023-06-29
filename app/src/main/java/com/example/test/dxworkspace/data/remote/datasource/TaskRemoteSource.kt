@@ -31,4 +31,10 @@ class TaskRemoteSource @Inject constructor(val api: DxApi) {
 
     fun requestToCloseTask(id : String , body : RequestCloseTask) = api.requestCloseTask(id,body)
 
+    fun createTask(body : Map<String,String>) = api.createTask(body)
+
+    fun getAllTemplate(userId : String) = api.getTemplatesByUserId(userId)
+
+    fun getAllProject() = api.getAllProject()
+
 }

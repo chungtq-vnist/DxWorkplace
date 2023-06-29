@@ -12,6 +12,7 @@
     <string name="title_time_start">Thời gian bắt đầu</string>
     <string name="title_end_date">Thời gian kết thúc</string>
     <string name="title_detail_task">Chi tiết công việc</string>
+    <string name="title_create_task">Tạo công việc</string>
     <string name="tv_title_chart_plan_status">Đồ thị kế hoạch sản xuất theo trạng thái</string>
     <string name="tv_title_chart_financial_status">Đồ thị doanh thu, chi phí, lợi nhuận </string>
     <string name="tv_title_chart_sale_status">Đồ thị kinh doanh tổng quan </string>
@@ -35,5 +36,18 @@
     <string name="title_percent_average">Trung bình</string>
     <string name="title_dashboard">Tổng quan</string>
     <string name="note_dashboard">Dữ liệu được so sánh trong khoảng từ %s đến %s với khoảng từ %s đến %s  </string>
+    <string name="title_unit_manage">Đơn vị quản lý <font color='red'>*</font></string>
+    <string name="title_user_responsible">Người thực hiện <font color='red'>*</font></string>
+    <string name="title_user_approval">Người phê duyệt <font color='red'>*</font></string>
+    <string name="title_user_consult">Người tư vấn</string>
+    <string name="title_user_view">Người quan sát</string>
+    <string name="title_priority">Độ ưu tiên <font color='red'>*</font></string>
+    <string name="title_task_name">Tên công việc <font color='red'>*</font></string>
+    <string name="title_time_start_new">Ngày bắt đầu <font color='red'>*</font></string>
+    <string name="title_time_end">Ngày kết thúc <font color='red'>*</font></string>
+    <string name="title_des">Mô tả </string>
+    <string name="title">Tiêu đề</string>
+    <string name="number_user">(%s nhân viên )</string>
+    <string name="unit_collab">Đơn vị phối hợp thực hiện</string>
 
 </resources>

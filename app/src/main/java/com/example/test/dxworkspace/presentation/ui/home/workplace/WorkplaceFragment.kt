@@ -48,6 +48,7 @@ import com.example.test.dxworkspace.presentation.ui.home.report.financial.Report
 import com.example.test.dxworkspace.presentation.ui.home.report.manufacturing.ReportManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.sale.ReportSaleFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.adapter.TaskTypeAdapter
+import com.example.test.dxworkspace.presentation.ui.home.workplace.create_task.CreateTaskFragment
 
 
 class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
@@ -201,6 +202,9 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
 //            )
             tvTimer.setOnClickListener {
                 postNormal(EventNextHome(TimeSheetFragment::class.java))
+            }
+            btnCreateNewTask.setOnClickListener{
+                postNormal(EventNextHome(CreateTaskFragment::class.java))
             }
 //            layoutLeftMenu.rcvMenu.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         }

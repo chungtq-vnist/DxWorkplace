@@ -4,6 +4,7 @@ import com.example.test.dxworkspace.core.exception.Failure
 import com.example.test.dxworkspace.core.extensions.Either
 import com.example.test.dxworkspace.data.entity.component.ComponentEntity
 import com.example.test.dxworkspace.data.entity.component.ComponentResponse
+import com.example.test.dxworkspace.data.entity.project.ProjectResponse
 import com.example.test.dxworkspace.data.entity.task.*
 import com.example.test.dxworkspace.data.entity.timesheet.StopTimeModel
 
@@ -22,4 +23,10 @@ interface TaskRepository : Repository {
     suspend fun postComment(id : String , creator : String ,description : String ,index : String): Either<Failure, List<TaskAction>>
 
     suspend fun requestToCloseTask(id: String , body : RequestCloseTask) : Either<Failure,TaskDetailResponseRaw>
+
+    suspend fun createTask(body : RequestCreateTask) : Either<Failure,TaskDetailResponseRaw>
+
+    suspend fun getAllProject() : Either<Failure , List<ProjectResponse>>
+
+    suspend fun getAllTemplates(id : String) : Either<Failure , List<TaskTemplateResponse>>
 }

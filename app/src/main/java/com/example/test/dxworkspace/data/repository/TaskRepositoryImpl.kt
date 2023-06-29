@@ -2,14 +2,18 @@ package com.example.test.dxworkspace.data.repository
 
 import com.example.test.dxworkspace.core.exception.Failure
 import com.example.test.dxworkspace.core.extensions.Either
+import com.example.test.dxworkspace.data.entity.project.ProjectResponse
 import com.example.test.dxworkspace.data.entity.task.*
 import com.example.test.dxworkspace.data.entity.timesheet.StartTimeModel
 import com.example.test.dxworkspace.data.entity.timesheet.StopTimeModel
 import com.example.test.dxworkspace.data.remote.api.requestApi
 import com.example.test.dxworkspace.data.remote.datasource.TaskRemoteSource
 import com.example.test.dxworkspace.domain.repository.TaskRepository
+import com.google.gson.Gson
+import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.http.Body
 import javax.inject.Inject
 
 class TaskRepositoryImpl @Inject constructor(
@@ -74,6 +78,40 @@ class TaskRepositoryImpl @Inject constructor(
         return requestApi(
             taskRemoteSource.requestToCloseTask(id,body),
             TaskDetailResponseRaw()
+        )
+    }
+
+    override suspend fun createTask(body: RequestCreateTask): Either<Failure, TaskDetailResponseRaw> {
+//        val requestBody = RequestBody.create(MediaType.parse("application/json"))
+//            MultipartBody.Builder()
+//            .setType(MultipartBody.FORM)
+//            .addFormDataPart("data", "hi")
+//            .ad
+//            .build()
+        val data = Gson().toJson(body)
+        val param = HashMap<String,String>()
+        param.put("data",data)
+        return requestApi(
+            taskRemoteSource.createTask(param),
+            TaskDetailResponseRaw()
+        )
+    }
+
+    override suspend fun getAllProject(): Either<Failure, List<ProjectResponse>> {
+        return requestApi(
+            taskRemoteSource.getAllProject(),
+            {
+                if(it.success) it.content ?: listOf() else listOf()
+            } , listOf()
+        )
+    }
+
+    override suspend fun getAllTemplates(id: String): Either<Failure, List<TaskTemplateResponse>> {
+        return requestApi(
+            taskRemoteSource.getAllTemplate(id),
+            {
+                if(it.success) it.content?.docs ?: listOf() else listOf()
+            } , listOf()
         )
     }
 

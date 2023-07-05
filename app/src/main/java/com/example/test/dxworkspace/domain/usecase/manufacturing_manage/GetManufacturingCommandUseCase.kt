@@ -17,9 +17,9 @@ import javax.inject.Inject
 class GetManufacturingCommandUseCase @Inject constructor(
     val manufacturingManagerRepository: ManufacturingManagerRepository,
     val configRepository: ConfigRepository
-): UseCase<List<ManufacturingCommandModel>, String>() {
-    override suspend fun run(params: String): Either<Failure, List<ManufacturingCommandModel>> {
-       return manufacturingManagerRepository.getAllManufacturingCommandsRemoteNew()
+): UseCase<List<ManufacturingCommandModel>, Pair<String,String>>() {
+    override suspend fun run(params: Pair<String,String>): Either<Failure, List<ManufacturingCommandModel>> {
+       return manufacturingManagerRepository.getAllManufacturingCommandsRemoteNew(params.first , params.second)
     }
 
 }

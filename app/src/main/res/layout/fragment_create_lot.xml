@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBack"
+            style="@style/ImageToolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvHeaderToolbar"
+            style="@style/Font.TextSemiBold13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:includeFontPadding="false"
+            android:text="Tạo lô sản xuất"
+            android:textColor="@color/clr_main_dark"
+            app:layout_constraintBottom_toBottomOf="@id/ivBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RelativeOverlap" />
+
+
+        <View
+            android:id="@+id/view_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/clr_line_new"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivBack" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_top">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:paddingVertical="@dimen/_8sdp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilCommandCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtCommandCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Mã lệnh"
+                        android:inputType="textCapSentences"
+                        android:maxLength="50"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPlanCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilCommandCode">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtPlanCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Sản phẩm"
+                        android:inputType="textCapSentences"
+                        android:maxLength="50"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilOrderCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilPlanCode">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtOrderCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Đơn vị tiêu chuẩn"
+                        android:inputType="textMultiLine"
+                        android:maxLength="500"
+                        android:maxLines="3"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilQuantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilOrderCode">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtQuantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Số lượng cần sản xuất"
+                        android:inputType="textMultiLine"
+                        android:maxLength="500"
+                        android:maxLines="3"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:background="@color/background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilQuantity" />
+
+                <TextView
+                    android:id="@+id/tvTitleProduct"
+                    style="@style/Font.TextBold13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="Thông tín thành phẩm"
+                    app:layout_constraintTop_toBottomOf="@id/view1" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilProductCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleProduct">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtProductCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Mã lô thành phẩm"
+                        android:inputType="textCapSentences"
+                        android:enabled="false"
+                        android:maxLength="50"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilProductQuantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilProductCode">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtProductQuantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Số lượng"
+                        android:inputType="number"
+                        android:maxLength="50"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilProductDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilProductQuantity">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtProductDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Ngày hết hạn"
+                        android:inputType="none"
+                        android:maxLength="500"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:maxLines="3"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilProductDes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilProductDate">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtProductDes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:hint="Mô tả"
+                    android:inputType="textMultiLine"
+                    android:maxLength="500"
+                    android:maxLines="3"
+                    android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:background="@color/background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilProductDes" />
+
+                <TextView
+                    android:id="@+id/tvTitleWaste"
+                    style="@style/Font.TextBold13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="Thông tín phế phẩm"
+                    app:layout_constraintTop_toBottomOf="@id/view2" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilWasteCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleWaste">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtWasteCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Mã lô phế phẩm"
+                        android:enabled="false"
+                        android:inputType="textCapSentences"
+                        android:maxLength="50"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilWasteQuantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilWasteCode">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtWasteQuantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Số lượng"
+                        android:inputType="number"
+                        android:maxLength="50"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilWasteDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilWasteQuantity">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtWasteDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Ngày hết hạn"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:maxLength="500"
+                        android:maxLines="3"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilWasteDes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilWasteDate">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtWasteDes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:hint="Mô tả"
+                    android:inputType="textMultiLine"
+                    android:maxLength="500"
+                    android:maxLines="3"
+                    android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/lnSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/tilWasteDes"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/sp_border"
+                        />
+
+                    <TextView
+                        android:id="@+id/btnSave"
+                        style="@style/Font.TextBold13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_6sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/bg_blue_create"
+                        android:gravity="center"
+                        android:paddingVertical="@dimen/_10sdp"
+                        android:text="Tạo lô sản xuất"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

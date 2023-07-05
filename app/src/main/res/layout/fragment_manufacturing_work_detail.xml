@@ -47,7 +47,7 @@
         <View
             android:id="@+id/viewTop"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_2sdp"
+            android:layout_height="@dimen/_1sdp"
             android:background="@color/clr_line_new"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -294,7 +294,7 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:background="@drawable/bg_border_gray_new"
+                    
                     android:drawableEnd="@drawable/ic_arrow_down_new"
                     android:gravity="center_vertical"
                     android:paddingStart="@dimen/_8sdp"

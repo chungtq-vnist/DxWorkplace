@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBack"
+            style="@style/ImageToolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvHeaderToolbar"
+            style="@style/Font.TextSemiBold13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:includeFontPadding="false"
+            android:text="Tạo kế hoạch sản xuất"
+            android:textColor="@color/clr_main_dark"
+            app:layout_constraintBottom_toBottomOf="@id/ivBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RelativeOverlap" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnMenuMore"
+            style="@style/ImageToolbar"
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:padding="@dimen/_12sdp"
+            android:src="@drawable/ic_menu_more"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@id/ivBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/viewTop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@color/clr_line_new"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivBack" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/screen1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/viewTop"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/_8sdp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPlanCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtPlanCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Mã kế hoạch"
+                        android:inputType="textCapSentences"
+                        android:maxLength="50"
+                        android:enabled="false"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilOrderCode"
+                    android:layout_width="match_parent"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilPlanCode">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroup1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/edtOrderCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Mã đơn kinh doanh"
+                        android:inputType="textMultiLine"
+                        android:maxLength="500"
+                        android:maxLines="3"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilDes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilOrderCode">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtDes"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Mô tả"
+                        android:inputType="textMultiLine"
+                        android:maxLength="500"
+                        android:maxLines="3"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilTimeStart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toStartOf="@+id/tilTimeEnd"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilDes">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtTimeStart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Ngày bắt đầu"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:inputType="textCapSentences"
+                        android:maxLength="50"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilTimeEnd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@id/tilTimeStart"
+                    app:layout_constraintTop_toBottomOf="@id/tilDes">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtTimeEnd"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Ngày kết thúc"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:inputType="textCapSentences"
+                        android:maxLength="50"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilUserApproval"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilTimeStart">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtUserApproval"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/title_user_approval"
+                        android:imeOptions="actionNone"
+                        android:background="@null"
+                        android:inputType="textMultiLine"
+                        android:clickable="false"
+                        android:focusable="false"
+                        tools:maxLines="1"
+                        tools:text="" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@color/background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilUserApproval" />
+
+                <TextView
+                    android:id="@+id/tvTitleProduct"
+                    style="@style/Font.TextBold13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="Thông tín sản phẩm"
+                    app:layout_constraintTop_toBottomOf="@id/view1" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleProduct"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_recycle_product"
+                    />
+                <TextView
+                    android:id="@+id/btnAddProduct"
+                    android:layout_width="wrap_content"
+                    style="@style/TextRegular13"
+                    android:layout_height="wrap_content"
+                    android:text="Thêm sản phẩm"
+                    android:background="@drawable/bg_status_finish"
+                    android:textColor="#3B950F"
+                    app:layout_constraintTop_toBottomOf="@id/rcvProduct"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/screen2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            tools:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/viewTop"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/_32sdp">
+
+                <TextView
+                    android:id="@+id/tvTitleProductPartCommand"
+                    style="@style/Font.TextBold13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="Thông tín sản phẩm"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvProductPartCommand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleProductPartCommand"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_recycle_product_create_command"
+                    />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@color/background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rcvProductPartCommand" />
+
+                <TextView
+                    android:id="@+id/tvTitleProductivity"
+                    style="@style/Font.TextBold13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="Thông tin năng suất của phân xưởng sản xuất"
+                    app:layout_constraintTop_toBottomOf="@id/view2" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvProductivity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleProductivity"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_recycle_productivity"
+                    />
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@color/background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rcvProductivity" />
+
+                <TextView
+                    android:id="@+id/tvTitleCommand"
+                    style="@style/Font.TextBold13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="Phân chia các lệnh sản xuất"
+                    app:layout_constraintTop_toBottomOf="@id/view3" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintEditCommand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleCommand"
+                    android:background="@color/white"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_4sdp">
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputVariantName"
+                        android:layout_width="0dp"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        
+                        android:gravity="center"
+                        app:hintTextColor="@color/hint_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/edtVariantName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:hint="Chọn sản phẩm"
+                            android:inputType="none"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColor="@color/text_color"
+                            tools:text="tools:sample" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputCode"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/inputVariantName">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:enabled="false"
+                            android:hint="Mã lệnh" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputStart"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        
+                        android:gravity="center"
+                        app:layout_constraintEnd_toStartOf="@id/inputMinimum"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/inputCode">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtPriceInit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:hint="@string/tv_quantity_red"
+                            android:imeOptions="actionDone"
+                            tools:maxLines="5"
+                            tools:text="0 đ" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputMinimum"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/ebony_clay"
+                        android:layout_marginRight="@dimen/_8sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        
+                        android:gravity="center"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@id/inputStart"
+                        app:layout_constraintTop_toTopOf="@+id/inputStart">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtLineCost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/tv_manager_material_red"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:inputType="textCapSentences"
+                            tools:text="0" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputObserver"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        
+                        android:gravity="center"
+                        app:layout_constraintEnd_toStartOf="@id/inputTester"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/inputStart">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtObserver"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textCapSentences"
+                            android:hint="@string/tv_manager_observer_red"
+                            android:imeOptions="actionNext"
+                            android:clickable="false"
+                            android:focusable="false"
+                            tools:maxLines="5"
+                            tools:text="0 đ" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputTester"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/ebony_clay"
+                        android:layout_marginRight="@dimen/_8sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        
+                        android:gravity="center"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@id/inputObserver"
+                        app:layout_constraintTop_toTopOf="@+id/inputObserver">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtTester"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/tv_manager_tester_red"
+                            android:inputType="textCapSentences"
+                            android:clickable="false"
+                            android:focusable="false"
+                            tools:text="0" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <TextView
+                    android:id="@+id/btnAddCommand"
+                    android:layout_width="wrap_content"
+                    style="@style/TextRegular13"
+                    android:layout_height="wrap_content"
+                    android:text="Thêm lệnh"
+                    android:background="@drawable/bg_status_finish"
+                    android:textColor="#3B950F"
+                    app:layout_constraintTop_toBottomOf="@id/constraintEditCommand"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvCreateCommand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/btnAddCommand"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_recycle_create_command"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/screen3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/viewTop"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/_8sdp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintPlan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+                <TextView
+                    android:id="@+id/tvTitleProductivity3"
+                    style="@style/Font.TextBold13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="Thông tin năng suất của phân xưởng sản xuất"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvProductivity3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleProductivity3"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_recycle_productivity"
+                    />
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@color/background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rcvProductivity3" />
+
+                <TextView
+                    android:id="@+id/tvTitleWorkSchedule"
+                    style="@style/Font.TextBold13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="Phân lịch các lệnh sản xuất"
+                    app:layout_constraintTop_toBottomOf="@id/view4" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvCommandSchdule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleWorkSchedule"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_recycle_create_work_schedule"
+                    />
+
+
+                <LinearLayout
+                    android:id="@+id/lnSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/rcvCommandSchdule"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/sp_border"
+                        />
+
+                    <TextView
+                        android:id="@+id/btnSave"
+                        style="@style/Font.TextBold13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_6sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/bg_blue_create"
+                        android:gravity="center"
+                        android:paddingVertical="@dimen/_10sdp"
+                        android:text="Tạo kế hoạch"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintSchedule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@color/white"
+                    >
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputCodeSchedule"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtCodeSchedule"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:enabled="false"
+                            android:textColor="@color/text_color"
+                            android:hint="Mã lệnh" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputMill"
+                        android:layout_width="0dp"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        
+                        android:gravity="center"
+                        app:hintTextColor="@color/hint_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/inputCodeSchedule">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/edtMill"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:hint="Chọn nhà máy"
+                            android:inputType="none"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColor="@color/text_color"
+                            tools:text="tools:sample" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputMonth"
+                        android:layout_width="0dp"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        
+                        android:gravity="center"
+                        app:hintTextColor="@color/hint_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/inputMill">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/edtMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:hint="Chọn tháng"
+                            android:inputType="none"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColor="@color/text_color"
+                            tools:text="tools:sample" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <View
+                        android:id="@+id/view5"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:background="@color/background"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/inputMonth" />
+
+                    <TextView
+                        android:id="@+id/tvTitleWorkScheduleInMonth"
+                        style="@style/Font.TextBold13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:textSize="@dimen/_15ssp"
+                        android:text="@string/title_work_schedule_month"
+                        app:layout_constraintTop_toBottomOf="@id/view5" />
+                    <TextView
+                        android:id="@+id/tvNotData"
+                        style="@style/Font.TextRegular13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_40sdp"
+                        android:textSize="@dimen/_15ssp"
+                        android:text="Không có lịch sản xuất"
+                        android:textColor="@color/red"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/tvTitleWorkScheduleInMonth" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:paddingVertical="@dimen/_8sdp"
+                        android:id="@+id/rcvSchdule"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/tvTitleWorkScheduleInMonth"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputUserResponsible"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/rcvSchdule">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtUserResponsible"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:textColor="@color/text_color"
+                            android:hint="Người thực hiện" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/btnSaveSchedule"
+                        style="@style/Font.TextBold13"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/inputUserResponsible"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_6sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/bg_blue_create"
+                        android:gravity="center"
+                        android:paddingVertical="@dimen/_10sdp"
+                        android:text="Lưu lịch"
+                        android:textColor="@color/white" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <ImageView
+            android:id="@+id/btnNext"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="@dimen/_8sdp"
+            android:src="@drawable/ic_arrow_right"
+            />
+        <ImageView
+            android:id="@+id/btnPrevious"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="@dimen/_8sdp"
+            android:src="@drawable/ic_arrow_left"
+            />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

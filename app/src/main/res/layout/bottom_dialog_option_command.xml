@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_payment_method"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/_4sdp">
+
+
+        <TextView
+            android:id="@+id/tvBuyGood"
+            style="@style/Font.TextRegular13"
+            android:padding="@dimen/_8sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tạo phiêú đề nghị mua nguyên vật liệu"/>
+
+        <TextView
+            android:id="@+id/tvExportGood"
+            style="@style/Font.TextRegular13"
+            android:padding="@dimen/_8sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tạo phiêú đề nghị xuất kho"/>
+        <TextView
+            android:id="@+id/tvStart"
+            style="@style/Font.TextRegular13"
+            android:padding="@dimen/_8sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bắt đầu thực hiện"/>
+        <TextView
+            android:id="@+id/tvFinish"
+            style="@style/Font.TextRegular13"
+            android:padding="@dimen/_8sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hoàn thành lệnh"/>
+        <TextView
+            android:id="@+id/tvQuality"
+            style="@style/Font.TextRegular13"
+            android:padding="@dimen/_8sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kiểm định chất lượng "/>
+        <TextView
+            android:id="@+id/tvCancel"
+            style="@style/Font.TextRegular13"
+            android:padding="@dimen/_8sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hủy phiếu"/>
+
+
+    </LinearLayout>
+
+</layout>

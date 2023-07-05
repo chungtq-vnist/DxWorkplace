@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBack"
+            style="@style/ImageToolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvHeaderToolbar"
+            style="@style/Font.TextSemiBold13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:includeFontPadding="false"
+            android:text="Thêm phiếu nhập kho sản phẩm"
+            android:textColor="@color/clr_main_dark"
+            app:layout_constraintBottom_toBottomOf="@id/ivBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RelativeOverlap" />
+
+
+        <View
+            android:id="@+id/viewTop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@color/clr_line_new"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivBack" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewTop">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvTitleProduct"
+                    style="@style/Font.TextBold13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="Thông tín sản phẩm"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilProductCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleProduct">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtProductCode"
+                        style="@style/TextRegular13"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:enabled="false"
+                        android:hint="Mã sản phẩm"
+                        android:inputType="textCapSentences"
+                        android:maxLength="50"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilProductCode">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtProductName"
+                        style="@style/TextRegular13"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Tên sản phẩm"
+                        android:inputType="textCapSentences"
+                        android:maxLength="50"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilUnit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toStartOf="@+id/tilQuantity"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilProductName">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtUnit"
+                        style="@style/TextRegular13"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:enabled="false"
+                        android:hint="Đơn vị tính "
+                        android:inputType="textCapSentences"
+                        android:maxLength="50"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilQuantity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@id/tilUnit"
+                    app:layout_constraintTop_toBottomOf="@id/tilProductName">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtQuantity"
+                        style="@style/TextRegular13"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Số lượng"
+                        android:inputType="number"
+                        android:maxLength="50"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@color/background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilQuantity" />
+
+                <TextView
+                    android:id="@+id/tvTitleInfoExportBill"
+                    style="@style/Font.TextBold13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="Thông tin phiếu nhập kho sản phẩm"
+                    app:layout_constraintTop_toBottomOf="@id/view1" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilCode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleInfoExportBill">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:enabled="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="Mã lệnh" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilStockStock"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    
+                    android:gravity="center"
+                    app:hintTextColor="@color/hint_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilCode">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/edtStock"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:hint="Chọn kho"
+                        android:inputType="none"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/text_color"
+                        tools:text="tools:sample" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilImportQuantity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:hintTextColor="@color/ebony_clay"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:gravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilStockStock">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtImportQuantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Số lượng nhập kho"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        tools:text="0" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilApprove"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    
+                    android:gravity="center"
+                    app:hintTextColor="@color/ebony_clay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@id/tilObserver"
+                    app:layout_constraintTop_toBottomOf="@id/tilImportQuantity">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtApprove"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:hint="Người phê duyệt"
+                        android:inputType="textCapSentences"
+                        tools:text="0" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilObserver"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginRight="@dimen/_8sdp"
+                    
+                    android:gravity="center"
+                    app:hintTextColor="@color/ebony_clay"
+                    app:layout_constraintEnd_toStartOf="@id/tilApprove"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tilApprove">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtObserver"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:hint="Người giám sát"
+                        android:inputType="textCapSentences"
+                        tools:text="0" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilResponsible"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    
+                    android:gravity="center"
+                    app:hintTextColor="@color/ebony_clay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilApprove">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtResponsible"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:hint="Những người thực hiện"
+                        android:inputType="textCapSentences"
+                        tools:text="0" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNameShipper"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    
+                    android:gravity="center"
+                    app:hintTextColor="@color/ebony_clay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilResponsible">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtNameShipper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Tên người giao hàng"
+                        android:inputType="textCapSentences"
+                        tools:text="0" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPhoneShipper"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    
+                    android:gravity="center"
+                    app:hintTextColor="@color/ebony_clay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilNameShipper">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtPhoneShipper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="SDT người giao hàng"
+                        android:inputType="textCapSentences"
+                        tools:text="0" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilAddressShipper"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    
+                    android:gravity="center"
+                    app:hintTextColor="@color/ebony_clay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilPhoneShipper">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtAddressShipper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Dia chi người giao hàng"
+                        android:inputType="textCapSentences"
+                        tools:text="0" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilDes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+
+                    android:gravity="center"
+                    app:hintTextColor="@color/ebony_clay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilAddressShipper">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtDes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Mô tả"
+                        android:inputType="textCapSentences"
+                        tools:text="0" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+                <TextView
+                    android:id="@+id/btnAddBill"
+                    android:layout_width="wrap_content"
+                    style="@style/TextRegular13"
+                    android:layout_height="wrap_content"
+                    android:text="Thêm bill"
+                    android:background="@drawable/bg_status_finish"
+                    android:textColor="#3B950F"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    app:layout_constraintTop_toBottomOf="@id/tilDes"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvBill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/btnAddBill"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_recycle_export_bill"/>
+
+                <LinearLayout
+                    android:id="@+id/lnSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/rcvBill"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btnSave"
+                        style="@style/Font.TextBold13"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginVertical="@dimen/_6sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_5dp"
+                        android:paddingVertical="@dimen/_10sdp"
+                        android:enabled="true"
+                        android:background="@drawable/bg_blue_create"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:text="Lưu" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -17,10 +17,9 @@ import javax.inject.Inject
 class GetManufacturingLotUseCase @Inject constructor(
     val manufacturingManagerRepository: ManufacturingManagerRepository,
     val configRepository: ConfigRepository
-): UseCase<List<ManufacturingLotModel>, String>() {
-    override suspend fun run(params: String): Either<Failure, List<ManufacturingLotModel>> {
-        return manufacturingManagerRepository.getAllManufacturingLotsRemote()
-
+): UseCase<List<ManufacturingLotModel>,  Pair<String,String>>() {
+    override suspend fun run(params: Pair<String,String>): Either<Failure, List<ManufacturingLotModel>> {
+        return manufacturingManagerRepository.getAllManufacturingLotsRemote(params.first,params.second)
     }
 
 }

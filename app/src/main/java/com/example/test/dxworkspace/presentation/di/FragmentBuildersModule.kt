@@ -1,19 +1,35 @@
 package com.example.test.dxworkspace.presentation.di
 
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.CreateLotFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.ExportMaterialFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.ManufacturingCommandDetailFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.ManufacturingCommandFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardManufacturingCommandFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardManufacturingPlanFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardManufacturingRequestFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.dialog.RangeDateSelectFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.quality.DashboardQualityManufacturingFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.lot.ImportProductFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.lot.ManufacturingLotDetailFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.lot.ManufacturingLotFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.mill.ManufacturingMillDetailFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.mill.ManufacturingMillFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.ManufacturingPlanDetailFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.ManufacturingPlanFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.create.CreateManufacturingPlanFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.request.CreateManufacturingRequestFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.request.ManufacturingRequestFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ChooseRoleFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingWorkDetailFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingWorkFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.financial.ReportFinancialFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.manufacturing.ReportManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.sale.ReportSaleFragment
+import com.example.test.dxworkspace.presentation.ui.home.report.warehouse.ReportMaterialWarehouseFragment
+import com.example.test.dxworkspace.presentation.ui.home.report.warehouse.ReportProductWarehouseFragment
+import com.example.test.dxworkspace.presentation.ui.home.report.warehouse.ReportWarehouseFragment
+import com.example.test.dxworkspace.presentation.ui.home.report.warehouse.ReportWasteWarehouseFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.ChooseUserFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.SelectRoleFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.TimeSheetFragment
@@ -105,4 +121,55 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeChooseUserFragment(): ChooseUserFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeReportWarehouseFragment(): ReportWarehouseFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeReportProductWarehouseFragment(): ReportProductWarehouseFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeReportMaterialWarehouseFragment(): ReportMaterialWarehouseFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeReportWasteWarehouseFragment(): ReportWasteWarehouseFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeManufacturingCommandFragment(): ManufacturingCommandFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeManufacturingPlanFragment(): ManufacturingPlanFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeManufacturingCommandDetailFragment(): ManufacturingCommandDetailFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeManufacturingPlanDetailFragment(): ManufacturingPlanDetailFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCreateManufacturingPlanFragment(): CreateManufacturingPlanFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeExportMaterialFragment(): ExportMaterialFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCreateLotFragment(): CreateLotFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeManufacturingLotFragment(): ManufacturingLotFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeManufacturingLotDetailFragment(): ManufacturingLotDetailFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeImportProductFragment(): ImportProductFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeManufacturingRequestFragment(): ManufacturingRequestFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCreateManufacturingRequestFragment(): CreateManufacturingRequestFragment
 }
+
+
+

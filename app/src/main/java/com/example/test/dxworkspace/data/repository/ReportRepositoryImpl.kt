@@ -7,6 +7,7 @@ import com.example.test.dxworkspace.core.extensions.Either
 import com.example.test.dxworkspace.data.entity.report.FinancialReportContentResponse
 import com.example.test.dxworkspace.data.entity.report.PlanCompletedOnScheduleContent
 import com.example.test.dxworkspace.data.entity.report.SaleReportContentResponse
+import com.example.test.dxworkspace.data.entity.report.WarehouseReportModel
 import com.example.test.dxworkspace.data.remote.api.requestApi
 import com.example.test.dxworkspace.data.remote.datasource.DashboardManufacturingRemoteSource
 import com.example.test.dxworkspace.data.remote.datasource.ReportRemoteSource
@@ -68,6 +69,20 @@ class ReportRepositoryImpl @Inject constructor(
                 } else PlanCompletedOnScheduleContent()
             },
             PlanCompletedOnScheduleContent()
+        )
+    }
+
+    override suspend fun getWarehouseReport(
+        from: String?,
+        to: String?,
+        fromCompare: String?,
+        toCompare: String?
+    ): Either<Failure, List<WarehouseReportModel>> {
+        return requestApi(
+            reportRemoteSource.getWarehouseReport(from,to,fromCompare,toCompare),
+            {
+                if(it.success) it.content ?: listOf() else listOf()
+            }, listOf()
         )
     }
 }

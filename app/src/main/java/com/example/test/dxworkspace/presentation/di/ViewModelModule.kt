@@ -5,8 +5,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.test.dxworkspace.core.di.viewmodel.ViewModelFactory
 import com.example.test.dxworkspace.core.di.viewmodel.ViewModelKey
 import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.ManufacturingCommandViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingViewModel
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.lot.ManufacturingLotViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.mill.ManufacturingMillViewModel
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.ManufacturingPlanViewModel
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.request.ManufacturingRequestViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingWorkViewModel
 import com.example.test.dxworkspace.presentation.ui.home.report.ReportViewModel
 import com.example.test.dxworkspace.presentation.ui.home.workplace.WorkplaceViewModel
@@ -62,5 +66,25 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CreateTaskViewModel::class)
     abstract fun bindsCreateTaskViewModel(workplaceViewModel: CreateTaskViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ManufacturingCommandViewModel::class)
+    abstract fun bindsManufacturingCommandViewModel(workplaceViewModel: ManufacturingCommandViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ManufacturingPlanViewModel::class)
+    abstract fun bindsManufacturingPlanViewModel(workplaceViewModel: ManufacturingPlanViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ManufacturingLotViewModel::class)
+    abstract fun bindsManufacturingLotViewModel(workplaceViewModel: ManufacturingLotViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ManufacturingRequestViewModel::class)
+    abstract fun bindsManufacturingRequestViewModel(workplaceViewModel: ManufacturingRequestViewModel) : ViewModel
 
 }

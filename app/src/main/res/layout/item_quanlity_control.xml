@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_4sdp">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            
+            android:gravity="center"
+            app:hintTextColor="@color/hint_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="Tên người kiểm định"
+                android:inputType="textMultiLine"
+                android:maxLines="1"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:enabled="false"
+                android:textColor="@color/text_color"
+                tools:text="tools:sample" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/inputStatus"
+            app:layout_constraintTop_toBottomOf="@id/inputName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:enabled="false"
+                android:textColor="@color/text_color"
+                android:hint="Thời gian kiểm định" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            
+            android:gravity="center"
+            app:layout_constraintEnd_toStartOf="@id/inputTime"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Trạng thái"
+                android:imeOptions="actionNext"
+                android:enabled="false"
+                android:textColor="@color/text_color"
+                tools:maxLines="5"
+                tools:text="0 đ" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputContentQuality"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:hintTextColor="@color/ebony_clay"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            
+            android:gravity="center"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputTime">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtContentQuality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nội dung kiểm định"
+                android:enabled="false"
+                android:textColor="@color/text_color"
+                android:inputType="number"
+                tools:text="0" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

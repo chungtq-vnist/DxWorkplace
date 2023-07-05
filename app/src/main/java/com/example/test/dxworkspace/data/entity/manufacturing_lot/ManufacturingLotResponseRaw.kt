@@ -23,7 +23,7 @@ data class ManufacturingLotModel(
     var description : String? = "",
     var createdAt : String = "",
     var productType : Int? = 0 ,
-    var status : Int = 0 ,
+    var status : Int = 0 , // 1. Chưa lên đơn nhập kho 2. Đã lên đơn nhập kho 3. Đã nhập kho
     var expirationDate : String? = "",
     var creator : SubUserBasicModel? =SubUserBasicModel(),
     var bills : List<String>? = listOf(),

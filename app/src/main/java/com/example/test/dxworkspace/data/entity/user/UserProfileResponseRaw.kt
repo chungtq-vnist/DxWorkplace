@@ -28,3 +28,9 @@ data class UserProfileResponse(
         return name
     }
 }
+
+data class AllUsersResponseRaw(
+    val success: Boolean = false,
+    val messages: List<String> = emptyList(),
+    val content: List<UserProfileResponse>? = listOf()
+)

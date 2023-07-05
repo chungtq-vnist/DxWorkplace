@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_4sdp">
+
+        <RelativeLayout
+            android:id="@+id/frameTop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/ed_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/tvDelete"
+                style="@style/TextRegular13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/ivDeleteVariant"
+                android:text="Xóa lệnh"
+                android:textColor="@color/sp_color_red" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivDeleteVariant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/_6sdp"
+                app:srcCompat="@drawable/ic_track_new" />
+
+            <TextView
+                android:id="@+id/tvEdit"
+                style="@style/TextRegular13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/_6sdp"
+                android:text="Chỉnh sửa"
+                android:textColor="#ECC243" />
+
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputVariantName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            
+            android:gravity="center"
+            app:hintTextColor="@color/hint_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frameTop">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtVariantName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="Tên mặt hàng"
+                android:inputType="none"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/text_color"
+                android:enabled="false"
+                tools:text="tools:sample" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputVariantName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:enabled="false"
+                android:textColor="@color/text_color"
+                android:hint="Mã mặt hàng" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputStart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            
+            android:gravity="center"
+            app:layout_constraintEnd_toStartOf="@id/inputMinimum"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputCode">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPriceInit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="Đơn vị tính"
+                android:imeOptions="actionNext"
+                tools:maxLines="5"
+                android:enabled="false"
+                android:textColor="@color/text_color"
+
+                tools:text="0 đ" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputMinimum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:hintTextColor="@color/ebony_clay"
+            android:layout_marginRight="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            
+            android:gravity="center"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/inputStart"
+            app:layout_constraintTop_toTopOf="@+id/inputStart">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtLineCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Số lượng"
+                android:inputType="textCapSentences"
+                android:textColor="@color/text_color"
+                android:enabled="false"
+                tools:text="0" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

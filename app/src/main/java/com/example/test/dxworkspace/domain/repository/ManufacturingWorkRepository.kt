@@ -14,6 +14,8 @@ interface ManufacturingWorkRepository : Repository {
 
     suspend fun getAllManufacturingWorksRemote() :  Either<Failure, List<ManufacturingWorkModel>>
 
+    suspend fun getAllManufacturingWorksRemoteWithoutRole() :  Either<Failure, List<ManufacturingWorkModel>>
+
     suspend fun getManufacturingWorkWithIds(ids : VersionRequest) :  Either<Failure, ManufacturingWorkResponseRaw>
 
     suspend fun handleCompareVersion(versionDiff: VersionDiff)

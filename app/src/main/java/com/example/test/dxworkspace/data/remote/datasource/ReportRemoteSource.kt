@@ -25,4 +25,11 @@ class ReportRemoteSource @Inject constructor(val api: DxApi) {
         fromCompare: String?,
         toCompare: String?
     ) = api.getNumberPlanCompletedOnSchedule(from,to,fromCompare,toCompare)
+
+    fun getWarehouseReport(
+        from: String?,
+        to: String?,
+        fromCompare: String?,
+        toCompare: String?
+    ) = api.getWarehouseReport(from,to,fromCompare,toCompare)
 }

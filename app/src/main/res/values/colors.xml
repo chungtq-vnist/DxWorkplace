@@ -185,5 +185,10 @@
     <color name="clr_money_red">#FF2D55</color>
     <color name="clr_bg_debit">#F9FAFB</color>
 
+    <color name="clr_status_finish">#67F421</color>
+    <color name="clr_status_cancel">#DD1850</color>
+    <color name="clr_status_wait">#D5B82D</color>
+    <color name="clr_status_approve">#3B28DF</color>
+    <color name="clr_status_inprogress">#DA0FE8</color>
 
 </resources>

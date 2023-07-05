@@ -41,12 +41,17 @@ import java.util.*
 import javax.inject.Inject
 import android.os.Looper
 import com.example.test.dxworkspace.presentation.model.menu.TaskType
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.ManufacturingCommandFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.quality.DashboardQualityManufacturingFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.lot.ManufacturingLotFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.mill.ManufacturingMillFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.ManufacturingPlanFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.request.ManufacturingRequestFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.financial.ReportFinancialFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.manufacturing.ReportManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.sale.ReportSaleFragment
+import com.example.test.dxworkspace.presentation.ui.home.report.warehouse.ReportWarehouseFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.adapter.TaskTypeAdapter
 import com.example.test.dxworkspace.presentation.ui.home.workplace.create_task.CreateTaskFragment
 
@@ -120,7 +125,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                 getAllTask()
             }
             EventUpdate.UPDATE_TIMER -> {
-                if(event.value as Boolean == true) {
+                if (event.value as Boolean == true) {
                     sharedPreferences[Constants.START_TIME_COUNT] = getDateTimer()
                     startTimer()
                 } else {
@@ -203,7 +208,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             tvTimer.setOnClickListener {
                 postNormal(EventNextHome(TimeSheetFragment::class.java))
             }
-            btnCreateNewTask.setOnClickListener{
+            btnCreateNewTask.setOnClickListener {
                 postNormal(EventNextHome(CreateTaskFragment::class.java))
             }
 //            layoutLeftMenu.rcvMenu.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
@@ -216,7 +221,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                     menu.isExpand = !menu.isExpand
                     menuAdapter.onExpandMenu(menu)
                 } else {
-                    when(menu.url){
+                    when (menu.url) {
                         "/change-role" -> {
                             postNormal(EventNextHome(SelectRoleFragment::class.java))
                         }
@@ -233,19 +238,52 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                     "/manage-manufacturing-mill" -> {
                         postNormal(EventNextHome(ManufacturingMillFragment::class.java))
                     }
-                    "/manufacturing-dashboard" -> postNormal(EventNextHome(DashboardControlManufacturingFragment::class.java))
-                    "/report_financial" -> postNormal(EventNextHome(
-                        ReportFinancialFragment::class.java
-                    ))
-                    "/report_sale" -> postNormal(EventNextHome(
-                        ReportSaleFragment::class.java
-                    ))
-                    "/report_manufacturing" -> postNormal(EventNextHome(
-                        ReportManufacturingFragment::class.java
-                    ))
-                    "/manufacturing-dashboard-quality" -> postNormal(EventNextHome(
-                        DashboardQualityManufacturingFragment::class.java
-                    ))
+                    "/manage-manufacturing-lot" -> {
+                        postNormal(EventNextHome(ManufacturingLotFragment::class.java))
+                    }
+                    "/manufacturing-dashboard" -> postNormal(
+                        EventNextHome(
+                            DashboardControlManufacturingFragment::class.java
+                        )
+                    )
+                    "/report_financial" -> postNormal(
+                        EventNextHome(
+                            ReportFinancialFragment::class.java
+                        )
+                    )
+                    "/report_sale" -> postNormal(
+                        EventNextHome(
+                            ReportSaleFragment::class.java
+                        )
+                    )
+                    "/report_manufacturing" -> postNormal(
+                        EventNextHome(
+                            ReportManufacturingFragment::class.java
+                        )
+                    )
+                    "/manufacturing-dashboard-quality" -> postNormal(
+                        EventNextHome(
+                            DashboardQualityManufacturingFragment::class.java
+                        )
+                    )
+                    "/report_warehouse" -> postNormal(
+                        EventNextHome(
+                            ReportWarehouseFragment::class.java
+                        )
+                    )
+                    "/manage-manufacturing-command" -> postNormal(
+                        EventNextHome(
+                            ManufacturingCommandFragment::class.java
+                        )
+                    )
+                    "/manage-manufacturing-plan" -> postNormal(
+                        EventNextHome(
+                            ManufacturingPlanFragment::class.java
+                        )
+                    )
+                    "/product-request-management/manufacturing" -> postNormal(
+                        EventNextHome(ManufacturingRequestFragment::class.java)
+                    )
                 }
                 handlerPostDelay({
                     binding!!.layoutDrawer.closeDrawer(GravityCompat.START)
@@ -264,19 +302,19 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
         getAllTask()
     }
 
-    fun setupRcvTaskType(){
+    fun setupRcvTaskType() {
         val listType = listOf<TaskType>(
-            TaskType(R.drawable.ic_task_todo,"Cần làm ",true),
-        TaskType(R.drawable.ic_task_approve, "Phê duyệt"),
-        TaskType(R.drawable.ic_task_consult, "Tư vấn"),
-        TaskType(R.drawable.ic_task_view, "Giám sát"),
-        TaskType(R.drawable.ic_task_created, "Đã tạo"),
+            TaskType(R.drawable.ic_task_todo, "Cần làm ", true),
+            TaskType(R.drawable.ic_task_approve, "Phê duyệt"),
+            TaskType(R.drawable.ic_task_consult, "Tư vấn"),
+            TaskType(R.drawable.ic_task_view, "Giám sát"),
+            TaskType(R.drawable.ic_task_created, "Đã tạo"),
         )
         binding?.apply {
             rcvTaskType.adapter = taskTypeAdapter
         }
         taskTypeAdapter.items = listType
-        taskTypeAdapter.onItemClick = object  : OnItemClick {
+        taskTypeAdapter.onItemClick = object : OnItemClick {
             override fun onItemClickListener(view: View, position: Int) {
                 onChangeFilter(position)
             }
@@ -284,16 +322,16 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
         }
     }
 
-    fun onChangeFilter(pos : Int){
-        if(pos == taskTypeFilter) return
-        else{
+    fun onChangeFilter(pos: Int) {
+        if (pos == taskTypeFilter) return
+        else {
             taskTypeFilter = pos
             setupRcvTask()
         }
     }
 
-    fun setupRcvTask(){
-        when(taskTypeFilter){
+    fun setupRcvTask() {
+        when (taskTypeFilter) {
             0 -> {
                 taskAdapter.items = viewModel.listAllTask0.value ?: mutableListOf()
             }
@@ -489,41 +527,81 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
         }
     }
 
-    fun addTempMenu(){
+    fun addTempMenu() {
         listMenu.add(
             MenuModel(
-                id = "asjkld", category = "manufacturing-management" ,level = 3 , iconStart = R.drawable.ic_home ,
-                desc = "Báo cáo chất lượng sản xuất", url = "/manufacturing-dashboard-quality"
+                id = "asjkld",
+                category = "manufacturing-management",
+                level = 3,
+                iconStart = R.drawable.ic_home,
+                desc = "Báo cáo chất lượng sản xuất",
+                url = "/manufacturing-dashboard-quality"
             )
         )
         listMenu.add(
             MenuModel(
-                id = "change_role", category = "setting_app" ,level = 2 , iconStart = R.drawable.ic_change_role ,
-                desc = "Chuyển vai trò", url = "/change-role"
+                id = "change_role",
+                category = "setting_app",
+                level = 2,
+                iconStart = R.drawable.ic_change_role,
+                desc = "Chuyển vai trò",
+                url = "/change-role"
             )
         )
-        listMenu.add(1,
+        listMenu.add(
+            1,
             MenuModel(
-                id = "report_overview", category = "report_overview" ,level = 2 , iconStart = R.drawable.ic_home ,
-                desc = "Báo cáo tổng quan", url = "" , iconEnd = R.drawable.ic_down_menu
+                id = "report_overview",
+                category = "report_overview",
+                level = 2,
+                iconStart = R.drawable.ic_home,
+                desc = "Báo cáo tổng quan",
+                url = "",
+                iconEnd = R.drawable.ic_down_menu
             )
         )
-        listMenu.add(2,
+        listMenu.add(
+            2,
             MenuModel(
-                id = "report_financial", category = "report_overview" ,level = 3 , iconStart = R.drawable.ic_money ,
-                desc = "Báo cáo tài chính", url = "/report_financial"
+                id = "report_financial",
+                category = "report_overview",
+                level = 3,
+                iconStart = R.drawable.ic_money,
+                desc = "Báo cáo tài chính",
+                url = "/report_financial"
             )
         )
-        listMenu.add(2,
+        listMenu.add(
+            2,
             MenuModel(
-                id = "report_sale", category = "report_overview" ,level = 3 , iconStart = R.drawable.ic_money ,
-                desc = "Báo cáo kinh doanh", url = "/report_sale"
+                id = "report_sale",
+                category = "report_overview",
+                level = 3,
+                iconStart = R.drawable.ic_money,
+                desc = "Báo cáo kinh doanh",
+                url = "/report_sale"
             )
         )
-        listMenu.add(2,
+        listMenu.add(
+            2,
             MenuModel(
-                id = "report_manufacturing", category = "report_overview" ,level = 3 , iconStart = R.drawable.ic_money ,
-                desc = "Báo cáo sản xuất", url = "/report_manufacturing"
+                id = "report_manufacturing",
+                category = "report_overview",
+                level = 3,
+                iconStart = R.drawable.ic_money,
+                desc = "Báo cáo sản xuất",
+                url = "/report_manufacturing"
+            )
+        )
+        listMenu.add(
+            2,
+            MenuModel(
+                id = "report_warehouse",
+                category = "report_overview",
+                level = 3,
+                iconStart = R.drawable.ic_money,
+                desc = "Báo cáo kho hàng",
+                url = "/report_warehouse"
             )
         )
 

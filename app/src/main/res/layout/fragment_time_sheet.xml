@@ -144,12 +144,21 @@
             </LinearLayout>
 
         </RelativeLayout>
-
+        <TextView
+            android:id="@+id/tvTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Font.TextBold13"
+            app:layout_constraintTop_toBottomOf="@id/rlSelectTime"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="@dimen/_8sdp"
+            android:text="Chọn công việc bấm giờ"
+            />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvAction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/rlSelectTime"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle2"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="@dimen/_8sdp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

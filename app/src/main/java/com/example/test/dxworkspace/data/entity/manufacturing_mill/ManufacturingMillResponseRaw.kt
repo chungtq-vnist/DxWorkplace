@@ -1,5 +1,8 @@
 package com.example.test.dxworkspace.data.entity.manufacturing_mill
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 
 data class ManufacturingMillResponseRaw(
     val success: Boolean = false,
@@ -24,19 +27,24 @@ data class ManufacturingMillModel(
     var status : Int = 0,
     var manufacturingWorks :SubManufacturingWorkInMill ? = null,
     var teamLeader : SubUserBasicModel? = null
-)
+){
+    override fun toString(): String {
+        return name
+    }
+}
 
 data class SubManufacturingWorkInMill(
     var _id : String ="",
     var name : String =""
 )
 
+@Parcelize
 data class SubUserBasicModel(
     var _id : String = "",
     var name : String ="",
     var email : String = "",
     var avatar : String? = ""
-)
+) : Parcelable
 
 
 

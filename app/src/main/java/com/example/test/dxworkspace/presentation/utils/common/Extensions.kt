@@ -13,7 +13,9 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -21,6 +23,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.test.dxworkspace.R
 import com.example.test.dxworkspace.presentation.utils.common.decorator.LinearMarginDecoration
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Qualifier
 
@@ -36,7 +41,7 @@ fun RecyclerView.addDefaultDecorator(margin: Int = resources.getDimensionPixelOf
         )
     )
 }
-
+fun TextView.setTextColorz(@ColorRes resId: Int) = setTextColor(ContextCompat.getColor(context, resId))
 fun Dialog.makeStatusBarTransparent() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         window?.apply {
@@ -211,4 +216,13 @@ fun hideKeyboard(activity: Activity) {
         view = View(activity)
     }
     imm.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun generateCode(header : String): String {
+    val format = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
+    val t = format.format(Date())
+    val random = Random()
+    val randomSuffix = String.format("%06d", random.nextInt(999999))
+
+    return "$header${t}.${randomSuffix}"
 }

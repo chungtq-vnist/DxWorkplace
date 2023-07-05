@@ -9,5 +9,9 @@ class EventUpdate(val type: Int, var value: Any? = null) : EventBus.Event() {
         const val UPDATE_LISTWORK_DASHBOARD_MANUFACTURING = 4
         const val UPDATE_ROLE = 5
         const val UPDATE_LIST_USER = 6
+        const val UPDATE_COMMAND = 7
+        const val UPDATE_LOT = 8
+        const val UPDATE_REQUEST = 9
+        const val UPDATE_PLAN = 10
     }
 }

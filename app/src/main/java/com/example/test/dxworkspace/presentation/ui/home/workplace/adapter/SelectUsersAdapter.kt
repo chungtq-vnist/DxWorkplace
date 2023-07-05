@@ -22,7 +22,7 @@ class SelectUsersAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val i = items[position]
         (holder as UserViewHolder).apply {
             binding.apply {
-                tvName.text = i.name + "( ${i.email} )"
+                tvName.text = i.name + " ( ${i.email} )"
                 cbSelected.isChecked = listChoose.contains(i.id)
                 root.setOnClickListener {
                     cbSelected.isChecked = !cbSelected.isChecked

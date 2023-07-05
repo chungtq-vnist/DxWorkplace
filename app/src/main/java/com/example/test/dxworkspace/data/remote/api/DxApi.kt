@@ -1,24 +1,41 @@
 package com.example.test.dxworkspace.data.remote.api
 
+import com.example.test.dxworkspace.data.entity.bill.BillByCommandResponseRaw
 import com.example.test.dxworkspace.data.entity.dashboard_manufacturing.*
+import com.example.test.dxworkspace.data.entity.good.GoodManageByRoleResponseRaw
+import com.example.test.dxworkspace.data.entity.good.GoodResponseRaw
+import com.example.test.dxworkspace.data.entity.good.InventoryGoodResponseRaw
+import com.example.test.dxworkspace.data.entity.manufacturing_command.ManufacturingCommandDetailRaw
 import com.example.test.dxworkspace.data.entity.manufacturing_command.ManufacturingCommandResponseRaw
+import com.example.test.dxworkspace.data.entity.manufacturing_command.StockResponseRaw
+import com.example.test.dxworkspace.data.entity.manufacturing_lot.ManufacturingLotDetailResponseRaw
 import com.example.test.dxworkspace.data.entity.manufacturing_lot.ManufacturingLotResponseRaw
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.ManufacturingMillByIdResponseRaw
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.ManufacturingMillResponseRaw
+import com.example.test.dxworkspace.data.entity.manufacturing_plan.*
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkDetailResponseRaw
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkResponseRaw
 import com.example.test.dxworkspace.data.entity.organization_unit.OrganizationUnitResponseRaw
+import com.example.test.dxworkspace.data.entity.product_request.ParamCreateProductRequest
+import com.example.test.dxworkspace.data.entity.product_request.ProductRequestManagementResponseRaw
+import com.example.test.dxworkspace.data.entity.product_request.UpdateProductRequest
 import com.example.test.dxworkspace.data.entity.project.ProjectResponseRaw
 import com.example.test.dxworkspace.data.entity.report.FinancialReportResponseRaw
 import com.example.test.dxworkspace.data.entity.report.PlanCompletedOnScheduleRaw
 import com.example.test.dxworkspace.data.entity.report.SaleReportResponseRaw
+import com.example.test.dxworkspace.data.entity.report.WarehouseReportResponseRaw
 import com.example.test.dxworkspace.data.entity.role.RoleResponseRawWrap
 import com.example.test.dxworkspace.data.entity.task.*
 import com.example.test.dxworkspace.data.entity.timesheet.StartTimeModel
 import com.example.test.dxworkspace.data.entity.timesheet.StopTimeModel
+import com.example.test.dxworkspace.data.entity.user.AllUsersResponseRaw
 import com.example.test.dxworkspace.data.entity.version.VersionDiffResponseRaw
 import com.example.test.dxworkspace.data.entity.version.VersionRequest
 import com.example.test.dxworkspace.data.entity.version.VersionResponseRaw
+import com.example.test.dxworkspace.data.entity.work_schedule.UserFreeWorkScheduleResponseRaw
+import com.example.test.dxworkspace.data.entity.work_schedule.WorkScheduleMillsResponseRaw
+import com.example.test.dxworkspace.domain.model.manufacturing_plan.RequestManufacturingPlan
+import com.example.test.dxworkspace.presentation.model.menu.*
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -206,7 +223,7 @@ interface DxApi : LoginApi {
 
     @GET("/manufacturing-works")
     fun getAllManufacturingWorks(
-        @Query("currentRole") role : String
+        @Query("currentRole") role : String?
     ) : Call<ManufacturingWorkResponseRaw>
     @GET("/manufacturing-works/version/ids")
     fun getManufacturingWorkWithIds(
@@ -233,15 +250,141 @@ interface DxApi : LoginApi {
     fun getAllManufacturingLots(
         @Query("page") page : Int =1 ,
         @Query("limit") limit : Int = 1000,
-        @Query("currentRole") role : String
+        @Query("currentRole") role : String,
+        @Query("from") from : String ,
+        @Query("to") to : String
     ) : Call<ManufacturingLotResponseRaw>
+
+    @GET("/lot/get-manufacturing-lot/{id}")
+    fun getLotById(
+        @Path("id") id : String
+    ) : Call<ManufacturingLotDetailResponseRaw>
+
+
 
     @GET("/manufacturing-command")
     fun getAllManufacturingCommand(
         @Query("page") page: Int = 1,
         @Query("limit") limit: Int = 1000,
-        @Query("currentRole") role: String
+        @Query("currentRole") role: String ,
+        @Query("endDate") endDate : String?,
+        @Query("startDate") startDate : String?,
     ) : Call<ManufacturingCommandResponseRaw>
+
+    @GET("/manufacturing-command/{id}")
+    fun getManufacturingCommandById(
+        @Path("id") id : String
+    ) : Call<ManufacturingCommandDetailRaw>
+
+    @GET("/lot/get-inventory")
+    fun getInventoryGood(
+        @Query("array") array : List<String>?
+    ) : Call<InventoryGoodResponseRaw>
+
+    // get bill de nghi xuat nguyen vat lieu cua lenh san xuat
+    @GET("/bills/bill-by-command")
+    fun getBillOfCommand(
+        @Query("manufacturingCommandId") id : String
+    ) : Call<BillByCommandResponseRaw>
+
+    @GET("/manufacturing-plan")
+    fun getAllPlan(
+        @Query("to") endDate : String?,
+        @Query("from") startDate : String?,
+        @Query("currentRole") role: String ,
+        @Query("limit") limit :Int = 1000,
+        @Query("page") page :Int = 1
+    ) : Call<ManufacturingPlanResponseRaw>
+
+    @GET("/manufacturing-plan/get-approvers-of-plan/{id}")
+    fun getApprovesOfPlanByRole(
+        @Path("id") id : String
+    ) : Call<ApproversManufacturingPlanResponseRaw>
+
+
+    @GET("/sales-order/get-by-manufacturing-works/{id}")
+    fun getSaleOrderByRole(
+        @Path("id") id : String
+    ) : Call<SalesOrderResponseRaw>
+
+    @GET("/goods/by-manage-works-role/role/{id}")
+    fun getGoodManageByRole(
+        @Path("id") id : String
+    ) : Call<GoodManageByRoleResponseRaw>
+
+    @GET("/goods")
+    fun getAllGoods(
+        @Query("type") type :String
+    ) :Call<GoodResponseRaw>
+
+    @GET("/work-schedule/manufacturingMills")
+    fun getWorkScheduleOfMillByDate(
+        @Query("manufacturingMills") mills : List<String>,
+        @Query("startDate") start : String ,
+        @Query("endDate") end : String,
+    ) : Call<WorkScheduleMillsResponseRaw>
+
+    @GET("/work-schedule/worker/array-schedules")
+    fun getFreeUsers(
+        @Query("arrayWorkerSchedules[]" ,encoded = false) array : List<String>,
+        @Query("currentRole") role : String,
+    ) : Call<UserFreeWorkScheduleResponseRaw>
+
+    @POST("/manufacturing-plan")
+    fun createPlan(
+        @Body plan : RequestManufacturingPlan
+    ) : Call<CreatePlanResponseRaw>
+
+    @GET("/stocks")
+    fun getStocks() : Call<StockResponseRaw>
+
+    @POST("/bills/create-many-product-bills")
+    fun createExportBills(
+        @Body data : List<BillExportMaterialRequest>
+    ) : Call<Unit>
+
+    @PATCH("/manufacturing-command/{id}")
+    fun updateCommand(
+        @Path("id") id : String ,
+        @Body data : RequestApproveCommand
+    ) : Call<Unit>
+
+
+    @PATCH("/manufacturing-command/{id}")
+    fun updateQualityControlCommand(
+        @Path("id") id : String ,
+        @Body data : RequestQualityControl
+    ) : Call<Unit>
+
+    @PATCH("/manufacturing-command/{id}")
+    fun finishCommand(
+        @Path("id") id : String ,
+        @Body data : RequestFinishCommand
+    ) : Call<Unit>
+
+    @POST("/lot/create-manufacturing-lot")
+    fun createLots(
+        @Body listLot : List<RequestCreateLot>
+    ) : Call<Unit>
+
+    @GET("/product-request-management")
+    fun getAllProductRequestInManufacturing(
+        @Query("requestType") requestType : Int ,
+        @Query("requestFrom") requestFrom :String? ,
+        @Query("from") from :String? ,
+        @Query("to") to :String?
+    ) : Call<ProductRequestManagementResponseRaw>
+
+    @POST("/product-request-management")
+    fun createRequest(
+        @Body data : ParamCreateProductRequest
+    ) : Call<Unit>
+
+    @PATCH("/product-request-management/{id}")
+    fun updateRequest(
+        @Path("id") id : String,
+        @Body data : UpdateProductRequest
+    ) : Call<Unit>
 
     @GET("/manufacturing-works/{id}")
     fun getManufacturingWorkById(
@@ -249,6 +392,17 @@ interface DxApi : LoginApi {
     ) : Call<ManufacturingWorkDetailResponseRaw>
 
 
+    @PATCH("/lot/{id}")
+    fun updateLot(
+        @Path("id") di : String,
+        @Body data : RequestUpdateLot
+    ) : Call<Unit>
+
+    @PATCH("/lot/{id}")
+    fun updateInfoLot(
+        @Path("id") di : String,
+        @Body data : RequestUpdateInfoLot
+    ) : Call<Unit>
 
     @GET("/role/roles")
     fun getAllRoles(
@@ -259,8 +413,15 @@ interface DxApi : LoginApi {
 
     ) : Call <OrganizationUnitResponseRaw>
 
-//    @GET("/user/users")
-//    fun getUserInDepartment(
-//        @Query("departmentIds") id : List<String>
-//    ) : Call<>
+    @GET("/user/users")
+    fun getAllUser(
+    ) : Call<AllUsersResponseRaw>
+
+    @GET("/warehouse-report/warehouse-report")
+    fun getWarehouseReport(
+        @Query("fromDate") fromDate : String? ,
+        @Query("toDate") toDate : String? ,
+        @Query("fromDateCompare") fromDateCompare : String ? ,
+        @Query("toDateCompare") toDateCompare : String?
+    ) : Call<WarehouseReportResponseRaw>
 }

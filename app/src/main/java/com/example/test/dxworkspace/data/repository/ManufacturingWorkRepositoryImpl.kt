@@ -67,6 +67,18 @@ class ManufacturingWorkRepositoryImpl @Inject constructor(
 
     }
 
+    override suspend fun getAllManufacturingWorksRemoteWithoutRole(): Either<Failure, List<ManufacturingWorkModel>> {
+        return requestApi(
+            manufacturingWorkRemoteSource.getAllManufacturingWorks(""),
+            {
+                if(it.success){
+                    it.content.allManufacturingWorks.docs ?: listOf()
+                } else listOf()
+            },
+            listOf()
+        )
+    }
+
     override suspend fun handleCompareVersion(versionDiff: VersionDiff) {
         val versionNow = versionDiff.versionRemote
         val v = getListIdFromVersion(versionDiff.versionDB)

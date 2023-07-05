@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_4sdp">
+
+        <RelativeLayout
+            android:id="@+id/frameTop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/ed_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingVertical="@dimen/_1sdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputVariantName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            
+            android:gravity="center"
+            app:hintTextColor="@color/hint_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frameTop">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtVariantName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="Tên sản phẩm"
+                android:enabled="false"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="textMultiLine"
+                android:singleLine="true"
+                android:textColor="@color/text_color"
+                tools:text="tools:sample" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputVariantName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:enabled="false"
+                android:hint="Mã sản phẩm" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputUnit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            
+            android:gravity="center"
+            android:visibility="gone"
+            app:hintTextColor="@color/hint_text"
+            app:layout_constraintEnd_toStartOf="@id/inputMill"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputVariantName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtUnit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="Đơn vị tính tiêu chuẩn"
+                android:enabled="false"
+                android:inputType="none"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/text_color"
+                tools:text="tools:sample" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputMill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputCode"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtMill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:enabled="false"
+                android:inputType="textMultiLine"
+                android:hint="Xưởng sản xuất" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputStart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:gravity="center"
+            app:layout_constraintEnd_toStartOf="@id/inputMinimum"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputMill">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPriceInit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Số sản phẩm sản xuất / ca"
+                android:imeOptions="actionNext"
+                android:enabled="false"
+                android:inputType="number"
+                tools:text="0" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputMinimum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:hintTextColor="@color/ebony_clay"
+            android:layout_marginRight="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            
+            android:gravity="center"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/inputStart"
+            app:layout_constraintTop_toTopOf="@+id/inputStart">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtLineCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Số công nhân / ca"
+                android:inputType="number"
+                android:enabled="false"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                tools:text="0" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

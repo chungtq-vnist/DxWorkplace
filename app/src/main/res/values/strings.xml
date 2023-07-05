@@ -48,6 +48,17 @@
     <string name="title_des">Mô tả </string>
     <string name="title">Tiêu đề</string>
     <string name="number_user">(%s nhân viên )</string>
+    <string name="number_material">(Có %s nguyên liệu)</string>
+    <string name="number_bill_material">(Có %s phiếu xuất nguyên liệu)</string>
     <string name="unit_collab">Đơn vị phối hợp thực hiện</string>
+    <string name="tv_quantity_red">Số lượng <font color='red'>*</font></string>
+    <string name="tv_manager_material_red">Người phụ trách NVL <font color='red'>*</font></string>
+    <string name="tv_manager_observer_red">Người giám sát  <font color='red'>*</font></string>
+    <string name="tv_manager_tester_red">Người kiểm định <font color='red'>*</font></string>
+    <string name="tv_product_need_manufacturing">Cần lập kế hoạch sản xuất %s sản phẩm</string>
+    <string name="title_work_schedule_month">Lịch sản xuất tháng %s</string>
+    <string name="title_alert">Thông báo</string>
+    <string name="cancel">Không</string>
+    <string name="accept">Có</string>
 
 </resources>

@@ -17,14 +17,12 @@ import com.example.test.dxworkspace.databinding.FragmentManufacturingCommandDeta
 import com.example.test.dxworkspace.domain.repository.ConfigRepository
 import com.example.test.dxworkspace.presentation.model.menu.RequestApproveCommand
 import com.example.test.dxworkspace.presentation.ui.BaseFragment
-import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.adapter.InfoMaterialAdapter
-import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.adapter.InfoMaterialInBillAdapter
-import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.adapter.InfoQualityAdapter
-import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.adapter.ListEmployeeAdapter
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.adapter.*
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.mill.ManufacturingMillViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.request.CreateManufacturingRequestFragment
 import com.example.test.dxworkspace.presentation.utils.common.postNormal
 import com.example.test.dxworkspace.presentation.utils.common.registerGreen
+import com.example.test.dxworkspace.presentation.utils.common.setTextColorz
 import com.example.test.dxworkspace.presentation.utils.common.unregisterGreen
 import com.example.test.dxworkspace.presentation.utils.convertToDate
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
@@ -50,7 +48,7 @@ class ManufacturingCommandDetailFragment : BaseFragment<FragmentManufacturingCom
     val adapterPerformer by lazy { ListEmployeeAdapter() }
     val adapterOperator by lazy { ListEmployeeAdapter() }
     val infoMaterialAdapter by lazy { InfoMaterialAdapter() }
-    val itemBillExport by lazy { InfoMaterialInBillAdapter() }
+    val itemBillExport by lazy { InfoRequestMaterialExportAdapter() }
     val qualityAdapter by lazy { InfoQualityAdapter() }
 
     @Inject
@@ -88,37 +86,45 @@ class ManufacturingCommandDetailFragment : BaseFragment<FragmentManufacturingCom
             observe(commandDetail){
                 command = it ?: command
                 setupData()
+                if(command.exportMaterialRequest?.isNotEmpty() == true)
+                    viewModel.getRequestExportMaterialOfCommand(command.exportMaterialRequest!!)
                 viewModel.getInventoryByGoods(command.good.materials?.filter { !it.good?._id.isNullOrEmpty() }?.map { it.good!!._id } ?: listOf())
             }
-            observe(listBill){
-                listBills = it ?: listBills
+//            observe(listBill){
+//                listBills = it ?: listBills
+//                binding?.apply {
+//                    if(listBills.isEmpty()){
+//                        rcvBillExportMaterial.isVisible = false
+//                        tilStock.isVisible = false
+//                        tilBillStatus.isVisible = false
+//                        tvNoBill.isVisible = true
+//                    } else {
+//                        val t = listBills.first()
+//                        rcvBillExportMaterial.isVisible = true
+//                        tilStock.isVisible = true
+//                        tvNoBill.isVisible = false
+//                        tilBillStatus.isVisible = true
+//                        edtStock.setText(t.fromStock?.name)
+//                        edtBillStatus.setText(
+//                            when(t.status){
+//                                "1"-> "Chờ phê duyệt"
+//                                "2"-> "Chờ thực hiện"
+//                                "3"-> "Đang thực hiện"
+//                                "4"-> "Chờ phê duyệt"
+//                                "5"-> "Đã hoàn thành"
+//                                "7"-> "Đã hủy phiếu"
+//                                else -> "Chờ phê duyệt"
+//                            }
+//                        )
+//                        rcvBillExportMaterial.adapter = itemBillExport
+//                        itemBillExport.items = t.goods ?: listOf()
+//                    }
+//                }
+//            }
+            observe(listRequest){
                 binding?.apply {
-                    if(listBills.isEmpty()){
-                        rcvBillExportMaterial.isVisible = false
-                        tilStock.isVisible = false
-                        tilBillStatus.isVisible = false
-                        tvNoBill.isVisible = true
-                    } else {
-                        val t = listBills.first()
-                        rcvBillExportMaterial.isVisible = true
-                        tilStock.isVisible = true
-                        tvNoBill.isVisible = false
-                        tilBillStatus.isVisible = true
-                        edtStock.setText(t.fromStock?.name)
-                        edtBillStatus.setText(
-                            when(t.status){
-                                "1"-> "Chờ phê duyệt"
-                                "2"-> "Chờ thực hiện"
-                                "3"-> "Đang thực hiện"
-                                "4"-> "Chờ phê duyệt"
-                                "5"-> "Đã hoàn thành"
-                                "7"-> "Đã hủy phiếu"
-                                else -> "Chờ phê duyệt"
-                            }
-                        )
-                        rcvBillExportMaterial.adapter = itemBillExport
-                        itemBillExport.items = t.goods ?: listOf()
-                    }
+                    rcvBillExportMaterial.adapter = itemBillExport
+                    itemBillExport.items = it ?: listOf()
                 }
             }
             observe(listInventory){
@@ -182,7 +188,7 @@ class ManufacturingCommandDetailFragment : BaseFragment<FragmentManufacturingCom
             }
         }
         viewModel.getManufacturingCommandById(commandId)
-        viewModel.getBillByCommand(commandId)
+//        viewModel.getBillByCommand(commandId)
         disableEdit()
     }
 
@@ -217,7 +223,8 @@ class ManufacturingCommandDetailFragment : BaseFragment<FragmentManufacturingCom
             edtPlanCode.setText(command.manufacturingPlan?.code)
             edtOrderCode.setText(command.manufacturingPlan?.salesOrders?.map { it.code }?.joinToString())
             edtLotCode.setText(command.lot?.map { it.code }?.joinToString())
-            edtLotCode.isVisible = !command.lot.isNullOrEmpty()
+            tilLotCode.isVisible = !command.lot.isNullOrEmpty()
+            tilOrderCode.isVisible = !(command.manufacturingPlan?.salesOrders?.isNullOrEmpty() ?: true)
             edtMillName.setText(command.manufacturingMill?.code)
             edtTimeStart.setText(getddMMYYYY(command.startDate))
             edtTimeEnd.setText(getddMMYYYY(command.endDate))
@@ -231,6 +238,17 @@ class ManufacturingCommandDetailFragment : BaseFragment<FragmentManufacturingCom
                     5 -> "Đã hủy"
                     6 -> "Mới tạo"
                     else -> ""
+                }
+            )
+            edtStatus.setTextColorz(
+                when(command.status){
+                    1 -> R.color.clr_status_wait
+                    2 -> R.color.clr_status_approve
+                    3 -> R.color.clr_status_inprogress
+                    4 -> R.color.clr_status_finish
+                    5 -> R.color.clr_status_cancel
+                    6 -> R.color.clr_status_wait
+                    else -> R.color.clr_status_wait
                 }
             )
             edtProductCode.setText(command.good.code)
@@ -300,7 +318,8 @@ class ManufacturingCommandDetailFragment : BaseFragment<FragmentManufacturingCom
                 .show()
         }
         dialog?.onExport = {
-            postNormal(EventNextHome(ExportMaterialFragment::class.java, bundleOf(Pair("QUANTITY",command.quantity),Pair("COMMAND",command),
+//            postNormal(EventNextHome(ExportMaterialFragment::class.java, bundleOf(Pair("QUANTITY",command.quantity),Pair("COMMAND",command),
+            postNormal(EventNextHome(ExportMaterialFragmentNew::class.java, bundleOf(Pair("QUANTITY",command.quantity),Pair("COMMAND",command),
             Pair("INVENTORY",gson.toJson(listInventorys)))))
         }
         dialog?.onBuyGood = {

@@ -71,7 +71,7 @@
                     android:id="@+id/tilLotCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -86,14 +86,15 @@
                         android:hint="Mã lô"
                         android:inputType="textCapSentences"
                         android:maxLength="50"
-                        android:textColor="@color/text_color" />
+                        android:textColor="@color/text_color"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilCommandCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilLotCode">
@@ -114,7 +115,7 @@
                     android:id="@+id/tilImportCode"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toStartOf="@id/btnImport"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilCommandCode">
@@ -135,6 +136,8 @@
                     android:id="@+id/btnImport"
                     style="@style/Font.TextBold13"
                     android:layout_width="0dp"
+                    android:visibility="gone"
+                    tools:visibility="visible"
                     app:layout_constraintTop_toTopOf="@id/tilImportCode"
                     app:layout_constraintBottom_toBottomOf="@id/tilImportCode"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +145,7 @@
                     android:layout_height="0dp"
                     android:layout_marginVertical="@dimen/_4sdp"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_blue_create"
                     android:gravity="center"
@@ -153,7 +156,7 @@
                     android:id="@+id/tilMillName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilImportCode">
@@ -175,7 +178,7 @@
                     android:id="@+id/tilTimeStart"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toStartOf="@+id/tilTimeEnd"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -198,7 +201,7 @@
                     android:id="@+id/tilTimeEnd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@id/tilTimeStart"
@@ -223,7 +226,7 @@
                     android:id="@+id/tilStatus"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -246,7 +249,7 @@
                     android:id="@+id/tilLotType"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilTimeStart">
@@ -267,7 +270,7 @@
                     android:id="@+id/tilDes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilStatus">
@@ -299,7 +302,7 @@
                     style="@style/Font.TextBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     android:text="Thông tín sản phẩm"
                     app:layout_constraintTop_toBottomOf="@id/view1" />
 
@@ -307,7 +310,7 @@
                     android:id="@+id/tilProductCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvTitleProduct">
@@ -329,7 +332,7 @@
                     android:id="@+id/tilProductName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilProductCode">
@@ -350,7 +353,7 @@
                     android:id="@+id/tilUnit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toStartOf="@+id/tilQuantity"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -373,7 +376,7 @@
                     android:id="@+id/tilQuantity"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@id/tilUnit"
@@ -406,7 +409,7 @@
                 <!--                        android:layout_height="wrap_content"-->
                 <!--                        style="@style/Font.TextBold13"-->
                 <!--                        android:text="Người thực hiện"-->
-                <!--                        android:layout_margin="@dimen/_10sdp"-->
+                <!--                        android:layout_margin="@dimen/_8sdp"-->
                 <!--                        app:layout_constraintTop_toBottomOf="@id/view1"/>-->
 
                 <!--                    <androidx.recyclerview.widget.RecyclerView-->
@@ -433,7 +436,7 @@
                 <!--                        style="@style/Font.TextBold13"-->
                 <!--                        android:text="Người điều hành"-->
                 <!--                        android:drawableStart="@drawable/ic_expand_down"-->
-                <!--                        android:layout_margin="@dimen/_10sdp"-->
+                <!--                        android:layout_margin="@dimen/_8sdp"-->
                 <!--                        app:layout_constraintTop_toBottomOf="@id/view1"/>-->
 
                 <!--                    <androidx.recyclerview.widget.RecyclerView-->
@@ -567,7 +570,7 @@
                         style="@style/Font.TextBold13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
+                        android:layout_margin="@dimen/_8sdp"
                         android:text="Người kiểm định chất lượng"
                         app:layout_constraintTop_toBottomOf="@id/view1" />
 
@@ -599,7 +602,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_6sdp"
                 android:layout_marginStart="@dimen/_5dp"
-                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
                 android:layout_weight="1"
                 android:background="@drawable/selector_save_default"
                 android:gravity="center"

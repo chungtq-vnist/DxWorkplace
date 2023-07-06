@@ -16,6 +16,7 @@ import com.example.test.dxworkspace.data.entity.manufacturing_plan.*
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkDetailResponseRaw
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkResponseRaw
 import com.example.test.dxworkspace.data.entity.organization_unit.OrganizationUnitResponseRaw
+import com.example.test.dxworkspace.data.entity.product_request.ListProductRequestResponseRaw
 import com.example.test.dxworkspace.data.entity.product_request.ParamCreateProductRequest
 import com.example.test.dxworkspace.data.entity.product_request.ProductRequestManagementResponseRaw
 import com.example.test.dxworkspace.data.entity.product_request.UpdateProductRequest
@@ -375,6 +376,11 @@ interface DxApi : LoginApi {
         @Query("to") to :String?
     ) : Call<ProductRequestManagementResponseRaw>
 
+    @GET("/product-request-management/ids")
+    fun getListRequestByIds(
+        @Query("ids") ids : List<String>
+    ) : Call<ListProductRequestResponseRaw>
+
     @POST("/product-request-management")
     fun createRequest(
         @Body data : ParamCreateProductRequest
@@ -384,6 +390,11 @@ interface DxApi : LoginApi {
     fun updateRequest(
         @Path("id") id : String,
         @Body data : UpdateProductRequest
+    ) : Call<Unit>
+
+    @POST("/product-request-management/create-many-request")
+    fun createManyRequest(
+        @Body data : List<ParamCreateProductRequest>
     ) : Call<Unit>
 
     @GET("/manufacturing-works/{id}")

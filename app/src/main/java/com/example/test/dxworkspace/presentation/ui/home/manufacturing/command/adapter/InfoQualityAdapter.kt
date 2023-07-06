@@ -4,11 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.test.dxworkspace.R
+import com.example.test.dxworkspace.core.extensions.justTry
 import com.example.test.dxworkspace.data.entity.bill.SubGoodsBill
 import com.example.test.dxworkspace.data.entity.good.InventoryGoodWrap
 import com.example.test.dxworkspace.data.entity.manufacturing_command.SubQualityControlStaff
 import com.example.test.dxworkspace.databinding.ItemMaterialInfoBillExportBinding
 import com.example.test.dxworkspace.databinding.ItemQuanlityControlBinding
+import com.example.test.dxworkspace.presentation.utils.common.setTextColorz
 import com.example.test.dxworkspace.presentation.utils.getTimeDDMMYYYYHHMMFromStringOneLine
 
 class InfoQualityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
@@ -39,7 +42,14 @@ class InfoQualityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
                 3 -> "Không đạt kiểm định"
                 else ->"Chưa kiểm định"
             })
-            edtTime.setText(getTimeDDMMYYYYHHMMFromStringOneLine(item.time?:""))
+            edtStatus.setTextColorz(
+                when(item.status){
+                1 -> R.color.clr_status_wait
+                2 -> R.color.clr_status_finish
+                3 -> R.color.clr_status_cancel
+                else -> R.color.clr_status_wait
+            })
+            justTry {  edtTime.setText(getTimeDDMMYYYYHHMMFromStringOneLine(item.time?:"")) }
             edtContentQuality.setText(item.content)
             edtContentQuality.isVisible = item.status != 1
         }

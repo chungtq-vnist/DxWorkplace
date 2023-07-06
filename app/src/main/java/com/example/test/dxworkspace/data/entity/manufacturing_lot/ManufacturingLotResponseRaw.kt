@@ -1,7 +1,9 @@
 package com.example.test.dxworkspace.data.entity.manufacturing_lot
 
+import android.os.Parcelable
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.SubManufacturingWorkInMill
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.SubUserBasicModel
+import kotlinx.android.parcel.Parcelize
 
 data class ManufacturingLotResponseRaw(
     val success: Boolean = false,
@@ -33,6 +35,7 @@ data class ManufacturingLotModel(
     var good : SubGoodsInLot? = SubGoodsInLot()
 )
 
+@Parcelize
 data class SubGoodsInLot(
     var _id: String = "",
     var code : String ="",
@@ -40,4 +43,4 @@ data class SubGoodsInLot(
     var baseUnit : String? = "",
 
 
-)
+) : Parcelable

@@ -1,9 +1,6 @@
 package com.example.test.dxworkspace.presentation.di
 
-import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.CreateLotFragment
-import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.ExportMaterialFragment
-import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.ManufacturingCommandDetailFragment
-import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.ManufacturingCommandFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.*
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardManufacturingCommandFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardManufacturingPlanFragment
@@ -11,6 +8,7 @@ import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.dialog.RangeDateSelectFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.quality.DashboardQualityManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.lot.ImportProductFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.lot.ImportProductFragmentNew
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.lot.ManufacturingLotDetailFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.lot.ManufacturingLotFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.mill.ManufacturingMillDetailFragment
@@ -169,6 +167,12 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeCreateManufacturingRequestFragment(): CreateManufacturingRequestFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeImportProductFragmentNew(): ImportProductFragmentNew
+
+    @ContributesAndroidInjector
+    abstract fun contributeExportMaterialFragmentNew(): ExportMaterialFragmentNew
 }
 
 

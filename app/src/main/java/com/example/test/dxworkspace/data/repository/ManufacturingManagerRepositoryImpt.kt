@@ -285,11 +285,27 @@ class ManufacturingManagerRepositoryImpt @Inject constructor(
         )
     }
 
+    override suspend fun getListRequestByIds(ids: List<String>): Either<Failure, List<ProductRequestManagementModel>> {
+        return requestApi(
+            manufacturingManagerRemoteSource.getListRequestByIds(ids),{
+                if(it.success) it.content?.request ?: listOf() else listOf()
+            },
+            listOf()
+        )
+    }
+
     override suspend fun createRequest(data: ParamCreateProductRequest): Either<Failure, Boolean> {
         return requestApi(
             manufacturingManagerRemoteSource.createRequest(data),{true},true
         )
     }
+
+    override suspend fun createManyRequest(data: List<ParamCreateProductRequest>): Either<Failure, Boolean> {
+        return requestApi(
+            manufacturingManagerRemoteSource.createManyRequest(data),{true},true
+        )
+    }
+
     override suspend fun updateRequest(data : UpdateProductRequest, id:String): Either<Failure, Boolean> {
         return requestApi(
             manufacturingManagerRemoteSource.updateRequest(data,id),{true},true

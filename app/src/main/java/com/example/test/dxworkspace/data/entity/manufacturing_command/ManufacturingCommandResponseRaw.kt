@@ -45,7 +45,9 @@ data class ManufacturingCommandModel(
     var finishedTime : String? = null,
     var substandardProductQuantity : Int? = null,
     var lot : List<SubManufacturingLot>? = listOf(),
-    var purchasingRequest : String? = ""
+    var purchasingRequest : String? = "",
+    var purchasesRequest : String? ="",
+    var exportMaterialRequest : List<String>? = listOf()
     ) : Parcelable
 
 @Parcelize

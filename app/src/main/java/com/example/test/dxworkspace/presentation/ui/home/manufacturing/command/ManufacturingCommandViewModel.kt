@@ -5,6 +5,7 @@ import com.example.test.dxworkspace.data.entity.bill.BillByCommandModel
 import com.example.test.dxworkspace.data.entity.good.InventoryGoodWrap
 import com.example.test.dxworkspace.data.entity.manufacturing_command.ManufacturingCommandModel
 import com.example.test.dxworkspace.data.entity.manufacturing_command.StockModel
+import com.example.test.dxworkspace.data.entity.product_request.ProductRequestManagementModel
 import com.example.test.dxworkspace.data.entity.user.UserProfileResponse
 import com.example.test.dxworkspace.domain.repository.ConfigRepository
 import com.example.test.dxworkspace.domain.usecase.manufacturing_manage.*
@@ -30,6 +31,7 @@ class ManufacturingCommandViewModel @Inject constructor(
     private val updateQualityControlCommandUseCase: UpdateQualityControlCommandUseCase,
     private val createdLotsUseCase: CreatedLotsUseCase,
     private val finishCommandUseCase: FinishCommandUseCase,
+    private val getListProductRequestByIdsUseCase: GetListProductRequestByIdsUseCase,
 ) : BaseViewModel() {
     val listCommand = MutableLiveData<List<ManufacturingCommandModel>>()
     val commandDetail = MutableLiveData<ManufacturingCommandModel>()
@@ -41,6 +43,7 @@ class ManufacturingCommandViewModel @Inject constructor(
     val statusCancelCommand = MutableLiveData<Boolean>()
     val statusStartCommand = MutableLiveData<Boolean>()
     val statusUpdate = MutableLiveData<Boolean>()
+    val listRequest = MutableLiveData<List<ProductRequestManagementModel>>()
 
     fun getAllCommand(start : String , end : String){
         showLoading(true)
@@ -74,6 +77,16 @@ class ManufacturingCommandViewModel @Inject constructor(
                 listBill.value = listOf()
             },{
                 listBill.value = it
+            })
+        }
+    }
+
+    fun getRequestExportMaterialOfCommand(ids :List<String>){
+        getListProductRequestByIdsUseCase(ids){
+            it.either({
+                listRequest.value = listOf()
+            },{
+                listRequest.value = it
             })
         }
     }

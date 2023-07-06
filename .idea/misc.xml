@@ -118,8 +118,10 @@
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_dashboard_warehouse_waste.xml" value="0.23541666666666666" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_day.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_detail_task.xml" value="0.264" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_export_material_new.xml" value="0.23645833333333333" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_import_material.xml" value="0.23645833333333333" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_import_product.xml" value="0.264" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_import_product_new.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_manufacturing_command.xml" value="0.23541666666666666" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_manufacturing_command_detail.xml" value="0.24795193883123975" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_manufacturing_list_request.xml" value="0.23645833333333333" />
@@ -158,12 +160,13 @@
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_detail_goods_quality_manufacturing_plan.xml" value="0.23645833333333333" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_employee.xml" value="0.23645833333333333" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_header_dashboard_manufacturing.xml" value="0.4" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_info_request_export_material.xml" value="0.2" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_manufacturing_command.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_manufacturing_plan.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_manufacturing_request.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_manufacturing_work.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_material_info.xml" value="0.4" />
-        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_material_info_bill_export.xml" value="0.4" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_material_info_bill_export.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_material_info_export.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_menu_child.xml" value="0.23645833333333333" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_menu_header.xml" value="0.23645833333333333" />
@@ -173,8 +176,9 @@
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_recycle_create_command.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_recycle_create_request.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_recycle_create_work_schedule.xml" value="0.4" />
-        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_recycle_export_bill.xml" value="0.4" />
-        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_recycle_import_bill.xml" value="0.4" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_recycle_export_bill.xml" value="0.264" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_recycle_export_request.xml" value="0.23645833333333333" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_recycle_import_bill.xml" value="0.22926829268292684" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_recycle_product.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_recycle_product_create_command.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_recycle_productivity.xml" value="0.4" />

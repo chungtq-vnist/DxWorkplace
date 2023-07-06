@@ -72,7 +72,7 @@
                     android:id="@+id/tilCommandCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -92,7 +92,7 @@
                     android:id="@+id/tilPlanCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilCommandCode">
@@ -112,7 +112,7 @@
                     android:id="@+id/tilOrderCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilPlanCode">
@@ -133,7 +133,7 @@
                     android:id="@+id/tilLotCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilOrderCode">
@@ -154,7 +154,7 @@
                     android:id="@+id/tilMillName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilLotCode">
@@ -174,7 +174,7 @@
                     android:id="@+id/tilTimeStart"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toStartOf="@+id/tilTimeEnd"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -195,7 +195,7 @@
                     android:id="@+id/tilTimeEnd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@id/tilTimeStart"
@@ -216,7 +216,7 @@
                     android:id="@+id/tilStatus"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@id/tilCreatedAt"
@@ -237,7 +237,7 @@
                     android:id="@+id/tilCreatedAt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toStartOf="@id/tilStatus"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -269,7 +269,7 @@
                     style="@style/Font.TextBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     android:text="Thông tín sản phẩm"
                     app:layout_constraintTop_toBottomOf="@id/view1" />
 
@@ -277,7 +277,7 @@
                     android:id="@+id/tilProductCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvTitleProduct">
@@ -297,7 +297,7 @@
                     android:id="@+id/tilProductName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilProductCode">
@@ -317,7 +317,7 @@
                     android:id="@+id/tilUnit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toStartOf="@+id/tilQuantity"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -338,7 +338,7 @@
                     android:id="@+id/tilQuantity"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@id/tilUnit"
@@ -370,7 +370,7 @@
                     style="@style/Font.TextBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     android:text="Thông tin nguyên vật liệu"
                     app:layout_constraintTop_toBottomOf="@id/view2" />
 
@@ -386,7 +386,7 @@
                 <!--                    android:id="@+id/tilMaterial"-->
                 <!--                    android:layout_width="match_parent"-->
                 <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_margin="@dimen/_10sdp"-->
+                <!--                    android:layout_margin="@dimen/_8sdp"-->
                 <!--                    app:layout_constraintEnd_toEndOf="parent"-->
                 <!--                    app:layout_constraintStart_toStartOf="parent"-->
                 <!--                    app:layout_constraintTop_toBottomOf="@id/tilQuantity">-->
@@ -419,7 +419,7 @@
                     style="@style/Font.TextBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     android:text="Thông tin phiếu xuất nguyên vật liệu"
                     app:layout_constraintTop_toBottomOf="@id/view3" />
 
@@ -436,54 +436,14 @@
                     android:text="Không có phiếu xuất nguyên vật liệu"
                     />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilStock"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvTitleBillExportMaterial">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtStock"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:hint="Tên kho"
-                        android:inputType="textCapSentences"
-                        android:enabled="false"
-                        android:maxLength="50"
-                        android:textColor="@color/text_color" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilBillStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tilStock">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtBillStatus"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:hint="Trạng thái phiếu xuất"
-                        android:inputType="textCapSentences"
-                        android:enabled="false"
-                        android:maxLength="50"
-                        android:textColor="@color/text_color" />
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcvBillExportMaterial"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@id/tilBillStatus"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleBillExportMaterial"
                     tools:itemCount="3" />
 
 
@@ -491,7 +451,7 @@
                 <!--                    android:id="@+id/tilBillMaterial"-->
                 <!--                    android:layout_width="match_parent"-->
                 <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_margin="@dimen/_10sdp"-->
+                <!--                    android:layout_margin="@dimen/_8sdp"-->
                 <!--                    app:layout_constraintEnd_toEndOf="parent"-->
                 <!--                    app:layout_constraintStart_toStartOf="parent"-->
                 <!--                    app:layout_constraintTop_toBottomOf="@id/rcvMaterial">-->
@@ -686,7 +646,7 @@
                 <!--                        style="@style/Font.TextBold13"-->
                 <!--                        android:layout_width="match_parent"-->
                 <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_margin="@dimen/_10sdp"-->
+                <!--                        android:layout_margin="@dimen/_8sdp"-->
                 <!--                        android:text="Người thực hiện"-->
                 <!--                        app:layout_constraintTop_toBottomOf="@id/view1" />-->
 
@@ -717,7 +677,7 @@
                 <!--                        style="@style/Font.TextBold13"-->
                 <!--                        android:layout_width="match_parent"-->
                 <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_margin="@dimen/_10sdp"-->
+                <!--                        android:layout_margin="@dimen/_8sdp"-->
                 <!--                        android:text="Người điều hành"-->
                 <!--                        app:layout_constraintTop_toBottomOf="@id/view1" />-->
 
@@ -747,7 +707,7 @@
                         style="@style/Font.TextBold13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
+                        android:layout_margin="@dimen/_8sdp"
                         android:text="Người kiểm định chất lượng"
                         app:layout_constraintTop_toBottomOf="@id/view1" />
 
@@ -775,7 +735,7 @@
                     android:layout_width="match_parent"
                     android:visibility="gone"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     android:text="Kết quả thực hiện"
                     app:layout_constraintTop_toBottomOf="@id/view4" />
 
@@ -783,7 +743,7 @@
                     android:id="@+id/tilTimeFinished"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -805,7 +765,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toStartOf="@+id/tilProductPercent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -827,7 +787,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@id/tilProductQuantity"
@@ -848,7 +808,7 @@
                     android:id="@+id/tilWasteQuantity"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toStartOf="@+id/tilWastePercent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -870,7 +830,7 @@
                     android:id="@+id/tilWastePercent"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"

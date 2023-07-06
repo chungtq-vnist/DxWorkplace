@@ -96,7 +96,12 @@ interface ManufacturingManagerRepository {
     suspend fun getAllProductRequestInManufacturing(requestType : Int , requestFrom : String , from :String,to:String)
         : Either<Failure,List<ProductRequestManagementModel>>
 
+    suspend fun getListRequestByIds(ids:List<String>)
+        : Either<Failure,List<ProductRequestManagementModel>>
+
     suspend fun createRequest(data : ParamCreateProductRequest) : Either<Failure,Boolean>
+
+    suspend fun createManyRequest(data : List<ParamCreateProductRequest>) : Either<Failure,Boolean>
 
     suspend fun updateRequest(data : UpdateProductRequest, id:String) : Either<Failure,Boolean>
 

@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/ivDeleteVariant"
-                android:text="Xóa sản phẩm"
+                android:text="Xóa đề nghị"
                 android:textColor="@color/sp_color_red" />
 
             <TextView
@@ -40,11 +40,11 @@
                 style="@style/TextRegular13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:text="Edit"
-                android:textColor="@color/sp_color_red" />
+                android:textColor="@color/clr_orange" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivDeleteVariant"
@@ -77,10 +77,9 @@
                 android:layout_height="wrap_content"
                 android:clickable="false"
                 android:focusable="false"
-                android:textColor="@color/text_color"
                 android:focusableInTouchMode="false"
                 android:enabled="false"
-                android:hint="Mã phiếu" />
+                android:hint="Mã đề nghị" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilCommandCode"
@@ -102,66 +101,9 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:textColor="@color/text_color"
                 android:enabled="false"
-                android:hint="Sản phẩm" />
+                android:hint="Kho" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilStock"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:enabled="false"
-
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilQuantity">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtStock"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:hint="Kho nhập"
-                android:imeOptions="actionNext"
-                android:textColor="@color/text_color"
-                tools:maxLines="5"
-                tools:text="0 đ" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilQuantity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:enabled="false"
-
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilCommandCode">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtQuantity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:hint="Số lượng"
-                android:imeOptions="actionNext"
-                android:textColor="@color/text_color"
-                tools:maxLines="5"
-                tools:text="0 đ" />
-        </com.google.android.material.textfield.TextInputLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

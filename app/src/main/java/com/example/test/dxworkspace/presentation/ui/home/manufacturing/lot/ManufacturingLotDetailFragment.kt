@@ -111,6 +111,17 @@ class ManufacturingLotDetailFragment : BaseFragment<FragmentManufacturingLotDeta
     fun setupUI(){
         binding?.apply {
             edtLotCode.setText(lot.code)
+            btnMenuMore.isVisible = false
+            tilCommandCode.isEnabled = false
+            tilLotCode.isEnabled = false
+            tilImportCode.isEnabled = false
+            tilLotType.isEnabled = false
+            tilProductName.isEnabled = false
+            tilTimeStart.isEnabled = false
+            tilMillName.isEnabled = false
+            tilStatus.isEnabled = false
+            tilProductCode.isEnabled = false
+            tilUnit.isEnabled = false
             edtCommandCode.setText(lot.manufacturingCommand?.code)
             edtImportCode.setText(lot.bills?.map{it.code}?.joinToString())
             edtMillName.setText(lot.manufacturingCommand?.manufacturingMill?.name)
@@ -149,8 +160,9 @@ class ManufacturingLotDetailFragment : BaseFragment<FragmentManufacturingLotDeta
             adapterPerformer.items = lot.manufacturingCommand?.responsibles ?: listOf()
             qualityAdapter.items = lot.manufacturingCommand?.qualityControlStaffs ?: listOf()
             edtTimeEnd.setOnClickListener { showDateTimePickerDialog() }
-            edtQuantity.isEnabled = lot.status == 1
-            edtTimeEnd.isEnabled = lot.status == 1
+            tilQuantity.isEnabled = lot.status == 1
+            tilTimeEnd.isEnabled = lot.status == 1
+            tilDes.isEnabled = lot.status == 1
             edtQuantity.doAfterTextChanged {
                 val t = edtQuantity.getTextz()
                 if(t == "") lot.originalQuantity = 0
@@ -158,9 +170,10 @@ class ManufacturingLotDetailFragment : BaseFragment<FragmentManufacturingLotDeta
                 btnSave.isSelected = true
                 btnSave.isEnabled = true
             }
-            btnImport.isVisible = lot.bills?.isEmpty() == true
+            btnImport.isVisible = lot.status == 1 && lot.importStockRequest.isNullOrEmpty()
             btnImport.setOnClickListener {
-                postNormal(EventNextHome(ImportProductFragment::class.java, bundleOf(Pair("LOT_ID",lotId))))
+//                postNormal(EventNextHome(ImportProductFragment::class.java, bundleOf(Pair("LOT_ID",lotId))))
+                postNormal(EventNextHome(ImportProductFragmentNew::class.java, bundleOf(Pair("LOT",lot))))
             }
             btnSave.setOnClickListener {
                 viewModel.updateInfoLot(lotId, RequestUpdateInfoLot(edtDes.getTextz(),lot.expirationDate,lot.originalQuantity))

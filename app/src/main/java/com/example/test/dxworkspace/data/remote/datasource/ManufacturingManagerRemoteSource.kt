@@ -62,9 +62,14 @@ class ManufacturingManagerRemoteSource @Inject constructor(val api: DxApi) {
     fun getAllProductRequestInManufacturing(requestType : Int , requestFrom : String , from :String,to:String)
         = api.getAllProductRequestInManufacturing(requestType, requestFrom, from, to)
 
+    fun getListRequestByIds(ids : List<String>)
+    = api.getListRequestByIds(ids)
+
     fun createRequest(data : ParamCreateProductRequest) = api.createRequest(data)
 
     fun updateRequest(data : UpdateProductRequest , id:String) = api.updateRequest(id,data)
+
+    fun createManyRequest(data : List<ParamCreateProductRequest>) = api.createManyRequest(data)
 
     fun createPlan(data : RequestManufacturingPlan) = api.createPlan(data)
 

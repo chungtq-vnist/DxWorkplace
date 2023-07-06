@@ -6,11 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.test.dxworkspace.data.entity.bill.SubGoodsBill
 import com.example.test.dxworkspace.data.entity.good.InventoryGoodWrap
 import com.example.test.dxworkspace.data.entity.manufacturing_command.SubMaterialModel
+import com.example.test.dxworkspace.data.entity.product_request.GoodInfomation
 import com.example.test.dxworkspace.databinding.ItemMaterialInfoBillExportBinding
 import com.example.test.dxworkspace.databinding.ItemMaterialInfoBinding
 
 class InfoMaterialInBillAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-    var items = listOf<SubGoodsBill>()
+    var items = listOf<GoodInfomation>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -32,8 +33,7 @@ class InfoMaterialInBillAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         (holder as InfoBillExport).binding.apply {
             edtCode.setText(item.good?.code)
             edtVariantName.setText(item.good?.name)
-            edtQuantity.setText(item.quantity.toString())
-            edtUnit.setText(item.good?.baseUnit)
+            edtQuantity.setText(item.quantity.toString() +" "+ item.good.baseUnit)
         }
     }
 

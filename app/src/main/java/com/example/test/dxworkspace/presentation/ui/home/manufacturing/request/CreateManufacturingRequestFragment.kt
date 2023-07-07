@@ -18,16 +18,22 @@ import com.example.test.dxworkspace.data.entity.manufacturing_work.OrganizationU
 import com.example.test.dxworkspace.data.entity.product_request.*
 import com.example.test.dxworkspace.data.entity.user.UserProfileResponse
 import com.example.test.dxworkspace.databinding.FragmentCreateRequestBinding
+import com.example.test.dxworkspace.domain.repository.ConfigRepository
+import com.example.test.dxworkspace.presentation.model.menu.RequestApproveCommand
 import com.example.test.dxworkspace.presentation.ui.BaseFragment
 import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.BottomDialogOptionCommand
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.adapter.InfoMaterialAdapter
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.request.adapter.ItemRequestAdapter
 import com.example.test.dxworkspace.presentation.utils.common.generateCode
 import com.example.test.dxworkspace.presentation.utils.common.getTextz
+import com.example.test.dxworkspace.presentation.utils.common.setTextColorz
 import com.example.test.dxworkspace.presentation.utils.convertToDate
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
+import com.example.test.dxworkspace.presentation.utils.getddMMYYYY
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -37,11 +43,13 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
         return R.layout.fragment_create_request
     }
 
+    var requestId = ""
     var from: String = ""
     var command = ManufacturingCommandModel()
     var listInventory = listOf<InventoryGoodWrap>()
     val infoAdapter = InfoMaterialAdapter()
-
+    var requestDetail = ProductRequestManagementModel()
+    var dialog : BottomDialogOptionRequest? = null
 
     val calendar = Calendar.getInstance()
     var request = ParamCreateProductRequest()
@@ -63,11 +71,15 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
     @Inject
     lateinit var homeViewModel: HomeViewModel
 
+    @Inject
+    lateinit var config : ConfigRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         type = arguments?.getInt("TYPE") ?: 1
         from = arguments?.getString("FROM") ?: ""
         command = arguments?.getParcelable("COMMAND") ?: command
+        requestId = arguments?.getString("REQUEST_ID") ?: ""
         listInventory = arguments?.getParcelableArrayList<InventoryGoodWrap>("INVENTORY") ?: listOf()
         viewModel = viewModel(viewModelFactory) {
             observe(listGoods) {
@@ -94,6 +106,10 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
                     onBackPress()
                 }
             }
+            observe(detailRequest){
+                requestDetail = it ?: requestDetail
+                setupDetail()
+            }
         }
         observe(homeViewModel.listUser) {
             allUser = it ?: allUser
@@ -111,6 +127,8 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
                 edtUnit.setOnItemClickListener { adapterView, view, i, l ->
                     val t = (adapterView.getItemAtPosition(i) as OrganizationUnit)
                     request.orderUnit = t._id
+                    request.approvers?.removeIf { it.approveType == 2 }
+                    edtBuyApprover.setText("",false)
                     edtBuyApprover.setAdapter(
                         ArrayAdapter(
                             requireContext(), android.R.layout.simple_dropdown_item_1line,
@@ -154,6 +172,8 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
                 edtWork.setOnItemClickListener { adapterView, view, i, l ->
                     val t = (adapterView.getItemAtPosition(i) as ManufacturingWorkModel)
                     request.manufacturingWork = t._id
+                    request.approvers?.removeIf { it.approveType == 1 }
+                    edtWorkApprover.setText("",false)
                     edtWorkApprover.setAdapter(
                         ArrayAdapter(
                             requireContext(), android.R.layout.simple_dropdown_item_1line,
@@ -166,10 +186,12 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
 
         }
         observeLoading(homeViewModel)
+        observeLoading(viewModel)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if(requestId.isNotEmpty()) viewModel.getRequestDetail(requestId)
         allUser = homeViewModel.listUser.value ?: listOf()
         allStock = homeViewModel.listStock.value ?: listOf()
         allUnit = homeViewModel.listOrganization.value ?: listOf()
@@ -180,6 +202,7 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
             infoAdapter.quantity = command.quantity
             infoAdapter.listInventory = listInventory
             infoAdapter.items = command.good.materials ?: listOf()
+            tvHeaderToolbar.text = if(type == 1) "Tạo đề nghị mua hàng" else if(type ==2) "Tạo đề nghị nhập kho" else "Tạo đề nghị xuất kho"
         }
         if (type == 1) {
             request.code = generateCode("PCR")
@@ -226,6 +249,7 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
             edtWork.setOnItemClickListener { adapterView, view, i, l ->
                 val t = (adapterView.getItemAtPosition(i) as ManufacturingWorkModel)
                 request.manufacturingWork = t._id
+                request.approvers?.removeIf { it.approveType == 1 }
                 edtWorkApprover.setAdapter(
                     ArrayAdapter(
                         requireContext(), android.R.layout.simple_dropdown_item_1line,
@@ -233,6 +257,7 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
                             ?: mutableListOf()
                     )
                 )
+                edtWorkApprover.setText("",false)
             }
             edtWorkApprover.setOnItemClickListener { adapterView, view, i, l ->
                 val t = (adapterView.getItemAtPosition(i) as UserProfileResponse)
@@ -254,6 +279,7 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
             edtUnit.setOnItemClickListener { adapterView, view, i, l ->
                 val t = (adapterView.getItemAtPosition(i) as OrganizationUnit)
                 request.orderUnit = t._id
+                request.approvers?.removeIf { it.approveType == 2 }
                 edtBuyApprover.setAdapter(
                     ArrayAdapter(
                         requireContext(), android.R.layout.simple_dropdown_item_1line,
@@ -261,6 +287,7 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
                             ?: mutableListOf()
                     )
                 )
+                edtBuyApprover.setText("",false)
             }
             edtBuyApprover.setOnItemClickListener { adapterView, view, i, l ->
                 val t = (adapterView.getItemAtPosition(i) as UserProfileResponse)
@@ -298,20 +325,61 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
             btnAdd.setOnClickListener {
                 if (goodNow._id.isNotEmpty() && edtQuantity.getTextz().isNotEmpty()) {
                     goodNow.quantity = edtQuantity.getTextz().toLong()
-                    listGood.add(goodNow)
+                    val t = listGood.find { it._id == goodNow._id }
+                    if(t == null) {
+                        listGood.add(goodNow)
+                    } else {
+                        t.quantity +=goodNow.quantity
+                    }
                     goodNow = GoodDetailModel()
+                    edtProduct.setText("",false)
+                    edtBaseUnit.setText("")
+                    edtQuantity.setText("")
                     adapter.items = listGood
                 }
             }
             btnSave.setOnClickListener {
-                request.goods =
-                    listGood.map { ParamGood(it._id, it.quantity.toString()) }.toMutableList()
-                println(request.toString())
-                if(from == "BUY_IN_COMMAND")  request.commandId = command._id
-                viewModel.createProductRequest(request)
+                if(requestId.isEmpty()) {
+                    if (listGood.isEmpty() || request.stock.isEmpty() || request.approvers.isNullOrEmpty()) {
+                        showToast(EventToast(text = "Vui lòng nhập đủ thông tin"))
+                        return@setOnClickListener
+                    }
+                    request.goods =
+                        listGood.map { ParamGood(it._id, it.quantity.toString()) }.toMutableList()
+                    println(request.toString())
+                    if (from == "BUY_IN_COMMAND") request.commandId = command._id
+                    viewModel.createProductRequest(request)
+                } else {
+                    if (listGood.isEmpty() || (request.manufacturingWork.isNotEmpty() && request.approvers?.find { it.approveType ==1 } == null)
+                        || (!request.orderUnit.isNullOrEmpty() && request.approvers?.find { it.approveType ==2 } == null)) {
+                        showToast(EventToast(text = "Vui lòng nhập đủ thông tin"))
+                        return@setOnClickListener
+                    }
+                    request.goods =
+                        listGood.map { ParamGood(it._id, it.quantity.toString()) }.toMutableList()
+                    viewModel.updateProductRequest(request,requestDetail._id)
+                }
+            }
+            btnMenuMore.setOnClickListener {
+                showDialog()
             }
 
         }
+        adapter.onDelete = {
+            listGood.removeAt(it)
+            adapter.notifyDataSetChanged()
+        }
+        adapter.onEdit = {
+            goodNow = listGood[it]
+            listGood.removeAt(it)
+            adapter.notifyDataSetChanged()
+            binding?.apply {
+                edtQuantity.setText(goodNow.quantity.toString())
+                edtBaseUnit.setText(goodNow.baseUnit)
+                edtProduct.setText(goodNow.toString())
+            }
+        }
+
         if(from.isNotEmpty()){
             homeViewModel.getAllUser()
             homeViewModel.getAllOrganizationUnit()
@@ -345,4 +413,194 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
         )
         datePickerDialog.show()
     }
+
+    fun setupDetail(){
+        val isEdit = requestDetail.status == 1 && (
+                requestDetail.approvers?.map { it.information?.firstOrNull()?.approver }?.find { it?._id == config.getUser().id } != null
+                        || requestDetail.creator?._id == config.getUser().id)
+                        // them dieu kien use vao
+        request = ParamCreateProductRequest()
+        binding?.apply {
+            tvHeaderToolbar.text = if(requestDetail.type == 1) "Chi tiết đề nghị mua hàng" else if(requestDetail.type ==2) "Chi tiết đề nghị nhập kho" else "Chi tiết đề nghị xuất kho"
+            edtCode.setText(requestDetail.code)
+            edtTime.setText(getddMMYYYY(requestDetail.desiredTime ?: ""))
+            edtWork.setText(requestDetail.manufacturingWork?.name ,false)
+            edtWorkApprover.setText(requestDetail.approvers?.find { it.approveType == 1 }?.information?.firstOrNull()?.approver?.name ,false)
+            edtStock.setText(requestDetail.stock?.name,false)
+            if(requestDetail.type == 1) {
+                tilUnit.isVisible = true
+                tilBuyApprover.isVisible = true
+                edtUnit.setText(requestDetail.orderUnit?.name,false)
+                edtBuyApprover.setText(requestDetail.approvers?.find{it.approveType == 2}?.information?.firstOrNull()?.approver?.name ,false)
+            } else {
+                tilUnit.isVisible = false
+                tilBuyApprover.isVisible = false
+            }
+            tilTime.isEnabled = isEdit
+            tilWork.isEnabled = isEdit
+            tilWorkApprover.isEnabled = isEdit
+            tilStock.isEnabled = isEdit
+            tilStatus.isVisible = true
+            tilUnit.isEnabled = isEdit
+            tilBuyApprover.isEnabled = isEdit
+            tilDes.isEnabled = isEdit
+            lnSave.isVisible = isEdit
+            btnSave.text = "Lưu"
+            tilProductType.isVisible = isEdit
+            tilProduct.isVisible = isEdit
+            tilBaseUnit.isVisible = isEdit
+            tilQuantity.isVisible = isEdit
+            btnAdd.isVisible = isEdit
+            btnMenuMore.isVisible = isEdit
+            listGood = (requestDetail.goods?.map { GoodDetailModel(quantity = it.quantity?.toLong() ?: 0L , _id = it.good._id
+                , name = it.good.name, baseUnit = it.good.baseUnit , code = it.good.code) })?.toMutableList() ?: mutableListOf()
+            adapter.isEdit = isEdit
+            adapter.items = listGood
+            when(requestDetail.type){
+                1 -> {
+                    when(requestDetail.status) {
+                        1 -> {
+                            edtStatus.setText("Chờ phê duyệt")
+                            edtStatus.setTextColorz(R.color.clr_status_wait)
+                        }
+                        2 -> {
+                            edtStatus.setText("Yêu cầu đã gửi đến bộ phận mua hàng")
+                            edtStatus.setTextColorz(R.color.clr_wait_confirm_grab)
+                        }
+                        3 -> {
+                            edtStatus.setText("đã phê duyệt mua hàng")
+                            edtStatus.setTextColorz(R.color.clr_status_approve)
+                        }
+                        4 -> {
+                            edtStatus.setText("Đã tạo đơn mua hàng")
+                            edtStatus.setTextColorz(R.color.clr_status_approve)
+                        }
+                        5 -> {
+                            edtStatus.setText("Chờ phê duyệt yêu cầu")
+                            edtStatus.setTextColorz(R.color.clr_status_wait)
+                        }
+                        6 -> {
+                            edtStatus.setText("Đã gửi yêu cầu nhập kho")
+                            edtStatus.setTextColorz(R.color.clr_status_approve)
+                        }
+                        7 -> {
+                            edtStatus.setText("Đã phê duyệt yêu cầu nhập kho")
+                            edtStatus.setTextColorz(R.color.clr_status_approve)
+                        }
+                        8 -> {
+                            edtStatus.setText("Đang tiến hành nhập kho")
+                            edtStatus.setTextColorz(R.color.clr_status_inprogress)
+                        }
+                        9 -> {
+                            edtStatus.setText("Đã hoàn thành nhập kho")
+                            edtStatus.setTextColorz(R.color.clr_status_finish)
+                        }
+                        10 -> {
+                            edtStatus.setText("Đã hủy yêu cầu mua hàng")
+                            edtStatus.setTextColorz(R.color.clr_status_cancel)
+                        }
+                        11 -> {
+                            edtStatus.setText("Đã hủy yêu cầu nhập kho")
+                            edtStatus.setTextColorz(R.color.clr_status_cancel)
+                        }
+                    }
+                }
+                2 -> {
+                    when (requestDetail.status) {
+                        1 -> {
+                            edtStatus.setText("Chờ phê duyệt")
+                            edtStatus.setTextColorz(R.color.clr_status_wait)
+                        }
+                        2 -> {
+                            edtStatus.setText("Yêu cầu đã gửi đến kho")
+                            edtStatus.setTextColorz(R.color.clr_wait_confirm_grab)
+                        }
+                        3 -> {
+                            edtStatus.setText("Đã phê duyệt yêu cầu nhập kho")
+                            edtStatus.setTextColorz(R.color.clr_status_approve)
+                        }
+                        4 -> {
+                            edtStatus.setText("Đang tiến hành nhập kho")
+                            edtStatus.setTextColorz(R.color.clr_status_inprogress)
+                        }
+                        5 -> {
+                            edtStatus.setText("Đã hoàn thành nhập kho")
+                            edtStatus.setTextColorz(R.color.clr_status_finish)
+                        }
+                        6 -> {
+                            edtStatus.setText("Đã hủy yêu cầu nhập kho")
+                            edtStatus.setTextColorz(R.color.clr_status_cancel)
+                        }
+                    }
+                }
+                3 -> {
+                    when (requestDetail.status) {
+                        1 -> {
+                            edtStatus.setText("Chờ phê duyệt")
+                            edtStatus.setTextColorz(R.color.clr_status_wait)
+                        }
+                        2 -> {
+                            edtStatus.setText("Yêu cầu đã gửi đến kho")
+                            edtStatus.setTextColorz(R.color.clr_wait_confirm_grab)
+                        }
+                        3 -> {
+                            edtStatus.setText("ĐĐã phê duyệt yêu cầu xuất kho")
+                            edtStatus.setTextColorz(R.color.clr_status_approve)
+                        }
+                        4 -> {
+                            edtStatus.setText("Đang tiến hành xuất kho")
+                            edtStatus.setTextColorz(R.color.clr_status_inprogress)
+                        }
+                        5 -> {
+                            edtStatus.setText("Đã hoàn thành xuất kho")
+                            edtStatus.setTextColorz(R.color.clr_status_finish)
+                        }
+                        6 -> {
+                            edtStatus.setText("Đã hủy yêu cầu xuất kho")
+                            edtStatus.setTextColorz(R.color.clr_status_cancel)
+                        }
+                    }
+
+                }
+            }
+
+        }
+    }
+
+    fun showDialog() {
+        if (dialog != null || dialog?.showsDialog == true) {
+            dialog?.dismiss()
+            dialog = null
+        }
+        dialog = BottomDialogOptionRequest(requestDetail, config)
+        dialog?.onConfirm = {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(resources.getString(R.string.title_alert))
+                .setMessage("Xác nhận phê duyệt phiếu?")
+                .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
+                    dialog.dismiss()
+                }
+                .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
+                    viewModel.updateStatusProductRequest(ParamUpdateRequest(1,config.getUser().id,null),requestId)
+                    dialog.dismiss()
+                }
+                .show()
+        }
+        dialog?.onCancel = {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(resources.getString(R.string.title_alert))
+                .setMessage("Xác nhận hủy phiếu?")
+                .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
+                    dialog.dismiss()
+                }
+                .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
+                    viewModel.updateStatusProductRequest(ParamUpdateRequest(null,null,if(requestDetail.type == 1) 10 else 6),requestId)
+                    dialog.dismiss()
+                }
+                .show()
+        }
+        dialog?.show(childFragmentManager,"BottomDialogOptionRequest")
+
+    }
+
 }

@@ -13,6 +13,9 @@ class ItemRequestAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         field = value
         notifyDataSetChanged()
     }
+    var isEdit = true
+    var onEdit :((pos:Int) -> Unit)? = null
+    var onDelete :((pos:Int) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder(ItemRecycleCreateRequestBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
@@ -24,6 +27,12 @@ class ItemRequestAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             edtCode.setText(t.code)
             edtPriceInit.setText(t.baseUnit)
             edtLineCost.setText(t.quantity.toString())
+            tvDelete.text = "Xóa hàng hóa"
+            tvEdit.setOnClickListener { onEdit?.invoke(position) }
+            tvDelete.setOnClickListener { onDelete?.invoke(position) }
+            tvDelete.visibility = if(isEdit) View.VISIBLE else View.INVISIBLE
+            tvEdit.visibility = if(isEdit) View.VISIBLE else View.INVISIBLE
+            ivDeleteVariant.visibility = if(isEdit) View.VISIBLE else View.INVISIBLE
         }
     }
 

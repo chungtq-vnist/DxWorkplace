@@ -20,6 +20,7 @@ import com.example.test.dxworkspace.data.entity.manufacturing_work.Manufacturing
 import com.example.test.dxworkspace.data.entity.manufacturing_work.OrganizationUnit
 import com.example.test.dxworkspace.data.entity.manufacturing_work.UserRoleInOrganizationUnit
 import com.example.test.dxworkspace.data.entity.product_request.ParamCreateProductRequest
+import com.example.test.dxworkspace.data.entity.product_request.ParamUpdateRequest
 import com.example.test.dxworkspace.data.entity.product_request.ProductRequestManagementModel
 import com.example.test.dxworkspace.data.entity.product_request.UpdateProductRequest
 import com.example.test.dxworkspace.data.entity.role.RoleModel
@@ -306,9 +307,15 @@ class ManufacturingManagerRepositoryImpt @Inject constructor(
         )
     }
 
-    override suspend fun updateRequest(data : UpdateProductRequest, id:String): Either<Failure, Boolean> {
+    override suspend fun updateRequest(data : ParamCreateProductRequest, id:String): Either<Failure, Boolean> {
         return requestApi(
             manufacturingManagerRemoteSource.updateRequest(data,id),{true},true
+        )
+    }
+
+    override suspend fun updateStatusRequest(data : ParamUpdateRequest, id:String): Either<Failure, Boolean> {
+        return requestApi(
+            manufacturingManagerRemoteSource.updateStatusRequest(data,id),{true},true
         )
     }
 

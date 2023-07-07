@@ -79,6 +79,9 @@ class ManufacturingRequestFragment : BaseFragment<FragmentManufacturingRequestBi
                 binding?.tvRangeTime?.text = homeViewModel.fromDate + " - " + homeViewModel.toDate
                 getData()
             }
+            EventUpdate.UPDATE_REQUEST -> {
+                getData()
+            }
         }
     }
 
@@ -107,7 +110,7 @@ class ManufacturingRequestFragment : BaseFragment<FragmentManufacturingRequestBi
             ivBack.setOnClickListener { onBackPress() }
             rcvWork.adapter = adapter
             adapter.onClick = {
-
+                postNormal(EventNextHome(CreateManufacturingRequestFragment::class.java, bundleOf(Pair("REQUEST_ID",it._id),)))
             }
             pullToRefresh.setOnRefreshListener {
                 getData()

@@ -35,6 +35,7 @@ data class ParamInformation (
 )
 
 data class ParamUpdateRequest(
-    var approveType : Int = 0,
-    var approvedUser :String =""
+    var approveType : Int?,
+    var approvedUser :String?,
+    var status :Int?
 ) : UpdateProductRequest

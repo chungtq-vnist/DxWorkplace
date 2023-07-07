@@ -18,7 +18,7 @@
             android:padding="@dimen/_8sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tạo phiêú đề nghị mua nguyên vật liệu"/>
+            android:text="Tạo phiếu đề nghị mua nguyên vật liệu"/>
 
         <TextView
             android:id="@+id/tvExportGood"
@@ -26,7 +26,7 @@
             android:padding="@dimen/_8sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tạo phiêú đề nghị xuất kho"/>
+            android:text="Tạo phiếu đề nghị xuất kho"/>
         <TextView
             android:id="@+id/tvStart"
             style="@style/Font.TextRegular13"
@@ -54,7 +54,7 @@
             android:padding="@dimen/_8sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hủy phiếu"/>
+            android:text="Hủy lệnh sản xuất"/>
 
 
     </LinearLayout>

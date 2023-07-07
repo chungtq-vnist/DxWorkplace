@@ -91,6 +91,7 @@
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/activity_splash.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/bottom_dialog_option_command.xml" value="0.264" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/bottom_dialog_option_request.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/bottom_dialog_select_manufacturingwork.xml" value="0.152" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/custom_toast.xml" value="0.23645833333333333" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/dialog_check_quality.xml" value="0.264" />
@@ -106,7 +107,7 @@
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_create_lot.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_create_manufacturing_plan.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_create_reequest.xml" value="0.23645833333333333" />
-        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_create_request.xml" value="0.23645833333333333" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_create_request.xml" value="0.28268991282689915" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_create_task.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_dashboard_control_manufacturing.xml" value="0.2" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_dashboard_manufacturing_command.xml" value="0.23645833333333333" />

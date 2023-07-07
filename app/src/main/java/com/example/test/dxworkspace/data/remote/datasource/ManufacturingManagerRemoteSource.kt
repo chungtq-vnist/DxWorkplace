@@ -1,6 +1,7 @@
 package com.example.test.dxworkspace.data.remote.datasource
 
 import com.example.test.dxworkspace.data.entity.product_request.ParamCreateProductRequest
+import com.example.test.dxworkspace.data.entity.product_request.ParamUpdateRequest
 import com.example.test.dxworkspace.data.entity.product_request.UpdateProductRequest
 import com.example.test.dxworkspace.data.remote.api.DxApi
 import com.example.test.dxworkspace.domain.model.manufacturing_plan.RequestManufacturingPlan
@@ -67,7 +68,9 @@ class ManufacturingManagerRemoteSource @Inject constructor(val api: DxApi) {
 
     fun createRequest(data : ParamCreateProductRequest) = api.createRequest(data)
 
-    fun updateRequest(data : UpdateProductRequest , id:String) = api.updateRequest(id,data)
+    fun updateRequest(data : ParamCreateProductRequest , id:String) = api.updateRequest(id,data)
+
+    fun updateStatusRequest(data : ParamUpdateRequest, id:String) = api.updateStatusRequest(id,data)
 
     fun createManyRequest(data : List<ParamCreateProductRequest>) = api.createManyRequest(data)
 

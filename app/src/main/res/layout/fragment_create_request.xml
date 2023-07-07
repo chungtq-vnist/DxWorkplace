@@ -31,6 +31,19 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="RelativeOverlap" />
 
+        <ImageView
+            android:id="@+id/btnMenuMore"
+            style="@style/ImageToolbar"
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:padding="@dimen/_12sdp"
+            android:visibility="gone"
+            android:src="@drawable/ic_menu_more"
+            app:layout_constraintBottom_toBottomOf="@id/ivBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/color_online_bill" />
 
         <View
             android:id="@+id/view_top"
@@ -40,6 +53,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivBack" />
+
+
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
@@ -113,13 +128,37 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="gone"
+                    android:enabled="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilCode">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="Trạng thái"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:inputType="textCapSentences"
+                        android:maxLength="50"
+                        android:textColor="@color/text_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tilCode">
+                    app:layout_constraintTop_toBottomOf="@id/tilStatus">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtTime"
@@ -322,7 +361,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilBaseUnit"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_8sdp"
@@ -330,7 +368,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilProduct">
 
-                    <AutoCompleteTextView
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtBaseUnit"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -344,7 +382,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilQuantity"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_8sdp"
@@ -352,7 +389,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilBaseUnit">
 
-                    <AutoCompleteTextView
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtQuantity"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

@@ -16,10 +16,7 @@ import com.example.test.dxworkspace.data.entity.manufacturing_plan.*
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkDetailResponseRaw
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkResponseRaw
 import com.example.test.dxworkspace.data.entity.organization_unit.OrganizationUnitResponseRaw
-import com.example.test.dxworkspace.data.entity.product_request.ListProductRequestResponseRaw
-import com.example.test.dxworkspace.data.entity.product_request.ParamCreateProductRequest
-import com.example.test.dxworkspace.data.entity.product_request.ProductRequestManagementResponseRaw
-import com.example.test.dxworkspace.data.entity.product_request.UpdateProductRequest
+import com.example.test.dxworkspace.data.entity.product_request.*
 import com.example.test.dxworkspace.data.entity.project.ProjectResponseRaw
 import com.example.test.dxworkspace.data.entity.report.FinancialReportResponseRaw
 import com.example.test.dxworkspace.data.entity.report.PlanCompletedOnScheduleRaw
@@ -389,7 +386,14 @@ interface DxApi : LoginApi {
     @PATCH("/product-request-management/{id}")
     fun updateRequest(
         @Path("id") id : String,
-        @Body data : UpdateProductRequest
+        @Body data : ParamCreateProductRequest
+    ) : Call<Unit>
+
+
+    @PATCH("/product-request-management/{id}")
+    fun updateStatusRequest(
+        @Path("id") id : String,
+        @Body data : ParamUpdateRequest
     ) : Call<Unit>
 
     @POST("/product-request-management/create-many-request")

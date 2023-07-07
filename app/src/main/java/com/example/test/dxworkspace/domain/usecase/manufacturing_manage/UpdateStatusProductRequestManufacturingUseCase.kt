@@ -14,6 +14,7 @@ import com.example.test.dxworkspace.data.entity.manufacturing_plan.Manufacturing
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkEntity
 import com.example.test.dxworkspace.data.entity.manufacturing_work.UserRoleInOrganizationUnit
 import com.example.test.dxworkspace.data.entity.product_request.ParamCreateProductRequest
+import com.example.test.dxworkspace.data.entity.product_request.ParamUpdateRequest
 import com.example.test.dxworkspace.data.entity.product_request.ProductRequestManagementModel
 import com.example.test.dxworkspace.data.entity.product_request.UpdateProductRequest
 import com.example.test.dxworkspace.data.entity.task.TaskModelDetail
@@ -26,12 +27,12 @@ import com.example.test.dxworkspace.domain.usecase.UseCase
 import com.example.test.dxworkspace.presentation.model.menu.*
 import javax.inject.Inject
 
-class UpdateProductRequestManufacturingUseCase @Inject constructor(
+class UpdateStatusProductRequestManufacturingUseCase @Inject constructor(
     val manufacturingManagerRepository: ManufacturingManagerRepository,
     val configRepository: ConfigRepository
-) : UseCase<Boolean,Pair<String,ParamCreateProductRequest> >() {
-    override suspend fun run(params: Pair<String,ParamCreateProductRequest>): Either<Failure, Boolean> {
-        return manufacturingManagerRepository.updateRequest(
+) : UseCase<Boolean,Pair<String,ParamUpdateRequest> >() {
+    override suspend fun run(params: Pair<String, ParamUpdateRequest>): Either<Failure, Boolean> {
+        return manufacturingManagerRepository.updateStatusRequest(
             params.second,params.first
         )
     }

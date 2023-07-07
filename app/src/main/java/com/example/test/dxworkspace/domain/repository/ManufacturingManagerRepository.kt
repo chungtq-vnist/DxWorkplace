@@ -21,6 +21,7 @@ import com.example.test.dxworkspace.data.entity.manufacturing_work.Manufacturing
 import com.example.test.dxworkspace.data.entity.manufacturing_work.OrganizationUnit
 import com.example.test.dxworkspace.data.entity.manufacturing_work.UserRoleInOrganizationUnit
 import com.example.test.dxworkspace.data.entity.product_request.ParamCreateProductRequest
+import com.example.test.dxworkspace.data.entity.product_request.ParamUpdateRequest
 import com.example.test.dxworkspace.data.entity.product_request.ProductRequestManagementModel
 import com.example.test.dxworkspace.data.entity.product_request.UpdateProductRequest
 import com.example.test.dxworkspace.data.entity.role.RoleModel
@@ -103,7 +104,9 @@ interface ManufacturingManagerRepository {
 
     suspend fun createManyRequest(data : List<ParamCreateProductRequest>) : Either<Failure,Boolean>
 
-    suspend fun updateRequest(data : UpdateProductRequest, id:String) : Either<Failure,Boolean>
+    suspend fun updateRequest(data : ParamCreateProductRequest, id:String) : Either<Failure,Boolean>
+
+    suspend fun updateStatusRequest(data : ParamUpdateRequest, id:String) : Either<Failure,Boolean>
 
     suspend fun createPlan(data : RequestManufacturingPlan) : Either<Failure,Boolean>
 

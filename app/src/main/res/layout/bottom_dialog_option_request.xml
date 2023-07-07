@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_payment_method"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/_4sdp">
+
+
+        <TextView
+            android:id="@+id/tvConfirm"
+            style="@style/Font.TextRegular13"
+            android:padding="@dimen/_8sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_8sdp"
+            android:text="Phê duyệt phiếu đề nghị"
+            app:drawableStartCompat="@drawable/ic_confirm" />
+        <TextView
+            android:id="@+id/tvCancel"
+            style="@style/Font.TextRegular13"
+            android:padding="@dimen/_8sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_8sdp"
+            android:text="Hủy phiếu đề nghị"
+            app:drawableStartCompat="@drawable/ic_cancel_request" />
+
+
+    </LinearLayout>
+
+</layout>

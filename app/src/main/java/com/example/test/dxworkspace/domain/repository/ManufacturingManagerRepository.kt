@@ -15,7 +15,9 @@ import com.example.test.dxworkspace.data.entity.manufacturing_lot.ManufacturingL
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.ManufacturingMillEntity
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.ManufacturingMillModel
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.SubUserBasicModel
+import com.example.test.dxworkspace.data.entity.manufacturing_plan.ManufacturingPlanDetailModel
 import com.example.test.dxworkspace.data.entity.manufacturing_plan.ManufacturingPlanModel
+import com.example.test.dxworkspace.data.entity.manufacturing_plan.ParamUpdatePlan
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkDetailModel
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkEntity
 import com.example.test.dxworkspace.data.entity.manufacturing_work.OrganizationUnit
@@ -61,6 +63,10 @@ interface ManufacturingManagerRepository {
     suspend fun getBillByCommand(id : String) : Either<Failure , List<BillByCommandModel>>
 
     suspend fun getAllPlan(s:String, e: String) : Either<Failure,List<ManufacturingPlanModel>>
+
+    suspend fun getPlanById(id:String) : Either<Failure,ManufacturingPlanDetailModel>
+
+    suspend fun updatePlan(id:String,data: ParamUpdatePlan) : Either<Failure,Boolean>
 
     suspend fun getApprovesOfPlanByRole(id : String) : Either<Failure,List<UserRoleInOrganizationUnit>>
 

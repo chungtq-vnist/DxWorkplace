@@ -117,7 +117,7 @@ abstract class BaseFragment< V : ViewDataBinding> : DaggerFragment() , ViewTreeO
     fun showToast(event: EventToast) {
         activity?.let {
             if (it is BaseActivity<*>) {
-                it.showToast(event)
+                it.showToastNew(event)
             }
         }
     }

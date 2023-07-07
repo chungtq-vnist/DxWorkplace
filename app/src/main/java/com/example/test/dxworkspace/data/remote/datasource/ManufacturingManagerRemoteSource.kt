@@ -1,5 +1,6 @@
 package com.example.test.dxworkspace.data.remote.datasource
 
+import com.example.test.dxworkspace.data.entity.manufacturing_plan.ParamUpdatePlan
 import com.example.test.dxworkspace.data.entity.product_request.ParamCreateProductRequest
 import com.example.test.dxworkspace.data.entity.product_request.ParamUpdateRequest
 import com.example.test.dxworkspace.data.entity.product_request.UpdateProductRequest
@@ -28,6 +29,10 @@ class ManufacturingManagerRemoteSource @Inject constructor(val api: DxApi) {
     fun getBillByCommand(id : String) = api.getBillOfCommand(id)
 
     fun getAllPLan(currentRole: String , startDate : String, endDate : String) = api.getAllPlan(endDate,startDate,currentRole)
+
+    fun getPlanById(id:String) = api.getPlanDetailById(id)
+
+    fun updatePlan(id:String, data : ParamUpdatePlan) = api.updatePlan(id,data)
 
     fun getApprovesOfPlanByRole(id : String) = api.getApprovesOfPlanByRole(id)
 

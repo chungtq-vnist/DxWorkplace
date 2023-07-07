@@ -100,7 +100,7 @@ class ManufacturingPlanFragment : BaseFragment<FragmentManufacturingPlanBinding>
                 postNormal(
                     EventNextHome(
                         ManufacturingPlanDetailFragment::class.java, bundleOf(
-                            Pair("PLAN",listPlans.first{it._id == t})
+                            Pair("PLAN_ID",listPlans.first{it._id == t}._id)
                         )
                     )
                 )

@@ -68,7 +68,7 @@ class BottomDialogOptionCommand(val command : ManufacturingCommandModel ,val lis
         binding.apply {
             tvBuyGood.isVisible = command.approvers?.map { it.approver?._id }?.contains(userId) == true && command.status == 1 && command.purchasesRequest.isNullOrEmpty()
             tvExportGood.isVisible = command.approvers?.map { it.approver?._id }?.contains(userId) == true  && command.exportMaterialRequest.isNullOrEmpty() && command.status == 1
-            tvStart.isVisible = command.accountables?.map { it._id }?.contains(userId) == true && (command.status == 1|| command.status == 2)
+            tvStart.isVisible = command.accountables?.map { it._id }?.contains(userId) == true &&  command.status == 2
             tvFinish.isVisible = command.accountables?.map { it._id }?.contains(userId) == true && (command.status == 3)
             tvQuality.isVisible = command.qualityControlStaffs?.map { it.staff._id }?.contains(userId) == true && (command.status == 3 || command.status == 4)
             tvCancel.isVisible = command.status != 5 && command.status != 4 &&

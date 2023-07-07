@@ -5,7 +5,9 @@ import com.example.test.dxworkspace.data.entity.good.GoodDetailModel
 import com.example.test.dxworkspace.data.entity.good.InventoryGoodWrap
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.ManufacturingMillModel
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.SubUserBasicModel
+import com.example.test.dxworkspace.data.entity.manufacturing_plan.ManufacturingPlanDetailModel
 import com.example.test.dxworkspace.data.entity.manufacturing_plan.ManufacturingPlanModel
+import com.example.test.dxworkspace.data.entity.manufacturing_plan.ParamUpdatePlan
 import com.example.test.dxworkspace.data.entity.manufacturing_work.UserRoleInOrganizationUnit
 import com.example.test.dxworkspace.data.entity.user.UserProfileResponse
 import com.example.test.dxworkspace.data.entity.work_schedule.WorkScheduleModel
@@ -27,6 +29,8 @@ class ManufacturingPlanViewModel  @Inject constructor(
     private val getManufacturingCommandUseCase: GetManufacturingCommandUseCase,
     private val getManufacturingCommandByIdUseCase: GetManufacturingCommandByIdUseCase,
     private val getAllPlanUseCase: GetManufacturingPlanUseCase,
+    private val getManufacturingPlanByIdUseCase: GetManufacturingPlanByIdUseCase,
+    private val updatePlanUseCase: UpdatePlanUseCase,
     private val getSaleOrderByRoleUseCase: GetSaleOrderByRoleUseCase,
     private val getApprovesOfPlanByRoleUseCase: GetApprovesOfPlanByRoleUseCase,
     private val getGoodManageByRoleUseCase: GetGoodManageByRoleUseCase,
@@ -46,6 +50,7 @@ class ManufacturingPlanViewModel  @Inject constructor(
     val listSchedule = MutableLiveData<List<WorkScheduleModel?>>()
     val listUserFree = MutableLiveData<List<SubUserBasicModel>>()
     val updateStatus = MutableLiveData<Boolean>()
+    val planDetail = MutableLiveData<ManufacturingPlanDetailModel>()
 
     fun getListPlan(s : String , e : String ){
         getAllPlanUseCase(Pair(s,e)){
@@ -151,6 +156,33 @@ class ManufacturingPlanViewModel  @Inject constructor(
         createManufacturingPlanUseCase(data){
             it.either({
                 showLoading(false)
+                updateStatus.value = false
+            },{
+                showLoading(false)
+                updateStatus.value = true
+            })
+        }
+    }
+
+    fun getPlanById(id:String){
+        showLoading(true)
+        getManufacturingPlanByIdUseCase(id){
+            it.either({
+                showLoading(false)
+                handleFailure(it)
+            } ,{
+                showLoading(false)
+                planDetail.value = it
+            })
+        }
+    }
+
+    fun updatePlan(id:String,data: ParamUpdatePlan){
+        showLoading(true)
+        updatePlanUseCase(Pair(id,data)){
+            it.either({
+                showLoading(false)
+                handleFailure(it)
                 updateStatus.value = false
             },{
                 showLoading(false)

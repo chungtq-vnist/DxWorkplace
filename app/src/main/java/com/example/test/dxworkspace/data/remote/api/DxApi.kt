@@ -294,6 +294,17 @@ interface DxApi : LoginApi {
         @Query("page") page :Int = 1
     ) : Call<ManufacturingPlanResponseRaw>
 
+    @GET("/manufacturing-plan/{id}")
+    fun getPlanDetailById(
+        @Path("id") id:String
+    ) : Call<ManufacturingPlanDetailResponseRaw>
+
+    @PATCH("/manufacturing-plan/{id}")
+    fun updatePlan(
+        @Path("id") id:String,
+        @Body data : ParamUpdatePlan
+    ) : Call<Unit>
+
     @GET("/manufacturing-plan/get-approvers-of-plan/{id}")
     fun getApprovesOfPlanByRole(
         @Path("id") id : String

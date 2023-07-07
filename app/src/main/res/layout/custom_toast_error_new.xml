@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/custom_toast_container_new"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#DAAA">
+
+  <TextView
+      android:id="@+id/textNew"
+      style="@style/Font.TextRegular13"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:drawablePadding="@dimen/_8sdp"
+      android:gravity="center"
+      android:paddingStart="@dimen/_10sdp"
+      android:paddingTop="@dimen/_20sdp"
+      android:paddingEnd="@dimen/_10sdp"
+      android:paddingBottom="@dimen/_20sdp"
+      android:textColor="@color/white"
+      app:drawableStartCompat="@drawable/ic_cancel_request"
+      tools:text="@tools:sample/lorem/random" />
+</RelativeLayout>

@@ -44,7 +44,7 @@ class PlanViewHolder(val binding : ItemManufacturingPlanBinding) : RecyclerView.
             tvName2.text = getddMMYYYY(item.createdAt)
             when(item.status){
                 1 -> {
-                    tvStatus.text = "Đang chờ duyệt"
+                    tvStatus.text = "Chờ phê duyệt"
                     tvStatus.setTextColorz(R.color.clr_status_wait)
 //                    tvStatus.setBackgroundResource(R.drawable.bg_status_wait)
                 }

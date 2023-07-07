@@ -15,7 +15,9 @@ import com.example.test.dxworkspace.data.entity.manufacturing_lot.ManufacturingL
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.ManufacturingMillEntity
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.ManufacturingMillModel
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.SubUserBasicModel
+import com.example.test.dxworkspace.data.entity.manufacturing_plan.ManufacturingPlanDetailModel
 import com.example.test.dxworkspace.data.entity.manufacturing_plan.ManufacturingPlanModel
+import com.example.test.dxworkspace.data.entity.manufacturing_plan.ParamUpdatePlan
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkDetailModel
 import com.example.test.dxworkspace.data.entity.manufacturing_work.OrganizationUnit
 import com.example.test.dxworkspace.data.entity.manufacturing_work.UserRoleInOrganizationUnit
@@ -158,6 +160,24 @@ class ManufacturingManagerRepositoryImpt @Inject constructor(
                 if(it.success) it.content?.manufacturingPlans?.docs ?: listOf() else listOf()
             } ,
             listOf()
+        )
+    }
+
+    override suspend fun getPlanById(id: String): Either<Failure, ManufacturingPlanDetailModel> {
+        return requestApi(
+            manufacturingManagerRemoteSource.getPlanById(id), {
+                if (it.success) it.content?.manufacturingPlan
+                    ?: ManufacturingPlanDetailModel() else ManufacturingPlanDetailModel()
+            },
+            ManufacturingPlanDetailModel()
+        )
+    }
+
+    override suspend fun updatePlan(id: String, data: ParamUpdatePlan): Either<Failure, Boolean> {
+        return requestApi(
+            manufacturingManagerRemoteSource.updatePlan(id,data),{
+                true
+            } , true
         )
     }
 

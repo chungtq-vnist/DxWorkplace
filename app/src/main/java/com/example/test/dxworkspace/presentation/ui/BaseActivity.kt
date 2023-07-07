@@ -2,8 +2,12 @@ package com.example.test.dxworkspace.presentation.ui
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Gravity
+import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -18,6 +22,7 @@ import com.example.test.dxworkspace.presentation.utils.event.EventSyncMessage
 import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.google.gson.Gson
 import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.android.synthetic.main.custom_toast.*
 import javax.inject.Inject
 
 abstract class BaseActivity<V : ViewDataBinding> : DaggerAppCompatActivity() {
@@ -31,6 +36,7 @@ abstract class BaseActivity<V : ViewDataBinding> : DaggerAppCompatActivity() {
     lateinit var binding: V
 
     private var dialogProcess: DialogProcess? = null
+    private var toast: Toast? = null
 
     @LayoutRes
     protected abstract fun getLayoutId(): Int
@@ -160,6 +166,39 @@ abstract class BaseActivity<V : ViewDataBinding> : DaggerAppCompatActivity() {
         layout.setBackgroundResource(if (event.isFail) R.drawable.round_corner_error else R.drawable.round_corner_success)
         Boast.makeCustom(this, layout).show(cancelCurrent = true)
     }
+
+    fun showToastNew(event: EventToast) {
+        val message = if (event.textId != 0) getString(event.textId) else event.text
+        toast?.cancel()
+        toast = null
+        val inflater = layoutInflater
+        var layout: View? = null
+        if (!event.isFail) {
+            layout = inflater.inflate(
+                R.layout.custom_toast_new, custom_toast_container
+            )
+            val text = layout.findViewById<TextView>(R.id.textNew)
+            layout.setBackgroundColor(ContextCompat.getColor(text.context, R.color.clr_green))
+
+            text.setText(message)
+        } else {
+            layout = inflater.inflate(R.layout.custom_toast_error_new, custom_toast_container)
+            val text = layout.findViewById<TextView>(R.id.textNew)
+            text.setText(message)
+            layout.setBackgroundColor(ContextCompat.getColor(text.context, R.color.sp_color_red))
+
+        }
+        toast = Toast(this)
+        toast?.setGravity(Gravity.FILL_HORIZONTAL or Gravity.TOP, 0, 0)
+//            toast?.setGravity(android.view.Gravity.TOP or android.view.Gravity.CENTER_HORIZONTAL, 0, 0)
+        toast?.duration = Toast.LENGTH_SHORT
+        toast?.view = layout
+        toast?.show()
+
+
+    }
+
+
 
     fun showDialogProcess() {
         justTry {

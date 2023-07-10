@@ -162,7 +162,7 @@
                     app:layout_constraintTop_toBottomOf="@id/view1">
 
                     <TextView
-                        style="@style/Font.TextBold13"
+                        style="@style/Font.TextSemiBold13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Chức vụ trưởng đơn vị " />
@@ -174,7 +174,7 @@
                         />
 
                     <TextView
-                        style="@style/Font.TextBold13"
+                        style="@style/Font.TextSemiBold13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Chức vụ phó đơn vị "
@@ -350,7 +350,7 @@
 
             <TextView
                 android:id="@+id/btnSave"
-                style="@style/Font.TextBold13"
+                style="@style/Font.TextSemiBold13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_6sdp"

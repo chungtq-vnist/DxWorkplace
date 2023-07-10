@@ -1,0 +1,56 @@
+[
+  {
+    "category" : "common",
+    "url" : "/home"
+  },  {
+    "category" : "report_overview",
+    "url" : ""
+  },   {
+    "category" : "report_overview",
+    "url" : "/report-financial"
+  },  {
+    "category" : "report_overview",
+    "url" : "/report-sale"
+  },  {
+    "category" : "report_overview",
+    "url" : "/report-manufacturing"
+  },  {
+    "category" : "report_overview",
+    "url" : "/report-warehouse"
+  },{
+    "category" : "manufacturing-management",
+    "url" : ""
+  },
+
+  {
+    "category" : "manufacturing-management",
+    "url" : "/manufacturing-dashboard"
+  },  {
+    "category" : "manufacturing-management",
+    "url" : "/manufacturing-dashboard-quality"
+  },  {
+    "category" : "manufacturing-management",
+    "url" : "/manage-manufacturing-plan"
+  },  {
+    "category" : "manufacturing-management",
+    "url" : "/manage-manufacturing-command"
+  },  {
+    "category" : "manufacturing-management",
+    "url" : "/manage-work-schedule"
+  },  {
+    "category" : "manufacturing-management",
+    "url" : "/manage-manufacturing-lot"
+  }, {
+    "category" : "manufacturing-management",
+    "url" : "/product-request-management/manufacturing"
+  }, {
+    "category" : "manufacturing-management",
+    "url" : "/manage-manufacturing-works"
+  }, {
+    "category" : "manufacturing-management",
+    "url" : "/manage-manufacturing-mill"
+  }, {
+    "category" : "setting_app",
+    "url" : "/change-role"
+  }
+]

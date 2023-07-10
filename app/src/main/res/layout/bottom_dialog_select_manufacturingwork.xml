@@ -43,7 +43,7 @@
 
       <TextView
           android:id="@+id/tvTitle"
-          style="@style/Font.TextBold13"
+          style="@style/Font.TextSemiBold13"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_centerInParent="true"
@@ -69,7 +69,7 @@
         android:orientation="horizontal"
         android:layout_marginHorizontal="@dimen/_6sdp">
 
-      <CheckBox
+      <com.google.android.material.checkbox.MaterialCheckBox
           android:id="@+id/cbAll"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"

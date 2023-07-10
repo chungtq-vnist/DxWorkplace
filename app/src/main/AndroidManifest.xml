@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".presentation.ui.home.HomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.ui.splash.SplashActivity"
             android:exported="true">

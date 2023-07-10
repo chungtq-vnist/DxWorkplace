@@ -40,6 +40,9 @@ import org.greenrobot.eventbus.Subscribe
 import java.util.*
 import javax.inject.Inject
 import android.os.Looper
+import com.example.test.dxworkspace.core.extensions.GetInfoDevice
+import com.example.test.dxworkspace.data.entity.good.InventoryGoodWrap
+import com.example.test.dxworkspace.presentation.model.menu.MenuSample
 import com.example.test.dxworkspace.presentation.model.menu.TaskType
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.ManufacturingCommandFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingFragment
@@ -54,6 +57,7 @@ import com.example.test.dxworkspace.presentation.ui.home.report.sale.ReportSaleF
 import com.example.test.dxworkspace.presentation.ui.home.report.warehouse.ReportWarehouseFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.adapter.TaskTypeAdapter
 import com.example.test.dxworkspace.presentation.ui.home.workplace.create_task.CreateTaskFragment
+import com.google.gson.reflect.TypeToken
 
 
 class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
@@ -246,17 +250,17 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                             DashboardControlManufacturingFragment::class.java
                         )
                     )
-                    "/report_financial" -> postNormal(
+                    "/report-financial" -> postNormal(
                         EventNextHome(
                             ReportFinancialFragment::class.java
                         )
                     )
-                    "/report_sale" -> postNormal(
+                    "/report-sale" -> postNormal(
                         EventNextHome(
                             ReportSaleFragment::class.java
                         )
                     )
-                    "/report_manufacturing" -> postNormal(
+                    "/report-manufacturing" -> postNormal(
                         EventNextHome(
                             ReportManufacturingFragment::class.java
                         )
@@ -266,7 +270,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                             DashboardQualityManufacturingFragment::class.java
                         )
                     )
-                    "/report_warehouse" -> postNormal(
+                    "/report-warehouse" -> postNormal(
                         EventNextHome(
                             ReportWarehouseFragment::class.java
                         )
@@ -431,7 +435,8 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             genMenuModel()
             Log.d("KGM", "list menu  : ${listMenu.toString()}")
             addTempMenu()
-            menuAdapter.items = listMenu
+            sortMenu()
+//            menuAdapter.items = listMenu
         }
     }
 
@@ -478,14 +483,17 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                         "/manage-manufacturing-command" -> {
                             it.iconStart = R.drawable.ic_manufacturing_command
                             it.level = 3
+                            it.desc = "Lệnh sản xuất"
                         }
                         "/manage-manufacturing-plan" -> {
                             it.iconStart = R.drawable.ic_manufacturing_plan
                             it.level = 3
+                            it.desc ="Kế hoạch sản xuất"
                         }
                         "/manage-work-schedule" -> {
                             it.iconStart = R.drawable.ic_manufacturing_workschedule
                             it.level = 3
+                            it.desc ="Lịch sản xuất"
                         }
 //                        "/manage-purchasing-request" -> {
 //                            it.iconStart = R.drawable.ic_purchasing_request
@@ -495,22 +503,27 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                         "/manufacturing-dashboard" -> {
                             it.iconStart = R.drawable.ic_home
                             it.level = 3
+                            it.desc ="Điều khiển sản xuất"
                         }
                         "/manage-manufacturing-works" -> {
                             it.iconStart = R.drawable.ic_manufacturing_work
                             it.level = 3
+                            it.desc ="Nhà máy sản xuất"
                         }
                         "/manage-manufacturing-mill" -> {
                             it.iconStart = R.drawable.ic_manufacturing_mill
                             it.level = 3
+                            it.desc ="Xưởng sản xuất"
                         }
                         "/manage-manufacturing-lot" -> {
                             it.iconStart = R.drawable.ic_manufacturing_lot
                             it.level = 3
+                            it.desc ="Lô sản xuất"
                         }
                         "/product-request-management/manufacturing" -> {
                             it.iconStart = R.drawable.ic_purchasing_request
                             it.level = 3
+                            it.desc ="Đề nghị"
                         }
                         "" -> {
                             it.iconStart = R.drawable.ic_manufacturing
@@ -534,7 +547,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                 category = "manufacturing-management",
                 level = 3,
                 iconStart = R.drawable.ic_home,
-                desc = "Báo cáo chất lượng sản xuất",
+                desc = "Chất lượng sản xuất",
                 url = "/manufacturing-dashboard-quality"
             )
         )
@@ -566,9 +579,9 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                 id = "report_financial",
                 category = "report_overview",
                 level = 3,
-                iconStart = R.drawable.ic_money,
+                iconStart = R.drawable.ic_business_report,
                 desc = "Báo cáo tài chính",
-                url = "/report_financial"
+                url = "/report-financial"
             )
         )
         listMenu.add(
@@ -577,9 +590,9 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                 id = "report_sale",
                 category = "report_overview",
                 level = 3,
-                iconStart = R.drawable.ic_money,
+                iconStart = R.drawable.ic_sales_report,
                 desc = "Báo cáo kinh doanh",
-                url = "/report_sale"
+                url = "/report-sale"
             )
         )
         listMenu.add(
@@ -588,9 +601,9 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                 id = "report_manufacturing",
                 category = "report_overview",
                 level = 3,
-                iconStart = R.drawable.ic_money,
+                iconStart = R.drawable.ic_report_manufacturing,
                 desc = "Báo cáo sản xuất",
-                url = "/report_manufacturing"
+                url = "/report-manufacturing"
             )
         )
         listMenu.add(
@@ -599,13 +612,26 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                 id = "report_warehouse",
                 category = "report_overview",
                 level = 3,
-                iconStart = R.drawable.ic_money,
+                iconStart = R.drawable.ic_report_warehouse,
                 desc = "Báo cáo kho hàng",
-                url = "/report_warehouse"
+                url = "/report-warehouse"
             )
         )
 
     }
+
+    fun sortMenu() {
+        val stringMenu = GetInfoDevice.loadJSONFromAsset(requireContext(), "menus.json")
+        var list = listOf<MenuSample>()
+        list = gson.fromJson(stringMenu, object : TypeToken<List<MenuSample>>() {}.type)
+        var listMenuNew = mutableListOf<MenuModel>()
+        list.forEach { t ->
+            val s = listMenu.find { it.category == t.category && it.url == t.url }
+            if (s != null) listMenuNew.add(s)
+        }
+        menuAdapter.items = listMenuNew
+    }
+
 
 
 }

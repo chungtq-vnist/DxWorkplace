@@ -218,7 +218,7 @@
 
                 <TextView
                     android:id="@+id/tvTitleProduct"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
@@ -271,7 +271,7 @@
 
                 <TextView
                     android:id="@+id/tvTitleProductPartCommand"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
@@ -302,7 +302,7 @@
 
                 <TextView
                     android:id="@+id/tvTitleProductivity"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
@@ -333,7 +333,7 @@
 
                 <TextView
                     android:id="@+id/tvTitleCommand"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
@@ -563,7 +563,7 @@
                     >
                 <TextView
                     android:id="@+id/tvTitleProductivity3"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
@@ -594,7 +594,7 @@
 
                 <TextView
                     android:id="@+id/tvTitleWorkSchedule"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
@@ -632,7 +632,7 @@
 
                     <TextView
                         android:id="@+id/btnSave"
-                        style="@style/Font.TextBold13"
+                        style="@style/Font.TextSemiBold13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/_6sdp"
@@ -754,7 +754,7 @@
 
                     <TextView
                         android:id="@+id/tvTitleWorkScheduleInMonth"
-                        style="@style/Font.TextBold13"
+                        style="@style/Font.TextSemiBold13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_10sdp"
@@ -814,7 +814,7 @@
 
                     <TextView
                         android:id="@+id/btnSaveSchedule"
-                        style="@style/Font.TextBold13"
+                        style="@style/Font.TextSemiBold13"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/inputUserResponsible"
                         android:layout_width="match_parent"

@@ -266,7 +266,7 @@
 
                 <TextView
                     android:id="@+id/tvTitleProduct"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_8sdp"
@@ -367,7 +367,7 @@
 
                 <TextView
                     android:id="@+id/tvTitleMaterial"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_8sdp"
@@ -416,7 +416,7 @@
 
                 <TextView
                     android:id="@+id/tvTitleBillExportMaterial"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_8sdp"
@@ -493,7 +493,7 @@
 
                     <TextView
                         android:id="@+id/tvTitleManagerMaterial"
-                        style="@style/Font.TextBold13"
+                        style="@style/Font.TextSemiBold13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_8sdp"
@@ -544,7 +544,7 @@
 
                     <TextView
                         android:id="@+id/tvTitlePerformer"
-                        style="@style/Font.TextBold13"
+                        style="@style/Font.TextSemiBold13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_8sdp"
@@ -595,7 +595,7 @@
 
                     <TextView
                         android:id="@+id/tvTitleOperator"
-                        style="@style/Font.TextBold13"
+                        style="@style/Font.TextSemiBold13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_8sdp"
@@ -643,7 +643,7 @@
                 <!--                        android:background="@color/background" />-->
 
                 <!--                    <TextView-->
-                <!--                        style="@style/Font.TextBold13"-->
+                <!--                        style="@style/Font.TextSemiBold13"-->
                 <!--                        android:layout_width="match_parent"-->
                 <!--                        android:layout_height="wrap_content"-->
                 <!--                        android:layout_margin="@dimen/_8sdp"-->
@@ -674,7 +674,7 @@
                 <!--                        android:background="@color/background" />-->
 
                 <!--                    <TextView-->
-                <!--                        style="@style/Font.TextBold13"-->
+                <!--                        style="@style/Font.TextSemiBold13"-->
                 <!--                        android:layout_width="match_parent"-->
                 <!--                        android:layout_height="wrap_content"-->
                 <!--                        android:layout_margin="@dimen/_8sdp"-->
@@ -704,7 +704,7 @@
                         android:background="@color/background" />
 
                     <TextView
-                        style="@style/Font.TextBold13"
+                        style="@style/Font.TextSemiBold13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_8sdp"
@@ -731,7 +731,7 @@
 
                 <TextView
                     android:id="@+id/tvResult"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:visibility="gone"
                     android:layout_height="wrap_content"

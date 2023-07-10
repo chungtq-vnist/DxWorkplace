@@ -103,7 +103,7 @@
 
             <TextView
                 android:id="@+id/tvCommandCode"
-                style="@style/Font.TextBold13"
+                style="@style/Font.TextSemiBold13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -115,7 +115,7 @@
 
             <TextView
                 android:id="@+id/tvTitlePlanCode"
-                style="@style/Font.TextBold13"
+                style="@style/Font.TextSemiBold13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
@@ -126,7 +126,7 @@
                 android:text="Sản phẩm" />
 
             <TextView
-                style="@style/Font.TextBold13"
+                style="@style/Font.TextSemiBold13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"

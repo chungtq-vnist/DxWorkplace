@@ -134,7 +134,7 @@
 
                 <TextView
                     android:id="@+id/btnImport"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="0dp"
                     android:visibility="gone"
                     tools:visibility="visible"
@@ -299,7 +299,7 @@
 
                 <TextView
                     android:id="@+id/tvTitleProduct"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_8sdp"
@@ -407,7 +407,7 @@
                 <!--                        android:id="@+id/tvTitleResponsible"-->
                 <!--                        android:layout_width="match_parent"-->
                 <!--                        android:layout_height="wrap_content"-->
-                <!--                        style="@style/Font.TextBold13"-->
+                <!--                        style="@style/Font.TextSemiBold13"-->
                 <!--                        android:text="Người thực hiện"-->
                 <!--                        android:layout_margin="@dimen/_8sdp"-->
                 <!--                        app:layout_constraintTop_toBottomOf="@id/view1"/>-->
@@ -433,7 +433,7 @@
                 <!--                    <TextView-->
                 <!--                        android:layout_width="match_parent"-->
                 <!--                        android:layout_height="wrap_content"-->
-                <!--                        style="@style/Font.TextBold13"-->
+                <!--                        style="@style/Font.TextSemiBold13"-->
                 <!--                        android:text="Người điều hành"-->
                 <!--                        android:drawableStart="@drawable/ic_expand_down"-->
                 <!--                        android:layout_margin="@dimen/_8sdp"-->
@@ -467,7 +467,7 @@
 
                     <TextView
                         android:id="@+id/tvTitlePerformer"
-                        style="@style/Font.TextBold13"
+                        style="@style/Font.TextSemiBold13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_8sdp"
@@ -518,7 +518,7 @@
 
                     <TextView
                         android:id="@+id/tvTitleOperator"
-                        style="@style/Font.TextBold13"
+                        style="@style/Font.TextSemiBold13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_8sdp"
@@ -567,7 +567,7 @@
                         android:background="@color/background" />
 
                     <TextView
-                        style="@style/Font.TextBold13"
+                        style="@style/Font.TextSemiBold13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_8sdp"
@@ -597,7 +597,7 @@
 
             <TextView
                 android:id="@+id/btnSave"
-                style="@style/Font.TextBold13"
+                style="@style/Font.TextSemiBold13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_6sdp"

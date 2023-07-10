@@ -49,9 +49,11 @@
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/custom_multi_checkbox.xml" value="0.2526041666666667" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_app_name.xml" value="0.2526041666666667" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_back_main.xml" value="0.2526041666666667" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_business_report.xml" value="0.2526041666666667" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_cancel.xml" value="0.2526041666666667" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_cb_new_checked.xml" value="0.2526041666666667" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_cb_unchecked.xml" value="0.2526041666666667" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_change_role.xml" value="0.2526041666666667" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_clear_search.xml" value="0.2526041666666667" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_close_new.xml" value="0.2526041666666667" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_compelete.xml" value="0.2526041666666667" />
@@ -71,6 +73,8 @@
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_multi_uncheck.xml" value="0.2526041666666667" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_name.xml" value="0.2526041666666667" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_process_bar.xml" value="0.2526041666666667" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_report_warehouse.xml" value="0.2526041666666667" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_sales_report.xml" value="0.2526041666666667" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_select_calendar.xml" value="0.2526041666666667" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_square_work_approved.xml" value="0.2526041666666667" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/drawable/ic_square_work_create.xml" value="0.2526041666666667" />
@@ -95,7 +99,7 @@
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/bottom_dialog_option_command.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/bottom_dialog_option_plan.xml" value="0.23645833333333333" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/bottom_dialog_option_request.xml" value="0.4" />
-        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/bottom_dialog_select_manufacturingwork.xml" value="0.152" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/bottom_dialog_select_manufacturingwork.xml" value="0.536" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/custom_toast.xml" value="0.23645833333333333" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/custom_toast_error_new.xml" value="0.23645833333333333" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/custom_toast_new.xml" value="0.23645833333333333" />
@@ -124,7 +128,7 @@
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_dashboard_warehouse_waste.xml" value="0.23541666666666666" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_day.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_detail_task.xml" value="0.264" />
-        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_export_material_new.xml" value="0.23645833333333333" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_export_material_new.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_import_material.xml" value="0.23645833333333333" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_import_product.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_import_product_new.xml" value="0.264" />
@@ -151,7 +155,7 @@
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_time_report_picker.xml" value="0.23645833333333333" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_time_sheet.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_week.xml" value="0.23645833333333333" />
-        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_workplace.xml" value="0.264" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/fragment_workplace.xml" value="0.2" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_action_task.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_action_timesheet.xml" value="0.25" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_comment_action_task.xml" value="0.23645833333333333" />
@@ -192,7 +196,7 @@
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_recycle_productivity.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_responsible_employee_task.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_search.xml" value="0.23645833333333333" />
-        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_select_manufacturing_work.xml" value="0.23645833333333333" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_select_manufacturing_work.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_shift_in_day.xml" value="0.8" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_shift_in_month.xml" value="0.23645833333333333" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_task.xml" value="0.5158124318429662" />

@@ -74,7 +74,7 @@
 
                 <TextView
                     android:id="@+id/tvTitleInfo"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
@@ -222,7 +222,7 @@
 
                 <TextView
                     android:id="@+id/tvTitleResponsible"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/view1"
@@ -338,7 +338,7 @@
 
                 <TextView
                     android:id="@+id/tvTitleOption"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/view2"
@@ -429,7 +429,7 @@
 
                 <TextView
                     android:id="@+id/tvTitleExpectResult"
-                    style="@style/Font.TextBold13"
+                    style="@style/Font.TextSemiBold13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/view3"
@@ -541,7 +541,7 @@
 
                     <TextView
                         android:id="@+id/btnSave"
-                        style="@style/Font.TextBold13"
+                        style="@style/Font.TextSemiBold13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/_6sdp"

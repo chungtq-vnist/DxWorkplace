@@ -224,7 +224,7 @@
 
             <TextView
                 android:id="@+id/btnSave"
-                style="@style/Font.TextBold13"
+                style="@style/Font.TextSemiBold13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_6sdp"

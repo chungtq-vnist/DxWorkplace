@@ -18,6 +18,7 @@ import com.example.test.dxworkspace.presentation.utils.event.EventStateNetwork
 import com.example.test.dxworkspace.presentation.utils.event.EventSyncMessage
 import com.example.test.dxworkspace.presentation.utils.event.StateNetwork
 import com.facebook.stetho.Stetho
+import com.google.android.material.color.DynamicColors
 import dagger.android.AndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.DaggerApplication
@@ -83,6 +84,7 @@ class DxApplication : DaggerApplication(), HasAndroidInjector, LifecycleObserver
         instance = this
         appComponent.inject(this)
 
+        DynamicColors.applyToActivitiesIfAvailable(this)
         val builder = NetworkRequest.Builder()
         builder.addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
         builder.addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)

@@ -33,6 +33,7 @@ import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import com.example.test.dxworkspace.presentation.utils.getddMMYYYY
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
 import java.util.*
@@ -230,7 +231,7 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
             edtCode.setText(request.code)
             rcvCreate.adapter = adapter
             edtTime.setOnClickListener {
-                showDateTimePickerDialog()
+                showMaterialDatePickerDialog()
             }
             edtStock.setAdapter(
                 ArrayAdapter(
@@ -412,6 +413,32 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         datePickerDialog.show()
+    }
+
+    private fun showMaterialDatePickerDialog() {
+        val selectedDateInMillis = calendar.timeInMillis
+
+        val builder = MaterialDatePicker.Builder.datePicker()
+        builder.setSelection(selectedDateInMillis)
+
+        val datePicker = builder.build()
+
+        datePicker.addOnPositiveButtonClickListener { selectedDateInMillis ->
+            calendar.timeInMillis = selectedDateInMillis
+
+            binding?.edtTime?.setText(
+                SimpleDateFormat(
+                    "dd-MM-yyyy",
+                    Locale.getDefault()
+                ).format(calendar.time)
+            )
+            request.desiredTime =
+                SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).format(
+                    calendar.time
+                )
+        }
+
+        datePicker.show(requireActivity().supportFragmentManager, datePicker.toString())
     }
 
     fun setupDetail(){

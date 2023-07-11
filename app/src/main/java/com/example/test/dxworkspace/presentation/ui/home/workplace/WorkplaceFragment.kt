@@ -57,6 +57,7 @@ import com.example.test.dxworkspace.presentation.ui.home.report.sale.ReportSaleF
 import com.example.test.dxworkspace.presentation.ui.home.report.warehouse.ReportWarehouseFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.adapter.TaskTypeAdapter
 import com.example.test.dxworkspace.presentation.ui.home.workplace.create_task.CreateTaskFragment
+import com.google.android.material.tabs.TabLayout
 import com.google.gson.reflect.TypeToken
 
 
@@ -189,6 +190,25 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             toolbar.setNavigationOnClickListener {
                 layoutDrawer.openDrawer(GravityCompat.START)
             }
+            tabTaskType.addTab(tabTaskType.newTab().setText("Cần làm"),0)
+            tabTaskType.addTab(tabTaskType.newTab().setText("Phê duyệt"),1)
+            tabTaskType.addTab(tabTaskType.newTab().setText("Tư vấn"),2)
+            tabTaskType.addTab(tabTaskType.newTab().setText("Giám sát"),3)
+            tabTaskType.addTab(tabTaskType.newTab().setText("Đã tạo"),4)
+            tabTaskType.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    onChangeFilter(tab?.position ?: 0)
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+//                    TODO("Not yet implemented")
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+//                    TODO("Not yet implemented")
+                }
+
+            })
             layoutLeftMenu.layoutLogout.setOnClickListener {
                 viewModel.logout()
             }
@@ -203,12 +223,12 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             }
             layoutLeftMenu.rcvMenu.adapter = menuAdapter
             rcvTask.adapter = taskAdapter
-//            rcvTask.addItemDecoration(
-//                DividerItemDecoration(
-//                    requireContext(),
-//                    LinearLayoutManager.VERTICAL
-//                )
-//            )
+            rcvTask.addItemDecoration(
+                DividerItemDecoration(
+                    requireContext(),
+                    LinearLayoutManager.VERTICAL
+                )
+            )
             tvTimer.setOnClickListener {
                 postNormal(EventNextHome(TimeSheetFragment::class.java))
             }

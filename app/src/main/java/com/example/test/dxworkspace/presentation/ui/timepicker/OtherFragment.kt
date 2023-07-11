@@ -9,6 +9,7 @@ import com.example.test.dxworkspace.presentation.ui.BaseFragment
 import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
 import com.example.test.dxworkspace.presentation.utils.common.Constants
 import com.example.test.dxworkspace.presentation.utils.convertToDate
+import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -40,12 +41,12 @@ class OtherFragment : BaseFragment<FragmentOtherBinding>() {
             tvEndTime.text = toDate
 
             rlStart.setOnClickListener {
-                showDatePickerDialog(true)
+                showMaterialDatePickerDialog(true)
 
             }
 
             rlEnd.setOnClickListener {
-                showDatePickerDialog(false)
+                showMaterialDatePickerDialog(false)
 
             }
 
@@ -78,6 +79,33 @@ class OtherFragment : BaseFragment<FragmentOtherBinding>() {
             }, year, month, dayOfMonth)
 
         datePickerDialog.show()
+    }
+    private fun showMaterialDatePickerDialog(isFromDate: Boolean) {
+        val calendar = Calendar.getInstance()
+        calendar.time = convertToDate(if (isFromDate) fromDate else toDate)
+        val selectedDateInMillis = calendar.timeInMillis
+
+        val builder = MaterialDatePicker.Builder.datePicker()
+        builder.setSelection(selectedDateInMillis)
+
+        val datePicker = builder.build()
+
+        datePicker.addOnPositiveButtonClickListener { selectedDateInMillis ->
+            val selectedCalendar = Calendar.getInstance()
+            selectedCalendar.timeInMillis = selectedDateInMillis
+
+            val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+
+            if (isFromDate) {
+                fromDate = dateFormat.format(selectedCalendar.time)
+                binding?.tvStartTime?.text = fromDate
+            } else {
+                toDate = dateFormat.format(selectedCalendar.time)
+                binding?.tvEndTime?.text = toDate
+            }
+        }
+
+        datePicker.show(requireActivity().supportFragmentManager, datePicker.toString())
     }
 
     fun getRangeTimeSelected(){

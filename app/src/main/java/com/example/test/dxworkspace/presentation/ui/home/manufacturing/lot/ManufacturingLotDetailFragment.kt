@@ -27,6 +27,7 @@ import com.example.test.dxworkspace.presentation.utils.event.EventNextHome
 import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import com.example.test.dxworkspace.presentation.utils.getddMMYYYY
+import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -159,7 +160,7 @@ class ManufacturingLotDetailFragment : BaseFragment<FragmentManufacturingLotDeta
             adapterOperator.items = lot.manufacturingCommand?.accountables ?: listOf()
             adapterPerformer.items = lot.manufacturingCommand?.responsibles ?: listOf()
             qualityAdapter.items = lot.manufacturingCommand?.qualityControlStaffs ?: listOf()
-            edtTimeEnd.setOnClickListener { showDateTimePickerDialog() }
+            edtTimeEnd.setOnClickListener { showMaterialDatePickerDialog() }
             tilQuantity.isEnabled = lot.status == 1
             tilTimeEnd.isEnabled = lot.status == 1
             tilDes.isEnabled = lot.status == 1
@@ -218,6 +219,39 @@ class ManufacturingLotDetailFragment : BaseFragment<FragmentManufacturingLotDeta
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         datePickerDialog.show()
+    }
+
+    private fun showMaterialDatePickerDialog(isProduct: Boolean = true) {
+        val selectedDateInMillis = calendar.timeInMillis
+
+        val builder = MaterialDatePicker.Builder.datePicker()
+        builder.setSelection(selectedDateInMillis)
+
+        val datePicker = builder.build()
+
+        datePicker.addOnPositiveButtonClickListener { selectedDateInMillis ->
+            calendar.timeInMillis = selectedDateInMillis
+            if (isProduct) {
+                binding?.edtTimeEnd?.setText(
+                    SimpleDateFormat(
+                        "dd/MM/yyyy",
+                        Locale.getDefault()
+                    ).format(calendar.time)
+                )
+                lot.expirationDate = SimpleDateFormat(
+                    "yyyy-MM-dd",
+                    Locale.getDefault()
+                ).format(calendar.time)
+                binding?.btnSave?.apply {
+                    isSelected = true
+                    isEnabled = true
+                }
+            } else {
+
+            }
+        }
+
+        datePicker.show(requireActivity().supportFragmentManager, datePicker.toString())
     }
 
 }

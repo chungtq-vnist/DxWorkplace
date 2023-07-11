@@ -105,7 +105,8 @@ fun getDateDDMMYYYYHHMM(date: Date): String {
     return df.format(date)
 }
 fun convertToDate(dateString: String): Date? {
-    val format = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+    val format = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+    format.timeZone = TimeZone.getTimeZone("UTC")
     return try {
         format.parse(dateString)
     } catch (e: Exception) {

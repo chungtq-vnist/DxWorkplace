@@ -26,6 +26,9 @@ import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import com.example.test.dxworkspace.presentation.utils.getDateTimer
 import com.example.test.dxworkspace.presentation.utils.getDateYYYYMMDDHHMMSS
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.min
@@ -127,15 +130,58 @@ class TimeSheetFragment : BaseFragment<FragmentTimeSheetBinding>() {
                 }
             }
             llDayStart.setOnClickListener {
-                showDateTimePickerDialog()
+                showMaterialDatePickerDialog()
             }
             llHourStart.setOnClickListener {
-                showTimePickerDialog()
+                showMaterialTimePickerDialog()
             }
             tvDayStart.text = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(calendar.time)
             tvHourStart.text = SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.time)
 
         }
+    }
+
+    private fun showMaterialDatePickerDialog() {
+        val selectedDateInMillis = calendar.timeInMillis
+
+        val builder = MaterialDatePicker.Builder.datePicker()
+        builder.setSelection(selectedDateInMillis)
+
+        val datePicker = builder.build()
+
+        datePicker.addOnPositiveButtonClickListener { selectedDateInMillis ->
+            calendar.timeInMillis = selectedDateInMillis
+            binding?.tvDayStart?.text = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(calendar.time)
+            showMaterialTimePickerDialog()
+        }
+
+        datePicker.show(requireActivity().supportFragmentManager, datePicker.toString())
+    }
+
+    private fun showMaterialTimePickerDialog() {
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
+
+        val timePicker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_24H)
+            .setHour(hour)
+            .setMinute(minute)
+            .build()
+
+        timePicker.addOnPositiveButtonClickListener {
+            val selectedHour = timePicker.hour
+            val selectedMinute = timePicker.minute
+
+            val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+            calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
+            calendar.set(Calendar.MINUTE, selectedMinute)
+
+            endTimeSchedule = getDateYYYYMMDDHHMMSS(calendar.time)
+            // Hiển thị thời gian đã chọn
+            binding?.tvHourStart?.text = "$selectedHour:${selectedMinute}"
+        }
+
+        timePicker.show(requireActivity().supportFragmentManager, timePicker.toString())
     }
 
     private fun showDateTimePickerDialog() {

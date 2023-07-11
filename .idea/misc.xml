@@ -172,7 +172,7 @@
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_header_dashboard_manufacturing.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_info_request_export_material.xml" value="0.2" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_manufacturing_command.xml" value="0.264" />
-        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_manufacturing_plan.xml" value="0.4" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_manufacturing_plan.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_manufacturing_request.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_manufacturing_work.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_material_info.xml" value="0.4" />
@@ -199,13 +199,14 @@
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_select_manufacturing_work.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_shift_in_day.xml" value="0.8" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_shift_in_month.xml" value="0.23645833333333333" />
-        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_task.xml" value="0.5158124318429662" />
+        <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_task.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_task_type.xml" value="0.23645833333333333" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/item_timesheet_log.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/layout_item_search.xml" value="0.29842446709916587" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/layout_left_menu.xml" value="0.4" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/layout_no_task.xml" value="0.264" />
         <entry key="..\:/Android-Project/DxWorkspace/app/src/main/res/layout/test.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/quocc/.gradle/caches/transforms-3/72563d0fc41d53ce7ecff87fd7219400/transformed/material-1.6.1/res/drawable-v21/m3_tabs_background.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/quocc/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_dropdown_item_1line.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/quocc/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/quocc/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_2.xml" value="0.23645833333333333" />

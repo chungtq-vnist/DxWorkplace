@@ -45,6 +45,7 @@ import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import com.example.test.dxworkspace.presentation.utils.getDateYYYYMMDDHHMMSS
 import com.example.test.dxworkspace.presentation.utils.isDateInMonth
+import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -335,10 +336,10 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
 //            edtTimeEnd.isEnabled = false
 
             edtTimeStart.setOnClickListener {
-                showDateTimePickerDialog(true)
+                showMaterialDatePickerDialog(true)
             }
             edtTimeEnd.setOnClickListener {
-                showDateTimePickerDialog(false)
+                showMaterialDatePickerDialog(false)
             }
             edtUserApproval.setOnClickListener {
                 postNormal(
@@ -772,6 +773,53 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         datePickerDialog.show()
+    }
+
+    private fun showMaterialDatePickerDialog(isStart: Boolean) {
+
+        val selectedDateInMillis = calendar.timeInMillis
+        val builder = MaterialDatePicker.Builder.datePicker()
+        builder.setSelection(selectedDateInMillis)
+        val datePicker = builder.build()
+
+        datePicker.addOnPositiveButtonClickListener { selectedDateInMillis ->
+            calendar.timeInMillis = selectedDateInMillis
+            if (isStart) {
+                binding?.edtTimeStart?.setText(
+                    SimpleDateFormat(
+                        "dd-MM-yyyy",
+                        Locale.getDefault()
+                    ).format(calendar.time)
+                )
+                request.startDate = SimpleDateFormat(
+                    "yyyy-MM-dd",
+                    Locale.getDefault()
+                ).format(calendar.time)
+                if(request.startDate.isNotEmpty() && request.endDate.isNotEmpty()) viewModel.getWorkScheduleOfMillByDate(
+                    listMill.map { it._id },
+                    binding?.edtTimeStart?.getTextz() ?: "",
+                    binding?.edtTimeEnd?.getTextz() ?:""
+                )
+            } else {
+                binding?.edtTimeEnd?.setText(
+                    SimpleDateFormat(
+                        "dd-MM-yyyy",
+                        Locale.getDefault()
+                    ).format(calendar.time)
+                )
+                request.endDate = SimpleDateFormat(
+                    "yyyy-MM-dd",
+                    Locale.getDefault()
+                ).format(calendar.time)
+                if(request.startDate.isNotEmpty() && request.endDate.isNotEmpty()) viewModel.getWorkScheduleOfMillByDate(
+                    listMill.map { it._id },
+                    binding?.edtTimeStart?.getTextz() ?: "",
+                    binding?.edtTimeEnd?.getTextz() ?:""
+                )
+            }
+        }
+
+        datePicker.show(requireActivity().supportFragmentManager, datePicker.toString())
     }
 
     // khoi tao cac view cua screen 2

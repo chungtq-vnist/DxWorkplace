@@ -45,6 +45,7 @@ import com.example.test.dxworkspace.presentation.utils.event.EventNextHome
 import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import com.example.test.dxworkspace.presentation.utils.getddMMYYYY
+import com.google.android.material.datepicker.MaterialDatePicker
 import javax.inject.Inject
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.custom_toast.*
@@ -268,7 +269,7 @@ class ExportMaterialFragmentNew(
 
             edtCode.setText(requestNow.code)
             edtTime.setOnClickListener {
-                showDateTimePickerDialog()
+                showMaterialDatePickerDialog()
             }
             edtStock.setOnItemClickListener { adapterView, view, i, l ->
                 val t = (adapterView.getItemAtPosition(i) as StockModel)
@@ -460,5 +461,30 @@ class ExportMaterialFragmentNew(
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         datePickerDialog.show()
+    }
+    private fun showMaterialDatePickerDialog() {
+        val selectedDateInMillis = calendar.timeInMillis
+
+        val builder = MaterialDatePicker.Builder.datePicker()
+        builder.setSelection(selectedDateInMillis)
+
+        val datePicker = builder.build()
+
+        datePicker.addOnPositiveButtonClickListener { selectedDateInMillis ->
+            calendar.timeInMillis = selectedDateInMillis
+
+            binding?.edtTime?.setText(
+                SimpleDateFormat(
+                    "dd-MM-yyyy",
+                    Locale.getDefault()
+                ).format(calendar.time)
+            )
+            requestNow.desiredTime =
+                SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).format(
+                    calendar.time
+                )
+        }
+
+        datePicker.show(requireActivity().supportFragmentManager, datePicker.toString())
     }
 }

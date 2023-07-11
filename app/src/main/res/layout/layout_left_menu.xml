@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_6sdp"
-        android:background="@color/azure_radiance_10_alpha"
+        android:background="?attr/colorSecondaryContainer"
         app:layout_constraintTop_toTopOf="parent">
 
       <TextView
@@ -29,7 +29,7 @@
           android:maxLines="3"
           android:textAllCaps="true"
           android:textColor="@color/clr_main_dark"
-          android:textSize="@dimen/_15ssp"
+          android:textSize="@dimen/_12ssp"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"

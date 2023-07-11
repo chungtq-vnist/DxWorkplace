@@ -14,15 +14,13 @@ import com.example.test.dxworkspace.domain.repository.ConfigRepository
 import com.example.test.dxworkspace.presentation.model.menu.RequestCreateLot
 import com.example.test.dxworkspace.presentation.model.menu.RequestFinishCommand
 import com.example.test.dxworkspace.presentation.ui.BaseFragment
+import com.example.test.dxworkspace.presentation.utils.*
 import com.example.test.dxworkspace.presentation.utils.common.generateCode
 import com.example.test.dxworkspace.presentation.utils.common.getTextz
-import com.example.test.dxworkspace.presentation.utils.convertToUTCTime
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
-import com.example.test.dxworkspace.presentation.utils.getDateTimeYYYYMMdd
-import com.example.test.dxworkspace.presentation.utils.getDateTimer
-import com.example.test.dxworkspace.presentation.utils.getDateYYYYMMDDHHMMSS
+import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.android.synthetic.main.custom_toast.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -88,10 +86,10 @@ class CreateLotFragment() : BaseFragment<FragmentCreateLotBinding>() {
                 lotRequestWaste.originalQuantity = lotRequestWaste.quantity
             }
             edtProductDate.setOnClickListener {
-                showDateTimePickerDialog(true)
+                showMaterialDatePickerDialog(true)
             }
             edtWasteDate.setOnClickListener {
-                showDateTimePickerDialog(false)
+                showMaterialDatePickerDialog(false)
             }
             btnSave.setOnClickListener {
                 if(lotRequestProduct.quantity=="0") {
@@ -107,6 +105,41 @@ class CreateLotFragment() : BaseFragment<FragmentCreateLotBinding>() {
             }
 
         }
+    }
+    private fun showMaterialDatePickerDialog(isProduct: Boolean) {
+        val selectedDateInMillis = calendar.timeInMillis
+        val builder = MaterialDatePicker.Builder.datePicker()
+        builder.setSelection(selectedDateInMillis)
+        val datePicker = builder.build()
+        datePicker.addOnPositiveButtonClickListener { selectedDateInMillis ->
+            calendar.timeInMillis = selectedDateInMillis
+
+            if (isProduct) {
+                binding?.edtProductDate?.setText(
+                    SimpleDateFormat(
+                        "dd-MM-yyyy",
+                        Locale.getDefault()
+                    ).format(calendar.time)
+                )
+                lotRequestProduct.expirationDate = SimpleDateFormat(
+                    "yyyy-MM-dd",
+                    Locale.getDefault()
+                ).format(calendar.time)
+            } else {
+                binding?.edtWasteDate?.setText(
+                    SimpleDateFormat(
+                        "dd-MM-yyyy",
+                        Locale.getDefault()
+                    ).format(calendar.time)
+                )
+                lotRequestWaste.expirationDate = SimpleDateFormat(
+                    "yyyy-MM-dd",
+                    Locale.getDefault()
+                ).format(calendar.time)
+            }
+        }
+
+        datePicker.show(requireActivity().supportFragmentManager, datePicker.toString())
     }
     private fun showDateTimePickerDialog(isProduct: Boolean) {
         val datePickerDialog = DatePickerDialog(

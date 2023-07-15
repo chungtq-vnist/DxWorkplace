@@ -18,22 +18,24 @@ import com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.Manu
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.create.CreateManufacturingPlanFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.request.CreateManufacturingRequestFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.request.ManufacturingRequestFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.work_schedule.MillWorkScheduleFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.work_schedule.UserWorkScheduleFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.work_schedule.WorkScheduleFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ChooseRoleFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingWorkDetailFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingWorkFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.financial.ReportFinancialFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.manufacturing.ReportManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.sale.ReportSaleFragment
-import com.example.test.dxworkspace.presentation.ui.home.report.warehouse.ReportMaterialWarehouseFragment
-import com.example.test.dxworkspace.presentation.ui.home.report.warehouse.ReportProductWarehouseFragment
-import com.example.test.dxworkspace.presentation.ui.home.report.warehouse.ReportWarehouseFragment
-import com.example.test.dxworkspace.presentation.ui.home.report.warehouse.ReportWasteWarehouseFragment
+import com.example.test.dxworkspace.presentation.ui.home.report.warehouse.*
 import com.example.test.dxworkspace.presentation.ui.home.workplace.ChooseUserFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.SelectRoleFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.TimeSheetFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.WorkplaceFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.create_task.CreateTaskFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.detail_task.DetailTaskFragment
+import com.example.test.dxworkspace.presentation.ui.home.workplace.notify.NotifyByTypeFragment
+import com.example.test.dxworkspace.presentation.ui.home.workplace.notify.NotifyFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.time_picker.RangeMonthFragment
 import com.example.test.dxworkspace.presentation.ui.timepicker.*
 import dagger.Module
@@ -173,6 +175,24 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeExportMaterialFragmentNew(): ExportMaterialFragmentNew
+
+    @ContributesAndroidInjector
+    abstract fun contributeWorkScheduleFragment(): WorkScheduleFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMillWorkScheduleFragment(): MillWorkScheduleFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeUserWorkScheduleFragment(): UserWorkScheduleFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeNotifyFragment(): NotifyFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeNotifyByTypeFragment(): NotifyByTypeFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeReportInventoryTurnoverFragment(): ReportInventoryTurnoverFragment
 }
 
 

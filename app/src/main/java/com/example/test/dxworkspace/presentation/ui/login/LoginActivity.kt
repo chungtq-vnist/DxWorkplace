@@ -17,13 +17,11 @@ import com.example.test.dxworkspace.data.entity.role.RoleEntity
 import com.example.test.dxworkspace.data.entity.user.UserEntity
 import com.example.test.dxworkspace.databinding.ActivityLoginBinding
 import com.example.test.dxworkspace.presentation.ui.BaseActivity
-import com.example.test.dxworkspace.presentation.utils.common.Constants
-import com.example.test.dxworkspace.presentation.utils.common.getTextz
-import com.example.test.dxworkspace.presentation.utils.common.isValidEmail
 import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import javax.inject.Inject
 import com.example.test.dxworkspace.data.local.preferences.AppPreferences.set
 import com.example.test.dxworkspace.presentation.ui.home.HomeActivity
+import com.example.test.dxworkspace.presentation.utils.common.*
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 import io.realm.kotlin.UpdatePolicy
@@ -65,7 +63,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     edtPassword.getTextz(),
                     edtPortal.getTextz()
                 )
-                viewModel.login(param)
+                getFirebaseMessageToken {
+                    param.pushNotificationToken = it
+                    viewModel.login(param)
+                }
             }
             edtUsername.doAfterTextChanged {
                 checkEnableLogin()

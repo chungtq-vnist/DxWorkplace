@@ -27,7 +27,11 @@ import com.example.test.dxworkspace.data.entity.product_request.ParamUpdateReque
 import com.example.test.dxworkspace.data.entity.product_request.ProductRequestManagementModel
 import com.example.test.dxworkspace.data.entity.product_request.UpdateProductRequest
 import com.example.test.dxworkspace.data.entity.role.RoleModel
+import com.example.test.dxworkspace.data.entity.user.UserInManufacturingWork
 import com.example.test.dxworkspace.data.entity.user.UserProfileResponse
+import com.example.test.dxworkspace.data.entity.work_schedule.ParamCreateWorkSchedule
+import com.example.test.dxworkspace.data.entity.work_schedule.ParamWorkSchedule
+import com.example.test.dxworkspace.data.entity.work_schedule.WorkScheduleDetailModel
 import com.example.test.dxworkspace.data.entity.work_schedule.WorkScheduleModel
 import com.example.test.dxworkspace.domain.model.manufacturing_plan.RequestManufacturingPlan
 import com.example.test.dxworkspace.presentation.model.menu.*
@@ -116,4 +120,9 @@ interface ManufacturingManagerRepository {
 
     suspend fun createPlan(data : RequestManufacturingPlan) : Either<Failure,Boolean>
 
+    suspend fun getAllWorkSchedule(data: ParamWorkSchedule) : Either<Failure,List<WorkScheduleDetailModel>>
+
+    suspend fun getUserInWork(role:String) : Either<Failure,List<SubUserBasicModel>>
+
+    suspend fun createSchedule(data: ParamCreateWorkSchedule) : Either<Failure,Boolean>
 }

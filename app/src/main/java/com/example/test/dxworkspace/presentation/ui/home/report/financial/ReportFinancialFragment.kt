@@ -17,11 +17,9 @@ import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard
 import com.example.test.dxworkspace.presentation.ui.home.report.ReportViewModel
 import com.example.test.dxworkspace.presentation.ui.home.report.adapter.DetailFinancialAdapter
 import com.example.test.dxworkspace.presentation.ui.timepicker.RangeTimeSelectFragment
+import com.example.test.dxworkspace.presentation.utils.Marker
 import com.example.test.dxworkspace.presentation.utils.VariantChartFormat
-import com.example.test.dxworkspace.presentation.utils.common.Constants
-import com.example.test.dxworkspace.presentation.utils.common.postNormal
-import com.example.test.dxworkspace.presentation.utils.common.registerGreen
-import com.example.test.dxworkspace.presentation.utils.common.unregisterGreen
+import com.example.test.dxworkspace.presentation.utils.common.*
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventNextHome
 import com.example.test.dxworkspace.presentation.utils.event.EventToast
@@ -33,6 +31,7 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate
 
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
 
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import javax.inject.Inject
@@ -53,6 +52,8 @@ class ReportFinancialFragment : BaseFragment<FragmentReportFinancialBinding>() {
     lateinit var configRepository: ConfigRepository
 
     val adapter by lazy { DetailFinancialAdapter()}
+    private var mkRate: Marker? = null
+    var currentFilter = "money"
 
     override fun onStart() {
         super.onStart()
@@ -153,6 +154,7 @@ class ReportFinancialFragment : BaseFragment<FragmentReportFinancialBinding>() {
         leftAxisVariant.gridColor = Color.argb(88, 218, 218, 218)
         leftAxisVariant.setDrawLabels(true)
         leftAxisVariant.textSize = 12f
+        leftAxisVariant.axisMinimum = 0f
         val vcFormat = VariantChartFormat()
         leftAxisVariant.valueFormatter = vcFormat
         val legend: Legend = chart.legend
@@ -170,6 +172,16 @@ class ReportFinancialFragment : BaseFragment<FragmentReportFinancialBinding>() {
         val chart = binding!!.chart
         val dataNow = viewModel.financialData.value!!
         val dataPre = viewModel.financialDataCompare.value!!
+        if((dataNow.revenue ?: 0.0) < 0 ||
+            (dataNow.expense ?: 0.0) < 0 ||
+            (dataNow.profit ?: 0.0) < 0 ||
+            (dataPre.profit ?: 0.0) < 0 ||
+            (dataPre.expense ?: 0.0) < 0 ||
+            (dataPre.revenue ?: 0.0) < 0 )
+        {
+            binding?.chart?.axisLeft?.resetAxisMinimum()
+
+        }
         val barEntriesRevenue = mutableListOf<BarEntry>()
         barEntriesRevenue.add(BarEntry(1f,(dataPre.revenue ?: 0L).toFloat()))
         barEntriesRevenue.add(BarEntry(2f,(dataNow.revenue ?: 0L).toFloat()))
@@ -209,6 +221,40 @@ class ReportFinancialFragment : BaseFragment<FragmentReportFinancialBinding>() {
         val data = BarData(barDataSetRevenue,barDataSetExpense,barDataSetProfit)
         chart.axisLeft.labelCount = 5
         data.barWidth = 0.25f
+        data.setDrawValues(false)
+        mkRate = object: Marker(context){
+            override fun refreshContent(
+                e: Entry,
+                highlight: Highlight,
+            ) {
+                val i = e.x.toDouble()
+                println("XAXISSSSSSSSSSSS : ${chart.xAxis.valueFormatter.getFormattedValue(e.x,chart.xAxis)}")
+                val name = if((0.2<=i && i < 0.45) || (1.15<=i && i<1.45)) "Doanh thu"
+                else if((0.45<=i && i < 0.75) || (1.45<=i && i<1.75)) "Chi phí"
+                else if((0.75<=i && i < 1.0) || (1.75<=i && i<2.0)) "Lợi nhuận"
+                else ""
+
+                if (currentFilter == "money") {
+                    val value = e.y.toDouble()
+
+                    val money = name + "\n" + formatMoney(
+                        value,
+                        isAcceptMinus = true,
+                        isAcceptZero = true
+                    )
+                    textView.text = money
+                } else if(currentFilter == "percent") {
+                    val orderCount = e.y.toString()+"%"
+                    textView.text = orderCount
+                } else {
+                    val orderCount = name + "\n" + e.y.toString()
+                    textView.text = orderCount
+                }
+
+                super.refreshContent(e, highlight)
+            }
+        }
+        chart.marker = mkRate
         chart.data = data
         chart.xAxis.valueFormatter =  IndexAxisValueFormatter(listStringXAxis)
         chart.groupBars(0f,0.1f,0.05f)

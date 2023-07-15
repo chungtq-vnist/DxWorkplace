@@ -31,6 +31,7 @@ import com.example.test.dxworkspace.domain.model.manufacturing_plan.SubRequestGo
 import com.example.test.dxworkspace.domain.repository.ConfigRepository
 import com.example.test.dxworkspace.presentation.model.menu.WorkerScheduleRequest
 import com.example.test.dxworkspace.presentation.ui.BaseFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.ManufacturingCommandDetailFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.ManufacturingCommandViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.ManufacturingPlanViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.adapter.*
@@ -46,6 +47,7 @@ import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import com.example.test.dxworkspace.presentation.utils.getDateYYYYMMDDHHMMSS
 import com.example.test.dxworkspace.presentation.utils.isDateInMonth
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -227,8 +229,28 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
         init()
     }
 
+    fun onBackPressNew(){
+        if(request.approvers.isNotEmpty() || request.startDate.isNotEmpty() || request.endDate.isNotEmpty() ||
+                request.goods.isNotEmpty()){
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Dữ liệu chưa được lưu")
+                .setMessage("Xin lưu ý, bạn chưa lưu lại dữ liệu. Bạn có chắc muốn rời khỏi trang này?")
+                .setNegativeButton("Không"){ dialog, which ->
+                    dialog.dismiss()
+                }
+                .setPositiveButton("Thoát") { dialog, which ->
+                    dialog.dismiss()
+                    onBackPress()
+                }
+                .show()
+        } else onBackPress()
+    }
+
     fun init() {
         binding?.apply {
+            ivBack.setOnClickListener {
+                onBackPressNew()
+            }
             if(page == 1){
                 btnPrevious.isVisible = false
             }

@@ -60,5 +60,9 @@
     <string name="title_alert">Thông báo</string>
     <string name="cancel">Không</string>
     <string name="accept">Có</string>
-
+    <string name="title_all_notify">Tất cả thông báo</string>
+    <string name="title_mark_as_read_notify">Đánh dấu tất cả đã đọc</string>
+    <string name="title_notification_emty_all">Chưa có thông báo </string>
+    <string name="chanel_message">@string/app_name</string>
+    <string name="chanel_id">@string/app_name</string>
 </resources>

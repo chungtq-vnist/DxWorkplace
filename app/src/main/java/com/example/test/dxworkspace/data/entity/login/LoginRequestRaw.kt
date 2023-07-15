@@ -4,4 +4,5 @@ data class LoginRequestRaw(
     val email : String ="",
     val password : String ="",
     val portal : String ="",
+    var pushNotificationToken :String =""
 )

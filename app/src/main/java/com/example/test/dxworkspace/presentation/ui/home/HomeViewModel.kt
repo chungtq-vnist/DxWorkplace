@@ -10,6 +10,7 @@ import com.example.test.dxworkspace.data.entity.report.ReportRequestModel
 import com.example.test.dxworkspace.data.entity.report.WarehouseReportModel
 import com.example.test.dxworkspace.data.entity.role.RoleModel
 import com.example.test.dxworkspace.data.entity.user.UserProfileResponse
+import com.example.test.dxworkspace.domain.repository.ConfigRepository
 import com.example.test.dxworkspace.domain.usecase.manufacturing_manage.GetAllOrganizationUnitRemoteUseCase
 import com.example.test.dxworkspace.domain.usecase.manufacturing_manage.GetAllStockUseCase
 import com.example.test.dxworkspace.domain.usecase.manufacturing_manage.GetAllUsersUseCase
@@ -17,11 +18,14 @@ import com.example.test.dxworkspace.domain.usecase.manufacturing_work.GetAllManu
 import com.example.test.dxworkspace.domain.usecase.manufacturing_work.GetAllManufacturingWorkRemoteWithoutRoleUsecase
 import com.example.test.dxworkspace.domain.usecase.report.GetWarehouseReportUseCase
 import com.example.test.dxworkspace.domain.usecase.role.GetAllRoleRemoteUseCase
+import com.example.test.dxworkspace.domain.usecase.task.GetTaskTimesheetLogUseCase
 import com.example.test.dxworkspace.domain.usecase.version.CheckVersionUseCase
 import com.example.test.dxworkspace.domain.usecase.version.HandleVersionUseCase
 import com.example.test.dxworkspace.presentation.model.menu.ManufacturingWorkSelect
 import com.example.test.dxworkspace.presentation.ui.BaseViewModel
 import com.example.test.dxworkspace.presentation.utils.common.Constants
+import com.example.test.dxworkspace.presentation.utils.event.EventBus
+import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -38,8 +42,9 @@ class HomeViewModel @Inject constructor(
     private val getAllUsersUseCase: GetAllUsersUseCase,
     private val getAllStockUseCase: GetAllStockUseCase,
     private val getAllManufacturingWorkRemoteUsecase: GetAllManufacturingWorkRemoteUsecase,
-    private val getAllManufacturingWorkRemoteWithoutRoleUsecase: GetAllManufacturingWorkRemoteWithoutRoleUsecase
-
+    private val getAllManufacturingWorkRemoteWithoutRoleUsecase: GetAllManufacturingWorkRemoteWithoutRoleUsecase,
+    private val getTaskTimesheetLogUseCase: GetTaskTimesheetLogUseCase,
+    private val configRepository: ConfigRepository
     ) : BaseViewModel() {
 
     // fromDate va toDate dung de luu rangetime cho dashboard dieu khien san xuat
@@ -176,6 +181,17 @@ class HomeViewModel @Inject constructor(
         getAllManufacturingWorkRemoteWithoutRoleUsecase(""){
             it.either({},{
                 listManufacturingWork.value = it
+            })
+
+        }
+    }
+
+    fun getTaskTimeSheetLog(){
+        getTaskTimesheetLogUseCase(configRepository.getUser().id){
+            it.either({
+
+            },{
+                EventBus.getDefault().post(EventUpdate(EventUpdate.UPDATE_TIMESHEET,it))
             })
 
         }

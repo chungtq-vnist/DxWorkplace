@@ -291,9 +291,9 @@ class ManufacturingCommandDetailFragment : BaseFragment<FragmentManufacturingCom
         dialog = BottomDialogOptionCommand(command,listBills,config)
         dialog?.onStart = {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle(resources.getString(R.string.title_alert))
-                .setMessage("Bắt đầu thực hiện lệnh?")
-                .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
+                .setTitle("Bắt đầu thực hiện lệnh?        ")
+                .setMessage("Chú ý: Bạn đang chuẩn bị bắt đầu thực hiện lệnh sản xuất. Bạn có chắc chắn muốn tiếp tục?")
+                .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
                     // Respond to neutral button press
                     dialog.dismiss()
                 }
@@ -306,9 +306,9 @@ class ManufacturingCommandDetailFragment : BaseFragment<FragmentManufacturingCom
         }
         dialog?.onCancel = {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle(resources.getString(R.string.title_alert))
-                .setMessage("Xác nhận hủy lệnh ?")
-                .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
+                .setTitle("Xác nhận hủy lệnh?           ")
+                .setMessage("Chú ý: Bạn đang chuẩn bị hủy lệnh sản xuất. Thao tác này sẽ không thể hoàn tác. Bạn có chắc chắn muốn tiếp tục?")
+                .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
                     dialog.dismiss()
                 }
                 .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
@@ -333,9 +333,9 @@ class ManufacturingCommandDetailFragment : BaseFragment<FragmentManufacturingCom
         }
         dialog?.onFinish = {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle(resources.getString(R.string.title_alert))
-                .setMessage("Xác nhận hoàn thành lệnh ?")
-                .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
+                .setTitle("Xác nhận hoàn thành lệnh?         ")
+                .setMessage("Chú ý: Bạn đang chuẩn bị hoàn thành lệnh sản xuất. Hành động này sẽ không thể chỉnh sửa sau này. Bạn có chắc chắn muốn tiếp tục?")
+                .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
                     dialog.dismiss()
                 }
                 .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->

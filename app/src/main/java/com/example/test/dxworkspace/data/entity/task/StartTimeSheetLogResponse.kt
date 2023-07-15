@@ -17,7 +17,7 @@ data class StartTimeSheetLogResponseRaw(
 data class StartTimeSheetLog(
     var autoStopped: Int? = 0,  // 1: Tắt bấm giờ bằng tay, 2: Tắt bấm giờ tự động với thời gian hẹn trc, 3: add log timer
     var acceptLog: Boolean? = false,
-
+    var startedAt :String? ="",
     var _id: String = "",
 
 )

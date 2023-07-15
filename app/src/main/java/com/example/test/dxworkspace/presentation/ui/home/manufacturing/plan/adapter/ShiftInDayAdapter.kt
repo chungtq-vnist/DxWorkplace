@@ -18,6 +18,7 @@ class ShiftInDayAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
 
     var onChooseShift : ((shift:Int , day : Int,check : Boolean) -> Unit)? = null
+    var onViewDetail : ((shift:Int , day : Int) -> Unit)? = null
     override fun getItemViewType(position: Int): Int {
         return if(position == 0) 0 else 1
     }
@@ -62,7 +63,7 @@ class ShiftInDayAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
                 root.setOnClickListener {
                     if(item != null && item?._id?.isNotEmpty() || item?.isSave == true) {
-                        return@setOnClickListener
+                        onViewDetail?.invoke(i-1,position)
                     } else {
                         if(item == null ) {
                             onChooseShift?.invoke(i-1,position,true)

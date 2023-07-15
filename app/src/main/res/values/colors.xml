@@ -39,6 +39,7 @@
     <color name="sp_color_background_guide">#600F1637</color>
     <color name="sp_color_background_button_dialog">#0088ff</color>
     <color name="sp_color_background_button_error">#c4cdd5</color>
+    <color name="sp_color_ic_launcher">#0fd186</color>
 
     <color name="azure_radiance">#0088FF</color>
     <color name="white_alpha">#50FFFFFF</color>

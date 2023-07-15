@@ -57,7 +57,7 @@ class ReportWarehouseFragment : BaseFragment<FragmentDashboardWarehouseBinding>(
         when(event.type){
             EventUpdate.UPDATE_DASHBOARD_MANUFACTURING -> {
                 binding?.tvRangeTime?.text = homeViewModel.fromDate + " - " + homeViewModel.toDate
-                getDataWarehouseReport()
+//                getDataWarehouseReport()
             }
         }
     }
@@ -84,6 +84,7 @@ class ReportWarehouseFragment : BaseFragment<FragmentDashboardWarehouseBinding>(
 //            tabLayout.addTab(tabLayout.newTab().setText("Vòng quay hàng tồn kho"), 0)
             tabLayout.addTab(tabLayout.newTab().setText("Sản phẩm"), 0)
             tabLayout.addTab(tabLayout.newTab().setText("Nguyên liệu"), 1)
+//            tabLayout.addTab(tabLayout.newTab().setText("Vòng quay hàng tồn"), 2)
 //            tabLayout.addTab(tabLayout.newTab().setText("Công cụ"), 3)
 //            tabLayout.addTab(tabLayout.newTab().setText("Phế phẩm"), 4)
             tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -106,14 +107,15 @@ class ReportWarehouseFragment : BaseFragment<FragmentDashboardWarehouseBinding>(
                 postNormal(EventNextHome(RangeTimeSelectFragment::class.java))
             }
             pullToRefresh.setOnRefreshListener {
-                getDataWarehouseReport()
+                EventBus.getDefault().post(EventUpdate(EventUpdate.UPDATE_DASHBOARD_MANUFACTURING))
+                pullToRefresh.isRefreshing = false
             }
-            getDataWarehouseReport()
+//            getDataWarehouseReport()
         }
     }
 
     fun getDataWarehouseReport(){
-        binding?.pullToRefresh?.isRefreshing = true
+        binding?.pullToRefresh?.isRefreshing = false
         homeViewModel.getListDataReportWarehouse(
             ReportRequestModel(
                 homeViewModel.fromDate,

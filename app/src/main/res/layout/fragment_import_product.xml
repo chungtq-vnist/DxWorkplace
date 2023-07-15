@@ -456,7 +456,7 @@
                         android:layout_marginStart="@dimen/_5dp"
                         android:paddingVertical="@dimen/_10sdp"
                         android:enabled="true"
-                        android:background="@drawable/bg_blue_create"
+                        android:background="@drawable/bg_button_secondary"
                         android:gravity="center"
                         android:textColor="@color/white"
                         android:text="Lưu" />

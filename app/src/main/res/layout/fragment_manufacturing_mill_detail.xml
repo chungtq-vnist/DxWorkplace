@@ -231,7 +231,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_blue_create"
+                android:background="@drawable/bg_button_secondary"
                 android:gravity="center"
                 android:paddingVertical="@dimen/_10sdp"
                 android:text="Lưu"

@@ -198,6 +198,7 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
         allUnit = homeViewModel.listOrganization.value ?: listOf()
         allWork = homeViewModel.listManufacturingWork.value ?: listOf()
         binding?.apply {
+            ivBack.setOnClickListener { onBackPress() }
             constraintInfoMaterial.isVisible = command._id.isNotEmpty()
             rcvMaterial.adapter = infoAdapter
             infoAdapter.quantity = command.quantity
@@ -602,9 +603,9 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
         dialog = BottomDialogOptionRequest(requestDetail, config)
         dialog?.onConfirm = {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle(resources.getString(R.string.title_alert))
-                .setMessage("Xác nhận phê duyệt phiếu?")
-                .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
+                .setTitle("Xác nhận phê duyệt phiếu?        ")
+                .setMessage("Chú ý: Bạn đang chuẩn bị xác nhận phiếu đề nghị. Thao tác này sẽ không thể hoàn tác. Bạn có chắc chắn muốn tiếp tục?")
+                .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
                     dialog.dismiss()
                 }
                 .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
@@ -615,9 +616,9 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
         }
         dialog?.onCancel = {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle(resources.getString(R.string.title_alert))
-                .setMessage("Xác nhận hủy phiếu?")
-                .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
+                .setTitle("Xác nhận hủy phiếu?       ")
+                .setMessage("Chú ý: Bạn đang chuẩn bị hủy phiếu đề nghị. Thao tác này sẽ không thể hoàn tác. Bạn có chắc chắn muốn tiếp tục?")
+                .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
                     dialog.dismiss()
                 }
                 .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->

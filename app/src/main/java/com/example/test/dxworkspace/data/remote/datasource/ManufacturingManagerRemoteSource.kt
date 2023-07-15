@@ -4,6 +4,8 @@ import com.example.test.dxworkspace.data.entity.manufacturing_plan.ParamUpdatePl
 import com.example.test.dxworkspace.data.entity.product_request.ParamCreateProductRequest
 import com.example.test.dxworkspace.data.entity.product_request.ParamUpdateRequest
 import com.example.test.dxworkspace.data.entity.product_request.UpdateProductRequest
+import com.example.test.dxworkspace.data.entity.work_schedule.ParamCreateWorkSchedule
+import com.example.test.dxworkspace.data.entity.work_schedule.ParamWorkSchedule
 import com.example.test.dxworkspace.data.remote.api.DxApi
 import com.example.test.dxworkspace.domain.model.manufacturing_plan.RequestManufacturingPlan
 import com.example.test.dxworkspace.presentation.model.menu.*
@@ -80,5 +82,14 @@ class ManufacturingManagerRemoteSource @Inject constructor(val api: DxApi) {
     fun createManyRequest(data : List<ParamCreateProductRequest>) = api.createManyRequest(data)
 
     fun createPlan(data : RequestManufacturingPlan) = api.createPlan(data)
+
+    fun getAllWorkSchedule(data: ParamWorkSchedule) = api.getAllWorkSchedule(
+        data.code, data.user, data.objects,
+        data.month, data.currentRole, data.page, data.limit
+    )
+
+    fun getUserInWork(role:String) = api.getUserInWork(role)
+
+    fun createSchedule(data : ParamCreateWorkSchedule) = api.createSchedule(data)
 
 }

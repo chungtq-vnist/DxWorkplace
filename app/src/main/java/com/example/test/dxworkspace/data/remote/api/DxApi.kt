@@ -15,6 +15,9 @@ import com.example.test.dxworkspace.data.entity.manufacturing_mill.Manufacturing
 import com.example.test.dxworkspace.data.entity.manufacturing_plan.*
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkDetailResponseRaw
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkResponseRaw
+import com.example.test.dxworkspace.data.entity.notify.PaginateNotificationsResponseRaw
+import com.example.test.dxworkspace.data.entity.notify.ParamGetPageNotify
+import com.example.test.dxworkspace.data.entity.notify.ParamMarkNotifyReaded
 import com.example.test.dxworkspace.data.entity.organization_unit.OrganizationUnitResponseRaw
 import com.example.test.dxworkspace.data.entity.product_request.*
 import com.example.test.dxworkspace.data.entity.project.ProjectResponseRaw
@@ -26,12 +29,16 @@ import com.example.test.dxworkspace.data.entity.role.RoleResponseRawWrap
 import com.example.test.dxworkspace.data.entity.task.*
 import com.example.test.dxworkspace.data.entity.timesheet.StartTimeModel
 import com.example.test.dxworkspace.data.entity.timesheet.StopTimeModel
+import com.example.test.dxworkspace.data.entity.timesheet.TimeSheetLogResponseRaw
 import com.example.test.dxworkspace.data.entity.user.AllUsersResponseRaw
+import com.example.test.dxworkspace.data.entity.user.UserInManufacturingWorkResponseRaw
 import com.example.test.dxworkspace.data.entity.version.VersionDiffResponseRaw
 import com.example.test.dxworkspace.data.entity.version.VersionRequest
 import com.example.test.dxworkspace.data.entity.version.VersionResponseRaw
+import com.example.test.dxworkspace.data.entity.work_schedule.ParamCreateWorkSchedule
 import com.example.test.dxworkspace.data.entity.work_schedule.UserFreeWorkScheduleResponseRaw
 import com.example.test.dxworkspace.data.entity.work_schedule.WorkScheduleMillsResponseRaw
+import com.example.test.dxworkspace.data.entity.work_schedule.WorkScheduleResponseRaw
 import com.example.test.dxworkspace.domain.model.manufacturing_plan.RequestManufacturingPlan
 import com.example.test.dxworkspace.presentation.model.menu.*
 import okhttp3.RequestBody
@@ -44,6 +51,16 @@ interface DxApi : LoginApi {
     // notification
     @GET("/notifications/get-notifications")
     fun getALlNotifications() : Unit
+
+    @POST("/notifications/paginate-notifications")
+    fun getPageNotifications(
+        @Body data : ParamGetPageNotify
+    ) : Call<PaginateNotificationsResponseRaw>
+
+    @PATCH("/notifications/readed")
+    fun markNotifyReaded(
+        @Body data : ParamMarkNotifyReaded
+    ) : Call<Unit>
 
     // get manual notification
     @GET("/notifications/get")
@@ -276,7 +293,7 @@ interface DxApi : LoginApi {
 
     @GET("/lot/get-inventory")
     fun getInventoryGood(
-        @Query("array") array : List<String>?
+        @Query("array[]") array : List<String>?
     ) : Call<InventoryGoodResponseRaw>
 
     // get bill de nghi xuat nguyen vat lieu cua lenh san xuat
@@ -325,6 +342,33 @@ interface DxApi : LoginApi {
     fun getAllGoods(
         @Query("type") type :String
     ) :Call<GoodResponseRaw>
+
+
+    @GET("/work-schedule")
+    fun getAllWorkSchedule(
+        @Query("code") code:String? ,
+        @Query("user") user:String?,
+        @Query("object") objects:String ,
+        @Query("month") month:String ,
+        @Query("currentRole") currentRole:String ,
+        @Query("page") page:Int = 1,
+        @Query("limit")limit:Int = 10
+    ) : Call<WorkScheduleResponseRaw>
+
+    @GET("/manufacturing-works/users")
+    fun getUserInWork(
+        @Query("currentRole") currentRole:String
+    ) : Call<UserInManufacturingWorkResponseRaw>
+
+    @POST("/work-schedule")
+    fun createSchedule(
+        @Body data : ParamCreateWorkSchedule
+    ) : Call<CreatePlanResponseRaw>
+
+    @GET("/performtask/task-timesheet-logs")
+    fun getTimeSheetLog(
+        @Query("userId") userId: String
+    ) : Call<TimeSheetLogResponseRaw>
 
     @GET("/work-schedule/manufacturingMills")
     fun getWorkScheduleOfMillByDate(

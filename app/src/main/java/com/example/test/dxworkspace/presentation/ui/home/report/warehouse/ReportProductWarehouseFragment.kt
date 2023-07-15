@@ -8,22 +8,28 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.test.dxworkspace.R
 import com.example.test.dxworkspace.core.extensions.observe
 import com.example.test.dxworkspace.core.extensions.viewModel
+import com.example.test.dxworkspace.data.entity.report.ReportRequestModel
 import com.example.test.dxworkspace.data.entity.report.WarehouseReportModel
 import com.example.test.dxworkspace.databinding.FragmentDashboardWarehouseProductBinding
 import com.example.test.dxworkspace.presentation.ui.BaseFragment
 import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
 import com.example.test.dxworkspace.presentation.ui.home.report.ReportViewModel
 import com.example.test.dxworkspace.presentation.ui.home.report.adapter.WarehouseReportGoodAdapter
+import com.example.test.dxworkspace.presentation.utils.MarkerHorizontal
 import com.example.test.dxworkspace.presentation.utils.VariantChartFormat
 import com.example.test.dxworkspace.presentation.utils.common.Constants
+import com.example.test.dxworkspace.presentation.utils.common.formatMoney
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventToast
+import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
 import javax.inject.Inject
 
 class ReportProductWarehouseFragment : BaseFragment<FragmentDashboardWarehouseProductBinding>() {
@@ -43,6 +49,8 @@ class ReportProductWarehouseFragment : BaseFragment<FragmentDashboardWarehousePr
     lateinit var viewModel: ReportViewModel
 
     var dataChart = listOf<WarehouseReportModel>()
+    private var mkRate: MarkerHorizontal? = null
+    var currentFilter = "money"
 
     override fun onStart() {
         super.onStart()
@@ -52,6 +60,14 @@ class ReportProductWarehouseFragment : BaseFragment<FragmentDashboardWarehousePr
     override fun onStop() {
         super.onStop()
         EventBus.getDefault().unregister(this)
+    }
+
+    fun onBusEvent(event: EventUpdate) {
+        when (event.type) {
+            EventUpdate.UPDATE_DASHBOARD_MANUFACTURING -> {
+                getDataWarehouseReport()
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,12 +83,13 @@ class ReportProductWarehouseFragment : BaseFragment<FragmentDashboardWarehousePr
 //                setDataRcv()
 //            }
 
-        }
-        observe(homeViewModel.statusReport){
-            if(it == "DONE"){
-                dataChart = homeViewModel.listDataWarehouseReport.value ?: listOf()
-                setDataChart()
-                setDataRcv()
+
+            observe(statusReport) {
+                if (it == "DONE") {
+                    dataChart = viewModel.listDataWarehouseReport.value ?: listOf()
+                    setDataChart()
+                    setDataRcv()
+                }
             }
         }
     }
@@ -83,7 +100,8 @@ class ReportProductWarehouseFragment : BaseFragment<FragmentDashboardWarehousePr
             rcvDetail.adapter = adapter
         }
         setupChart()
-        setDataChart()
+//        setDataChart()
+        getDataWarehouseReport()
     }
 
     fun setupChart(){
@@ -118,7 +136,7 @@ class ReportProductWarehouseFragment : BaseFragment<FragmentDashboardWarehousePr
         rightAxisVariant.spaceTop = 15f
         rightAxisVariant.axisLineColor = Color.argb(150, 95, 95, 95)
         rightAxisVariant.setDrawGridLines(true)
-        rightAxisVariant.gridColor = Color.argb(88, 218, 218, 218)
+        rightAxisVariant.gridColor = Color.argb(100, 218, 218, 218)
         rightAxisVariant.setDrawLabels(true)
         rightAxisVariant.textSize = 12f
         rightAxisVariant.setDrawGridLines(false)
@@ -196,9 +214,40 @@ class ReportProductWarehouseFragment : BaseFragment<FragmentDashboardWarehousePr
             params.width = ViewGroup.LayoutParams.MATCH_PARENT
             chart.layoutParams = params
             chart.requestLayout()
+            mkRate = object: MarkerHorizontal(context){
+                override fun refreshContent(
+                    e: Entry,
+                    highlight: Highlight,
+                ) {
+                    val i = e.x.toDouble()
+                    val name = if((0.0<i && i < 0.25) || (1.0<i && i<1.25)) "GT đầu kỳ"
+                    else if((0.25<i && i < 0.5) || (1.25<i && i<1.5)) "GT cuối kỳ"
+                    else if((0.5<i && i < 0.75) || (1.5<i && i<1.75)) "GT nhập"
+                    else if((0.75<i && i < 1) || (1.75<i && i<2)) "GT xuất"
+                        else ""
+
+                    if (currentFilter == "money") {
+                        val value = e.y.toDouble()
+
+                        val money = name + "\n" + formatMoney(
+                            value,
+                            isAcceptMinus = true,
+                            isAcceptZero = true
+                        )
+                        textView.text = money
+                    } else {
+                        val orderCount = name + "\n" + e.y.toString()
+                        textView.text = orderCount
+                    }
+
+                    super.refreshContent(e, highlight)
+                }
+            }
+            chart.marker = mkRate
 
             chart.axisRight.labelCount = 5
             data.barWidth = 0.175f
+            data.setDrawValues(false)
             chart.data = data
             chart.xAxis.valueFormatter = IndexAxisValueFormatter(listStringXAxis)
             chart.groupBars(0f, 0.1f, 0.05f)
@@ -215,5 +264,16 @@ class ReportProductWarehouseFragment : BaseFragment<FragmentDashboardWarehousePr
 
     fun setDataRcv() {
 
+    }
+
+    fun getDataWarehouseReport(){
+        viewModel.getListDataReportWarehouse(
+            ReportRequestModel(
+                homeViewModel.fromDate,
+                homeViewModel.toDate,
+                if (homeViewModel.isCompare) homeViewModel.fromDateCompare else null,
+                if (homeViewModel.isCompare) homeViewModel.toDateCompare else null,
+            )
+        )
     }
 }

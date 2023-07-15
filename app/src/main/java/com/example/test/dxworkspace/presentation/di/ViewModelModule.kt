@@ -11,10 +11,12 @@ import com.example.test.dxworkspace.presentation.ui.home.manufacturing.lot.Manuf
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.mill.ManufacturingMillViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.ManufacturingPlanViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.request.ManufacturingRequestViewModel
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.work_schedule.WorkScheduleViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingWorkViewModel
 import com.example.test.dxworkspace.presentation.ui.home.report.ReportViewModel
 import com.example.test.dxworkspace.presentation.ui.home.workplace.WorkplaceViewModel
 import com.example.test.dxworkspace.presentation.ui.home.workplace.create_task.CreateTaskViewModel
+import com.example.test.dxworkspace.presentation.ui.home.workplace.notify.NotifyViewModel
 import com.example.test.dxworkspace.presentation.ui.login.LoginViewModel
 import dagger.Binds
 import dagger.Module
@@ -86,5 +88,15 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ManufacturingRequestViewModel::class)
     abstract fun bindsManufacturingRequestViewModel(workplaceViewModel: ManufacturingRequestViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WorkScheduleViewModel::class)
+    abstract fun bindsWorkScheduleViewModel(workplaceViewModel: WorkScheduleViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NotifyViewModel::class)
+    abstract fun bindsNotifyViewModel(workplaceViewModel: NotifyViewModel) : ViewModel
 
 }

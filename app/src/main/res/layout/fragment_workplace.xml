@@ -16,7 +16,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="@dimen/heigt_toolbar"
                 android:background="@color/white"
                 app:contentInsetStartWithNavigation="0dp"
                 app:navigationIcon="@drawable/ic_menu">
@@ -24,9 +24,54 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="?attr/actionBarSize"
+                    android:layout_marginEnd="@dimen/heigt_toolbar"
                     android:scaleType="centerInside"
                     app:srcCompat="@drawable/ic_app_name" />
+
+                <RelativeLayout
+                    android:layout_width="@dimen/heigt_toolbar"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivNotify"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:padding="@dimen/_10sdp"
+                        android:src="@drawable/ic_notification" />
+
+                    <FrameLayout
+                        android:id="@+id/frameTotalCart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:paddingLeft="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_alignTop="@id/ivNotify"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivSttCart"
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:background="?attr/colorSecondary"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+                        <TextView
+                            android:id="@+id/tvCartCount"
+                            style="@style/Font.TextSemiBold11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_6ssp"
+                            tools:text="99+" />
+                    </FrameLayout>
+                </RelativeLayout>
 
 
             </androidx.appcompat.widget.Toolbar>
@@ -53,7 +98,12 @@
                     android:paddingTop="@dimen/_4sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
-
+                    <LinearLayout
+                        android:id="@+id/lnRangeTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_centerInParent="true">
                     <ImageView
                         android:id="@+id/ivRangeTime"
                         android:layout_width="@dimen/_16sdp"
@@ -72,10 +122,11 @@
                         android:text="Today"
                         android:textColor="@color/clr_blue_new"
                         android:textSize="@dimen/_12ssp" />
+                    </LinearLayout>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_below="@id/tvRangeTime"
+                        android:layout_below="@id/lnRangeTime"
                         android:layout_marginTop="@dimen/_4sdp"
                         android:visibility="gone"
                         android:background="@drawable/bg_line_devider_custom" />
@@ -216,6 +267,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:layout_constraintTop_toTopOf="parent"
+                            app:tabMode="scrollable"
                             />
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rcvTaskType"

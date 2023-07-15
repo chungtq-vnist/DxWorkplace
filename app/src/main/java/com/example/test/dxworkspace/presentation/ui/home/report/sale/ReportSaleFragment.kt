@@ -17,8 +17,10 @@ import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
 import com.example.test.dxworkspace.presentation.ui.home.report.ReportViewModel
 import com.example.test.dxworkspace.presentation.ui.home.report.adapter.DetailFinancialAdapter
 import com.example.test.dxworkspace.presentation.ui.timepicker.RangeTimeSelectFragment
+import com.example.test.dxworkspace.presentation.utils.Marker
 import com.example.test.dxworkspace.presentation.utils.VariantChartFormat
 import com.example.test.dxworkspace.presentation.utils.common.Constants
+import com.example.test.dxworkspace.presentation.utils.common.formatMoney
 import com.example.test.dxworkspace.presentation.utils.common.postNormal
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventNextHome
@@ -33,8 +35,7 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 import com.github.mikephil.charting.charts.CombinedChart.DrawOrder
-
-
+import com.github.mikephil.charting.highlight.Highlight
 
 
 class ReportSaleFragment : BaseFragment<FragmentReportSaleBinding>() {
@@ -51,6 +52,8 @@ class ReportSaleFragment : BaseFragment<FragmentReportSaleBinding>() {
     @Inject
     lateinit var configRepository: ConfigRepository
 
+    private var mkRate: Marker? = null
+    var currentFilter = "money"
     val adapter by lazy { DetailFinancialAdapter() }
 
     override fun onStart() {
@@ -124,9 +127,9 @@ class ReportSaleFragment : BaseFragment<FragmentReportSaleBinding>() {
         chart.setDrawBorders(false)
         chart.setScaleEnabled(false)
 
-        chart.drawOrder = arrayOf(
-            DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.CANDLE, DrawOrder.LINE, DrawOrder.SCATTER
-        )
+//        chart.drawOrder = arrayOf(
+//            DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.CANDLE, DrawOrder.LINE, DrawOrder.SCATTER
+//        )
 
         val xl = chart.xAxis
         xl.position = XAxis.XAxisPosition.BOTTOM
@@ -187,7 +190,7 @@ class ReportSaleFragment : BaseFragment<FragmentReportSaleBinding>() {
         val barEntriesRevenue = mutableListOf<BarEntry>()
         barEntriesRevenue.add(BarEntry(1f,(dataPre.revenue ?: 0L).toFloat()))
         barEntriesRevenue.add(BarEntry(2f,(dataNow.revenue ?: 0L).toFloat()))
-
+        var hasNegativeValue = dataNow.revenue <0.0 || dataPre.revenue < 0.0
         var maxOfRightAxis = 20
 
         val barEntriesNumberOrder = mutableListOf<BarEntry>()
@@ -237,13 +240,18 @@ class ReportSaleFragment : BaseFragment<FragmentReportSaleBinding>() {
         barDataSetRevenue.setColors(Color.YELLOW)
         barDataSetNewOrder.setColors(Color.GREEN)
         barDataSetNewQuote.setColors(Color.CYAN)
+//        val bardata = BarData(barDataSetOrder,barDataSetNewOrder,barDataSetNewQuote)
+
         barDataSetRevenue.axisDependency = YAxis.AxisDependency.LEFT
         barDataSetOrder.axisDependency = YAxis.AxisDependency.RIGHT
         barDataSetNewOrder.axisDependency = YAxis.AxisDependency.RIGHT
         barDataSetNewQuote.axisDependency = YAxis.AxisDependency.RIGHT
 
         chart.xAxis.valueFormatter =  IndexAxisValueFormatter(listStringXAxis)
-
+        if(hasNegativeValue) chart.axisLeft.resetAxisMinimum()
+            else chart.axisLeft.axisMinimum = 0f
+        chart.axisRight.axisMinimum = 0f
+        chart.axisRight.labelCount = 4
         val bardata = BarData(barDataSetRevenue,barDataSetOrder,barDataSetNewOrder,barDataSetNewQuote)
         chart.axisLeft.labelCount = 4
         bardata.barWidth = 0.15f
@@ -262,13 +270,46 @@ class ReportSaleFragment : BaseFragment<FragmentReportSaleBinding>() {
 //        lineDataSet.setCircleRadius(5f);
 //        val lineData = LineData(lineDataSet)
 
+        bardata.setDrawValues(true)
+        mkRate = object: Marker(context){
+            override fun refreshContent(
+                e: Entry,
+                highlight: Highlight,
+            ) {
+                val i = e.x.toDouble()
+//                println("XAXISSSSSSSSSSSS : ${chart.xAxis.valueFormatter.getFormattedValue(e.x,chart.xAxis)}")
+//                val name = if((0.2<=i && i < 0.45) || (1.15<=i && i<1.45)) "Doanh thu"
+//                else if((0.45<=i && i < 0.75) || (1.45<=i && i<1.75)) "Chi phí"
+//                else if((0.75<=i && i < 1.0) || (1.75<=i && i<2.0)) "Lợi nhuận"
+//                else ""
+//
+//                if (currentFilter == "money") {
+//                    val value = e.y.toDouble()
+//
+//                    val money = name + "\n" + formatMoney(
+//                        value,
+//                        isAcceptMinus = true,
+//                        isAcceptZero = true
+//                    )
+//                    textView.text = money
+//                } else if(currentFilter == "percent") {
+//                    val orderCount = e.y.toString()+"%"
+//                    textView.text = orderCount
+//                } else {
+                    val orderCount = e.y.toString()
+                    textView.text = orderCount
+
+
+                super.refreshContent(e, highlight)
+            }
+        }
+        chart.marker = mkRate
 
 
 
-
-        val combineData = CombinedData()
-        combineData.setData(bardata)
-        chart.data = combineData
+//        val combineData = CombinedData()
+//        combineData.setData(bardata)
+        chart.data = bardata
         chart.highlightValue(null)
         chart.animateXY(1000, 1000)
         chart.invalidate()

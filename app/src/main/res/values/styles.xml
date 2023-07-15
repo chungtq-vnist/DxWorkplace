@@ -5,7 +5,7 @@
 <!--        <item name="colorPrimary">#00C4CA</item>-->
 <!--        <item name="colorPrimaryDark">@color/sp_color_blue</item>-->
 <!--        <item name="colorAccent">#00BCD4</item>-->
-      <item name="colorSecondary">#C752DC</item>
+      <item name="colorSecondary">#0088FF</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -404,7 +404,7 @@
 
   <style name="ImageToolbar">
     <item name="android:layout_width">@dimen/_36sdp</item>
-    <item name="android:layout_height">?actionBarSize</item>
+    <item name="android:layout_height">@dimen/heigt_toolbar</item>
     <item name="android:padding">@dimen/_9sdp</item>
     <item name="android:adjustViewBounds">true</item>
     <item name="srcCompat">@drawable/ic_back_main</item>

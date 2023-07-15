@@ -7,6 +7,8 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.text.Html
+import android.text.Spanned
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -22,12 +24,18 @@ import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test.dxworkspace.R
 import com.example.test.dxworkspace.presentation.utils.common.decorator.LinearMarginDecoration
+import com.google.firebase.messaging.FirebaseMessaging
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Qualifier
+import android.content.Context
+
+import android.util.TypedValue
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 
 fun RecyclerView.addDefaultDecorator(margin: Int = resources.getDimensionPixelOffset(R.dimen._8sdp)) {
@@ -225,4 +233,41 @@ fun generateCode(header : String): String {
     val randomSuffix = String.format("%06d", random.nextInt(999999))
 
     return "$header${t}.${randomSuffix}"
+}
+
+fun getFirebaseMessageToken(handle:(String) -> Unit) :String{
+    var token =""
+    try {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {task ->
+            if(task.isSuccessful) token = task.result ?: ""
+            handle.invoke(token)
+        }
+    } catch (e:Exception){
+        return ""
+    }
+    return token
+
+}
+fun String.toHtml(): Spanned? {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(this, Html.FROM_HTML_MODE_COMPACT)
+    } else {
+        Html.fromHtml(this)
+    }
+}
+fun getThemeAccentColor(context: Context): Int {
+    val value = TypedValue()
+    context.getTheme().resolveAttribute(R.attr.colorAccent, value, true)
+    return value.data
+}
+fun getThemePrimaryColor(context: Context): Int {
+    val value = TypedValue()
+    context.getTheme().resolveAttribute(R.attr.colorPrimary, value, true)
+    return value.data
+}
+
+fun roundDouble(n: Double): String {
+    val df = DecimalFormat("#.##")
+    df.setRoundingMode(RoundingMode.CEILING)
+    return df.format(n)
 }

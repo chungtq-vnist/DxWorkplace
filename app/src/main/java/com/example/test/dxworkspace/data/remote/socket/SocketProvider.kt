@@ -83,6 +83,9 @@ class SocketProvider @Inject constructor() {
 
                 EventBus.getDefault().post(EventSyncMessage(EventSyncMessage.SYNC_CHECK_VERSION))
             }
+            mSocket!!.on("stop timers"){
+                EventBus.getDefault().post(EventSyncMessage(EventSyncMessage.SYNC_TIMESHEET_LOG))
+            }
         }
     }
 }

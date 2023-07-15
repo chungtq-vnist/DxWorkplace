@@ -16,6 +16,7 @@ class ManufacturingPlanDashboardAdapter : RecyclerView.Adapter<RecyclerView.View
             field = value
             notifyDataSetChanged()
         }
+    var onClick2:((DashboardManufacturingPlanModel) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolderPlan(
@@ -28,7 +29,7 @@ class ManufacturingPlanDashboardAdapter : RecyclerView.Adapter<RecyclerView.View
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
-        (holder as ViewHolderPlan).bind(item)
+        (holder as ViewHolderPlan).bind(item,onClick2)
         (holder as ViewHolderPlan).binding.root.setOnClickListener {
             item.first!![0].isSelected = !item.first!![0].isSelected
             notifyItemChanged(position)
@@ -43,8 +44,12 @@ class ManufacturingPlanDashboardAdapter : RecyclerView.Adapter<RecyclerView.View
 class ViewHolderPlan(val binding: ItemHeaderDashboardManufacturingBinding) : RecyclerView.ViewHolder(
     binding.root
 ) {
-    fun bind(item: Pair<List<DashboardManufacturingPlanModel>?,String>) {
+    fun bind(item: Pair<List<DashboardManufacturingPlanModel>?,String>,click :((DashboardManufacturingPlanModel)-> Unit)?) {
         val adapter = ManufacturingPlanSubAdapter()
+        adapter.onClick = {
+            click?.invoke(it)
+        }
+
         binding.apply {
             tvCode.text = item.second
             tvQuantity.text = item.first?.size.toString()
@@ -62,7 +67,7 @@ class ManufacturingPlanSubAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder
             field = value
             notifyDataSetChanged()
         }
-
+    var onClick:((DashboardManufacturingPlanModel) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return SubViewHolderPlan(
             ItemDetailDashboardManufacturingPlanBinding.inflate(
@@ -76,6 +81,9 @@ class ManufacturingPlanSubAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
         (holder as SubViewHolderPlan).bind(item)
+        holder.binding.lnRoot.setOnClickListener {
+            onClick?.invoke(item)
+        }
     }
 
     override fun getItemCount(): Int {

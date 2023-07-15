@@ -42,24 +42,30 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-            <RelativeLayout
-                android:id="@+id/rlRangeTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:paddingTop="@dimen/_4sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivBack">
+        <RelativeLayout
+            android:id="@+id/rlRangeTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingTop="@dimen/_4sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivBack">
 
+            <LinearLayout
+                android:id="@+id/lnRangeTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true">
                 <ImageView
                     android:id="@+id/ivRangeTime"
                     android:layout_width="@dimen/_16sdp"
                     android:layout_height="@dimen/_16sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_toStartOf="@id/tvRangeTime"
                     android:layout_alignTop="@id/tvRangeTime"
                     android:layout_alignBottom="@id/tvRangeTime"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/tvRangeTime"
                     android:src="@drawable/ic_select_calendar" />
 
                 <TextView
@@ -68,18 +74,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginStart="@dimen/_6sdp"
                     android:text="16/6/2023 - 20/6/2023"
                     android:textColor="@color/clr_blue_new"
                     android:textSize="@dimen/_12ssp" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_below="@id/tvRangeTime"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:background="@color/clr_line_new" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/lnRangeTime"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="@color/clr_line_new" />
 
-            </RelativeLayout>
+        </RelativeLayout>
 
 
 

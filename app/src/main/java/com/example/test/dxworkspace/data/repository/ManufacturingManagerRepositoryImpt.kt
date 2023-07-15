@@ -27,6 +27,9 @@ import com.example.test.dxworkspace.data.entity.product_request.ProductRequestMa
 import com.example.test.dxworkspace.data.entity.product_request.UpdateProductRequest
 import com.example.test.dxworkspace.data.entity.role.RoleModel
 import com.example.test.dxworkspace.data.entity.user.UserProfileResponse
+import com.example.test.dxworkspace.data.entity.work_schedule.ParamCreateWorkSchedule
+import com.example.test.dxworkspace.data.entity.work_schedule.ParamWorkSchedule
+import com.example.test.dxworkspace.data.entity.work_schedule.WorkScheduleDetailModel
 import com.example.test.dxworkspace.data.entity.work_schedule.WorkScheduleModel
 import com.example.test.dxworkspace.data.local.datasource.ManufacturingCommandLocalSource
 import com.example.test.dxworkspace.data.local.datasource.ManufacturingLotLocalSource
@@ -494,6 +497,36 @@ class ManufacturingManagerRepositoryImpt @Inject constructor(
             {
                 if(it.success) it.content ?: listOf() else listOf()
             }, listOf()
+        )
+    }
+
+    override suspend fun getAllWorkSchedule(data: ParamWorkSchedule): Either<Failure, List<WorkScheduleDetailModel>> {
+        return requestApi(
+            manufacturingManagerRemoteSource.getAllWorkSchedule(data),
+            {
+            if(it.success) it.content?.workSchedules?.docs ?: listOf() else listOf()
+            },
+            listOf()
+        )
+    }
+
+    override suspend fun getUserInWork(role: String): Either<Failure, List<SubUserBasicModel>> {
+        return requestApi(
+            manufacturingManagerRemoteSource.getUserInWork(role),
+            {
+                if(it.success) it.content?.employees?.map { it.userId } ?: listOf() else listOf()
+            },
+            listOf()
+        )
+    }
+
+    override suspend fun createSchedule(data: ParamCreateWorkSchedule): Either<Failure, Boolean> {
+        return requestApi(
+            manufacturingManagerRemoteSource.createSchedule(data),
+            {
+                it.success
+            },
+            true
         )
     }
 }

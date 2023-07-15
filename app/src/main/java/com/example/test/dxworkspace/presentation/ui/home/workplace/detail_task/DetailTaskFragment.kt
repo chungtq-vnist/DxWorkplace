@@ -77,7 +77,6 @@ class DetailTaskFragment : BaseFragment<FragmentDetailTaskBinding>() {
                 sharedPreferences[Constants.IS_COUNTING] = true
                 sharedPreferences[Constants.TASK_ID_COUNTING] = viewModel.taskSelected?.value?._id ?: ""
                 viewModel.startTimer(viewModel.taskIdTimer , configRepository.getUser().id)
-                EventBus.getDefault().post(EventUpdate(EventUpdate.UPDATE_TIMER,true))
                 onBackPress()
             }
             btnMenuMore.setOnClickListener {

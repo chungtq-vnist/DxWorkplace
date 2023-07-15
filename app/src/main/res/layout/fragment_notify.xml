@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/pullToRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_foot_menu"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/heigt_toolbar"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivBack"
+                    style="@style/ImageToolbar" />
+
+                <TextView
+                    style="@style/Font.TextSemiBold13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:includeFontPadding="false"
+                    android:text="Danh sách thông báo"
+                    android:textColor="@color/clr_main_dark"
+                    tools:ignore="RelativeOverlap" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivSetting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/clr_line_new" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+
+                android:background="@drawable/bg_border_notification"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_10sdp"
+                android:weightSum="5">
+
+                <RelativeLayout
+                    android:id="@+id/rlTask"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/ic_notify_cart" />
+
+                    <TextView
+                        style="@style/Font.TextSemiBold11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:includeFontPadding="false"
+                        android:text="Công việc"
+                        android:textColor="@color/clr_main_dark"
+                        tools:ignore="RelativeOverlap" />
+
+                    <FrameLayout
+                        android:id="@+id/frameTotalTask"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingLeft="@dimen/_26sdp"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivSttCart"
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:src="@color/sp_color_red"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+                        <TextView
+                            android:id="@+id/tvTaskCount"
+                            style="@style/Font.TextSemiBold11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_6ssp"
+                            tools:text="99+" />
+                    </FrameLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlAsset"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/ic_notify_asset" />
+
+                    <TextView
+                        style="@style/Font.TextSemiBold11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv1"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:includeFontPadding="false"
+                        android:text="Tài sản"
+                        android:textColor="@color/clr_main_dark"
+                        tools:ignore="RelativeOverlap" />
+
+                    <FrameLayout
+                        android:id="@+id/frameTotalAsset"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingLeft="@dimen/_26sdp"
+                        android:visibility="gone">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivSttDelivery"
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:src="@color/sp_color_red" />
+
+                        <TextView
+                            android:id="@+id/tvAssetCount"
+                            style="@style/Font.TextSemiBold11"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_6ssp"
+                            tools:text="99+" />
+                    </FrameLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlKPI"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/ic_notify_kpi" />
+
+                    <TextView
+                        style="@style/Font.TextSemiBold11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv2"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:includeFontPadding="false"
+                        android:text="KPI"
+                        android:textColor="@color/clr_main_dark"
+                        tools:ignore="RelativeOverlap" />
+
+                    <FrameLayout
+                        android:id="@+id/frameTotalKPI"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingLeft="@dimen/_26sdp"
+                        android:visibility="gone">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivSttKitchen"
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:src="@color/sp_color_red" />
+
+                        <TextView
+                            android:id="@+id/tvKPICount"
+                            style="@style/Font.TextSemiBold11"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_6ssp"
+                            tools:text="99+" />
+                    </FrameLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlProduct"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/ic_notify_product" />
+
+                    <TextView
+                        style="@style/Font.TextSemiBold11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv3"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:includeFontPadding="false"
+                        android:text="Sản phẩm"
+                        android:textColor="@color/clr_main_dark"
+                        tools:ignore="RelativeOverlap" />
+
+                    <FrameLayout
+                        android:id="@+id/frameTotalProduct"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingLeft="@dimen/_26sdp"
+                        android:visibility="gone">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivSttSystem"
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:src="@color/sp_color_red"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+                        <TextView
+                            android:id="@+id/tvProductCount"
+                            style="@style/Font.TextSemiBold11"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_6ssp"
+                            tools:text="99+" />
+                    </FrameLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlProcedure"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/ic_notify_procedure" />
+
+                    <TextView
+                        style="@style/Font.TextSemiBold11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv4"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:includeFontPadding="false"
+                        android:text="Quy trình"
+                        android:textColor="@color/clr_main_dark"
+                        tools:ignore="RelativeOverlap" />
+
+                    <FrameLayout
+                        android:id="@+id/frameTotalProcedure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingLeft="@dimen/_26sdp"
+                        android:visibility="gone">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivSttProcedure"
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:src="@color/sp_color_red"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+                        <TextView
+                            android:id="@+id/tvProcedureCount"
+                            style="@style/Font.TextSemiBold11"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_6ssp"
+                            tools:text="99+" />
+                    </FrameLayout>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp">
+
+                <TextView
+                    style="@style/Font.TextRegular13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:includeFontPadding="false"
+                    android:text="@string/title_all_notify"
+                    android:textColor="@color/clr_main_dark"
+                    tools:ignore="RelativeOverlap" />
+
+                <TextView
+                    android:id="@+id/tvMarkAsReadAll"
+                    style="@style/Font.TextRegular13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:includeFontPadding="false"
+                    android:paddingVertical="@dimen/_10sdp"
+                    android:textColor="@color/sp_color_blue"
+                    tools:ignore="RelativeOverlap"
+                    android:text="@string/title_mark_as_read_notify" />
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/view_root_rcv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:background="@drawable/bg_border_notification"
+                android:visibility="gone">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvNotify"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="10"
+                    tools:listitem="@layout/item_notify" />
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:id="@+id/view_root_emty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/bg_border_notification">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_emty_notification" />
+
+                    <TextView
+                        style="@style/Font.TextSemiBold13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:includeFontPadding="false"
+                        android:text="@string/title_notification_emty_all"
+                        android:textColor="@color/clr_main_dark"
+                        android:textStyle="bold"
+                        tools:ignore="RelativeOverlap" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "186363264855",
+    "project_id": "dxworkplace-b74bc",
+    "storage_bucket": "dxworkplace-b74bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186363264855:android:a04247d49c0146e9dc4812",
+        "android_client_info": {
+          "package_name": "com.example.test.dxworkspace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "186363264855-t1fc1uirq1rt071ndu6sb818jkc74t7b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLffm-X9lJVgc9CTMM5b-UAhRuyFIZy5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "186363264855-t1fc1uirq1rt071ndu6sb818jkc74t7b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

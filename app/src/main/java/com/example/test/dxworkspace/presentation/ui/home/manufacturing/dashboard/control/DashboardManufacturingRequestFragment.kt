@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.example.test.dxworkspace.R
@@ -17,7 +18,11 @@ import com.example.test.dxworkspace.presentation.ui.BaseFragment
 import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.adapter.ManufacturingCommandDashboardAdapter
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.adapter.ManufacturingRequestDashboardAdapter
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.request.CreateManufacturingRequestFragment
+import com.example.test.dxworkspace.presentation.utils.common.getThemePrimaryColor
+import com.example.test.dxworkspace.presentation.utils.common.postNormal
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
+import com.example.test.dxworkspace.presentation.utils.event.EventNextHome
 import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import com.github.mikephil.charting.animation.Easing
@@ -109,19 +114,21 @@ class DashboardManufacturingRequestFragment : BaseFragment<FragmentDashboardManu
         getNumberOfPlan()
         setupPieChart()
         binding?.apply {
-            tvStatus.setTextColor(resources.getColor(R.color.sp_color_blue))
-            viewStatus.setBackgroundColor(resources.getColor(R.color.sp_color_blue))
-            tvProgress.setTextColor(resources.getColor(R.color.sp_color_black_opacity_80))
-            viewProgress.setBackgroundColor(resources.getColor(R.color.sp_color_black_opacity_80))
+//            tvStatus.setTextColor(getThemePrimaryColor(requireContext()))
+//            viewStatus.setBackgroundColor(getThemePrimaryColor(requireContext()))
+//            tvProgress.setTextColor(resources.getColor(R.color.sp_color_black_opacity_80))
+//            viewProgress.setBackgroundColor(getThemePrimaryColor(requireContext()))
             tvTitleChart.text = getText(R.string.tv_title_chart_request_status)
             tvProgress.text = "Loại"
             rlStatus.setOnClickListener {
                 if (!isTypeStatus) {
                     isTypeStatus = true
-                    tvStatus.setTextColor(resources.getColor(R.color.sp_color_blue))
-                    viewStatus.setBackgroundColor(resources.getColor(R.color.sp_color_blue))
-                    tvProgress.setTextColor(resources.getColor(R.color.sp_color_black_opacity_80))
-                    viewProgress.setBackgroundColor(resources.getColor(R.color.sp_color_black_opacity_80))
+//                    tvStatus.setTextColor(resources.getColor(R.color.sp_color_blue))
+//                    viewStatus.setBackgroundColor(resources.getColor(R.color.sp_color_blue))
+//                    tvProgress.setTextColor(resources.getColor(R.color.sp_color_black_opacity_80))
+//                    viewProgress.setBackgroundColor(resources.getColor(R.color.sp_color_black_opacity_80))
+                    viewStatus.isVisible = true
+                    viewProgress.isVisible = false
                     tvTitleChart.text = getText(R.string.tv_title_chart_request_status)
                     setDataRequestStatus()
                     setDataForRcvDetail()
@@ -130,16 +137,21 @@ class DashboardManufacturingRequestFragment : BaseFragment<FragmentDashboardManu
             rlProgress.setOnClickListener {
                 if (isTypeStatus) {
                     isTypeStatus = false
-                    tvStatus.setTextColor(resources.getColor(R.color.sp_color_black_opacity_80))
-                    viewStatus.setBackgroundColor(resources.getColor(R.color.sp_color_black_opacity_80))
-                    tvProgress.setTextColor(resources.getColor(R.color.sp_color_blue))
-                    viewProgress.setBackgroundColor(resources.getColor(R.color.sp_color_blue))
+//                    tvStatus.setTextColor(resources.getColor(R.color.sp_color_black_opacity_80))
+//                    viewStatus.setBackgroundColor(resources.getColor(R.color.sp_color_black_opacity_80))
+//                    tvProgress.setTextColor(resources.getColor(R.color.sp_color_blue))
+//                    viewProgress.setBackgroundColor(resources.getColor(R.color.sp_color_blue))
+                    viewStatus.isVisible = false
+                    viewProgress.isVisible = true
                     tvTitleChart.text = getText(R.string.tv_title_chart_request_type)
                     setDataRequestType()
                     setDataForRcvDetail()
                 }
             }
             rcvDetail.adapter = adapterDetail
+            adapterDetail.onClick2 = {
+                postNormal(EventNextHome(CreateManufacturingRequestFragment::class.java, bundleOf(Pair("REQUEST_ID",it._id))))
+            }
             pullToRefresh.setOnRefreshListener {
                 getNumberOfPlan()
             }

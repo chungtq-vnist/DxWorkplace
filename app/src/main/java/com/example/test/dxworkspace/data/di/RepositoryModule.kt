@@ -58,5 +58,10 @@ class RepositoryModule {
     fun providesManufacturingManagerRepository(repository : ManufacturingManagerRepositoryImpt) : ManufacturingManagerRepository = repository
 
 
+    @Provides
+    @Singleton
+    fun providesNotifyRepository(repository : NotifyRepositoryImpl) : NotifyRepository = repository
+
+
 
 }

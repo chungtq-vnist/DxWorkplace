@@ -172,9 +172,9 @@ class ManufacturingPlanDetailFragment : BaseFragment<FragmentManufacturingPlanDe
         dialog = BottomDialogOptionPlan(planDetail, configRepository)
         dialog?.onConfirm = {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle(resources.getString(R.string.title_alert))
-                .setMessage("Xác nhận phê duyệt kế hoạch?")
-                .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
+                .setTitle("Xác nhận phê duyệt kế hoạch?")
+                .setMessage("Chú ý: Bạn đang chuẩn bị phê duyệt kế hoạch sản xuất. Hành động này sẽ xác nhận và đưa kế hoạch vào giai đoạn thực hiện. Bạn có chắc chắn muốn tiếp tục?")
+                .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
                     dialog.dismiss()
                 }
                 .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
@@ -185,9 +185,9 @@ class ManufacturingPlanDetailFragment : BaseFragment<FragmentManufacturingPlanDe
         }
         dialog?.onCancel = {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle(resources.getString(R.string.title_alert))
-                .setMessage("Xác nhận hủy kế hoạch?")
-                .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
+                .setTitle("Xác nhận hủy kế hoạch?       ")
+                .setMessage("Chú ý: Bạn đang chuẩn bị hủy kế hoạch sản xuất. Thao tác này sẽ gây ảnh hưởng đến lịch trình sản xuất hiện tại. Bạn có chắc chắn muốn tiếp tục?")
+                .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
                     dialog.dismiss()
                 }
                 .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->

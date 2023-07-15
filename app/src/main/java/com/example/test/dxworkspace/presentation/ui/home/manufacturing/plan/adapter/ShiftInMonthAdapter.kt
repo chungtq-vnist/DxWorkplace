@@ -16,6 +16,8 @@ class ShiftInMonthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         }
 
     var onChooseShift2 : ((shift:Int , day : Int,check : Boolean) -> Unit)? = null
+    var onViewDetailShift : ((shift:Int , day : Int) -> Unit)? = null
+
 
     override fun getItemViewType(position: Int): Int {
         return if(position == 0 ) 0 else 1
@@ -39,6 +41,10 @@ class ShiftInMonthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
                 adapter.data = item.toMutableList()
                 adapter.onChooseShift = { s ,d ,c ->
                     onChooseShift2?.invoke(s,d,c)
+                }
+                adapter.onViewDetail = {s,d ->
+                    onViewDetailShift?.invoke(s,d)
+
                 }
             }
         }

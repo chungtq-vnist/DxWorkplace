@@ -35,7 +35,8 @@ data class ManufacturingMillModel(
 
 data class SubManufacturingWorkInMill(
     var _id : String ="",
-    var name : String =""
+    var name : String ="",
+    var turn : Int? = 3
 )
 
 @Parcelize
@@ -44,7 +45,11 @@ data class SubUserBasicModel(
     var name : String ="",
     var email : String = "",
     var avatar : String? = ""
-) : Parcelable
+) : Parcelable {
+    override fun toString(): String {
+        return name
+    }
+}
 
 
 

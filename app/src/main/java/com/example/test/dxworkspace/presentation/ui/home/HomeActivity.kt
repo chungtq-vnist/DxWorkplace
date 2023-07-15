@@ -1,5 +1,6 @@
 package com.example.test.dxworkspace.presentation.ui.home
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -18,6 +19,7 @@ import com.example.test.dxworkspace.presentation.utils.common.Constants
 import com.example.test.dxworkspace.presentation.utils.common.registerGreen
 import com.example.test.dxworkspace.presentation.utils.common.unregisterGreen
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
+import com.example.test.dxworkspace.presentation.utils.event.EventGoToNotification
 import com.example.test.dxworkspace.presentation.utils.event.EventNextHome
 import com.example.test.dxworkspace.presentation.utils.event.EventSyncMessage
 import io.socket.client.Socket
@@ -40,6 +42,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
     var checkVersionRetry = 0 // số lần retry lại check version khi bị lỗi , tối đa 3 lần
 
+    private var notificationId = ""
+    private var notificationType = 0
+    private var notificationObjectId = ""
+    private var notificationSubTitle = ""
+    private var notificationHeader = ""
 
 
     override fun getLayoutId(): Int {
@@ -48,6 +55,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DxApplication.appIsRunning = true
         viewModel = viewModel(viewModelFactory){
             // observer
 
@@ -60,7 +68,39 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             }
         }
 
+        // receiver from notify
+        notificationId = intent?.extras?.getString("NOTIFY_ID", "") ?: ""
+        notificationType = intent?.extras?.getInt("DATA_TYPE", 0) ?: 0
+        notificationObjectId = intent?.extras?.getString("OBJECT_ID", "") ?: ""
+        notificationSubTitle = intent?.extras?.getString("SUB_TITLE", "") ?: ""
+        notificationHeader = intent?.extras?.getString("HEADER", "") ?: ""
 
+
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        notificationId = intent?.extras?.getString("NOTIFY_ID", "") ?: ""
+        notificationType = intent?.extras?.getInt("DATA_TYPE", 0) ?: 0
+        notificationObjectId = intent?.extras?.getString("OBJECT_ID", "") ?: ""
+        notificationSubTitle = intent?.extras?.getString("SUB_TITLE", "") ?: ""
+        notificationHeader = intent?.extras?.getString("HEADER", "") ?: ""
+        goToScreenFromNotify()
+    }
+
+    fun goToScreenFromNotify(){
+        when(notificationType){
+            1 -> {
+                EventBus.getDefault().post(EventGoToNotification(EventGoToNotification.DETAIL_TASK))
+            }
+            5 -> {
+                EventBus.getDefault().post(EventGoToNotification(EventGoToNotification.DETAIL_REQUEST))
+            }
+            else -> {
+                EventBus.getDefault().post(EventGoToNotification(EventGoToNotification.DIALOG_DETAIL,
+                    listOf(notificationHeader,notificationSubTitle)))
+            }
+        }
     }
 
     override fun updateUI(savedInstanceState: Bundle?) {
@@ -87,6 +127,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             eventNextHome.bundle,
             eventNextHome.isAddToBackStack
         )
+        justTry {
+            viewModel.getTaskTimeSheetLog()
+        }
     }
 
     fun onBusEvent(event: EventSyncMessage){
@@ -94,6 +137,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             EventSyncMessage.SYNC_CHECK_VERSION -> {
                 DxApplication.stateWorkNext = Constants.STATE_WORK.STATE_WAIT_SYNC
                 checkVersion()
+            }
+            EventSyncMessage.SYNC_TIMESHEET_LOG -> {
+                viewModel.getTaskTimeSheetLog()
             }
 
             else -> {}
@@ -137,6 +183,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
     override fun onDestroy() {
         super.onDestroy()
+        DxApplication.appIsRunning = false
         socketProvider.closeConnection()
     }
 }

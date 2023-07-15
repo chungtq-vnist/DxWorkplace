@@ -84,8 +84,8 @@ class DashboardControlManufacturingFragment : BaseFragment<FragmentDashboardCont
             ivBack.setOnClickListener { onBackPress() }
             viewpager.adapter = dashboardControPageAdapter
             viewpager.isUserInputEnabled = false
-            tabLayout.addTab(tabLayout.newTab().setText("Kế hoạch sản xuất"), 0)
-            tabLayout.addTab(tabLayout.newTab().setText("Lệnh sản xuất"), 1)
+            tabLayout.addTab(tabLayout.newTab().setText("Kế hoạch "), 0)
+            tabLayout.addTab(tabLayout.newTab().setText("Lệnh "), 1)
             tabLayout.addTab(tabLayout.newTab().setText("Đề nghị"), 2)
             tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {

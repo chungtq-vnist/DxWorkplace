@@ -3,14 +3,12 @@ package com.example.test.dxworkspace.presentation.ui.home.report
 import androidx.lifecycle.MutableLiveData
 import com.example.test.dxworkspace.data.entity.dashboard_manufacturing.ModelRequestDashboardGoodQuality
 import com.example.test.dxworkspace.data.entity.dashboard_manufacturing.QualityGoodsCompare
-import com.example.test.dxworkspace.data.entity.report.FinancialReportModel
-import com.example.test.dxworkspace.data.entity.report.PlanCompletedOnScheduleModel
-import com.example.test.dxworkspace.data.entity.report.ReportRequestModel
-import com.example.test.dxworkspace.data.entity.report.SaleReportModel
+import com.example.test.dxworkspace.data.entity.report.*
 import com.example.test.dxworkspace.domain.usecase.manufacturing_dashboard.GetReportGoodsQualityUseCase
 import com.example.test.dxworkspace.domain.usecase.report.GetFinancialReportUseCase
 import com.example.test.dxworkspace.domain.usecase.report.GetNumberPlanCompletedReportUseCase
 import com.example.test.dxworkspace.domain.usecase.report.GetSaleReportUseCase
+import com.example.test.dxworkspace.domain.usecase.report.GetWarehouseReportUseCase
 import com.example.test.dxworkspace.presentation.ui.BaseViewModel
 import javax.inject.Inject
 
@@ -18,9 +16,10 @@ class ReportViewModel @Inject constructor(
     private val getFinancialReportUseCase: GetFinancialReportUseCase,
     private val getSaleReportUseCase: GetSaleReportUseCase,
     private val getNumberPlanCompletedReportUseCase: GetNumberPlanCompletedReportUseCase,
-    private val getReportGoodsQualityUseCase: GetReportGoodsQualityUseCase
+    private val getReportGoodsQualityUseCase: GetReportGoodsQualityUseCase,
+    private val getWarehouseReportUseCase : GetWarehouseReportUseCase,
 
-) : BaseViewModel() {
+    ) : BaseViewModel() {
 
     val isSuccess = MutableLiveData<Boolean>()
     val financialData = MutableLiveData<FinancialReportModel>()
@@ -30,6 +29,13 @@ class ReportViewModel @Inject constructor(
     val planData = MutableLiveData<PlanCompletedOnScheduleModel>()
     val planDataCompare = MutableLiveData<PlanCompletedOnScheduleModel>()
     var listGoods = MutableLiveData<List<QualityGoodsCompare>>()
+    val listDataWarehouseReport = MutableLiveData<List<WarehouseReportModel>>()
+    val statusReport = MutableLiveData<String>()
+
+
+
+
+
 
     fun getFinancialReport(param: ReportRequestModel) {
         getFinancialReportUseCase(param) {
@@ -87,6 +93,18 @@ class ReportViewModel @Inject constructor(
                 isSuccess.value = true
             })
 
+        }
+    }
+
+    fun getListDataReportWarehouse(params: ReportRequestModel){
+        getWarehouseReportUseCase(params){
+            it.either({
+                handleFailure(it)
+                statusReport.value = "FAIL"
+            },{
+                listDataWarehouseReport.value = it
+                statusReport.value = "DONE"
+            })
         }
     }
 }

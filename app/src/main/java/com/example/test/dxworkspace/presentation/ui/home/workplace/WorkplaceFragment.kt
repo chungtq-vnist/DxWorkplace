@@ -41,9 +41,14 @@ import java.util.*
 import javax.inject.Inject
 import android.os.Looper
 import com.example.test.dxworkspace.core.extensions.GetInfoDevice
+import com.example.test.dxworkspace.core.extensions.justTry
 import com.example.test.dxworkspace.data.entity.good.InventoryGoodWrap
+import com.example.test.dxworkspace.data.entity.notify.ParamGetPageNotify
+import com.example.test.dxworkspace.data.entity.timesheet.TimeSheetLogResponse
 import com.example.test.dxworkspace.presentation.model.menu.MenuSample
 import com.example.test.dxworkspace.presentation.model.menu.TaskType
+import com.example.test.dxworkspace.presentation.ui.dialog.DialogNotification
+import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.ManufacturingCommandFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.quality.DashboardQualityManufacturingFragment
@@ -51,12 +56,15 @@ import com.example.test.dxworkspace.presentation.ui.home.manufacturing.lot.Manuf
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.mill.ManufacturingMillFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.ManufacturingPlanFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.request.ManufacturingRequestFragment
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.work_schedule.WorkScheduleFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.financial.ReportFinancialFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.manufacturing.ReportManufacturingFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.sale.ReportSaleFragment
 import com.example.test.dxworkspace.presentation.ui.home.report.warehouse.ReportWarehouseFragment
 import com.example.test.dxworkspace.presentation.ui.home.workplace.adapter.TaskTypeAdapter
 import com.example.test.dxworkspace.presentation.ui.home.workplace.create_task.CreateTaskFragment
+import com.example.test.dxworkspace.presentation.ui.home.workplace.notify.NotifyFragment
+import com.example.test.dxworkspace.presentation.utils.convertFromUTCtoLocal
 import com.google.android.material.tabs.TabLayout
 import com.google.gson.reflect.TypeToken
 
@@ -73,10 +81,13 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
     @Inject
     lateinit var configRepository: ConfigRepository
 
+    @Inject
+    lateinit var homeViewModel : HomeViewModel
+
     val taskTypeAdapter by lazy { TaskTypeAdapter() }
     var taskTypeFilter = 0
 
-    val timer = Timer()
+    var timer = Timer()
 
     var fromMonth = "6-2023"
     var toMonth = "6-2023"
@@ -131,12 +142,63 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             }
             EventUpdate.UPDATE_TIMER -> {
                 if (event.value as Boolean == true) {
-                    sharedPreferences[Constants.START_TIME_COUNT] = getDateTimer()
+//                    sharedPreferences[Constants.START_TIME_COUNT] = getDateTimer()
                     startTimer()
+                    showToast(EventToast(isFail = false, text = "Bắt đầu bấm giờ"))
                 } else {
+                    showToast(EventToast(isFail = false, text = "Đã dừng bấm giờ"))
                     stopTimer()
                 }
             }
+            EventUpdate.UPDATE_TIMESHEET -> {
+                println("UPDATE_TIMESHEETTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
+                justTry {
+                    val t = event.value as TimeSheetLogResponse
+                    if(t._id.isEmpty()) {
+                        if(sharedPreferences[Constants.IS_COUNTING,false] == true) {
+                            stopTimer()
+                            sharedPreferences[Constants.START_TIME_COUNT] = ""
+                            sharedPreferences[Constants.TIMERID_COUNTING] = ""
+                        }
+                    }
+                    else {
+                        if(sharedPreferences[Constants.IS_COUNTING,false] == true && sharedPreferences[Constants.TIMERID_COUNTING,""] == t.timesheetLogs?.first()?._id) {
+
+                        } else {
+                            sharedPreferences[Constants.IS_COUNTING] = true
+                            sharedPreferences[Constants.TASK_ID_COUNTING] = t._id
+                            sharedPreferences[Constants.TIMERID_COUNTING] = t.timesheetLogs?.first()?._id
+                            sharedPreferences[Constants.START_TIME_COUNT] = convertFromUTCtoLocal(t.timesheetLogs?.first()?.startedAt ?: "")
+                            startTimer()
+                        }
+                    }
+                }
+            }
+            EventUpdate.UPDATE_COUNT_NOTIFY -> {
+                val total = event.value as Int
+                binding?.apply {
+                    val count = total
+                    frameTotalCart.isVisible = count > 0
+                    binding?.tvCartCount?.text = if (count < 100) count.toString() else "${count}+"
+                }
+            }
+
+        }
+    }
+
+    fun onBusEvent(event : EventGoToNotification){
+        when(event.type){
+            EventGoToNotification.DIALOG_DETAIL -> {
+                val noti = event.message ?: listOf()
+                showDialogNotification(noti.getOrNull(0) ?: "" , noti.getOrNull(1) ?: "")
+            }
+            EventGoToNotification.DETAIL_TASK -> {
+                postNormal(EventNextHome(WorkplaceFragment::class.java))
+            }
+            EventGoToNotification.DETAIL_REQUEST -> {
+                postNormal(EventNextHome(ManufacturingRequestFragment::class.java))
+            }
+            else -> {}
         }
     }
 
@@ -169,6 +231,14 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                 binding?.pullToRefresh?.isRefreshing = false
                 setupRcvTask()
             }
+            observe(notifyResponse) {
+                binding?.apply {
+                    val count = it?.docs?.filter { !it.readed }?.size ?: 0
+                    frameTotalCart.isVisible = count > 0
+                    binding?.tvCartCount?.text = if (count < 100) count.toString() else "${count}+"
+                }
+            }
+
         }
         observeLoading(viewModel)
 
@@ -177,6 +247,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        homeViewModel.getTaskTimeSheetLog()
         if (sharedPreferences[Constants.IS_COUNTING, false] == true) startTimer()
         // init time filter task
         val calendar = Calendar.getInstance()
@@ -234,6 +305,9 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             }
             btnCreateNewTask.setOnClickListener {
                 postNormal(EventNextHome(CreateTaskFragment::class.java))
+            }
+            ivNotify.setOnClickListener {
+                postNormal(EventNextHome(NotifyFragment::class.java))
             }
 //            layoutLeftMenu.rcvMenu.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         }
@@ -308,6 +382,9 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                     "/product-request-management/manufacturing" -> postNormal(
                         EventNextHome(ManufacturingRequestFragment::class.java)
                     )
+                    "/manage-work-schedule" -> postNormal(
+                        EventNextHome(WorkScheduleFragment::class.java)
+                    )
                 }
                 handlerPostDelay({
                     binding!!.layoutDrawer.closeDrawer(GravityCompat.START)
@@ -324,6 +401,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             )
         }
         getAllTask()
+        viewModel.getNotifications(ParamGetPageNotify(1,50))
     }
 
     fun setupRcvTaskType() {
@@ -381,32 +459,40 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
 
 
     fun startTimer() {
-        binding?.tvTimer?.isVisible = true
-        timer.scheduleAtFixedRate(
-            object : TimerTask() {
-                override fun run() {
-                    Handler(Looper.getMainLooper()).post(Runnable {
-                        binding?.tvTimer?.text = timeStringFromLong(
-                            getTimeInMillisFromString(getDateTimer())
-                                    - getTimeInMillisFromString(sharedPreferences[Constants.START_TIME_COUNT]!!)
-                        )
-                    })
+            binding?.tvTimer?.isVisible = true
+        println("timer is start ")
+            timer.cancel()
+            timer = Timer()
+            timer.scheduleAtFixedRate(
+                object : TimerTask() {
+                    override fun run() {
+                        Handler(Looper.getMainLooper()).post(Runnable {
+                            println("timer is runningggggggggggggggggggggg")
+                            binding?.tvTimer?.text = timeStringFromLong(
+                                getTimeInMillisFromString(getDateTimer())
+                                        - getTimeInMillisFromString(sharedPreferences[Constants.START_TIME_COUNT]!!)
+                            )
+                        })
 
-                }
-            }, 0, 500
+                    }
+                }, 0, 500
 
-        )
+            )
+
     }
 
     fun stopTimer() {
-        timer.cancel()
-        binding?.tvTimer?.isVisible = false
-        sharedPreferences[Constants.IS_COUNTING] = false
-        sharedPreferences[Constants.TASK_ID_COUNTING] = ""
+        justTry {
+            binding?.tvTimer?.isVisible = false
+            sharedPreferences[Constants.IS_COUNTING] = false
+            sharedPreferences[Constants.TASK_ID_COUNTING] = ""
+            timer.cancel()
+        }
     }
 
 
     private fun timeStringFromLong(ms: Long): String {
+        if(ms < 0L) return "00:00:00"
         val seconds = (ms / 1000) % 60
         val minutes = (ms / (1000 * 60) % 60)
         val hours = (ms / (1000 * 60 * 60) % 24)
@@ -652,6 +738,9 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
         menuAdapter.items = listMenuNew
     }
 
-
+    private fun showDialogNotification(header:String,content:String){
+        val dialogConfirm = DialogNotification(requireContext(),header,content)
+        dialogConfirm.show()
+    }
 
 }

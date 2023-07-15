@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <RelativeLayout
+        android:id="@+id/rootView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingTop="@dimen/_10sdp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+
+            tools:src="@drawable/ic_notify_cart">
+
+        </androidx.appcompat.widget.AppCompatImageView>
+        <LinearLayout
+            android:id="@+id/llBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_toRightOf="@+id/ivImage"
+            android:layout_marginStart="@dimen/_10sdp">
+            <TextView
+                android:id="@+id/tvHeader"
+                style="@style/Font.TextSemiBold13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/clr_main_dark"
+                tools:text="Có đơn hàng mới từ Web Order" />
+            <TextView
+                android:id="@+id/tvBody"
+                style="@style/Font.TextRegular12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/clr_main_dark"
+                tools:text="Đơn hàng Mang đi #T12345 trị giá 888,888đ đã được tạo từ Kênh bán online - Web Order. Hãy kiểm tra ngay nhé" />
+            <TextView
+                android:id="@+id/tvTime"
+                style="@style/Font.TextRegular12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/sp_color_time_notification"
+                tools:text="28/07/2021 11:15">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_below="@+id/llBody"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/sp_border">
+
+        </View>
+
+    </RelativeLayout>
+
+
+
+</layout>

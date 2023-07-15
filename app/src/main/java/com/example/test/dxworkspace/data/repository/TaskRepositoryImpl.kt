@@ -6,6 +6,7 @@ import com.example.test.dxworkspace.data.entity.project.ProjectResponse
 import com.example.test.dxworkspace.data.entity.task.*
 import com.example.test.dxworkspace.data.entity.timesheet.StartTimeModel
 import com.example.test.dxworkspace.data.entity.timesheet.StopTimeModel
+import com.example.test.dxworkspace.data.entity.timesheet.TimeSheetLogResponse
 import com.example.test.dxworkspace.data.remote.api.requestApi
 import com.example.test.dxworkspace.data.remote.datasource.TaskRemoteSource
 import com.example.test.dxworkspace.domain.repository.TaskRepository
@@ -78,6 +79,16 @@ class TaskRepositoryImpl @Inject constructor(
         return requestApi(
             taskRemoteSource.requestToCloseTask(id,body),
             TaskDetailResponseRaw()
+        )
+    }
+
+    override suspend fun getTaskTimesheetLog(id: String): Either<Failure, TimeSheetLogResponse> {
+        return requestApi(
+            taskRemoteSource.getTaskTimesheetLog(id),
+            {
+            if(it.success) it.content ?: TimeSheetLogResponse() else TimeSheetLogResponse()
+            },
+            TimeSheetLogResponse()
         )
     }
 

@@ -3,6 +3,8 @@ package com.example.test.dxworkspace.presentation.ui.home.workplace
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import com.example.test.dxworkspace.data.entity.link.LinkEntity
+import com.example.test.dxworkspace.data.entity.notify.PaginateNotificationsResponse
+import com.example.test.dxworkspace.data.entity.notify.ParamGetPageNotify
 import com.example.test.dxworkspace.data.entity.task.RequestCloseTask
 import com.example.test.dxworkspace.data.entity.task.TaskModel
 import com.example.test.dxworkspace.data.entity.task.TaskModelDetail
@@ -14,7 +16,11 @@ import com.example.test.dxworkspace.domain.usecase.auth.LogoutUseCase
 import com.example.test.dxworkspace.presentation.ui.BaseViewModel
 import com.example.test.dxworkspace.presentation.utils.common.Constants
 import com.example.test.dxworkspace.data.local.preferences.AppPreferences.set
+import com.example.test.dxworkspace.domain.usecase.notify.GetPaginateNotificationUseCase
 import com.example.test.dxworkspace.domain.usecase.task.*
+import com.example.test.dxworkspace.presentation.utils.convertFromUTCtoLocal
+import com.example.test.dxworkspace.presentation.utils.event.EventBus
+import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -28,7 +34,8 @@ class WorkplaceViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences,
     private val postActionUseCase: PostActionUseCase,
     private val requestCloseTaskUseCase: RequestCloseTaskUseCase,
-    ) : BaseViewModel() {
+    private val getPaginateNotificationUseCase: GetPaginateNotificationUseCase,
+) : BaseViewModel() {
     val linksCanAccess = MutableLiveData<List<LinkEntity>>()
     val logoutSuccess = MutableLiveData<Boolean>()
     val listAllTask0 = MutableLiveData<MutableList<TaskModel>>()
@@ -42,6 +49,8 @@ class WorkplaceViewModel @Inject constructor(
     var startDate = ""
     var endDate = ""
     val stopSuccess = MutableLiveData<Boolean>()
+    val notifyResponse = MutableLiveData<PaginateNotificationsResponse>()
+
     fun getLinksCanAccess(){
         getLinksCanAccessUseCase(UseCase.None()){
             it.either({
@@ -93,10 +102,19 @@ class WorkplaceViewModel @Inject constructor(
         }
     }
 
-    fun startTimer(taskId : String,userId:String){
-        startTimerUseCase(Pair(taskId,userId)){
-            it.either({},{
-                sharedPreferences[Constants.TIMERID_COUNTING] = it.content?.timesheetLogs?.first()?._id
+    fun startTimer(taskId: String, userId: String) {
+        startTimerUseCase(Pair(taskId, userId)) {
+            it.either({
+                handleFailure(it)
+                sharedPreferences[Constants.IS_COUNTING] = false
+                sharedPreferences[Constants.TASK_ID_COUNTING] = ""
+            }, {
+                sharedPreferences[Constants.TIMERID_COUNTING] =
+                    it.content?.timesheetLogs?.first()?._id
+                sharedPreferences[Constants.START_TIME_COUNT] =
+                    convertFromUTCtoLocal(it.content?.timesheetLogs?.first()?.startedAt ?: "")
+                EventBus.getDefault().post(EventUpdate(EventUpdate.UPDATE_TIMER,true))
+
             })
         }
     }
@@ -141,4 +159,13 @@ class WorkplaceViewModel @Inject constructor(
         }
     }
 
+    fun getNotifications(data : ParamGetPageNotify){
+        getPaginateNotificationUseCase(data){
+            it.either({
+            },
+                {
+                    notifyResponse.value = it
+                })
+        }
+    }
 }

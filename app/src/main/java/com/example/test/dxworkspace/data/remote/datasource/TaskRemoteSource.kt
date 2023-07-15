@@ -37,4 +37,6 @@ class TaskRemoteSource @Inject constructor(val api: DxApi) {
 
     fun getAllProject() = api.getAllProject()
 
+    fun getTaskTimesheetLog(id:String) = api.getTimeSheetLog(id)
+
 }

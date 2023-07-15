@@ -7,6 +7,7 @@ import com.example.test.dxworkspace.data.entity.component.ComponentResponse
 import com.example.test.dxworkspace.data.entity.project.ProjectResponse
 import com.example.test.dxworkspace.data.entity.task.*
 import com.example.test.dxworkspace.data.entity.timesheet.StopTimeModel
+import com.example.test.dxworkspace.data.entity.timesheet.TimeSheetLogResponse
 
 interface TaskRepository : Repository {
 
@@ -29,4 +30,6 @@ interface TaskRepository : Repository {
     suspend fun getAllProject() : Either<Failure , List<ProjectResponse>>
 
     suspend fun getAllTemplates(id : String) : Either<Failure , List<TaskTemplateResponse>>
+
+    suspend fun getTaskTimesheetLog(id:String) :Either<Failure,TimeSheetLogResponse>
 }

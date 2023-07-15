@@ -33,5 +33,6 @@ class EventSyncMessage(val type: Int, var message: List<String>? = null) : Event
         const val SYNC_PRIVILEGE = 2
         const val SYNC_USER = 3
         const val SYNC_MANUFACTURING_WORK = 4
+        const val SYNC_TIMESHEET_LOG = 5
     }
 }

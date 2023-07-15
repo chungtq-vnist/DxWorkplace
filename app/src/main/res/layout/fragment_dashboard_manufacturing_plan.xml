@@ -27,6 +27,7 @@
                     style="@style/Font.TextSemiBold12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/sp_color_black"
                     android:layout_centerInParent="true"
                     android:text="Trạng thái">
 
@@ -35,9 +36,9 @@
                 <View
                     android:id="@+id/viewStatus"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
+                    android:layout_height="@dimen/_2sdp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/sp_color_blue">
+                    android:background="?attr/colorPrimary">
 
                 </View>
             </RelativeLayout>
@@ -54,16 +55,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:textColor="@color/sp_color_black"
                     android:text="Tiến độ">
 
                 </TextView>
 
                 <View
+                    android:visibility="gone"
                     android:id="@+id/viewProgress"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
+                    android:layout_height="@dimen/_2sdp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/sp_color_blue">
+                    android:background="?attr/colorPrimary">
 
                 </View>
             </RelativeLayout>

@@ -1,5 +1,8 @@
 package com.example.test.dxworkspace.presentation.ui.home.manufacturing.command
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +35,9 @@ class DialogCheckQuality(val command : ManufacturingCommandModel , val userId:St
             val width = ViewGroup.LayoutParams.MATCH_PARENT
             val height = ViewGroup.LayoutParams.WRAP_CONTENT
             dialog.window!!.setLayout(width, height)
+            val t = ColorDrawable(Color.TRANSPARENT)
+            val r = InsetDrawable(t,36)
+            dialog.window?.setBackgroundDrawable(r)
         }
     }
 

@@ -51,6 +51,7 @@ class DxApplication : DaggerApplication(), HasAndroidInjector, LifecycleObserver
 
     companion object {
         private lateinit var instance: DxApplication
+        var appIsRunning = false
 
         var stateWork = Constants.STATE_WORK.STATE_NONE
         var stateWorkNext = Constants.STATE_WORK.STATE_NONE

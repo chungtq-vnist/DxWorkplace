@@ -18,8 +18,11 @@ import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
 import com.example.test.dxworkspace.presentation.ui.home.report.ReportViewModel
 import com.example.test.dxworkspace.presentation.ui.home.report.adapter.DetailFinancialAdapter
 import com.example.test.dxworkspace.presentation.ui.timepicker.RangeTimeSelectFragment
+import com.example.test.dxworkspace.presentation.utils.Marker
+import com.example.test.dxworkspace.presentation.utils.MarkerHorizontal
 import com.example.test.dxworkspace.presentation.utils.VariantChartFormat
 import com.example.test.dxworkspace.presentation.utils.common.Constants
+import com.example.test.dxworkspace.presentation.utils.common.formatMoney
 import com.example.test.dxworkspace.presentation.utils.common.postNormal
 import com.example.test.dxworkspace.presentation.utils.common.roundPercent
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
@@ -33,8 +36,10 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
 import javax.inject.Inject
 
 class ReportManufacturingFragment : BaseFragment<FragmentReportManufacturingBinding>() {
@@ -55,6 +60,8 @@ class ReportManufacturingFragment : BaseFragment<FragmentReportManufacturingBind
     lateinit var configRepository: ConfigRepository
     var listChart = mutableListOf<QualityGoodsCompare>()
     val adapter by lazy { DetailFinancialAdapter() }
+    private var mkRate: Marker? = null
+    var currentFilter = "percent"
 
     override fun onStart() {
         super.onStart()
@@ -311,6 +318,36 @@ class ReportManufacturingFragment : BaseFragment<FragmentReportManufacturingBind
         val data = BarData(barDataSetRevenue, barDataSetExpense)
         chart.axisLeft.labelCount = 4
         data.barWidth = 0.25f
+        data.setDrawValues(false)
+        mkRate = object: Marker(context){
+            override fun refreshContent(
+                e: Entry,
+                highlight: Highlight,
+            ) {
+                val i = e.x.toDouble()
+                val name = ""
+
+                if (currentFilter == "money") {
+                    val value = e.y.toDouble()
+
+                    val money = name + "\n" + formatMoney(
+                        value,
+                        isAcceptMinus = true,
+                        isAcceptZero = true
+                    )
+                    textView.text = money
+                } else if(currentFilter == "percent") {
+                    val orderCount = String.format("%.2f", e.y)+"%"
+                    textView.text = orderCount
+                } else {
+                    val orderCount = name + "\n" + e.y.toString()
+                    textView.text = orderCount
+                }
+
+                super.refreshContent(e, highlight)
+            }
+        }
+        chart.marker = mkRate
         chart.data = data
         chart.xAxis.valueFormatter = IndexAxisValueFormatter(listStringXAxis)
         chart.groupBars(0f, 0.2f, 0.15f)

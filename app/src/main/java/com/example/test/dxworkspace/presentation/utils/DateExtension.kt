@@ -22,6 +22,7 @@ fun convertToUTCTime(dateTimeString : String): String {
     val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     format.timeZone = TimeZone.getTimeZone("Asia/Ho_Chi_Minh")
     val formatNew = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
+    formatNew.timeZone = TimeZone.getTimeZone("UTC")
     try {
         val date = format.parse(dateTimeString)
         return formatNew.format(date)
@@ -95,6 +96,24 @@ fun getDateTimer() : String {
     val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     return format.format(Date())
 }
+
+fun convertFromUTCtoLocal(dateTimeString:String) :String{
+
+    val formatNew = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
+    formatNew.timeZone = TimeZone.getTimeZone("UTC")
+    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    format.timeZone = TimeZone.getTimeZone("Asia/Ho_Chi_Minh")
+    try {
+        val date = formatNew.parse(dateTimeString)
+        return format.format(date)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    } finally {
+
+    }
+    return dateTimeString
+}
+
 fun getDateTimeYYYYMMdd() : String {
     val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     return format.format(Date())
@@ -117,4 +136,15 @@ fun convertToDate(dateString: String): Date? {
 fun getDateYYYYMMDDHHMMSS(date : Date) : String  {
     val df = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     return df.format(date)
+}
+
+fun getRangeTime(from:String,to:String) : Long{
+    val df = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+    val day1 = df.parse(from)
+    val day2 = df.parse(to)
+    val timeDifference = day2.time - day1.time
+    val daysDifference = timeDifference / (24 * 60 * 60 * 1000) // Chuyển đổi thành số ngày
+
+    return daysDifference + 1
+
 }

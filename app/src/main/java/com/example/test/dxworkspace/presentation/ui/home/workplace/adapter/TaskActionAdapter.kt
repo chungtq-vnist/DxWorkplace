@@ -54,7 +54,7 @@ class TaskActionViewHolder(val binding: ItemActionTaskBinding) : RecyclerView.Vi
             tvUserName.text = item.creator?.name
             val commentAdapter = TaskCommentAdapter()
             rcvReply.adapter = commentAdapter
-            commentAdapter.items = item.comment?.toMutableList() ?: mutableListOf<Comment>()
+            commentAdapter.items = item.comments?.toMutableList() ?: mutableListOf<Comment>()
         }
     }
 }

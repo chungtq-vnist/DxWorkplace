@@ -3,6 +3,7 @@ package com.example.test.dxworkspace.presentation.ui.home.manufacturing.lot
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +21,7 @@ import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.M
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.adapter.CommandAdapter
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.lot.adapter.LotAdapter
 import com.example.test.dxworkspace.presentation.ui.timepicker.RangeTimeSelectFragment
+import com.example.test.dxworkspace.presentation.utils.common.clearText
 import com.example.test.dxworkspace.presentation.utils.common.postNormal
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventNextHome
@@ -106,6 +108,16 @@ class ManufacturingLotFragment : BaseFragment<FragmentManufacturingLotBinding>()
                     )
                 )
             }
+            layoutSearch.itemSearch.edtSearch.hint = "Mã lô sản xuất"
+            search(layoutSearch.itemSearch){
+                val l = search(it)
+                adapter.items = l
+            }
+            layoutSearch.itemSearch.ivClearSearch.setOnClickListener {
+                layoutSearch.itemSearch.edtSearch.clearText()
+                layoutSearch.itemSearch.ivClearSearch.isVisible = false
+                adapter.items = listLots
+            }
             getAllLot()
             homeViewModel.getAllUser()
             homeViewModel.getStock()
@@ -115,6 +127,7 @@ class ManufacturingLotFragment : BaseFragment<FragmentManufacturingLotBinding>()
     fun getAllLot(){
         viewModel.getAllLot(homeViewModel.fromDate,homeViewModel.toDate)
     }
+    fun search(key:String) = listLots.filter { it.code.contains(key) }
 
 
 

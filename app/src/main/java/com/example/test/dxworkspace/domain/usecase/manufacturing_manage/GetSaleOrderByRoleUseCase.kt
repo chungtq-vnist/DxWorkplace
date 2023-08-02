@@ -7,6 +7,7 @@ import com.example.test.dxworkspace.data.entity.manufacturing_command.Manufactur
 import com.example.test.dxworkspace.data.entity.manufacturing_command.SubSaleOrder
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.ManufacturingMillEntity
 import com.example.test.dxworkspace.data.entity.manufacturing_plan.ManufacturingPlanModel
+import com.example.test.dxworkspace.data.entity.manufacturing_plan.SalesOrderModel
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkEntity
 import com.example.test.dxworkspace.data.entity.manufacturing_work.UserRoleInOrganizationUnit
 import com.example.test.dxworkspace.data.entity.task.TaskModelDetail
@@ -20,8 +21,8 @@ import javax.inject.Inject
 class GetSaleOrderByRoleUseCase @Inject constructor(
     val manufacturingManagerRepository: ManufacturingManagerRepository,
     val configRepository: ConfigRepository
-): UseCase< List<SubSaleOrder>, String>() {
-    override suspend fun run(params:String): Either<Failure,  List<SubSaleOrder>> {
+): UseCase< List<SalesOrderModel>, String>() {
+    override suspend fun run(params:String): Either<Failure,  List<SalesOrderModel>> {
        return manufacturingManagerRepository.getSaleOrderByRole(params)
     }
 

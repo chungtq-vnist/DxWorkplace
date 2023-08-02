@@ -20,6 +20,7 @@ import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.request.adapter.RequestManagementAdapter
 import com.example.test.dxworkspace.presentation.ui.timepicker.RangeTimeSelectFragment
+import com.example.test.dxworkspace.presentation.utils.common.clearText
 import com.example.test.dxworkspace.presentation.utils.common.postNormal
 import com.example.test.dxworkspace.presentation.utils.common.registerGreen
 import com.example.test.dxworkspace.presentation.utils.common.unregisterGreen
@@ -40,6 +41,7 @@ class ManufacturingRequestFragment : BaseFragment<FragmentManufacturingRequestBi
     var listBuy = listOf<ProductRequestManagementModel>()
     var listImport = listOf<ProductRequestManagementModel>()
     var listExport = listOf<ProductRequestManagementModel>()
+    var keySearch = ""
 
 
     val adapter = RequestManagementAdapter()
@@ -110,7 +112,12 @@ class ManufacturingRequestFragment : BaseFragment<FragmentManufacturingRequestBi
             ivBack.setOnClickListener { onBackPress() }
             rcvWork.adapter = adapter
             adapter.onClick = {
-                postNormal(EventNextHome(CreateManufacturingRequestFragment::class.java, bundleOf(Pair("REQUEST_ID",it._id),)))
+                postNormal(
+                    EventNextHome(
+                        CreateManufacturingRequestFragment::class.java,
+                        bundleOf(Pair("REQUEST_ID", it._id),)
+                    )
+                )
             }
             pullToRefresh.setOnRefreshListener {
                 getData()
@@ -144,7 +151,25 @@ class ManufacturingRequestFragment : BaseFragment<FragmentManufacturingRequestBi
 
             })
             btnSave.setOnClickListener {
-                postNormal(EventNextHome(CreateManufacturingRequestFragment::class.java, bundleOf(Pair("TYPE",typePage+1))))
+                postNormal(
+                    EventNextHome(
+                        CreateManufacturingRequestFragment::class.java,
+                        bundleOf(Pair("TYPE", typePage + 1))
+                    )
+                )
+            }
+            layoutSearch.itemSearch.edtSearch.hint = "Mã đề nghị"
+            search(layoutSearch.itemSearch){
+                keySearch = it
+                val l = search(it)
+                adapter.items = l
+                setNodata()
+            }
+            layoutSearch.itemSearch.ivClearSearch.setOnClickListener {
+                layoutSearch.itemSearch.edtSearch.clearText()
+                keySearch =""
+                layoutSearch.itemSearch.ivClearSearch.isVisible = false
+                setupUI()
             }
         }
         getData()
@@ -158,13 +183,13 @@ class ManufacturingRequestFragment : BaseFragment<FragmentManufacturingRequestBi
 
         when (typePage) {
             0 -> {
-                adapter.items = listBuy
+                adapter.items = search(keySearch)
             }
             1 -> {
-                adapter.items = listImport
+                adapter.items = search(keySearch)
             }
             2 -> {
-                adapter.items = listExport
+                adapter.items = search(keySearch)
             }
         }
         setNodata()
@@ -184,5 +209,26 @@ class ManufacturingRequestFragment : BaseFragment<FragmentManufacturingRequestBi
 
     fun getData() {
         viewModel.getProductRequest(homeViewModel.fromDate, homeViewModel.toDate)
+    }
+
+    fun search(key: String) : List<ProductRequestManagementModel> {
+       return when (typePage) {
+            0 -> {
+                listBuy.filter {
+                    it.code.contains(key)
+                }
+            }
+            1 -> {
+                listImport.filter {
+                    it.code.contains(key)
+                }
+            }
+            2 -> {
+                listExport.filter {
+                    it.code.contains(key)
+                }
+            }
+           else -> listOf()
+        }
     }
 }

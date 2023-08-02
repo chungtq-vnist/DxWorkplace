@@ -70,7 +70,8 @@ class NotifyAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         }
                         2 ,3 ,6-> {
                             // show dialog thong tin thong bao
-                            EventBus.getDefault().post(EventGoToNotification(EventGoToNotification.DIALOG_DETAIL))
+                            EventBus.getDefault().post(EventGoToNotification(EventGoToNotification.DIALOG_DETAIL,
+                                listOf(item.title,item.content)))
 
                         }
                         5 -> {
@@ -79,7 +80,8 @@ class NotifyAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         }
                         else -> {
                             ivImage.setImageResource(R.drawable.ic_notify_cart)
-                            EventBus.getDefault().post(EventGoToNotification(EventGoToNotification.DIALOG_DETAIL))
+                            EventBus.getDefault().post(EventGoToNotification(EventGoToNotification.DIALOG_DETAIL,
+                                listOf(item.title,item.content)))
                         }
                     }
                 }

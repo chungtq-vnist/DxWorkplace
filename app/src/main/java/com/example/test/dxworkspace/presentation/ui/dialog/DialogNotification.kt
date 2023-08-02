@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import com.example.test.dxworkspace.R
+import com.example.test.dxworkspace.presentation.utils.common.toHtml
 import kotlinx.android.synthetic.main.dialog_cofirrm_notification.*
 
 class DialogNotification (context: Context, val header:String,val content:String) : Dialog(context) {
@@ -21,7 +22,9 @@ class DialogNotification (context: Context, val header:String,val content:String
         setContentView(R.layout.dialog_cofirrm_notification)
         btn_logout.setOnClickListener(onClickListener)
         txt_title.text = header
-        txt_content.text = content
+        val htmlDescription = content.toHtml()
+        val descriptionWithOutExtraSpace = (htmlDescription.toString()).trim { it <= ' ' }
+        txt_content.setText(htmlDescription?.subSequence(0, descriptionWithOutExtraSpace.length))
 
     }
 

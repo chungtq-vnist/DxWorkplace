@@ -6,7 +6,7 @@ import com.example.test.dxworkspace.data.entity.work_schedule.WorkScheduleModel
 
 data class RequestManufacturingPlan(
     var code: String ="",
-    var salesOrders: List<String> = listOf(),
+    var salesOrders: MutableList<String> = mutableListOf(),
     var startDate: String ="",
     var endDate: String ="",
     var description: String ="",

@@ -8,6 +8,7 @@ import com.example.test.dxworkspace.data.entity.manufacturing_mill.SubUserBasicM
 import com.example.test.dxworkspace.data.entity.manufacturing_plan.ManufacturingPlanDetailModel
 import com.example.test.dxworkspace.data.entity.manufacturing_plan.ManufacturingPlanModel
 import com.example.test.dxworkspace.data.entity.manufacturing_plan.ParamUpdatePlan
+import com.example.test.dxworkspace.data.entity.manufacturing_plan.SalesOrderModel
 import com.example.test.dxworkspace.data.entity.manufacturing_work.UserRoleInOrganizationUnit
 import com.example.test.dxworkspace.data.entity.user.UserProfileResponse
 import com.example.test.dxworkspace.data.entity.work_schedule.WorkScheduleModel
@@ -51,6 +52,7 @@ class ManufacturingPlanViewModel  @Inject constructor(
     val listUserFree = MutableLiveData<List<SubUserBasicModel>>()
     val updateStatus = MutableLiveData<Boolean>()
     val planDetail = MutableLiveData<ManufacturingPlanDetailModel>()
+    val listSalesOrder = MutableLiveData<List<SalesOrderModel>>()
 
     fun getListPlan(s : String , e : String ){
         getAllPlanUseCase(Pair(s,e)){
@@ -79,9 +81,9 @@ class ManufacturingPlanViewModel  @Inject constructor(
     fun getListSalesOrder(id : String){
         getSaleOrderByRoleUseCase(id){
             it.either({
-
+                listSalesOrder.value = listOf()
             },{
-
+                listSalesOrder.value = it
             })
         }
     }

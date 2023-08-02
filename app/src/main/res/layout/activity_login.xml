@@ -88,7 +88,7 @@
                     android:id="@+id/edtPortal"
                     android:layout_width="match_parent"
                     style="@style/LoginFormEditText"
-                    android:drawableStart="@drawable/ic_login_password"
+                    android:drawableStart="@drawable/ic_portal"
                     android:drawablePadding="@dimen/_10sdp"
                     android:hint="@string/portal"
                     android:text="vnist"
@@ -114,6 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:gravity="center"
+                android:visibility="gone"
                 android:text="@string/forget_password" />
         </LinearLayout>
 

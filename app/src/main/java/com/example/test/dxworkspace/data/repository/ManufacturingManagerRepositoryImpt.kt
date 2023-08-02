@@ -18,6 +18,7 @@ import com.example.test.dxworkspace.data.entity.manufacturing_mill.SubUserBasicM
 import com.example.test.dxworkspace.data.entity.manufacturing_plan.ManufacturingPlanDetailModel
 import com.example.test.dxworkspace.data.entity.manufacturing_plan.ManufacturingPlanModel
 import com.example.test.dxworkspace.data.entity.manufacturing_plan.ParamUpdatePlan
+import com.example.test.dxworkspace.data.entity.manufacturing_plan.SalesOrderModel
 import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkDetailModel
 import com.example.test.dxworkspace.data.entity.manufacturing_work.OrganizationUnit
 import com.example.test.dxworkspace.data.entity.manufacturing_work.UserRoleInOrganizationUnit
@@ -378,7 +379,7 @@ class ManufacturingManagerRepositoryImpt @Inject constructor(
         )
     }
 
-    override suspend fun getSaleOrderByRole(id: String): Either<Failure, List<SubSaleOrder>> {
+    override suspend fun getSaleOrderByRole(id: String): Either<Failure, List<SalesOrderModel>> {
         return requestApi(
             manufacturingManagerRemoteSource.getSaleOrderByRole(id),
             {

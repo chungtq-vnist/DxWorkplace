@@ -3,6 +3,7 @@ package com.example.test.dxworkspace.presentation.ui.home.manufacturing.command
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,27 +14,38 @@ import com.example.test.dxworkspace.data.entity.manufacturing_command.Manufactur
 import com.example.test.dxworkspace.databinding.FragmentDashboardManufacturingCommandBinding
 import com.example.test.dxworkspace.databinding.FragmentManufacturingCommandBinding
 import com.example.test.dxworkspace.databinding.FragmentManufacturingCommandDetailBinding
+import com.example.test.dxworkspace.databinding.FragmentManufacturingCommandNewBinding
+import com.example.test.dxworkspace.domain.repository.ConfigRepository
 import com.example.test.dxworkspace.presentation.ui.BaseFragment
 import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.adapter.CommandAdapter
+import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.DashboardControlManufacturingViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingWorkDetailFragment
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.works.ManufacturingWorkViewModel
 import com.example.test.dxworkspace.presentation.ui.timepicker.RangeTimeSelectFragment
+import com.example.test.dxworkspace.presentation.utils.common.clearText
 import com.example.test.dxworkspace.presentation.utils.common.postNormal
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventNextHome
+import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import javax.inject.Inject
 
-class ManufacturingCommandFragment : BaseFragment<FragmentManufacturingCommandBinding>() {
+class ManufacturingCommandFragment : BaseFragment<FragmentManufacturingCommandNewBinding>() {
     override fun getLayoutId(): Int {
-        return R.layout.fragment_manufacturing_command
+        return R.layout.fragment_manufacturing_command_new
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Inject
     lateinit var viewModel: ManufacturingCommandViewModel
+
+    @Inject
+    lateinit var configRepository: ConfigRepository
+
+    @Inject
+    lateinit var dashboardViewModel : DashboardControlManufacturingViewModel
 
     @Inject
     lateinit var homeViewModel : HomeViewModel
@@ -56,6 +68,7 @@ class ManufacturingCommandFragment : BaseFragment<FragmentManufacturingCommandBi
             EventUpdate.UPDATE_DASHBOARD_MANUFACTURING -> {
                 binding?.tvRangeTime?.text = homeViewModel.fromDate + " - " + homeViewModel.toDate
                 getAllCommand()
+                getProgressPlan()
             }
             EventUpdate.UPDATE_COMMAND -> {
                 getAllCommand()
@@ -75,6 +88,16 @@ class ManufacturingCommandFragment : BaseFragment<FragmentManufacturingCommandBi
             }
         }
         observeLoading(viewModel)
+        dashboardViewModel = viewModel(viewModelFactory){
+            observe(numberOfCommandByProgress){
+                val s = it?.slowCommands ?: 0
+                val e = it?.expiredCommands ?: 0
+                if( s != 0 || e != 0  ){
+                    showToast(EventToast(text = "Bạn có $s lệnh chậm và $e lệnh quá hạn. Hãy thực hiện ngay nhé!"))
+//                    Toast.makeText(requireContext(),"Bạn có $s kế hoạch chậm và $e kế hoạch quá hạn.\n Hãy thực hiện ngay nhé!",Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -105,8 +128,19 @@ class ManufacturingCommandFragment : BaseFragment<FragmentManufacturingCommandBi
                     )
                 )
             }
+            layoutSearch.itemSearch.edtSearch.hint = "Mã lệnh sản xuất"
+            search(layoutSearch.itemSearch){
+                val l = search(it)
+                adapter.items = l
+            }
+            layoutSearch.itemSearch.ivClearSearch.setOnClickListener {
+                layoutSearch.itemSearch.edtSearch.clearText()
+                layoutSearch.itemSearch.ivClearSearch.isVisible = false
+                adapter.items = listCommands
+            }
         }
         getAllCommand()
+        getProgressPlan()
 //        homeViewModel.getAllOrganizationUnit()
 //        homeViewModel.getAllRoles()
 //        if(homeViewModel.listManufacturingWork.value.isNullOrEmpty()) viewModel.getManufacturingWorks() else {
@@ -117,4 +151,14 @@ class ManufacturingCommandFragment : BaseFragment<FragmentManufacturingCommandBi
     fun getAllCommand(){
         viewModel.getAllCommand(homeViewModel.fromDate,homeViewModel.toDate)
     }
+    fun getProgressPlan(){
+        dashboardViewModel.getNumberOfCommandByProgress(
+            configRepository.getCurrentRole().id,
+            null,
+            homeViewModel.fromDate,
+            homeViewModel.toDate)
+    }
+
+    fun search(key:String) = listCommands.filter { it.code.contains(key) }
+
 }

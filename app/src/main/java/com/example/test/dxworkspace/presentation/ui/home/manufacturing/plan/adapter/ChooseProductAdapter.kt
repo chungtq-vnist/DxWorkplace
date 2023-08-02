@@ -1,5 +1,7 @@
 package com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.adapter
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +44,8 @@ class ChooseProductAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     android.R.layout.simple_dropdown_item_1line,
                     listgood
                 )
+                edtLineCost.removeTextChangedListener(holder.textWatcher)
+                edtLineCost.setText(item.quantity.toString())
                 edtVariantName.setAdapter(adapter)
                 edtVariantName.onItemClickListener =
                     AdapterView.OnItemClickListener { p0, p1, p2, p3 ->
@@ -49,10 +53,11 @@ class ChooseProductAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         println("POS1 : ${p2}")
                         notifyItemChanged(position)
                     }
-                edtLineCost.doAfterTextChanged {
-                    item.quantity =
-                        if (edtLineCost.getTextz().isEmpty()) 0 else edtLineCost.getTextz().toInt()
-                }
+                edtLineCost.addTextChangedListener(holder.textWatcher)
+//                edtLineCost.doAfterTextChanged {
+//                    item.quantity =
+//                        if (edtLineCost.getTextz().isEmpty()) 0 else edtLineCost.getTextz().toInt()
+//                }
                 if (item.goodId != "")
                     justTry {
                         println("POS2 : ${listgood.indexOfFirst { it._id == item.goodId }}")
@@ -61,7 +66,6 @@ class ChooseProductAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                     }
                 else edtVariantName.setText("")
-                edtLineCost.setText(item.quantity.toString())
                 edtPriceType.setText(if (item.goodId == "") "" else listgood.find { it._id == item.goodId }?.baseUnit)
                 edtPriceInit.setText(
                     if (item.goodId == "") "0" else listInventory.find { it.good._id == item.goodId }?.inventory.toString()
@@ -84,12 +88,31 @@ class ChooseProductAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemCount(): Int {
         return data.size
     }
+
+   inner class ViewHolder(val binding: ItemRecycleProductBinding) : RecyclerView.ViewHolder(binding.root) {
+        var textWatcher : TextWatcher? = null
+        init {
+            textWatcher = object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//                    TODO("Not yet implemented")
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//                    TODO("Not yet implemented")
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    data.get(adapterPosition).quantity =
+                        if (binding.edtLineCost.getTextz().isEmpty()) 0 else binding.edtLineCost.getTextz().toInt()
+                }
+            }
+
+        }
+
+    }
+
 }
 
-class ViewHolder(val binding: ItemRecycleProductBinding) : RecyclerView.ViewHolder(binding.root) {
-
-
-}
 
 data class DataProductInput(
     var quantity: Int = 0,

@@ -69,7 +69,7 @@ data class TaskAction(
     var createdAt : String? = "",
     var updatedAt : String? = "",
     var actionImportanceLevel : Int? = 0 ,
-    var comment: List<Comment>? = emptyList(),
+    var comments: List<Comment>? = emptyList(),
     var timesheetLogs : List<TimeSheetLog>? = emptyList(),
 
 )

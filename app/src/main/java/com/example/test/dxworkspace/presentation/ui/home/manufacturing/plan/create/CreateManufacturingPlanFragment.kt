@@ -19,7 +19,12 @@ import com.example.test.dxworkspace.data.entity.good.GoodDetailModel
 import com.example.test.dxworkspace.data.entity.good.InventoryGoodWrap
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.ManufacturingMillModel
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.SubUserBasicModel
+import com.example.test.dxworkspace.data.entity.manufacturing_plan.SalesOrderModel
 import com.example.test.dxworkspace.data.entity.manufacturing_plan.SubGoodPlan
+import com.example.test.dxworkspace.data.entity.manufacturing_work.ManufacturingWorkModel
+import com.example.test.dxworkspace.data.entity.manufacturing_work.OrganizationUnit
+import com.example.test.dxworkspace.data.entity.product_request.GoodInfomation
+import com.example.test.dxworkspace.data.entity.task.CollaboratedWithOrganizationalUnitRequest
 import com.example.test.dxworkspace.data.entity.user.UserProfileResponse
 import com.example.test.dxworkspace.data.entity.work_schedule.SubCommandInWorkSchedule
 import com.example.test.dxworkspace.data.entity.work_schedule.WorkScheduleModel
@@ -36,6 +41,7 @@ import com.example.test.dxworkspace.presentation.ui.home.manufacturing.command.M
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.ManufacturingPlanViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.adapter.*
 import com.example.test.dxworkspace.presentation.ui.home.workplace.ChooseUserFragment
+import com.example.test.dxworkspace.presentation.utils.common.clearText
 import com.example.test.dxworkspace.presentation.utils.common.generateCode
 import com.example.test.dxworkspace.presentation.utils.common.getTextz
 import com.example.test.dxworkspace.presentation.utils.common.postNormal
@@ -46,6 +52,7 @@ import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import com.example.test.dxworkspace.presentation.utils.getDateYYYYMMDDHHMMSS
 import com.example.test.dxworkspace.presentation.utils.isDateInMonth
+import com.google.android.material.chip.Chip
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
@@ -69,12 +76,14 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
     var listCommandTemp = mutableListOf<SubRequestCommand>()
     var listSchedules = listOf<WorkScheduleModel?>()
     var listUsersFree = listOf<UserProfileResponse>()
+    var lSalesOrder = listOf<SalesOrderModel>()
 
     var commandNow = SubRequestCommand(generateCode("LSX"))
     var commandNowSchedule = SubRequestCommand(generateCode("LSX"))
     var listTempUsesResponsible = listOf<String>()
 
     val adapterProduct by lazy{ ChooseProductAdapter() }
+    val recommendProductAdapter = RecommendProductAdapter()
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -185,6 +194,41 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
             observe(listUserApporvers) {
                 listApproveUsers = it ?: listOf()
             }
+            observe(listSalesOrder) { l ->
+                lSalesOrder = l ?: listOf()
+                binding?.apply {
+                    edtOrderCode.setAdapter(
+                        ArrayAdapter(
+                            requireContext(), android.R.layout.simple_dropdown_item_1line,
+                            l?.toMutableList() ?: mutableListOf()
+                        )
+                    )
+                    edtOrderCode.setOnItemClickListener { adapterView, view, i, l ->
+                        val t = (adapterView.getItemAtPosition(i) as SalesOrderModel)
+
+                        val chip = Chip(requireContext())
+                        chip.text = t.code
+//                    chip.setBackgroundColor(R.color.cardview_shadow_end_color)
+                        chip.isCloseIconVisible = true
+                        chip.closeIcon = resources.getDrawable(R.drawable.ic_close_chip)
+                        chip.setOnCloseIconClickListener { v ->
+                            binding?.chipGroup1?.removeView(v)
+                            val code = (v as Chip).text
+                            request.salesOrders.removeIf { it == lSalesOrder.find { k -> k.code == code }?._id }
+                            showRecommendProduct()
+                        }
+                        chip.setEnsureMinTouchTargetSize(false)
+
+                        if (request.salesOrders.firstOrNull { it == t._id } == null) {
+                            request.salesOrders.add(t._id!!)
+                            binding?.chipGroup1?.addView(chip)
+                        }
+                        showRecommendProduct()
+                        binding?.edtOrderCode?.clearText()
+
+                    }
+                }
+            }
             observe(listGood){
                 listGoods = it ?: listOf()
                 adapterProduct.listgood = listGoods
@@ -193,6 +237,8 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
             observe(listInventory){
                 listInventorys = it ?: listOf()
                 adapterProduct.listInventory = listInventorys
+                recommendProductAdapter.listInventory = listInventorys
+                recommendProductAdapter.notifyDataSetChanged()
                 adapterProduct.notifyDataSetChanged()
             }
             observe(listMills){
@@ -357,6 +403,7 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
 //            edtTimeStart.isEnabled = false
 //            edtTimeEnd.isEnabled = false
 
+            rcvRecommendProduct.adapter = recommendProductAdapter
             edtTimeStart.setOnClickListener {
                 showMaterialDatePickerDialog(true)
             }
@@ -392,12 +439,27 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
             }
             btnAddProduct.setOnClickListener {
                 val t = adapterProduct.data
-                t.add(DataProductInput())
+                t.add(0,DataProductInput())
                 adapterProduct.data = t
             }
 
         }
     }
+
+    fun showRecommendProduct(){
+        binding?.lnRecommendProduct?.isVisible = !request.salesOrders.isEmpty()
+        val listGood = mutableListOf<GoodInfomation>()
+        val saleOrders = lSalesOrder.filter { request.salesOrders.contains(it._id)   }
+        saleOrders.forEach { s ->
+            s.goods?.forEach { g ->
+                val t = listGood.find { it.good._id == g.good._id }
+                if(t == null) listGood.add(g)
+                else t.quantity = (t.quantity ?: 0) + ( g.quantity ?: 0)
+            }
+        }
+        recommendProductAdapter.data = listGood
+    }
+
     fun initForScreen2(){
         binding?.apply {
             screen1.isVisible = false

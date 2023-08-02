@@ -347,7 +347,7 @@ class CreateTaskFragment : BaseFragment<FragmentCreateTaskBinding>() {
                     task.endDate = convertToUTCTime(getDateYYYYMMDDHHMMSS(calendar.time))
 
                 }
-                showTimePickerDialog(isStart)
+                showTimePickerDialog(isStart) // sua lai materialtimepicker
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),

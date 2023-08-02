@@ -41,7 +41,7 @@ class PlanViewHolder(val binding : ItemManufacturingPlanBinding) : RecyclerView.
     fun bind(item : ManufacturingPlanModel){
         binding.apply {
             tvName.text = item.code
-            tvName2.text = getddMMYYYY(item.createdAt)
+            tvName2.text = getddMMYYYY(item.createdAt).substringBeforeLast("/")
             when(item.status){
                 1 -> {
                     tvStatus.text = "Chờ phê duyệt"

@@ -89,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/toolbar"
-                android:background="@color/clr_bg_main">
+                android:background="@color/color_foot_menu">
 
                 <RelativeLayout
                     android:id="@+id/rlRangeTime"

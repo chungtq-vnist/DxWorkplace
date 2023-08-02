@@ -13,7 +13,7 @@ class ComponentEntity : RealmObject {
     var name : String = ""
     var description : String = ""
     var deleteSoft : Boolean = false
-    var links : RealmList<LinkEntity> = realmListOf()
+    var links : String = ""
 //    var attributes : List<String> = listOf()
     var createdAt : String  = ""
     var updatedAt : String = ""

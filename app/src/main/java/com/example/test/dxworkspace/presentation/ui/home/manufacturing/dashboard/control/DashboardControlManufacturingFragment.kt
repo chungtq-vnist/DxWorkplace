@@ -11,7 +11,6 @@ import com.example.test.dxworkspace.presentation.model.menu.ManufacturingWorkSel
 import com.example.test.dxworkspace.presentation.ui.BaseFragment
 import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.dialog.DialogSelectManufacturingWork
-import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.dialog.RangeDateSelectFragment
 import com.example.test.dxworkspace.presentation.ui.timepicker.RangeTimeSelectFragment
 import com.example.test.dxworkspace.presentation.utils.common.postNormal
 import com.example.test.dxworkspace.presentation.utils.common.registerGreen
@@ -65,6 +64,9 @@ class DashboardControlManufacturingFragment : BaseFragment<FragmentDashboardCont
             EventUpdate.UPDATE_DASHBOARD_MANUFACTURING -> {
                 binding?.tvRangeTime?.text = homeViewModel.fromDate + " - " + homeViewModel.toDate
             }
+            EventUpdate.SYNC_DASHBOARD_MANUFACTURING -> {
+
+            }
         }
     }
 
@@ -87,6 +89,7 @@ class DashboardControlManufacturingFragment : BaseFragment<FragmentDashboardCont
             tabLayout.addTab(tabLayout.newTab().setText("Kế hoạch "), 0)
             tabLayout.addTab(tabLayout.newTab().setText("Lệnh "), 1)
             tabLayout.addTab(tabLayout.newTab().setText("Đề nghị"), 2)
+            tabLayout.addTab(tabLayout.newTab().setText("Chất lượng"),3)
             tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     viewpager.setCurrentItem(tab?.position ?: 0)

@@ -74,6 +74,7 @@ class AuthRepositoryImpl @Inject constructor(
                         name = component.name
                         description = component.description
                         deleteSoft = component.deleteSoft
+                        links = component.links.joinToString(",")
                     }
                 }
             },

@@ -8,94 +8,94 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivBack"
-            style="@style/ImageToolbar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@+id/ivBack"-->
+<!--            style="@style/ImageToolbar"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <TextView
-            android:id="@+id/tvHeaderToolbar"
-            style="@style/Font.TextSemiBold13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:includeFontPadding="false"
-            android:text="Dashboard chất lượng sản xuất"
-            android:textColor="@color/clr_main_dark"
-            app:layout_constraintBottom_toBottomOf="@id/ivBack"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RelativeOverlap" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvHeaderToolbar"-->
+<!--            style="@style/Font.TextSemiBold13"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:includeFontPadding="false"-->
+<!--            android:text="Dashboard chất lượng sản xuất"-->
+<!--            android:textColor="@color/clr_main_dark"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/ivBack"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_chainStyle="packed"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            tools:ignore="RelativeOverlap" />-->
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnMenuMore"
-            style="@style/ImageToolbar"
-            android:layout_width="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="end"
-            android:src="@drawable/ic_menu_more"
-            app:layout_constraintBottom_toBottomOf="@id/ivBack"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@+id/btnMenuMore"-->
+<!--            style="@style/ImageToolbar"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_gravity="end"-->
+<!--            android:src="@drawable/ic_menu_more"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/ivBack"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <RelativeLayout
-            android:id="@+id/rlRangeTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:gravity="center"
-            android:paddingTop="@dimen/_4sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivBack">
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/rlRangeTime"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/white"-->
+<!--            android:gravity="center"-->
+<!--            android:paddingTop="@dimen/_4sdp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/ivBack">-->
 
-            <LinearLayout
-                android:id="@+id/lnRangeTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_centerInParent="true">
-                <ImageView
-                    android:id="@+id/ivRangeTime"
-                    android:layout_width="@dimen/_16sdp"
-                    android:layout_height="@dimen/_16sdp"
-                    android:layout_alignTop="@id/tvRangeTime"
-                    android:layout_alignBottom="@id/tvRangeTime"
-                    android:layout_centerVertical="true"
-                    android:layout_toStartOf="@id/tvRangeTime"
-                    android:src="@drawable/ic_select_calendar" />
+<!--            <LinearLayout-->
+<!--                android:id="@+id/lnRangeTime"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_centerInParent="true">-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/ivRangeTime"-->
+<!--                    android:layout_width="@dimen/_16sdp"-->
+<!--                    android:layout_height="@dimen/_16sdp"-->
+<!--                    android:layout_alignTop="@id/tvRangeTime"-->
+<!--                    android:layout_alignBottom="@id/tvRangeTime"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_toStartOf="@id/tvRangeTime"-->
+<!--                    android:src="@drawable/ic_select_calendar" />-->
 
-                <TextView
-                    android:id="@+id/tvRangeTime"
-                    style="@style/Font.TextRegular13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="16/6/2023 - 20/6/2023"
-                    android:textColor="@color/clr_blue_new"
-                    android:textSize="@dimen/_12ssp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_below="@id/lnRangeTime"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:background="@color/clr_line_new" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvRangeTime"-->
+<!--                    style="@style/Font.TextRegular13"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerInParent="true"-->
+<!--                    android:text="16/6/2023 - 20/6/2023"-->
+<!--                    android:textColor="@color/clr_blue_new"-->
+<!--                    android:textSize="@dimen/_12ssp" />-->
+<!--            </LinearLayout>-->
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0.5dp"-->
+<!--                android:layout_below="@id/lnRangeTime"-->
+<!--                android:layout_marginTop="@dimen/_4sdp"-->
+<!--                android:background="@color/clr_line_new" />-->
 
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
 
 
 
-        <View
-            android:id="@+id/viewTop"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:background="@color/clr_line_new"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rlRangeTime" />
+<!--        <View-->
+<!--            android:id="@+id/viewTop"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/_1sdp"-->
+<!--            android:background="@color/clr_line_new"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/rlRangeTime" />-->
 
 
 
@@ -104,7 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/color_foot_menu"
-            app:layout_constraintTop_toBottomOf="@id/viewTop"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:orientation="vertical">

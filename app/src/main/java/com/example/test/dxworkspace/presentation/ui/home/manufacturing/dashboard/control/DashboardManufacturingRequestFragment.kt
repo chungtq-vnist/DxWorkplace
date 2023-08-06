@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.test.dxworkspace.R
 import com.example.test.dxworkspace.core.extensions.observe
 import com.example.test.dxworkspace.core.extensions.viewModel
+import com.example.test.dxworkspace.data.entity.dashboard_manufacturing.DashboardManufacturingCommandByProgress
+import com.example.test.dxworkspace.data.entity.dashboard_manufacturing.DashboardManufacturingCommandByStatus
 import com.example.test.dxworkspace.data.entity.dashboard_manufacturing.DashboardManufacturingRequestByStatus
 import com.example.test.dxworkspace.data.entity.dashboard_manufacturing.DashboardManufacturingRequestByType
 import com.example.test.dxworkspace.databinding.FragmentDashboardManufacturingPlanBinding
@@ -63,6 +65,7 @@ class DashboardManufacturingRequestFragment : BaseFragment<FragmentDashboardManu
 
     var numberRequestStatus = DashboardManufacturingRequestByStatus()
     var numberRequestType = DashboardManufacturingRequestByType()
+    var isUpdate = false
 
     override fun onStart() {
         super.onStart()
@@ -82,6 +85,10 @@ class DashboardManufacturingRequestFragment : BaseFragment<FragmentDashboardManu
             EventUpdate.UPDATE_LISTWORK_DASHBOARD_MANUFACTURING -> {
                 getNumberOfPlan()
             }
+            EventUpdate.SYNC_DASHBOARD_MANUFACTURING -> {
+                isUpdate = true
+                getNumberOfPlan()
+            }
         }
     }
 
@@ -92,16 +99,38 @@ class DashboardManufacturingRequestFragment : BaseFragment<FragmentDashboardManu
                 showToast(EventToast(R.string.error_notification))
             }
             observe(numberOfRequestByStatus) {
-                numberRequestStatus = it ?: DashboardManufacturingRequestByStatus()
-                if (isTypeStatus) setDataRequestStatus()
-                setDataForRcvDetail()
-                binding?.pullToRefresh?.isRefreshing = false
+                if(isUpdate && isTypeStatus) {
+                    isUpdate = false
+                    val t = it ?: DashboardManufacturingCommandByStatus()
+                    if(!numberRequestStatus.equals(t)){
+                        numberRequestStatus = it ?: DashboardManufacturingRequestByStatus()
+                        if (isTypeStatus) setDataRequestStatus()
+                        setDataForRcvDetail()
+                        binding?.pullToRefresh?.isRefreshing = false
+                    }
+                } else {
+                    numberRequestStatus = it ?: DashboardManufacturingRequestByStatus()
+                    if (isTypeStatus) setDataRequestStatus()
+                    setDataForRcvDetail()
+                    binding?.pullToRefresh?.isRefreshing = false
+                }
             }
             observe(numberOfRequestByType) {
-                numberRequestType = it ?: DashboardManufacturingRequestByType()
-                if (!isTypeStatus) setDataRequestType()
-                setDataForRcvDetail()
-                binding?.pullToRefresh?.isRefreshing = false
+                if(isUpdate && !isTypeStatus) {
+                    isUpdate = false
+                    val t = it ?: DashboardManufacturingRequestByType()
+                    if(!numberRequestType.equals(t)){
+                        numberRequestType = it ?: DashboardManufacturingRequestByType()
+                        if (!isTypeStatus) setDataRequestType()
+                        setDataForRcvDetail()
+                        binding?.pullToRefresh?.isRefreshing = false
+                    }
+                } else {
+                    numberRequestType = it ?: DashboardManufacturingRequestByType()
+                    if (!isTypeStatus) setDataRequestType()
+                    setDataForRcvDetail()
+                    binding?.pullToRefresh?.isRefreshing = false
+                }
             }
         }
         homeViewModel = viewModel(viewModelFactory) {

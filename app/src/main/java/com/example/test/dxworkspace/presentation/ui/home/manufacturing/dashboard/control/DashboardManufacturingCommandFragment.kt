@@ -64,6 +64,7 @@ class DashboardManufacturingCommandFragment : BaseFragment<FragmentDashboardManu
 
     var numberCommandStatus = DashboardManufacturingCommandByStatus()
     var numberCommandProgress = DashboardManufacturingCommandByProgress()
+    var isUpdate = false
 
     override fun onStart() {
         super.onStart()
@@ -83,6 +84,10 @@ class DashboardManufacturingCommandFragment : BaseFragment<FragmentDashboardManu
             EventUpdate.UPDATE_LISTWORK_DASHBOARD_MANUFACTURING -> {
                 getNumberOfPlan()
             }
+            EventUpdate.SYNC_DASHBOARD_MANUFACTURING -> {
+                isUpdate = true
+                getNumberOfPlan()
+            }
         }
     }
 
@@ -93,16 +98,38 @@ class DashboardManufacturingCommandFragment : BaseFragment<FragmentDashboardManu
                 showToast(EventToast(R.string.error_notification))
             }
             observe(numberOfCommandByStatus) {
-                numberCommandStatus = it ?: DashboardManufacturingCommandByStatus()
-                if (isTypeStatus) setDataCommandStatus()
-                setDataForRcvDetail()
-                binding?.pullToRefresh?.isRefreshing = false
+                if(isUpdate && isTypeStatus) {
+                    isUpdate = false
+                    val t = it ?: DashboardManufacturingCommandByStatus()
+                    if(!numberCommandStatus.equals(t)){
+                        numberCommandStatus = it ?: DashboardManufacturingCommandByStatus()
+                        if (isTypeStatus) setDataCommandStatus()
+                        setDataForRcvDetail()
+                        binding?.pullToRefresh?.isRefreshing = false
+                    }
+                } else {
+                    numberCommandStatus = it ?: DashboardManufacturingCommandByStatus()
+                    if (isTypeStatus) setDataCommandStatus()
+                    setDataForRcvDetail()
+                    binding?.pullToRefresh?.isRefreshing = false
+                }
             }
             observe(numberOfCommandByProgress) {
-                numberCommandProgress = it ?: DashboardManufacturingCommandByProgress()
-                if (!isTypeStatus) setDataProgress()
-                setDataForRcvDetail()
-                binding?.pullToRefresh?.isRefreshing = false
+                if(isUpdate && !isTypeStatus) {
+                    isUpdate = false
+                    val t = it ?: DashboardManufacturingCommandByProgress()
+                    if(!numberCommandProgress.equals(t)){
+                        numberCommandProgress = it ?: DashboardManufacturingCommandByProgress()
+                        if (!isTypeStatus) setDataProgress()
+                        setDataForRcvDetail()
+                        binding?.pullToRefresh?.isRefreshing = false
+                    }
+                } else {
+                    numberCommandProgress = it ?: DashboardManufacturingCommandByProgress()
+                    if (!isTypeStatus) setDataProgress()
+                    setDataForRcvDetail()
+                    binding?.pullToRefresh?.isRefreshing = false
+                }
             }
         }
         homeViewModel = viewModel(viewModelFactory) {

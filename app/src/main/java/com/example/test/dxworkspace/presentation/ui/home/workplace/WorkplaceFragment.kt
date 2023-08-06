@@ -120,11 +120,12 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             EventSyncMessage.SYNC_FIRST -> {
                 viewModel.getLinksCanAccess()
             }
-            EventSyncMessage.SYNC_PRIVILEGE -> {
-                viewModel.getLinksCanAccess()
-            }
+//            EventSyncMessage.SYNC_PRIVILEGE -> {
+//                viewModel.getLinksCanAccess()
+//            }
             EventSyncMessage.SYNC_USER -> {
                 setupMenuHeader()
+                viewModel.getLinksCanAccess()
             }
 
             else -> {}
@@ -241,8 +242,6 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
 
         }
         observeLoading(viewModel)
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -396,7 +395,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             postNormal(
                 EventNextHome(
                     DetailTaskFragment::class.java,
-                    bundleOf(Pair("TASK_ID", it._id))
+                    bundleOf(Pair("TASK_ID", it._id),Pair("TASK_TYPE",taskTypeFilter))
                 )
             )
         }
@@ -611,16 +610,16 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                             it.level = 3
                             it.desc ="Điều khiển sản xuất"
                         }
-                        "/manage-manufacturing-works" -> {
-                            it.iconStart = R.drawable.ic_manufacturing_work
-                            it.level = 3
-                            it.desc ="Nhà máy sản xuất"
-                        }
-                        "/manage-manufacturing-mill" -> {
-                            it.iconStart = R.drawable.ic_manufacturing_mill
-                            it.level = 3
-                            it.desc ="Xưởng sản xuất"
-                        }
+//                        "/manage-manufacturing-works" -> {
+//                            it.iconStart = R.drawable.ic_manufacturing_work
+//                            it.level = 3
+//                            it.desc ="Nhà máy sản xuất"
+//                        }
+//                        "/manage-manufacturing-mill" -> {
+//                            it.iconStart = R.drawable.ic_manufacturing_mill
+//                            it.level = 3
+//                            it.desc ="Xưởng sản xuất"
+//                        }
                         "/manage-manufacturing-lot" -> {
                             it.iconStart = R.drawable.ic_manufacturing_lot
                             it.level = 3
@@ -647,16 +646,16 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
     }
 
     fun addTempMenu() {
-        listMenu.add(
-            MenuModel(
-                id = "asjkld",
-                category = "manufacturing-management",
-                level = 3,
-                iconStart = R.drawable.ic_home,
-                desc = "Chất lượng sản xuất",
-                url = "/manufacturing-dashboard-quality"
-            )
-        )
+//        listMenu.add(
+//            MenuModel(
+//                id = "asjkld",
+//                category = "manufacturing-management",
+//                level = 3,
+//                iconStart = R.drawable.ic_home,
+//                desc = "Chất lượng sản xuất",
+//                url = "/manufacturing-dashboard-quality"
+//            )
+//        )
         listMenu.add(
             MenuModel(
                 id = "change_role",

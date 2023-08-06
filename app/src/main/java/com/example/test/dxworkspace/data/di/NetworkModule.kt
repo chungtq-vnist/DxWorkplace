@@ -36,7 +36,10 @@ class NetworkModule {
     companion object {
         const val BASE_URL = "https://dxclan.com:5000"
 //         const val BASE_URL_DEV = "http://10.0.2.2:8000"
-        const val BASE_URL_DEV = "http://192.168.1.3:8000"
+//        const val BASE_URL_DEV = "http://192.168.1.3:8000"
+        const val BASE_URL_DEV = "http://119.17.214.105:8000"
+        const val BASE_URL_MANUFACTURING_SERVICE = "119.17.214.105:8000/msf"
+        const val IS_LIVE = false
         private const val CONNECT_TIMEOUT = 120L
         private const val READ_TIMEOUT = 120L
         private const val WRITE_TIMEOUT = 120L
@@ -82,7 +85,33 @@ class NetworkModule {
         }
 
         okHttpClientBuilder.addInterceptor { chain ->
-            val builder = chain.request().newBuilder()
+            val request = chain.request()
+            var builder = chain.request().newBuilder()
+            val listPathManufacturing = listOf<String>("/manufacturing-dashboard","/manufacturing-works",
+                "/manufacturing-mill","/manufacturing-command",
+                "/manufacturing-plan","/work-schedule")
+            // change url for manufacturing service
+//            if(IS_LIVE && listPathManufacturing.firstOrNull { request.url.encodedPath.contains(it) } != null){
+//                val path = request.url.encodedPath
+//                val r = request.url.pathSegments.drop(1)
+//                val urlRetry = request.url.newBuilder()
+//                    .scheme("http") // hoặc "https" nếu bạn đang sử dụng kết nối bảo mật
+//                    .host("119.17.214.105")
+//                    .port(8000)
+//                    .addPathSegment("msf") // Thêm path "/msf" vào URL
+//                    .build()
+//                builder = chain.request().newBuilder().url(urlRetry)
+//            }
+
+            if(!IS_LIVE){
+                val urlRetry = request.url.newBuilder()
+                    .removePathSegment(0)
+                    .host("192.168.1.3")
+                    .port(8000)
+                    .build()
+                builder = chain.request().newBuilder().url(urlRetry)
+            }
+
 
             builder.addHeader(ACCEPT_HEADER, JSON_TYPE)
             builder.addHeader(X_APP_VERSION, BuildConfig.VERSION_NAME)

@@ -12,15 +12,12 @@ import com.example.test.dxworkspace.core.extensions.observe
 import com.example.test.dxworkspace.core.extensions.viewModel
 import com.example.test.dxworkspace.data.entity.dashboard_manufacturing.DashboardManufacturingPlanByProgress
 import com.example.test.dxworkspace.data.entity.dashboard_manufacturing.DashboardManufacturingPlanByStatus
-import com.example.test.dxworkspace.data.entity.dashboard_manufacturing.DashboardManufacturingPlanModel
-import com.example.test.dxworkspace.databinding.FragmentDashboardControlManufacturingBinding
 import com.example.test.dxworkspace.databinding.FragmentDashboardManufacturingPlanBinding
 import com.example.test.dxworkspace.domain.repository.ConfigRepository
 import com.example.test.dxworkspace.presentation.ui.BaseFragment
 import com.example.test.dxworkspace.presentation.ui.home.HomeViewModel
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.dashboard.control.adapter.ManufacturingPlanDashboardAdapter
 import com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan.ManufacturingPlanDetailFragment
-import com.example.test.dxworkspace.presentation.ui.home.workplace.WorkplaceViewModel
 import com.example.test.dxworkspace.presentation.utils.common.postNormal
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventNextHome
@@ -31,7 +28,6 @@ import com.github.mikephil.charting.components.Legend
 
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.formatter.PercentFormatter
 
 import com.github.mikephil.charting.data.PieData
 
@@ -71,6 +67,7 @@ class DashboardManufacturingPlanFragment : BaseFragment<FragmentDashboardManufac
 
     var numberPlanStatus = DashboardManufacturingPlanByStatus()
     var numberPlanProgress = DashboardManufacturingPlanByProgress()
+    var isUpdate = false
 
     override fun onStart() {
         super.onStart()
@@ -90,6 +87,10 @@ class DashboardManufacturingPlanFragment : BaseFragment<FragmentDashboardManufac
             EventUpdate.UPDATE_LISTWORK_DASHBOARD_MANUFACTURING -> {
                 getNumberOfPlan()
             }
+            EventUpdate.SYNC_DASHBOARD_MANUFACTURING -> {
+                isUpdate = true
+                getNumberOfPlan()
+            }
         }
     }
 
@@ -100,16 +101,39 @@ class DashboardManufacturingPlanFragment : BaseFragment<FragmentDashboardManufac
                 showToast(EventToast(R.string.error_notification))
             }
             observe(numberOfPlanByStatus) {
-                numberPlanStatus = it ?: DashboardManufacturingPlanByStatus()
-                if (isTypeStatus) setData()
-                setDataForRcvDetail()
-                binding?.pullToRefresh?.isRefreshing = false
+                if(isUpdate && isTypeStatus) {
+                    isUpdate = false
+                    val t = it ?: DashboardManufacturingPlanByStatus()
+                    if(!numberPlanStatus.equals(t)){
+                        numberPlanStatus = it ?: DashboardManufacturingPlanByStatus()
+                        if (isTypeStatus) setData()
+                        setDataForRcvDetail()
+                        binding?.pullToRefresh?.isRefreshing = false
+                    }
+
+                } else {
+                    numberPlanStatus = it ?: DashboardManufacturingPlanByStatus()
+                    if (isTypeStatus) setData()
+                    setDataForRcvDetail()
+                    binding?.pullToRefresh?.isRefreshing = false
+                }
             }
             observe(numberOfPlanByProgress) {
-                numberPlanProgress = it ?: DashboardManufacturingPlanByProgress()
-                if (!isTypeStatus) setDataProgress()
-                setDataForRcvDetail()
-                binding?.pullToRefresh?.isRefreshing = false
+                if(isUpdate && !isTypeStatus) {
+                    isUpdate = false
+                    val t = it ?: DashboardManufacturingPlanByProgress()
+                    if(!numberPlanProgress.equals(t)){
+                        numberPlanProgress = it ?: DashboardManufacturingPlanByProgress()
+                        if (!isTypeStatus) setDataProgress()
+                        setDataForRcvDetail()
+                        binding?.pullToRefresh?.isRefreshing = false
+                    }
+                } else {
+                    numberPlanProgress = it ?: DashboardManufacturingPlanByProgress()
+                    if (!isTypeStatus) setDataProgress()
+                    setDataForRcvDetail()
+                    binding?.pullToRefresh?.isRefreshing = false
+                }
             }
         }
         homeViewModel = viewModel(viewModelFactory) {

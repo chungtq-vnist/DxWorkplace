@@ -17,7 +17,7 @@ const val WASTE_ORDER_INDEX = 4
 class WarehouseReportTabAdapter(fm : FragmentManager, lc : Lifecycle) : FragmentStateAdapter(fm,lc) {
     private val productFrag = ReportProductWarehouseFragment()
     private val materialFrag = ReportMaterialWarehouseFragment()
-    private val inventoryFrag = ReportInventoryTurnoverFragment()
+//    private val inventoryFrag = ReportInventoryTurnoverFragment()
 
     override fun getItemCount(): Int {
         return tabFragmentsCreators.size
@@ -31,7 +31,7 @@ class WarehouseReportTabAdapter(fm : FragmentManager, lc : Lifecycle) : Fragment
 //        Pair(OVERVIEW_PAGE_INDEX, planFragment),
         Pair(PRODUCT_PAGE_INDEX, productFrag),
         Pair(MATERIAL_PAGE_INDEX, materialFrag),
-        Pair(TURNOVER_PAGE_INDEX, inventoryFrag),
+//        Pair(TURNOVER_PAGE_INDEX, inventoryFrag),
 //        Pair(PAY_PAGE_INDEX, payFragment),
 //        Pair(QR_ORDER_INDEX,qrOrderFragment)
     )

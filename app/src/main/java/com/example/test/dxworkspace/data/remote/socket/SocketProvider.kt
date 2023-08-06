@@ -3,6 +3,7 @@ package com.example.test.dxworkspace.data.remote.socket
 import android.util.Log
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventSyncMessage
+import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import io.socket.client.IO
 import io.socket.client.Socket
 import java.net.URISyntaxException
@@ -85,6 +86,15 @@ class SocketProvider @Inject constructor() {
             }
             mSocket!!.on("stop timers"){
                 EventBus.getDefault().post(EventSyncMessage(EventSyncMessage.SYNC_TIMESHEET_LOG))
+            }
+            mSocket!!.on("dashboard_update"){data ->
+                Log.d("SOCKET","dashboard update")
+                if( data.firstOrNull() is String && (data.firstOrNull() as String) == "manufacturing-control") EventBus.getDefault().post(EventUpdate(EventUpdate.SYNC_DASHBOARD_MANUFACTURING))
+                if( data.firstOrNull() is String && (data.firstOrNull() as String) == "inventory")
+                    EventBus.getDefault().post(EventUpdate(EventUpdate.SYNC_DASHBOARD_INVENTORY))
+                if( data.firstOrNull() is String && (data.firstOrNull() as String) == "financial")
+                    EventBus.getDefault().post(EventUpdate(EventUpdate.SYNC_DASHBOARD_FINANCIAL))
+
             }
         }
     }

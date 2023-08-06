@@ -88,6 +88,7 @@ class DashboardQualityManufacturingFragment : BaseFragment<FragmentDashboardQual
     var percentAverage = 0.0
     var listChart = mutableListOf<QualityGoodsCompare>()
     val qualityAdapter by lazy { ManufacturingGoodsQualityAdapter() }
+    var isUpdate = false
 
     @Subscribe
     fun onEventUpdate(event: EventUpdate) {
@@ -97,11 +98,15 @@ class DashboardQualityManufacturingFragment : BaseFragment<FragmentDashboardQual
     fun onBusEvent(event: EventUpdate) {
         when (event.type) {
             EventUpdate.UPDATE_DASHBOARD_MANUFACTURING -> {
-                binding?.tvRangeTime?.text = homeViewModel.fromDate + " - " + homeViewModel.toDate
+//                binding?.tvRangeTime?.text = homeViewModel.fromDate + " - " + homeViewModel.toDate
                 getGoodsReport()
             }
 
             EventUpdate.UPDATE_LISTWORK_DASHBOARD_MANUFACTURING -> {
+                getGoodsReport()
+            }
+            EventUpdate.SYNC_DASHBOARD_MANUFACTURING -> {
+                isUpdate = true
                 getGoodsReport()
             }
         }
@@ -115,8 +120,17 @@ class DashboardQualityManufacturingFragment : BaseFragment<FragmentDashboardQual
             }
             observe(listGoods) {
 //                setData(5,100f)
-                binding!!.pullToRefresh.isRefreshing = false
-                setDataChartReport(listGoods.value ?: emptyList())
+                if(isUpdate){
+                    isUpdate = false
+                    binding!!.pullToRefresh.isRefreshing = false
+                    val listTemp = listGoods.value ?: emptyList()
+                    if(!isEqual(listChart,listTemp.toMutableList())) {
+                        setDataChartReport(listGoods.value ?: emptyList())
+                    }
+                } else {
+                    binding!!.pullToRefresh.isRefreshing = false
+                    setDataChartReport(listGoods.value ?: emptyList())
+                }
             }
             observe(optionSelect){
                 if(it == "-1"){
@@ -134,14 +148,14 @@ class DashboardQualityManufacturingFragment : BaseFragment<FragmentDashboardQual
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
-            tvRangeTime.text = homeViewModel.fromDate + " - " + homeViewModel.toDate
-            rlRangeTime.setOnClickListener {
-                postNormal(EventNextHome(RangeTimeSelectFragment::class.java))
-            }
-            ivBack.setOnClickListener { onBackPress() }
-            btnMenuMore.setOnClickListener {
-                showDialogSelectWorks(if (homeViewModel.listWorksSelected.isEmpty()) viewModel.listAllWorks else homeViewModel.listWorksSelected)
-            }
+//            tvRangeTime.text = homeViewModel.fromDate + " - " + homeViewModel.toDate
+//            rlRangeTime.setOnClickListener {
+//                postNormal(EventNextHome(RangeTimeSelectFragment::class.java))
+//            }
+//            ivBack.setOnClickListener { onBackPress() }
+//            btnMenuMore.setOnClickListener {
+//                showDialogSelectWorks(if (homeViewModel.listWorksSelected.isEmpty()) viewModel.listAllWorks else homeViewModel.listWorksSelected)
+//            }
             pullToRefresh.setOnRefreshListener {
                 getGoodsReport()
             }
@@ -502,5 +516,15 @@ class DashboardQualityManufacturingFragment : BaseFragment<FragmentDashboardQual
             data.barWidth = barWidth
             chart.setData(data)
         }
+    }
+
+    fun isEqual(a : MutableList<QualityGoodsCompare> , b : MutableList<QualityGoodsCompare>) : Boolean{
+        if(a.size != b.size) return false
+        a.forEach { k ->
+            val t = b.find { k.goods?._id == it.goods?._id }
+            if(t == null) return false
+            if(t.numberOfProducts != k.numberOfProducts || t.numberOfWaste != k.numberOfWaste) return false
+        }
+        return true
     }
 }

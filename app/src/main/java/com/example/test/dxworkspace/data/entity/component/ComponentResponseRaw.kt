@@ -14,4 +14,5 @@ data class ComponentResponse(
     var name : String ="",
     var description : String ="",
     var deleteSoft : Boolean = false,
+    var links : List<String> = listOf(),
 )

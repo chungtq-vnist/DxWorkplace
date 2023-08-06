@@ -9,29 +9,29 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface LoginApi {
-    @POST("/auth/login")
+    @POST("/ms/auth/login")
     fun loginByPassword(@Body param: LoginRequestRaw): Call<LoginResponseRaw>
 
-    @GET("/auth/get-links-that-role-can-access/{roleId}")
+    @GET("/ms/auth/get-links-that-role-can-access/{roleId}")
     fun getLinkThatRoleCanAccess(
         @Path("roleId") roleId: String,
         @Query("userId") userId: String,
     ): Call<LinkResponseRaw>
 
-    @GET("/component/components")
+    @GET("/ms/component/components")
     fun getComponentCanAccess(
         @Query("currentRole") currentRole: String,
         @Query("userId") userId: String,
     ): Call<ComponentResponseRaw>
 
-    @GET("/component/components")
+    @GET("/ms/component/components")
     fun getAllComponents(
     ): Call<ComponentResponseRaw>
 
-    @GET("/auth/logout")
+    @GET("/ms/auth/logout")
     fun logout(): Call<Unit>
 
-    @GET("/auth/get-profile/{userId}")
+    @GET("/ms/auth/get-profile/{userId}")
     fun getProfileUser(
         @Path("userId") userId: String
     ) : Call<UserProfileResponseRaw>

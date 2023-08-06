@@ -23,7 +23,15 @@ data class DashboardManufacturingPlanByStatus(
     var listPlan3 : List<DashboardManufacturingPlanModel>? = emptyList(),
     var listPlan4 : List<DashboardManufacturingPlanModel>? = emptyList(),
     var listPlan5 : List<DashboardManufacturingPlanModel>? = emptyList(),
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if(other is DashboardManufacturingPlanByStatus){
+            other as DashboardManufacturingPlanByStatus
+            return other.plan1 == plan1 && other.plan2 == plan2 && other.plan3 == plan3
+                    && other.plan4 == plan4 && other.plan5 == plan5
+        }else return false
+    }
+}
 
 data class DashboardManufacturingPlanByProgress(
     var totalPlans : Int? = 0,
@@ -33,7 +41,15 @@ data class DashboardManufacturingPlanByProgress(
     var listSlowPlans : List<DashboardManufacturingPlanModel>? = emptyList(),
     var listExpiredPlans : List<DashboardManufacturingPlanModel>? = emptyList(),
     var listTruePlans : List<DashboardManufacturingPlanModel>? = emptyList(),
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if(other is DashboardManufacturingPlanByProgress){
+            other as DashboardManufacturingPlanByProgress
+            return other.totalPlans == totalPlans && other.truePlans == truePlans && other.slowPlans == slowPlans
+                    && other.expiredPlans == expiredPlans
+        }else return false
+    }
+}
 
 
 

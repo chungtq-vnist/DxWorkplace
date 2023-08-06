@@ -30,7 +30,15 @@ data class DashboardManufacturingCommandByStatus(
     var listCommand4 : List<DashboardManufacturingCommandModel>? = emptyList(),
     var listCommand5 : List<DashboardManufacturingCommandModel>? = emptyList(),
     var listCommand6 : List<DashboardManufacturingCommandModel>? = emptyList(),
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if(other is DashboardManufacturingCommandByStatus){
+            other as DashboardManufacturingCommandByStatus
+            return other.command1 == command1 && other.command2 == command2 && other.command3 == command3
+                    && other.command4 == command4 && other.command5 == command5 && other.command6 == command6
+        }else return false
+    }
+}
 
 data class DashboardManufacturingCommandByProgress(
     var totalCommands : Int? = 0,
@@ -40,7 +48,15 @@ data class DashboardManufacturingCommandByProgress(
     var arrayTrueCommands : List<DashboardManufacturingCommandModel>? = emptyList(),
     var arraySlowCommands : List<DashboardManufacturingCommandModel>? = emptyList(),
     var arrayExpiredCommands : List<DashboardManufacturingCommandModel>? = emptyList(),
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if(other is DashboardManufacturingCommandByProgress){
+            other as DashboardManufacturingCommandByProgress
+            return other.totalCommands == totalCommands && other.trueCommands == trueCommands && other.slowCommands == slowCommands
+                    && other.expiredCommands == expiredCommands
+        }else return false
+    }
+}
 
 
 

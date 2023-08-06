@@ -24,7 +24,7 @@ class DashboardControlManufacturingViewModel @Inject constructor(
     private val getReportGoodsQualityUseCase: GetReportGoodsQualityUseCase
 ) : BaseViewModel() {
 
-    var listManufacturingWorks = MutableLiveData<List<ManufacturingWorkEntity>>()
+//    var listManufacturingWorks = MutableLiveData<List<ManufacturingWorkEntity>>()
 
     var numberOfPlanByStatus = MutableLiveData<DashboardManufacturingPlanByStatus>()
     var numberOfPlanByProgress = MutableLiveData<DashboardManufacturingPlanByProgress>()
@@ -51,7 +51,7 @@ class DashboardControlManufacturingViewModel @Inject constructor(
     fun getAllManufacturingWorkCanManage(){
         getAllManufacturingWorkUseCase(""){
             it.either({handleFailure(it)},{
-                listManufacturingWorks.value = it
+//                listManufacturingWorks.value = it
                 listAllWorks = it.map { f -> f.mapWithName() }.toMutableList()
             })
         }

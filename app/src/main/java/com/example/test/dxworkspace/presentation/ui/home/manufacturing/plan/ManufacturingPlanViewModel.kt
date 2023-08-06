@@ -1,6 +1,7 @@
 package com.example.test.dxworkspace.presentation.ui.home.manufacturing.plan
 
 import androidx.lifecycle.MutableLiveData
+import com.example.test.dxworkspace.data.entity.component.ComponentEntity
 import com.example.test.dxworkspace.data.entity.good.GoodDetailModel
 import com.example.test.dxworkspace.data.entity.good.InventoryGoodWrap
 import com.example.test.dxworkspace.data.entity.manufacturing_mill.ManufacturingMillModel
@@ -14,6 +15,8 @@ import com.example.test.dxworkspace.data.entity.user.UserProfileResponse
 import com.example.test.dxworkspace.data.entity.work_schedule.WorkScheduleModel
 import com.example.test.dxworkspace.domain.model.manufacturing_plan.RequestManufacturingPlan
 import com.example.test.dxworkspace.domain.repository.ConfigRepository
+import com.example.test.dxworkspace.domain.usecase.UseCase
+import com.example.test.dxworkspace.domain.usecase.auth.GetComponentsCanAccessUseCase
 import com.example.test.dxworkspace.domain.usecase.manufacturing_manage.*
 import com.example.test.dxworkspace.domain.usecase.manufacturing_work.GetAllManufacturingWorkRemoteUsecase
 import com.example.test.dxworkspace.presentation.model.menu.WorkerScheduleRequest
@@ -40,7 +43,8 @@ class ManufacturingPlanViewModel  @Inject constructor(
     private val getWorkScheduleOfMillByDateUseCase: GeWorkScheduleOfMillByDateUseCase,
     private val getAllUser : GetAllUsersUseCase,
     private val gson: Gson,
-    private val createManufacturingPlanUseCase: CreateManufacturingPlanUseCase
+    private val createManufacturingPlanUseCase: CreateManufacturingPlanUseCase,
+    private val getComponentsCanAccessUseCase: GetComponentsCanAccessUseCase,
 ) : BaseViewModel() {
     val listPlan = MutableLiveData<List<ManufacturingPlanModel>>()
     val listMills = MutableLiveData<List<ManufacturingMillModel>>()
@@ -53,6 +57,7 @@ class ManufacturingPlanViewModel  @Inject constructor(
     val updateStatus = MutableLiveData<Boolean>()
     val planDetail = MutableLiveData<ManufacturingPlanDetailModel>()
     val listSalesOrder = MutableLiveData<List<SalesOrderModel>>()
+    val listComponent = MutableLiveData<List<ComponentEntity>>()
 
     fun getListPlan(s : String , e : String ){
         getAllPlanUseCase(Pair(s,e)){
@@ -189,6 +194,16 @@ class ManufacturingPlanViewModel  @Inject constructor(
             },{
                 showLoading(false)
                 updateStatus.value = true
+            })
+        }
+    }
+
+    fun getComponent(){
+        getComponentsCanAccessUseCase(UseCase.None()){
+            it.either({
+                listComponent.value = listOf()
+            },{
+                listComponent.value = it
             })
         }
     }

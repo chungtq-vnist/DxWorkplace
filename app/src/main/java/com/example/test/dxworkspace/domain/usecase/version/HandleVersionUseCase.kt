@@ -38,58 +38,61 @@ class HandleVersionUseCase @Inject constructor(
 
             versionDiff.forEach { v ->
                 when (v.versionKey) {
-                    Constants.VERSION_KEY.USER_ROLE, Constants.VERSION_KEY.USER -> {
+//                    Constants.VERSION_KEY.USER_ROLE, Constants.VERSION_KEY.USER -> {
+//                        withContext(Dispatchers.IO) {
+//                            // get user profile
+//                            authRepository.getUserProfile(userId)
+//                            versionRepository.saves(version.filter {
+//                                listOf(
+//                                    Constants.VERSION_KEY.USER_ROLE,
+//                                    Constants.VERSION_KEY.USER
+//                                ).contains(it.versionKey)
+//                            }, configRepository.getDBName())
+//                            EventBus.getDefault().post(EventSyncMessage(EventSyncMessage.SYNC_USER))
+//                        }
+//
+//                    }
+//                    Constants.VERSION_KEY.ROLE -> {
+//                        withContext(Dispatchers.IO){
+//                            if(v.versionDB == 0 ){
+//                                authRepository.getAllRolesRemote()
+//                                versionRepository.save(version.first { it.versionKey == Constants.VERSION_KEY.ROLE },
+//                                    configRepository.getDBName())
+//                            } else {
+//                                authRepository.handleCompareVersionRole(v)
+//                            }
+//                        }
+//                    }
+                    Constants.VERSION_KEY.USER, Constants.VERSION_KEY.ROLE -> {
                         withContext(Dispatchers.IO) {
-                            // get user profile
-                            authRepository.getUserProfile(userId)
+                            val a = async {  authRepository.getUserProfile(userId) }
+                            val b = async { authRepository.getComponentCanAccessRemote(roleId, userId) }
+                            val c = async { authRepository.getLinksCanAccessRemote(roleId, userId) }
                             versionRepository.saves(version.filter {
                                 listOf(
-                                    Constants.VERSION_KEY.USER_ROLE,
-                                    Constants.VERSION_KEY.USER
+                                    Constants.VERSION_KEY.USER,
+                                    Constants.VERSION_KEY.ROLE,
                                 ).contains(it.versionKey)
                             }, configRepository.getDBName())
+                            a.await()
+                            b.await()
+                            c.await()
                             EventBus.getDefault().post(EventSyncMessage(EventSyncMessage.SYNC_USER))
                         }
 
                     }
-                    Constants.VERSION_KEY.ROLE -> {
-                        withContext(Dispatchers.IO){
-                            if(v.versionDB == 0 ){
-                                authRepository.getAllRolesRemote()
-                                versionRepository.save(version.first { it.versionKey == Constants.VERSION_KEY.ROLE },
-                                    configRepository.getDBName())
-                            } else {
-                                authRepository.handleCompareVersionRole(v)
-                            }
-                        }
-                    }
-                    Constants.VERSION_KEY.COMPONENT, Constants.VERSION_KEY.LINK, Constants.VERSION_KEY.PRIVILEGE -> {
-                        withContext(Dispatchers.IO) {
-                            authRepository.getComponentCanAccessRemote(roleId, userId)
-                            authRepository.getLinksCanAccessRemote(roleId, userId)
-                            versionRepository.saves(version.filter {
-                                listOf(
-                                    Constants.VERSION_KEY.COMPONENT,
-                                    Constants.VERSION_KEY.LINK,
-                                    Constants.VERSION_KEY.PRIVILEGE
-                                ).contains(it.versionKey)
-                            }, configRepository.getDBName())
-                            EventBus.getDefault().post(EventSyncMessage(EventSyncMessage.SYNC_PRIVILEGE))
-                        }
-
-                    }
-                    Constants.VERSION_KEY.MANUFACTURINGWORK -> {
-                       withContext(Dispatchers.IO){
-                           if(v.versionDB == 0 ){
-                               manufacturingWorkRepository.getAllManufacturingWorks()
-                               versionRepository.save(version.first { it.versionKey == Constants.VERSION_KEY.MANUFACTURINGWORK },
-                               configRepository.getDBName())
-                           } else {
-                               manufacturingWorkRepository.handleCompareVersion(v)
-                           }
-                           EventBus.getDefault().post(EventSyncMessage(EventSyncMessage.SYNC_MANUFACTURING_WORK))
-                       }
-                    }
+//                    Constants.VERSION_KEY.MANUFACTURINGWORK -> {
+//                       withContext(Dispatchers.IO){
+//                           if(v.versionDB == 0 ){
+//                               manufacturingWorkRepository.getAllManufacturingWorks()
+//                               versionRepository.save(version.first { it.versionKey == Constants.VERSION_KEY.MANUFACTURINGWORK },
+//                               configRepository.getDBName())
+//                           } else {
+//                               manufacturingWorkRepository.handleCompareVersion(v)
+//                           }
+//                           EventBus.getDefault().post(EventSyncMessage(EventSyncMessage.SYNC_MANUFACTURING_WORK))
+//                       }
+//                    }
 
                 }
             }

@@ -159,7 +159,8 @@
                             android:id="@+id/ivSttDelivery"
                             android:layout_width="@dimen/_12sdp"
                             android:layout_height="@dimen/_12sdp"
-                            android:src="@color/sp_color_red" />
+                            android:src="@color/sp_color_red"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
 
                         <TextView
                             android:id="@+id/tvAssetCount"
@@ -213,7 +214,8 @@
                             android:id="@+id/ivSttKitchen"
                             android:layout_width="@dimen/_12sdp"
                             android:layout_height="@dimen/_12sdp"
-                            android:src="@color/sp_color_red" />
+                            android:src="@color/sp_color_red"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
 
                         <TextView
                             android:id="@+id/tvKPICount"

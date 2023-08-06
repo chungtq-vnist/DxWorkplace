@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.test.dxworkspace.R
 import com.example.test.dxworkspace.data.entity.notify.NotificationModel
 import com.example.test.dxworkspace.databinding.ItemNotifyBinding
+import com.example.test.dxworkspace.presentation.utils.common.getThemeAccentColor
+import com.example.test.dxworkspace.presentation.utils.common.getThemePrimaryColor
 import com.example.test.dxworkspace.presentation.utils.common.toHtml
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
 import com.example.test.dxworkspace.presentation.utils.event.EventGoToNotification
@@ -55,7 +57,7 @@ class NotifyAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 if (item.readed) {
                     holder.binding.rootView.setBackgroundResource(R.color.white)
                 } else {
-                    holder.binding.rootView.setBackgroundResource(R.color.sp_color_notification)
+                    holder.binding.rootView.setBackgroundResource(R.color.primary_background)
                 }
                 rootView.setOnClickListener {
                     if(!item.readed) {

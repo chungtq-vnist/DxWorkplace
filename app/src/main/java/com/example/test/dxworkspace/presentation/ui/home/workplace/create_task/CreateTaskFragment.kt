@@ -35,6 +35,9 @@ import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import com.example.test.dxworkspace.presentation.utils.getDateYYYYMMDDHHMMSS
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -154,10 +157,10 @@ class CreateTaskFragment : BaseFragment<FragmentCreateTaskBinding>() {
                     task.priority = 5 - p2
                 }
             edtStartTime.setOnClickListener {
-                showDateTimePickerDialog(true)
+                showMaterialDatePickerDialog(true)
             }
             edtEndTime.setOnClickListener {
-                showDateTimePickerDialog(false)
+                showMaterialDatePickerDialog(false)
             }
             edtUserResponsible.setOnClickListener {
 //                val bundle = Bundle()
@@ -385,5 +388,79 @@ class CreateTaskFragment : BaseFragment<FragmentCreateTaskBinding>() {
             true
         )
         timePickerDialog.show()
+    }
+
+    private fun showMaterialDatePickerDialog(isStart: Boolean) {
+        val selectedDateInMillis = calendar.timeInMillis
+
+        val builder = MaterialDatePicker.Builder.datePicker()
+        builder.setSelection(selectedDateInMillis)
+
+        val datePicker = builder.build()
+
+        datePicker.addOnPositiveButtonClickListener { selectedDateInMillis ->
+            calendar.timeInMillis = selectedDateInMillis
+            if (isStart) {
+                binding?.edtStartTime?.setText(
+                    SimpleDateFormat(
+                        "HH:mm dd-MM-yyyy",
+                        Locale.getDefault()
+                    ).format(calendar.time)
+                )
+                task.startDate = convertToUTCTime(getDateYYYYMMDDHHMMSS(calendar.time))
+            } else {
+                binding?.edtEndTime?.setText(
+                    SimpleDateFormat(
+                        "HH:mm dd-MM-yyyy",
+                        Locale.getDefault()
+                    ).format(calendar.time)
+                )
+                task.endDate = convertToUTCTime(getDateYYYYMMDDHHMMSS(calendar.time))
+
+            }
+            showMaterialTimePickerDialog(isStart)
+        }
+
+        datePicker.show(requireActivity().supportFragmentManager, datePicker.toString())
+    }
+
+    private fun showMaterialTimePickerDialog(isStart: Boolean) {
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
+
+        val timePicker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_24H)
+            .setHour(hour)
+            .setMinute(minute)
+            .build()
+
+        timePicker.addOnPositiveButtonClickListener {
+            val selectedHour = timePicker.hour
+            val selectedMinute = timePicker.minute
+
+            val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+            calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
+            calendar.set(Calendar.MINUTE, selectedMinute)
+
+            if (isStart) {
+                binding?.edtStartTime?.setText(
+                    SimpleDateFormat(
+                        "HH:mm dd-MM-yyyy",
+                        Locale.getDefault()
+                    ).format(calendar.time)
+                )
+                task.startDate = convertToUTCTime(getDateYYYYMMDDHHMMSS(calendar.time))
+            } else {
+                binding?.edtEndTime?.setText(
+                    SimpleDateFormat(
+                        "HH:mm dd-MM-yyyy",
+                        Locale.getDefault()
+                    ).format(calendar.time)
+                )
+                task.endDate = convertToUTCTime(getDateYYYYMMDDHHMMSS(calendar.time))
+            }
+        }
+
+        timePicker.show(requireActivity().supportFragmentManager, timePicker.toString())
     }
 }

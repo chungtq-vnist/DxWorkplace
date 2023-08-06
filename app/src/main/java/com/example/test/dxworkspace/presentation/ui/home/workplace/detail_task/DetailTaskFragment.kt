@@ -48,6 +48,7 @@ class DetailTaskFragment : BaseFragment<FragmentDetailTaskBinding>() {
     val taskConsultedEmpl by lazy { TaskResponsibleEmployeeAdapter() }
     val taskTimeSheetAdapter by lazy { TaskTimeSheetLogAdapter() }
     var taskId = ""
+    var taskType = 0
     var popupOption : DialogTaskOption? = null
     var dialogCloseTask : DialogCloseTask? = null
     var dialogOpenTask : DialogOpenTask? = null
@@ -55,6 +56,7 @@ class DetailTaskFragment : BaseFragment<FragmentDetailTaskBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         taskId = arguments?.getString("TASK_ID") ?: ""
+        taskType = arguments?.getInt("TASK_TYPE") ?: 0
         viewModel = viewModel(viewModelFactory) {
             observe(taskSelected) {
                 if (it?._id.isNullOrEmpty()) {
@@ -172,7 +174,7 @@ class DetailTaskFragment : BaseFragment<FragmentDetailTaskBinding>() {
             taskActionAdapter.items = task.taskActions.toMutableList()
             constraintAction.setOnClickListener {
                 rcvAction.isVisible = !rcvAction.isVisible
-                lnAddAction.isVisible = !lnAddAction.isVisible
+                lnAddAction.isVisible = !lnAddAction.isVisible && taskType == 0
                 ivExpandAction.setImageResource(if(rcvAction.isVisible) R.drawable.ic_expand_up else R.drawable.ic_expand_down)
 
             }
@@ -209,7 +211,8 @@ class DetailTaskFragment : BaseFragment<FragmentDetailTaskBinding>() {
                 hideKeyboard()
 
             }
-            rlTimeSheet.isVisible = task.status != "finished" && task.status != "canceled"
+            rlTimeSheet.isVisible = task.status != "finished" && task.status != "canceled" && taskType == 0
+            btnMenuMore.isVisible = taskType == 0
         }
     }
 }

@@ -191,5 +191,6 @@
     <color name="clr_status_wait">#D5B82D</color>
     <color name="clr_status_approve">#3B28DF</color>
     <color name="clr_status_inprogress">#DA0FE8</color>
+    <color name="primary_background">#F2EAF6</color>
 
 </resources>

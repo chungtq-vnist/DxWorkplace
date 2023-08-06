@@ -53,6 +53,7 @@ class ReportMaterialWarehouseFragment : BaseFragment<FragmentDashboardWarehouseM
     var dataChart = listOf<WarehouseReportModel>()
     private var mkRate: MarkerHorizontal? = null
     var currentFilter = "money"
+    var isUpdate = false
 
     override fun onStart() {
         super.onStart()
@@ -67,6 +68,10 @@ class ReportMaterialWarehouseFragment : BaseFragment<FragmentDashboardWarehouseM
     fun onBusEvent(event: EventUpdate) {
         when (event.type) {
             EventUpdate.UPDATE_DASHBOARD_MANUFACTURING -> {
+                getDataWarehouseReport()
+            }
+            EventUpdate.SYNC_DASHBOARD_INVENTORY -> {
+                isUpdate = true
                 getDataWarehouseReport()
             }
         }
@@ -88,9 +93,18 @@ class ReportMaterialWarehouseFragment : BaseFragment<FragmentDashboardWarehouseM
 
             observe(statusReport) {
                 if (it == "DONE") {
-                    dataChart = viewModel.listDataWarehouseReport.value ?: listOf()
-                    setDataChart()
-                    setDataRcv()
+                    if(!isUpdate) {
+                        dataChart = viewModel.listDataWarehouseReport.value ?: listOf()
+                        setDataChart()
+                        setDataRcv()
+                    } else {
+                        isUpdate = false
+                        val e = viewModel.listDataWarehouseReport.value ?: listOf()
+                        if(!isEquals(e,dataChart)) {
+                            setDataChart()
+                            setDataRcv()
+                        }
+                    }
                 }
             }
         }
@@ -296,5 +310,18 @@ class ReportMaterialWarehouseFragment : BaseFragment<FragmentDashboardWarehouseM
                 if (homeViewModel.isCompare) homeViewModel.toDateCompare else null,
             )
         )
+    }
+    fun isEquals(a : List<WarehouseReportModel>,b:List<WarehouseReportModel>) : Boolean{
+        if(a.size != b.size) return false
+        for( i in a.indices){
+            val t = a[i]
+            val r = b[i]
+            if( t.materialBeginningValue != r.materialBeginningValue ||
+                t.materialEndingValue != r.materialEndingValue ||
+                t.materialImportValue != r.materialImportValue ||
+                t.materialExportValue != r.materialExportValue  )
+                return false
+        }
+        return true
     }
 }

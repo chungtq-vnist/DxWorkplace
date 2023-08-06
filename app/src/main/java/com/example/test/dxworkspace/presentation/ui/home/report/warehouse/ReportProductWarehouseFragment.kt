@@ -51,6 +51,7 @@ class ReportProductWarehouseFragment : BaseFragment<FragmentDashboardWarehousePr
     var dataChart = listOf<WarehouseReportModel>()
     private var mkRate: MarkerHorizontal? = null
     var currentFilter = "money"
+    var isUpdate = false
 
     override fun onStart() {
         super.onStart()
@@ -65,6 +66,10 @@ class ReportProductWarehouseFragment : BaseFragment<FragmentDashboardWarehousePr
     fun onBusEvent(event: EventUpdate) {
         when (event.type) {
             EventUpdate.UPDATE_DASHBOARD_MANUFACTURING -> {
+                getDataWarehouseReport()
+            }
+            EventUpdate.SYNC_DASHBOARD_INVENTORY -> {
+                isUpdate = true
                 getDataWarehouseReport()
             }
         }
@@ -86,9 +91,18 @@ class ReportProductWarehouseFragment : BaseFragment<FragmentDashboardWarehousePr
 
             observe(statusReport) {
                 if (it == "DONE") {
-                    dataChart = viewModel.listDataWarehouseReport.value ?: listOf()
-                    setDataChart()
-                    setDataRcv()
+                    if(!isUpdate) {
+                        dataChart = viewModel.listDataWarehouseReport.value ?: listOf()
+                        setDataChart()
+                        setDataRcv()
+                    } else {
+                        isUpdate = false
+                        val e = viewModel.listDataWarehouseReport.value ?: listOf()
+                        if(!isEquals(e,dataChart)) {
+                            setDataChart()
+                            setDataRcv()
+                        }
+                    }
                 }
             }
         }
@@ -275,5 +289,19 @@ class ReportProductWarehouseFragment : BaseFragment<FragmentDashboardWarehousePr
                 if (homeViewModel.isCompare) homeViewModel.toDateCompare else null,
             )
         )
+    }
+
+    fun isEquals(a : List<WarehouseReportModel>,b:List<WarehouseReportModel>) : Boolean{
+        if(a.size != b.size) return false
+        for( i in a.indices){
+            val t = a[i]
+            val r = b[i]
+            if( t.productBeginningValue != r.productBeginningValue ||
+                t.productEndingValue != r.productEndingValue ||
+                t.productImportValue != r.productImportValue ||
+                t.productExportValue != r.productExportValue  )
+                    return false
+        }
+        return true
     }
 }

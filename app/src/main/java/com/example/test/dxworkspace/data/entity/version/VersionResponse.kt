@@ -6,11 +6,11 @@ data class VersionResponse(
     var _id: String = "",
     var role: Int = 0,
     var user: Int = 0,
-    var userRole: Int = 0,
-    var component: Int = 0,
-    var link: Int = 0,
-    var privilege: Int = 0,
-    var manufacturingWork : Int = 0 ,
+//    var userRole: Int = 0,
+//    var component: Int = 0,
+//    var link: Int = 0,
+//    var privilege: Int = 0,
+//    var manufacturingWork : Int = 0 ,
 )
 
 data class VersionResponseRaw(

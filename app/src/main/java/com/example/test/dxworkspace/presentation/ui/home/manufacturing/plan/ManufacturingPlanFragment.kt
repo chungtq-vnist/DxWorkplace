@@ -87,6 +87,12 @@ class ManufacturingPlanFragment : BaseFragment<FragmentManufacturingPlanBinding>
                 listPlans = it ?: listPlans
                 adapter.items = listPlans
             }
+            observe(listComponent){
+                val t = it ?: listOf()
+                if(t.isEmpty() || t.find { it.name == "create-manufacturing-plan" } == null){
+                    binding?.lnCreate?.isVisible = false
+                }
+            }
         }
         dashboardViewModel = viewModel(viewModelFactory){
             observe(numberOfPlanByProgress){
@@ -103,6 +109,7 @@ class ManufacturingPlanFragment : BaseFragment<FragmentManufacturingPlanBinding>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getComponent()
         binding?.apply {
             ivBack.setOnClickListener { onBackPress() }
             pullToRefresh.setOnRefreshListener {

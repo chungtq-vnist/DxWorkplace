@@ -364,7 +364,7 @@
                         android:hint="Mẫu công việc"
                         android:imeOptions="actionNone"
                         android:background="@null"
-                        android:inputType="textCapSentences"
+                        android:inputType="none"
                         tools:maxLines="1"
                         tools:text="" />
                 </com.google.android.material.textfield.TextInputLayout>

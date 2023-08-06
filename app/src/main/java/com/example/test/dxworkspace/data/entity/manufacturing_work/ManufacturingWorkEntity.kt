@@ -21,6 +21,6 @@ class ManufacturingWorkEntity : RealmObject {
     var turn : Int? = 0
 }
 
-fun ManufacturingWorkEntity.mapWithName(): ManufacturingWorkSelect {
+fun ManufacturingWorkModel.mapWithName(): ManufacturingWorkSelect {
     return ManufacturingWorkSelect(this._id,this.name)
 }

@@ -15,5 +15,8 @@ class EventUpdate(val type: Int, var value: Any? = null) : EventBus.Event() {
         const val UPDATE_PLAN = 10
         const val UPDATE_TIMESHEET = 11
         const val UPDATE_COUNT_NOTIFY = 12
+        const val SYNC_DASHBOARD_MANUFACTURING = 6
+        const val SYNC_DASHBOARD_INVENTORY = 7
+        const val SYNC_DASHBOARD_FINANCIAL = 8
     }
 }

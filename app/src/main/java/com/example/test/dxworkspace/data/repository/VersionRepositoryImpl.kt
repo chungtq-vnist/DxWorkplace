@@ -53,26 +53,26 @@ class VersionRepositoryImpl @Inject constructor(
             versionKey = Constants.VERSION_KEY.USER
             value = res.user
         })
-        versions.add(VersionEntity().apply {
-            versionKey = Constants.VERSION_KEY.USER_ROLE
-            value = res.userRole
-        })
-        versions.add(VersionEntity().apply {
-            versionKey = Constants.VERSION_KEY.COMPONENT
-            value = res.component
-        })
-        versions.add(VersionEntity().apply {
-            versionKey = Constants.VERSION_KEY.LINK
-            value = res.link
-        })
-        versions.add(VersionEntity().apply {
-            versionKey = Constants.VERSION_KEY.PRIVILEGE
-            value = res.privilege
-        })
-        versions.add(VersionEntity().apply {
-            versionKey = Constants.VERSION_KEY.MANUFACTURINGWORK
-            value = res.manufacturingWork
-        })
+//        versions.add(VersionEntity().apply {
+//            versionKey = Constants.VERSION_KEY.USER_ROLE
+//            value = res.userRole
+//        })
+//        versions.add(VersionEntity().apply {
+//            versionKey = Constants.VERSION_KEY.COMPONENT
+//            value = res.component
+//        })
+//        versions.add(VersionEntity().apply {
+//            versionKey = Constants.VERSION_KEY.LINK
+//            value = res.link
+//        })
+//        versions.add(VersionEntity().apply {
+//            versionKey = Constants.VERSION_KEY.PRIVILEGE
+//            value = res.privilege
+//        })
+//        versions.add(VersionEntity().apply {
+//            versionKey = Constants.VERSION_KEY.MANUFACTURINGWORK
+//            value = res.manufacturingWork
+//        })
         return versions
     }
 

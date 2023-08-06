@@ -27,7 +27,15 @@ data class DashboardManufacturingRequestByStatus(
     var listStatus41 : List<DashboardManufacturingRequestModel>? = emptyList(),
     var listStatus51 : List<DashboardManufacturingRequestModel>? = emptyList(),
     var listStatus61 : List<DashboardManufacturingRequestModel>? = emptyList(),
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if(other is DashboardManufacturingRequestByStatus){
+            other as DashboardManufacturingRequestByStatus
+            return other.request1 == request1 && other.request2 == request2 && other.request3 == request3
+                    && other.request4 == request4 && other.request5 == request5 && other.request6 == request6
+        } else return false
+    }
+}
 
 data class DashboardManufacturingRequestByType(
     var request1 : Int? = 0,
@@ -36,7 +44,14 @@ data class DashboardManufacturingRequestByType(
     var listRequestPurchase : List<DashboardManufacturingRequestModel>? = emptyList(),
     var listRequestImport : List<DashboardManufacturingRequestModel>? = emptyList(),
     var listRequestExport : List<DashboardManufacturingRequestModel>? = emptyList(),
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if(other is DashboardManufacturingRequestByType){
+            other as DashboardManufacturingRequestByType
+            return other.request1== request1 && other.request2 == request2 && other.request3 == request3
+        } else return false
+    }
+}
 
 
 

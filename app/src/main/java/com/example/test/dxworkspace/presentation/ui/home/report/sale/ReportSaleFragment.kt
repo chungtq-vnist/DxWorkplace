@@ -330,27 +330,47 @@ class ReportSaleFragment : BaseFragment<FragmentReportSaleBinding>() {
                 R.drawable.ic_money)
         )
         listItem.add(
-            CompareModel((dataNow.cancelOrderMoney ?: 0.0),dataPre.cancelOrderMoney ?: 0.0,"money","Tiền hủy đơn",
+            CompareModel((dataNow.expense ?: 0.0),dataPre.expense ?: 0.0,"money","Chi phí",
                 R.drawable.ic_money)
         )
         listItem.add(
-            CompareModel((dataNow.numberOrder ?: 0L).toDouble(),(dataPre.numberOrder ?: 0L).toDouble(),"value","Số hóa đơn",
+            CompareModel((dataNow.totalMoneyNewSaleOrder ?: 0.0),dataPre.totalMoneyNewSaleOrder ?: 0.0,"money","Tổng giá trị đơn bán hàng mới",
                 R.drawable.ic_money)
         )
         listItem.add(
-            CompareModel((dataNow.numberNewQuote ?: 0L).toDouble(),(dataPre.numberNewQuote ?: 0L).toDouble(),"value","Số báo giá mới",
+            CompareModel((dataNow.totalMoneyNewPurchaseOrder ?: 0.0),dataPre.totalMoneyNewPurchaseOrder ?: 0.0,"money","Tổng giá trị đơn mua hàng mới",
                 R.drawable.ic_money)
         )
         listItem.add(
-            CompareModel((dataNow.numberNewQuoteSuccess ?: 0L).toDouble(),(dataPre.numberNewQuoteSuccess ?: 0L).toDouble(),"value","Số báo giá mới đã tạo đơn",
+            CompareModel((dataNow.cancelMoney ?: 0.0),dataPre.cancelMoney ?: 0.0,"money","Tổng tiền hủy đơn",
                 R.drawable.ic_money)
         )
         listItem.add(
-            CompareModel((dataNow.numberNewOrder ?: 0L).toDouble(),(dataPre.numberNewOrder ?: 0L).toDouble(),"value","Số đơn mới",
+            CompareModel((dataNow.numberOrder ?: 0L).toDouble(),(dataPre.numberOrder ?: 0L).toDouble(),"value","Hóa đơn ",
                 R.drawable.ic_money)
         )
         listItem.add(
-            CompareModel((dataNow.numberNewOrderSuccess ?: 0L).toDouble(),(dataPre.numberNewOrderSuccess ?: 0L).toDouble(),"value","Số đơn mới thành công",
+            CompareModel((dataNow.numberNewQuote ?: 0L).toDouble(),(dataPre.numberNewQuote ?: 0L).toDouble(),"value","Báo giá mới",
+                R.drawable.ic_money)
+        )
+        listItem.add(
+            CompareModel((dataNow.numberNewQuoteSuccess ?: 0L).toDouble(),(dataPre.numberNewQuoteSuccess ?: 0L).toDouble(),"value","Báo giá mới đã tạo đơn",
+                R.drawable.ic_money)
+        )
+        listItem.add(
+            CompareModel((dataNow.numberNewOrder ?: 0L).toDouble(),(dataPre.numberNewOrder ?: 0L).toDouble(),"value","Đơn bán hàng mới",
+                R.drawable.ic_money)
+        )
+        listItem.add(
+            CompareModel((dataNow.numberNewOrderSuccess ?: 0L).toDouble(),(dataPre.numberNewOrderSuccess ?: 0L).toDouble(),"value","Đơn bán hàng mới thành công",
+                R.drawable.ic_money)
+        )
+        listItem.add(
+            CompareModel((dataNow.numberCancelOrder ?: 0L).toDouble(),(dataPre.numberCancelOrder ?: 0L).toDouble(),"value","Đơn bán hàng đã hủy",
+                R.drawable.ic_money)
+        )
+        listItem.add(
+            CompareModel((dataNow.numberPurchaseOrder ?: 0L).toDouble(),(dataPre.numberPurchaseOrder ?: 0L).toDouble(),"value","Đơn mua NVL",
                 R.drawable.ic_money)
         )
 

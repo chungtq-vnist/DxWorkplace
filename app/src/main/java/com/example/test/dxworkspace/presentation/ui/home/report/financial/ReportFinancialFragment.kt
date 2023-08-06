@@ -276,7 +276,7 @@ class ReportFinancialFragment : BaseFragment<FragmentReportFinancialBinding>() {
         listItem.add(CompareModel((dataNow.revenue ?: 0.0),dataPre.revenue ?: 0.0,"money","Doanh thu",R.drawable.ic_money))
         listItem.add(CompareModel((dataNow.expense ?: 0.0),dataPre.expense ?: 0.0,"money","Chi phí",R.drawable.ic_money))
         listItem.add(CompareModel((dataNow.numberOrder ?: 0L).toDouble(),(dataPre.numberOrder ?: 0L).toDouble(),"value","Tổng đơn hàng",R.drawable.ic_money))
-        listItem.add(CompareModel((dataNow.repair ?: 0.0),dataPre.repair ?: 0.0,"money","Tiền bảo trì",R.drawable.ic_money))
+//        listItem.add(CompareModel((dataNow.repair ?: 0.0),dataPre.repair ?: 0.0,"money","Tiền bảo trì",R.drawable.ic_money))
         listItem.add(CompareModel((dataNow.cancelOrderMoney ?: 0.0),dataPre.cancelOrderMoney ?: 0.0,"money","Tiền hủy đơn",R.drawable.ic_money))
         listItem.add(CompareModel((dataNow.profit ?: 0.0),dataPre.profit ?: 0.0,"money","Lợi nhuận",R.drawable.ic_money))
         adapter.items = listItem

@@ -13,10 +13,16 @@ data class SaleReportContentResponse(
 
 data class SaleReportModel(
     var revenue : Double = 0.0 ,
-    var cancelOrderMoney : Double = 0.0 ,
+    var cancelMoney : Double = 0.0 ,
     var numberOrder : Long = 0L ,
     var numberNewQuote : Long = 0L ,
     var numberNewOrder : Long = 0L ,
     var numberNewQuoteSuccess : Long = 0L ,
-    var numberNewOrderSuccess : Long = 0L
+    var numberNewOrderSuccess : Long = 0L ,
+    var numberCancelOrder : Long = 0L ,
+    var numberPurchaseOrder : Long = 0L,
+    var expense : Double = 0.0,
+    var totalMoneyNewSaleOrder : Double = 0.0 ,
+    var totalMoneyNewPurchaseOrder :Double = 0.0,
+
 )

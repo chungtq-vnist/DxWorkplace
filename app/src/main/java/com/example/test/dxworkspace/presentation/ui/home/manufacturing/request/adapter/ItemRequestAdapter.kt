@@ -33,6 +33,7 @@ class ItemRequestAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             tvDelete.visibility = if(isEdit) View.VISIBLE else View.INVISIBLE
             tvEdit.visibility = if(isEdit) View.VISIBLE else View.INVISIBLE
             ivDeleteVariant.visibility = if(isEdit) View.VISIBLE else View.INVISIBLE
+            frameTop.visibility = if(isEdit) View.VISIBLE else View.INVISIBLE
         }
     }
 

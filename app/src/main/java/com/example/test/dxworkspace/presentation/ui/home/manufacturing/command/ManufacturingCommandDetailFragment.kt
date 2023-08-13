@@ -86,8 +86,20 @@ class ManufacturingCommandDetailFragment : BaseFragment<FragmentManufacturingCom
             observe(commandDetail){
                 command = it ?: command
                 setupData()
-                if(command.exportMaterialRequest?.isNotEmpty() == true)
+                if(command.exportMaterialRequest?.isNotEmpty() == true) {
                     viewModel.getRequestExportMaterialOfCommand(command.exportMaterialRequest!!)
+                    binding?.apply {
+                        view3.isVisible = true
+                        tvTitleBillExportMaterial.isVisible = true
+                        rcvBillExportMaterial.isVisible = true
+                    }
+                } else {
+                    binding?.apply {
+                        view3.isVisible = false
+                        tvTitleBillExportMaterial.isVisible = false
+                        rcvBillExportMaterial.isVisible = false
+                    }
+                }
                 viewModel.getInventoryByGoods(command.good.materials?.filter { !it.good?._id.isNullOrEmpty() }?.map { it.good!!._id } ?: listOf())
             }
 //            observe(listBill){
@@ -274,7 +286,7 @@ class ManufacturingCommandDetailFragment : BaseFragment<FragmentManufacturingCom
                 tilWastePercent.isVisible = true
                 edtTimeFinished.setText(getddMMYYYY(command.finishedTime ?:""))
                 edtProductQuantity.setText(command.finishedProductQuantity.toString())
-                edtWasteQuantity.setText(command.substandardProductQuantity.toString())
+                edtWasteQuantity.setText((command.substandardProductQuantity ?: 0).toString())
                 edtProductPercent.setText(((((command.finishedProductQuantity?: 0)/(command.quantity.toDouble()))*10000).toLong()/100).toString() + "%")
                 edtWastePercent.setText(((((command.substandardProductQuantity?: 0)/(command.quantity.toDouble()))*10000).toLong()/100).toString() + "%")
             }

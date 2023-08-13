@@ -182,10 +182,10 @@
 
             <TextView
                 style="@style/Font.TextSemiBold13"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
                 android:gravity="center"
+                android:maxLines="1"
                 android:paddingHorizontal="@dimen/_2sdp"
                 android:paddingVertical="@dimen/_8sdp"
                 android:text="Trạng thái" />

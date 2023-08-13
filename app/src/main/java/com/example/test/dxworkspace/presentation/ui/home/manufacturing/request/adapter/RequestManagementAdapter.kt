@@ -116,7 +116,7 @@ class RequestManagementAdapter :RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                             tvStatus.setTextColorz(R.color.clr_wait_confirm_grab)
                         }
                         3 -> {
-                            tvStatus.text = "ĐĐã phê duyệt yêu cầu xuất kho"
+                            tvStatus.text = "Đã phê duyệt yêu cầu xuất kho"
                             tvStatus.setTextColorz(R.color.clr_status_approve)
                         }
                         4 -> {

@@ -64,7 +64,7 @@
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            
+            android:enabled="false"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -78,7 +78,7 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:enabled="false"
+                android:textColor="@color/text_color"
                 android:hint="Đơn vị tính tiêu chuẩn" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -88,7 +88,7 @@
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            
+            android:enabled="false"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +101,7 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:enabled="false"
+                android:textColor="@color/text_color"
                 android:hint="Đơn vị tính tiêu chuẩn" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,7 +112,7 @@
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_8sdp"
             android:layout_marginStart="@dimen/_8sdp"
-            
+            android:enabled="false"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,7 +127,7 @@
                 android:focusableInTouchMode="false"
                 android:hint="Kho"
                 android:imeOptions="actionNext"
-                android:enabled="false"
+                android:textColor="@color/text_color"
                 tools:maxLines="5"
                 tools:text="0 đ" />
         </com.google.android.material.textfield.TextInputLayout>

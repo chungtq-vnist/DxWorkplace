@@ -14,9 +14,11 @@ class InfoRequestExportAdapter :RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         set(value) {
             field = value
             notifyDataSetChanged()
+
         }
     var onEdit : ((pos:Int) -> Unit)? = null
     var onDelete : ((pos:Int) -> Unit)? = null
+    var onChange : ((isEmpty : Boolean) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return InfoRequestViewHolder(
             ItemRecycleExportRequestBinding.inflate(
@@ -38,6 +40,7 @@ class InfoRequestExportAdapter :RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     }
 
     override fun getItemCount(): Int {
+        onChange?.invoke(items.isEmpty())
         return items.size
     }
 

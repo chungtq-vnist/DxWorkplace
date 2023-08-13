@@ -96,9 +96,9 @@ class ManufacturingRequestFragment : BaseFragment<FragmentManufacturingRequestBi
             observe(listRequest) {
                 binding?.pullToRefresh?.isRefreshing = false
                 allRequest = it ?: allRequest
-                listBuy = allRequest.filter { it.type == 1 }
-                listImport = allRequest.filter { it.type == 2 }
-                listExport = allRequest.filter { it.type == 3 }
+                listBuy = allRequest.filter { it.type == 1 }.sortedByDescending { it.createdAt }
+                listImport = allRequest.filter { it.type == 2 }.sortedByDescending { it.createdAt }
+                listExport = allRequest.filter { it.type == 3 }.sortedByDescending { it.createdAt }
                 setupUI()
             }
         }

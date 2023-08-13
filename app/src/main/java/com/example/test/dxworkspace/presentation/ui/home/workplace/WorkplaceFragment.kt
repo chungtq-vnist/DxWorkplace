@@ -67,6 +67,8 @@ import com.example.test.dxworkspace.presentation.ui.home.workplace.notify.Notify
 import com.example.test.dxworkspace.presentation.utils.convertFromUTCtoLocal
 import com.google.android.material.tabs.TabLayout
 import com.google.gson.reflect.TypeToken
+import android.os.Build
+import androidx.recyclerview.widget.RecyclerView
 
 
 class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
@@ -309,6 +311,15 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                 postNormal(EventNextHome(NotifyFragment::class.java))
             }
 //            layoutLeftMenu.rcvMenu.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
+            rcvTask.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    if (dy > 0) { // Khi cuộn xuống
+                        btnCreateNewTask.hide()
+                    } else { // Khi cuộn lên
+                        btnCreateNewTask.show()
+                    }
+                }
+            })
         }
         viewModel.getLinksCanAccess()
         setupMenuHeader()
@@ -514,7 +525,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
         listMenu.clear()
         if (links.isNotEmpty()) {
             links =
-                links.filter { listOf("common", "manufacturing-management").contains(it.category) }
+                links.filter { listOf("common", "manufacturing-management","overview-report").contains(it.category) }
             val category = links.groupBy { it.category }
             category.forEach { c ->
                 val first = c.value.first()
@@ -641,6 +652,37 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                         }
                     }
                 }
+                "overview-report" -> {
+                    when(it.url){
+                        "/report-financial" -> {
+                            it.iconStart = R.drawable.ic_business_report
+                            it.level = 3
+                            it.desc ="Báo cáo tài chính"
+                        }
+                        "/report-sale" -> {
+                            it.iconStart = R.drawable.ic_sales_report
+                            it.level = 3
+                            it.desc ="Báo cáo kinh doanh"
+                        }
+                        "/report-manufacturing" -> {
+                            it.iconStart = R.drawable.ic_report_manufacturing
+                            it.level = 3
+                            it.desc ="Báo cáo sản xuất"
+                        }
+                        "/report-warehouse" -> {
+                            it.iconStart = R.drawable.ic_report_warehouse
+                            it.level = 3
+                            it.desc ="Báo cáo kho hàng"
+                        }
+                        "" -> {
+                            it.iconStart = R.drawable.ic_home
+                            it.level = 2
+                            it.desc = "Báo cáo tổng quan"
+                            it.iconEnd = R.drawable.ic_down_menu
+                        }
+
+                    }
+                }
             }
         }
     }
@@ -670,7 +712,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             1,
             MenuModel(
                 id = "report_overview",
-                category = "report_overview",
+                category = "overview-report",
                 level = 2,
                 iconStart = R.drawable.ic_home,
                 desc = "Báo cáo tổng quan",
@@ -682,7 +724,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             2,
             MenuModel(
                 id = "report_financial",
-                category = "report_overview",
+                category = "overview-report",
                 level = 3,
                 iconStart = R.drawable.ic_business_report,
                 desc = "Báo cáo tài chính",
@@ -693,7 +735,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             2,
             MenuModel(
                 id = "report_sale",
-                category = "report_overview",
+                category = "overview-report",
                 level = 3,
                 iconStart = R.drawable.ic_sales_report,
                 desc = "Báo cáo kinh doanh",
@@ -704,7 +746,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             2,
             MenuModel(
                 id = "report_manufacturing",
-                category = "report_overview",
+                category = "overview-report",
                 level = 3,
                 iconStart = R.drawable.ic_report_manufacturing,
                 desc = "Báo cáo sản xuất",
@@ -715,7 +757,7 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
             2,
             MenuModel(
                 id = "report_warehouse",
-                category = "report_overview",
+                category = "overview-report",
                 level = 3,
                 iconStart = R.drawable.ic_report_warehouse,
                 desc = "Báo cáo kho hàng",

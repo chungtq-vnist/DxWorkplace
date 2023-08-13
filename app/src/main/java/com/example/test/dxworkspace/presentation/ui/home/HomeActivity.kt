@@ -3,6 +3,7 @@ package com.example.test.dxworkspace.presentation.ui.home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.test.dxworkspace.DxApplication
@@ -16,6 +17,7 @@ import com.example.test.dxworkspace.domain.repository.ConfigRepository
 import com.example.test.dxworkspace.presentation.ui.BaseActivity
 import com.example.test.dxworkspace.presentation.ui.home.workplace.WorkplaceFragment
 import com.example.test.dxworkspace.presentation.utils.common.Constants
+import com.example.test.dxworkspace.presentation.utils.common.handlerPostDelay
 import com.example.test.dxworkspace.presentation.utils.common.registerGreen
 import com.example.test.dxworkspace.presentation.utils.common.unregisterGreen
 import com.example.test.dxworkspace.presentation.utils.event.EventBus
@@ -79,6 +81,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     }
 
     override fun onNewIntent(intent: Intent?) {
+        Log.v("KGM","onNewIntent")
         super.onNewIntent(intent)
         notificationId = intent?.extras?.getString("NOTIFY_ID", "") ?: ""
         notificationType = intent?.extras?.getInt("DATA_TYPE", 0) ?: 0
@@ -89,6 +92,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     }
 
     fun goToScreenFromNotify(){
+        Log.v("KGM","goToScreenFromNotify")
+
         when(notificationType){
             1 -> {
                 EventBus.getDefault().post(EventGoToNotification(EventGoToNotification.DETAIL_TASK))
@@ -104,12 +109,21 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     }
 
     override fun updateUI(savedInstanceState: Bundle?) {
+        Log.v("KGM","updateUI")
         DxApplication.getInstance().observerLifecycle()
+        notificationId = intent?.extras?.getString("NOTIFY_ID", "") ?: ""
+        notificationType = intent?.extras?.getInt("DATA_TYPE", 0) ?: 0
+        notificationObjectId = intent?.extras?.getString("OBJECT_ID", "") ?: ""
+        notificationSubTitle = intent?.extras?.getString("SUB_TITLE", "") ?: ""
+        notificationHeader = intent?.extras?.getString("HEADER", "") ?: ""
         openFragment(
             R.id.containerHome,
             WorkplaceFragment::class.java,
 
         )
+        if((intent?.extras?.getInt("DATA_TYPE", 0) ?: 0) != 0) handlerPostDelay( {
+            goToScreenFromNotify()
+        } , 1000)
         DxApplication.stateWork = Constants.STATE_WORK.STATE_NONE
         checkVersion()
 //        viewModel.checkVersion {

@@ -104,6 +104,7 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
                 else {
                     showToast(EventToast(isFail = false, text = "Update thành công"))
                     EventBus.getDefault().post(EventUpdate(EventUpdate.UPDATE_REQUEST))
+                    if(command._id.isNotEmpty()) EventBus.getDefault().post(EventUpdate(EventUpdate.UPDATE_COMMAND))
                     onBackPress()
                 }
             }
@@ -572,7 +573,7 @@ class CreateManufacturingRequestFragment : BaseFragment<FragmentCreateRequestBin
                             edtStatus.setTextColorz(R.color.clr_wait_confirm_grab)
                         }
                         3 -> {
-                            edtStatus.setText("ĐĐã phê duyệt yêu cầu xuất kho")
+                            edtStatus.setText("Đã phê duyệt yêu cầu xuất kho")
                             edtStatus.setTextColorz(R.color.clr_status_approve)
                         }
                         4 -> {

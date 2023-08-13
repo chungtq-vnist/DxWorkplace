@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.test.dxworkspace.R
 import com.example.test.dxworkspace.core.extensions.observe
 import com.example.test.dxworkspace.core.extensions.viewModel
+import com.example.test.dxworkspace.data.entity.report.FinancialReportModel
 import com.example.test.dxworkspace.data.entity.report.ReportRequestModel
+import com.example.test.dxworkspace.data.entity.report.SaleReportModel
 import com.example.test.dxworkspace.databinding.FragmentReportFinancialBinding
 import com.example.test.dxworkspace.domain.repository.ConfigRepository
 import com.example.test.dxworkspace.presentation.model.menu.CompareModel
@@ -54,6 +56,8 @@ class ReportFinancialFragment : BaseFragment<FragmentReportFinancialBinding>() {
     val adapter by lazy { DetailFinancialAdapter()}
     private var mkRate: Marker? = null
     var currentFilter = "money"
+    var isUpdate = false
+    var financialDataRaw = FinancialReportModel()
 
     override fun onStart() {
         super.onStart()
@@ -71,7 +75,10 @@ class ReportFinancialFragment : BaseFragment<FragmentReportFinancialBinding>() {
                 binding?.tvRangeTime?.text = homeViewModel.fromDate + " - " + homeViewModel.toDate
                 getReportData()
             }
-
+            EventUpdate.SYNC_DASHBOARD_FINANCIAL -> {
+                isUpdate = true
+                getReportData()
+            }
         }
     }
 
@@ -88,8 +95,17 @@ class ReportFinancialFragment : BaseFragment<FragmentReportFinancialBinding>() {
             }
             observe(isSuccess){
                 binding?.pullToRefresh?.isRefreshing = false
-                setDataChart()
-                setDataRcv()
+                if(!isUpdate) {
+                    setDataChart()
+                    setDataRcv()
+                } else {
+                    isUpdate = false
+                    if(financialDataRaw == viewModel.financialData.value) {
+                        setDataChart()
+                        setDataRcv()
+                    }
+                }
+                financialDataRaw = viewModel.financialData.value ?: FinancialReportModel()
             }
 
         }

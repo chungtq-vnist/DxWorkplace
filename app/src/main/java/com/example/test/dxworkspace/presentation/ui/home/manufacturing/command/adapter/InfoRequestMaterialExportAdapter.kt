@@ -41,7 +41,7 @@ class InfoRequestMaterialExportAdapter : RecyclerView.Adapter<RecyclerView.ViewH
                         edtBillStatus.setTextColorz(R.color.clr_wait_confirm_grab)
                     }
                     3 -> {
-                        edtBillStatus.setText("ĐĐã phê duyệt yêu cầu xuất kho")
+                        edtBillStatus.setText("Đã phê duyệt yêu cầu xuất kho")
                         edtBillStatus.setTextColorz(R.color.clr_status_approve)
                     }
                     4 -> {

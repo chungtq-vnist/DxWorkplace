@@ -42,10 +42,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvRole"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_300sdp"
             app:layout_constraintTop_toBottomOf="@id/view_top"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="@dimen/_80sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.3"
             android:layout_marginHorizontal="@dimen/_16ssp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             />
@@ -66,7 +67,7 @@
                 android:layout_weight="1"
                 android:layout_marginVertical="@dimen/_6sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_5dp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:paddingVertical="@dimen/_10sdp"
                 android:enabled="true"
                 android:background="@drawable/selector_save_default"

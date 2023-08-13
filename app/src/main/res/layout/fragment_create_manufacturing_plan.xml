@@ -58,7 +58,7 @@
             android:id="@+id/screen1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            tools:visibility="visible"
+            tools:visibility="gone"
             android:scrollbars="vertical"
             app:layout_constraintTop_toBottomOf="@id/viewTop"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -427,7 +427,7 @@
                         android:layout_marginTop="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:layout_marginStart="@dimen/_8sdp"
-
+                        android:enabled="false"
                         android:gravity="center"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -441,7 +441,7 @@
                             android:clickable="false"
                             android:focusable="false"
                             android:focusableInTouchMode="false"
-                            android:enabled="false"
+                            android:textColor="@color/text_color"
                             android:hint="Mã lệnh" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -583,7 +583,7 @@
             android:layout_height="0dp"
             android:visibility="gone"
             android:scrollbars="vertical"
-            tools:visibility="gone"
+            tools:visibility="visible"
             android:background="@color/white"
             app:layout_constraintTop_toBottomOf="@id/viewTop"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -689,7 +689,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    tools:visibility="gone"
+                    tools:visibility="visible"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -743,7 +743,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
-                            android:hint="Chọn nhà máy"
+                            android:hint="Chọn xưởng sản xuất"
                             android:inputType="none"
                             android:maxLines="1"
                             android:singleLine="true"
@@ -795,6 +795,7 @@
                         style="@style/Font.TextSemiBold13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:layout_marginHorizontal="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_4sdp"
 
@@ -820,8 +821,8 @@
                         android:paddingVertical="@dimen/_8sdp"
                         android:id="@+id/rcvSchdule"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/tvTitleWorkScheduleInMonth"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvNotData"
                         app:layout_constraintStart_toStartOf="parent"
                         />
 
@@ -847,7 +848,7 @@
                             android:focusable="false"
                             android:focusableInTouchMode="false"
                             android:textColor="@color/text_color"
-                            android:hint="Người thực hiện" />
+                            android:hint="@string/title_user_responsible" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView

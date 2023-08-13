@@ -13,7 +13,8 @@ import javax.inject.Singleton
 @Singleton
 class SocketProvider @Inject constructor() {
     companion object {
-        val urlSocket = "http://192.168.1.3:8000"
+//        val urlSocket = "http://192.168.1.3:8000"
+        val urlSocket = "http://119.17.214.105:9000"
         var mSocket: Socket? = null
     }
 

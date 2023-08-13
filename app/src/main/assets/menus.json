@@ -3,19 +3,19 @@
     "category" : "common",
     "url" : "/home"
   },  {
-    "category" : "report_overview",
+    "category" : "overview-report",
     "url" : ""
   },   {
-    "category" : "report_overview",
+    "category" : "overview-report",
     "url" : "/report-financial"
   },  {
-    "category" : "report_overview",
+    "category" : "overview-report",
     "url" : "/report-sale"
   },  {
-    "category" : "report_overview",
+    "category" : "overview-report",
     "url" : "/report-manufacturing"
   },  {
-    "category" : "report_overview",
+    "category" : "overview-report",
     "url" : "/report-warehouse"
   },{
     "category" : "manufacturing-management",

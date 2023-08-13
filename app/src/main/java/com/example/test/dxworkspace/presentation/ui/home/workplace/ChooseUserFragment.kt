@@ -29,6 +29,7 @@ class ChooseUserFragment : BaseFragment<FragmentChooseListUserBinding>() {
         super.onCreate(savedInstanceState)
         listDataChoose = arguments?.getStringArrayList("LIST_USER") ?: mutableListOf<String>()
         listDataSource = arguments?.getParcelableArrayList("LIST_DATA") ?: mutableListOf()
+        listDataSource = listDataSource.distinctBy { it.id }.toMutableList()
         usingfor = arguments?.getString("USING_FOR") ?:"RESPONSIBLE"
     }
 
@@ -63,7 +64,7 @@ class ChooseUserFragment : BaseFragment<FragmentChooseListUserBinding>() {
     }
 
     fun search(query : String) : MutableList<UserProfileResponse>{
-        val t = listDataSource.filter { it.name.contains(query) }
+        val t = listDataSource.filter { it.name.contains(query,true) }
         return t.toMutableList()
     }
 }

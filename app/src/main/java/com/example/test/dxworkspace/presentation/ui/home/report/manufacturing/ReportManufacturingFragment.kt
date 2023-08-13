@@ -235,7 +235,7 @@ class ReportManufacturingFragment : BaseFragment<FragmentReportManufacturingBind
                 ?: 0.0)
             totalC += (s.numberOfProducts ?: 0) + (s.numberOfWaste ?: 0)
         }
-        val percentAverage = if (totalC != 0) ((totalP / totalC) * 100.toLong()) / 100 else 0.0
+        val percentAverage = if (totalC != 0) (((totalP / totalC) * 100).toLong()) / 100.0 else 0.0
         // average compare
         listChart =
             listGoodsCompare.filter {
@@ -252,7 +252,7 @@ class ReportManufacturingFragment : BaseFragment<FragmentReportManufacturingBind
             totalCc += (s.numberOfProductsCompare ?: 0) + (s.numberOfWasteCompare ?: 0)
         }
         val percentAverageCompare =
-            if (totalCc != 0) ((totalPc / totalCc) * 100.toLong()) / 100 else 0.0
+            if (totalCc != 0) (((totalPc / totalCc) * 100).toLong()) / 100.0 else 0.0
 
         val listItem = mutableListOf<CompareModel>()
         listItem.add(

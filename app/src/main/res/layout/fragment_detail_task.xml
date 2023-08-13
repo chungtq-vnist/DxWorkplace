@@ -663,7 +663,7 @@
                 android:layout_weight="1"
                 android:layout_marginVertical="@dimen/_6sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_5dp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:paddingVertical="@dimen/_10sdp"
                 android:enabled="false"
                 android:background="@drawable/selector_save_default"

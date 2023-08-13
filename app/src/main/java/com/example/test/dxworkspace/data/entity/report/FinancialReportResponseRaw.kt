@@ -19,4 +19,11 @@ data class FinancialReportModel(
     var numberOrder : Long? = 0L ,
     var buyEquipment : Double? = 0.0,
     var profit : Double? = 0.0 ,
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if(other is FinancialReportModel){
+            return other.revenue == revenue &&  other.numberOrder == numberOrder && other.profit == profit
+                    && other.expense == expense && other.repair == repair && other.cancelOrderMoney == cancelOrderMoney
+        } else return false
+    }
+}

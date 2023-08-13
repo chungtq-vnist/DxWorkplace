@@ -44,7 +44,7 @@ class ShiftInDayAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     ivShift.setImageResource(R.drawable.ic_square_work_free)
                 } else {
                     if(item!!._id.isEmpty()) {
-                        if(!item.isSave) ivShift.setImageResource(R.drawable.ic_square_work_selected)
+                        if(!item.isSave || (item.isSave && item.code == code)) ivShift.setImageResource(R.drawable.ic_square_work_selected)
                         else ivShift.setImageResource(R.drawable.ic_square_work_saved)
                     }
                     else {
@@ -62,7 +62,7 @@ class ShiftInDayAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                 }
                 root.setOnClickListener {
-                    if(item != null && item?._id?.isNotEmpty() || item?.isSave == true) {
+                    if(item != null && item?._id?.isNotEmpty() || item?.isSave == true && item?.code != code) {
                         onViewDetail?.invoke(i-1,position)
                     } else {
                         if(item == null ) {

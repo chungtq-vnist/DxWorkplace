@@ -8,6 +8,7 @@ import com.example.test.dxworkspace.R
 import com.example.test.dxworkspace.core.extensions.observe
 import com.example.test.dxworkspace.core.extensions.viewModel
 import com.example.test.dxworkspace.data.entity.report.ReportRequestModel
+import com.example.test.dxworkspace.data.entity.report.SaleReportModel
 import com.example.test.dxworkspace.databinding.FragmentReportFinancialBinding
 import com.example.test.dxworkspace.databinding.FragmentReportSaleBinding
 import com.example.test.dxworkspace.domain.repository.ConfigRepository
@@ -55,6 +56,8 @@ class ReportSaleFragment : BaseFragment<FragmentReportSaleBinding>() {
     private var mkRate: Marker? = null
     var currentFilter = "money"
     val adapter by lazy { DetailFinancialAdapter() }
+    var isUpdate = false
+    var saleDataRaw = SaleReportModel()
 
     override fun onStart() {
         super.onStart()
@@ -70,6 +73,10 @@ class ReportSaleFragment : BaseFragment<FragmentReportSaleBinding>() {
         when (event.type) {
             EventUpdate.UPDATE_DASHBOARD_MANUFACTURING -> {
                 binding?.tvRangeTime?.text = homeViewModel.fromDate + " - " + homeViewModel.toDate
+                getReportData()
+            }
+            EventUpdate.SYNC_DASHBOARD_FINANCIAL -> {
+                isUpdate = true
                 getReportData()
             }
 
@@ -89,8 +96,18 @@ class ReportSaleFragment : BaseFragment<FragmentReportSaleBinding>() {
             }
             observe(isSuccess){
                 binding?.pullToRefresh?.isRefreshing = false
-                setDataChart()
-                setDataRcv()
+                if(!isUpdate) {
+                    saleDataRaw = viewModel.saleData.value ?: saleDataRaw
+                    setDataChart()
+                    setDataRcv()
+                } else {
+                    isUpdate = false
+                    if(saleDataRaw != viewModel.saleData.value){
+                        setDataChart()
+                        setDataRcv()
+                    }
+                }
+                saleDataRaw = viewModel.saleData.value ?: saleDataRaw
             }
 
         }

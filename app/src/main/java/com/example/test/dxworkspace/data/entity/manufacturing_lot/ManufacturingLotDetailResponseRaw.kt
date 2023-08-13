@@ -31,7 +31,7 @@ data class ManufacturingLotDetailModel(
         var quantity : Int? = 0,
         var good : SubGoodsInLot? = SubGoodsInLot(),
         var manufacturingCommand : SubManufacturingCommandModel? = SubManufacturingCommandModel(),
-        var importStockRequest : List<String>? = listOf()
+        var importStockRequest : List<BillImportStock>? = listOf()
 ) : Parcelable
 @Parcelize
 data class BillImportStock(

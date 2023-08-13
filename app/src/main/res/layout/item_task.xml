@@ -23,10 +23,11 @@
             android:layout_width="0dp"
             android:paddingHorizontal="@dimen/_4sdp"
             android:paddingVertical="@dimen/_8sdp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             style="@style/Font.TextRegular13"
             tools:text="UT + FT Module quản trị hệ thống"
             android:gravity="start|center_vertical"
+            android:layout_gravity="center_vertical"
             />
         <TextView
             android:id="@+id/tvTimeEnd"
@@ -37,6 +38,7 @@
             android:paddingStart="@dimen/_1sdp"
             android:paddingVertical="@dimen/_8sdp"
             android:gravity="center"
+            android:layout_gravity="center_vertical"
             tools:text="15:30\n20-03-2023"
             />
 

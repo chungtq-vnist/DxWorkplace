@@ -66,7 +66,7 @@ class CreateLotFragment() : BaseFragment<FragmentCreateLotBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
          lotRequestProduct = RequestCreateLot(code = generateCode("LTP"), creator = configRepository.getUser().id,
         type = "product", productType = 1, manufacturingCommand = command._id, good = command.good._id!!, status = 1)
-         lotRequestWaste = RequestCreateLot(code = generateCode("LTP"), creator = configRepository.getUser().id,
+         lotRequestWaste = RequestCreateLot(code = generateCode("LPP"), creator = configRepository.getUser().id,
             type = "product", productType = 2, manufacturingCommand = command._id, good = command.good._id!!, status = 1)
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
@@ -80,10 +80,12 @@ class CreateLotFragment() : BaseFragment<FragmentCreateLotBinding>() {
             edtProductQuantity.doAfterTextChanged {
                 lotRequestProduct.quantity = if(edtProductQuantity.getTextz() == "") "0" else edtProductQuantity.getTextz()
                 lotRequestProduct.originalQuantity = lotRequestProduct.quantity
+                println("edtProductQuantity.doAfterTextChanged ${lotRequestProduct.quantity}")
             }
             edtWasteQuantity.doAfterTextChanged {
                 lotRequestWaste.quantity = if(edtWasteQuantity.getTextz() == "") "0" else edtWasteQuantity.getTextz()
                 lotRequestWaste.originalQuantity = lotRequestWaste.quantity
+                println("edtWasteQuantity.doAfterTextChanged ${lotRequestWaste.originalQuantity}")
             }
             edtProductDate.setOnClickListener {
                 showMaterialDatePickerDialog(true)
@@ -92,13 +94,14 @@ class CreateLotFragment() : BaseFragment<FragmentCreateLotBinding>() {
                 showMaterialDatePickerDialog(false)
             }
             btnSave.setOnClickListener {
-                if(lotRequestProduct.quantity=="0") {
+                println("lotRequestProduct.quantity ${lotRequestProduct.quantity}")
+                if(lotRequestProduct.quantity=="0" || lotRequestProduct.quantity == "") {
                     showToast(EventToast(text = "Vui lòng chọn đủ thông tin"))
                     return@setOnClickListener
                 } else {
                     val list = mutableListOf<RequestCreateLot>()
                     list.add(lotRequestProduct)
-                    if(lotRequestWaste.quantity != "0") list.add(lotRequestWaste)
+                    if(lotRequestWaste.quantity != "0" && lotRequestWaste.quantity != "") list.add(lotRequestWaste)
                     viewModel.finishCommand(RequestFinishCommand(lotRequestProduct.quantity,lotRequestWaste.quantity,getDateTimer(),4),command._id)
                     viewModel.createLot(list)
                 }

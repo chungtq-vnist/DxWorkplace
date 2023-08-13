@@ -164,7 +164,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="3"
+                android:layout_weight="3.5"
                 android:gravity="start"
                 android:paddingVertical="@dimen/_8sdp"
                 android:paddingStart="@dimen/_8sdp"
@@ -185,11 +185,10 @@
 
             <TextView
                 style="@style/Font.TextSemiBold13"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
                 android:gravity="center"
-                android:paddingHorizontal="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_4sdp"
                 android:paddingVertical="@dimen/_8sdp"
                 android:text="Trạng thái" />
 

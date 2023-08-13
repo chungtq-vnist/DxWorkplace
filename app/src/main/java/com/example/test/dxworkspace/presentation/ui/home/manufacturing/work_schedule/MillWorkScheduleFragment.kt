@@ -85,6 +85,7 @@ class MillWorkScheduleFragment : BaseFragment<FragmentMillScheduleBinding>() {
                 else {
                     showToast(EventToast(isFail = false, text ="Tạo lịch sản xuất thành công"))
                 }
+                getWorkSchedule()
             }
             observe(workSchedule){
                 work = it ?: WorkScheduleDetailModel()
@@ -159,10 +160,19 @@ class MillWorkScheduleFragment : BaseFragment<FragmentMillScheduleBinding>() {
         }
     }
     fun getWorkSchedule(){
-        viewModel.getWorkSchedule(
-            ParamWorkSchedule(10,1,"manufacturingMill",month,configRepository.getCurrentRole().id,codeMill,""
+        if(codeMill.isNotEmpty()) {
+            viewModel.getWorkSchedule(
+                ParamWorkSchedule(
+                    10,
+                    1,
+                    "manufacturingMill",
+                    month,
+                    configRepository.getCurrentRole().id,
+                    codeMill,
+                    ""
+                )
             )
-        )
+        }
     }
 
     private fun showMonthYearTimePickerDialog() {

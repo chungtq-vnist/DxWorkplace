@@ -25,4 +25,13 @@ data class SaleReportModel(
     var totalMoneyNewSaleOrder : Double = 0.0 ,
     var totalMoneyNewPurchaseOrder :Double = 0.0,
 
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if(other is SaleReportModel){
+            return other.revenue == revenue && other.cancelMoney == cancelMoney && other.numberOrder == numberOrder && other.numberNewQuote == numberNewQuote
+                    && other.numberNewOrder == numberNewOrder && other.numberNewQuoteSuccess == numberNewQuoteSuccess && other.numberCancelOrder == numberCancelOrder
+                    && other.numberPurchaseOrder == numberPurchaseOrder
+                    && other.expense == expense && other.totalMoneyNewSaleOrder == totalMoneyNewSaleOrder && other.totalMoneyNewPurchaseOrder == totalMoneyNewPurchaseOrder
+        } else return false
+    }
+}

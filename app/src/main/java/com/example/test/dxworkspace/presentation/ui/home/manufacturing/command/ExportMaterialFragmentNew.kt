@@ -76,7 +76,7 @@ class ExportMaterialFragmentNew(
     lateinit var homeViewModel: HomeViewModel
 
     val calendar = Calendar.getInstance()
-    var requestNow = ParamCreateProductRequest()
+    var requestNow = ParamCreateProductRequest(lotId = null)
     var listRequest = mutableListOf<ParamCreateProductRequest>()
     var requestAdapter = InfoRequestExportAdapter()
 
@@ -193,6 +193,7 @@ class ExportMaterialFragmentNew(
         requestNow.type = type
         requestNow.commandId = command._id
         binding?.apply {
+            ivBack.setOnClickListener { onBackPress() }
             // setup thong tin nvl can xuat
             rcvBill.adapter = requestAdapter
             rcvInfoMaterial.adapter = infoAdapter
@@ -242,6 +243,9 @@ class ExportMaterialFragmentNew(
                     edtNeedToExport.setText((totalNeed - exported).toString())
                 }
 
+            }
+            requestAdapter.onChange = {
+                binding?.tvTitleInfoRequestExport?.isVisible = !it
             }
             infoMateritalAdapter.listMaterial = command.good.materials ?: listOf()
             edtVariantName.setAdapter(
@@ -394,7 +398,7 @@ class ExportMaterialFragmentNew(
                 requestNow.description = edtDes.getTextz()
                 listRequest.add(requestNow)
                 requestAdapter.items = listRequest
-                requestNow = ParamCreateProductRequest()
+                requestNow = ParamCreateProductRequest(lotId = null)
                 requestNow.code = generateCode("GIR")
                 requestNow.status = 1
                 requestNow.requestType = 1

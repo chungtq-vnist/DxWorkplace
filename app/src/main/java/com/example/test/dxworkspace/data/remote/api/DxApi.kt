@@ -96,7 +96,7 @@ interface DxApi : LoginApi {
         @Body start : StartTimeModel
     ) : Call<StartTimeSheetLogResponseRaw>
 
-    @POST("performtask/tasks/{id}/timesheet-logs/stop-timer")
+    @POST("/ms/performtask/tasks/{id}/timesheet-logs/stop-timer")
     fun stopTimer(
         @Path("id") id : String,
         @Body start : StopTimeModel
@@ -344,7 +344,7 @@ interface DxApi : LoginApi {
     ) :Call<GoodResponseRaw>
 
 
-    @GET("/work-schedule")
+    @GET("/mfs/work-schedule")
     fun getAllWorkSchedule(
         @Query("code") code:String? ,
         @Query("user") user:String?,
@@ -360,7 +360,7 @@ interface DxApi : LoginApi {
         @Query("currentRole") currentRole:String
     ) : Call<UserInManufacturingWorkResponseRaw>
 
-    @POST("/work-schedule")
+    @POST("/mfs/work-schedule")
     fun createSchedule(
         @Body data : ParamCreateWorkSchedule
     ) : Call<CreatePlanResponseRaw>
@@ -370,14 +370,14 @@ interface DxApi : LoginApi {
         @Query("userId") userId: String
     ) : Call<TimeSheetLogResponseRaw>
 
-    @GET("/work-schedule/manufacturingMills")
+    @GET("/mfs/work-schedule/manufacturingMills")
     fun getWorkScheduleOfMillByDate(
         @Query("manufacturingMills") mills : List<String>,
         @Query("startDate") start : String ,
         @Query("endDate") end : String,
     ) : Call<WorkScheduleMillsResponseRaw>
 
-    @GET("/work-schedule/worker/array-schedules")
+    @GET("/mfs/work-schedule/worker/array-schedules")
     fun getFreeUsers(
         @Query("arrayWorkerSchedules[]" ,encoded = false) array : List<String>,
         @Query("currentRole") role : String,

@@ -363,7 +363,7 @@ class DashboardQualityManufacturingFragment : BaseFragment<FragmentDashboardQual
             binding?.apply {
                 chart.visibility = View.VISIBLE
                 tvTitleNoData.isVisible = false
-                percentAverage = ((totalP/totalC)*100.toLong())/100
+                percentAverage = (((totalP/totalC)*100).toLong())/100.0
                 viewModel.setDataSelect("-1",percentAverage.toString()+"%")
                 llOption.isVisible = true
             }

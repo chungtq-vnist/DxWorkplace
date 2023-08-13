@@ -92,6 +92,16 @@ fun isDateInMonth(dateString: String, month: Int): Boolean {
     return dateMonth == month
 }
 
+fun getMonthSchedule(dateString :String) :String {
+    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    val date = format.parse(dateString)
+    val formatter = SimpleDateFormat("MM-yyyy", Locale.getDefault())
+    val calendar = Calendar.getInstance()
+    calendar.time = date
+
+    return formatter.format(calendar.time)
+}
+
 fun getDateTimer() : String {
     val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     return format.format(Date())

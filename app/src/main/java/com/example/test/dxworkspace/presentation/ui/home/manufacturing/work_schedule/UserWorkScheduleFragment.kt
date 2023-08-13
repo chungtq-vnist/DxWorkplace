@@ -90,6 +90,7 @@ class UserWorkScheduleFragment : BaseFragment<FragmentUserScheduleBinding>() {
                 else {
                     showToast(EventToast(isFail = false, text ="Tạo lịch sản xuất thành công"))
                 }
+                if(userNow._id.isNotEmpty()) getWorkSchedule()
             }
             observe(workSchedule){
                 work = it ?: WorkScheduleDetailModel()

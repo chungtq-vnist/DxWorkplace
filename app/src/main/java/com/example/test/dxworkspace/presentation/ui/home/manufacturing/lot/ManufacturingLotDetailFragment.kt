@@ -124,7 +124,7 @@ class ManufacturingLotDetailFragment : BaseFragment<FragmentManufacturingLotDeta
             tilProductCode.isEnabled = false
             tilUnit.isEnabled = false
             edtCommandCode.setText(lot.manufacturingCommand?.code)
-            edtImportCode.setText(lot.bills?.map{it.code}?.joinToString())
+            edtImportCode.setText(lot.importStockRequest?.map{it.code}?.joinToString())
             edtMillName.setText(lot.manufacturingCommand?.manufacturingMill?.name)
             edtTimeStart.setText(getddMMYYYY(lot.createdAt))
             edtTimeEnd.setText(getddMMYYYY(lot.expirationDate ?: ""))

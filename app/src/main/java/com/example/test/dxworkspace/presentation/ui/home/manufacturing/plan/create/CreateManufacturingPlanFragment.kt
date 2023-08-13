@@ -51,10 +51,12 @@ import com.example.test.dxworkspace.presentation.utils.event.EventNextHome
 import com.example.test.dxworkspace.presentation.utils.event.EventToast
 import com.example.test.dxworkspace.presentation.utils.event.EventUpdate
 import com.example.test.dxworkspace.presentation.utils.getDateYYYYMMDDHHMMSS
+import com.example.test.dxworkspace.presentation.utils.getMonthSchedule
 import com.example.test.dxworkspace.presentation.utils.isDateInMonth
 import com.google.android.material.chip.Chip
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.gson.reflect.TypeToken
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -75,12 +77,13 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
     var listUsers = listOf<UserProfileResponse>()
     var listCommandTemp = mutableListOf<SubRequestCommand>()
     var listSchedules = listOf<WorkScheduleModel?>()
+    var listSchedulesRaw = listOf<WorkScheduleModel?>()
     var listUsersFree = listOf<UserProfileResponse>()
     var lSalesOrder = listOf<SalesOrderModel>()
 
     var commandNow = SubRequestCommand(generateCode("LSX"))
     var commandNowSchedule = SubRequestCommand(generateCode("LSX"))
-    var listTempUsesResponsible = listOf<String>()
+    var listTempUsesResponsible = mutableListOf<String>()
 
     val adapterProduct by lazy{ ChooseProductAdapter() }
     val recommendProductAdapter = RecommendProductAdapter()
@@ -105,8 +108,9 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
     }
 
     fun onBusEvent(event: EventUpdate) {
+        justTry {
         when (event.type) {
-            EventUpdate.UPDATE_LIST_USER -> {
+                EventUpdate.UPDATE_LIST_USER -> {
                 val t = event.value as Pair<String, MutableList<String>>
                 when (t.first) {
                     "APPROVE_PLAN" -> {
@@ -184,6 +188,8 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
 //                    }
 
                 }
+                hideKeyboard()
+            }
             }
         }
     }
@@ -248,7 +254,9 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
                 listUsers = it ?: listOf()
             }
             observe(listSchedule){
-                listSchedules = it ?: listOf()
+                listSchedulesRaw = it ?: listOf()
+                val t = gson.toJson(listSchedulesRaw)
+                listSchedules = gson.fromJson(t, object : TypeToken<List<WorkScheduleModel?>?>() {}.type)
                 request.manufacturingCommands.forEach {
                     it.responsibles = listOf()
                 }
@@ -326,8 +334,8 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
                     }
                 } else if(page == 2){
                     request.goods.forEach { k ->
-                        val t = listCommandTemp.find{it.goodID == k.good}
-                        if(t == null || t.quantity != k.quantity.toString()){
+                        val t = listCommandTemp.filter{it.goodID == k.good}
+                        if(t.isEmpty() || t.sumOf { it.quantity.toInt() }.toString() != k.quantity.toString()){
                             showToast(EventToast(text = "Vui lòng phân đủ lệnh sản xuất"))
                             return@setOnClickListener
                         } else {
@@ -344,15 +352,17 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
                     if(!constraintSchedule.isVisible) gotoScreen2() else {
                         constraintSchedule.isVisible = false
                         constraintPlan.isVisible = true
-                        if(commandNowSchedule.responsibles.isEmpty()){
-                            scheduleNow?.turns?.forEach { k ->
-                                k.forEachIndexed { index, subCommandInWorkSchedule ->
-                                    if(subCommandInWorkSchedule?._id?.isEmpty() == true && !subCommandInWorkSchedule.isSave){
-                                        k[index] = null
-                                    }
-                                }
-                            }
-                        }
+//                        if(commandNowSchedule.responsibles.isEmpty()){
+//                            scheduleNow?.turns?.forEach { k ->
+//                                k.forEachIndexed { index, subCommandInWorkSchedule ->
+//                                    if(subCommandInWorkSchedule?._id?.isEmpty() == true && !subCommandInWorkSchedule.isSave){
+//                                        k[index] = null
+//                                    }
+//                                }
+//                            }
+//                        }
+                        val t = gson.toJson(listSchedulesRaw)
+                        listSchedules = gson.fromJson(t, object : TypeToken<List<WorkScheduleModel?>?>() {}.type)
                     }
                 }
             }
@@ -677,24 +687,42 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
     }
 
     var month = 0
+    var monthText = ""
     var millNow = ""
     var scheduleNow : WorkScheduleModel? = null
     var listScheduleRequest = mutableListOf<WorkerScheduleRequest>()
     fun initScreenSchedule(command : SubRequestCommand , name : String){
         binding?.apply {
+            listTempUsesResponsible = mutableListOf()
+            listTempUsesResponsible.addAll(command.responsibles)
+            month = 0
+            millNow = command.manufacturingMill
+            scheduleNow  = null
+//            edtMill.setText("",false)
+//            edtMonth.setText("",false)
+            tvNotData.isVisible = false
+            tvTitleWorkScheduleInMonth.isVisible  = false
             edtCodeSchedule.setText(command.code)
-            val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line,listMill)
+            val listMillForGood = listMill.filter {  listGoods.firstOrNull { it._id == command.goodID }?.manufacturingMills?.map { it.manufacturingMill?._id }?.contains(it._id) ?: false }
+            val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line,listMillForGood)
             edtMill.setAdapter(adapter)
             rcvSchdule.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
             val shiftAdapter = ShiftInMonthAdapter()
             rcvSchdule.adapter = shiftAdapter
+            rcvSchdule.setHasFixedSize(true)
             edtMill.setOnItemClickListener { adapterView, view, i, l ->
+                Log.v("SOCKET","edtMill.setOnItemClickListener")
                 val mill = (adapterView.getItemAtPosition(i) as ManufacturingMillModel)
                 val listSchedule = listSchedules.filter { it?.manufacturingMill == mill._id }
-                command.manufacturingMill = mill._id
+                if(millNow != mill._id && month != 0){
+                    listTempUsesResponsible = mutableListOf()
+                    edtUserResponsible.setText("")
+                }
+//                command.manufacturingMill = mill._id
                 millNow = mill._id
                 if(month != 0){
                     tvTitleWorkScheduleInMonth.text = getString(R.string.title_work_schedule_month , month.toString())
+                    tvTitleWorkScheduleInMonth.isVisible = true
                     Log.v("TAG",listSchedules.toString())
                     scheduleNow =  listSchedules.filter { it?.manufacturingMill == millNow  && isDateInMonth(it.month , month)}.firstOrNull()
                     Log.v("TAG",scheduleNow.toString())
@@ -703,56 +731,118 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
                         shiftAdapter.data = scheduleNow!!.turns
                         tvNotData.isVisible = false
                     } else {
+                        shiftAdapter.data = emptyList()
                         tvNotData.isVisible = true
-
                     }
-
+                    listScheduleRequest = mutableListOf()
+                    val temp = listSchedules.filter { it?.manufacturingMill == millNow }
+                    temp.forEach { v ->
+                        v?.turns?.forEachIndexed { index, shift ->
+                            shift.forEachIndexed { index2, day ->
+                                if(day?.code == command.code) listScheduleRequest.add(WorkerScheduleRequest(index,index2 ,monthText))
+                            }
+                        }
+                    }
+                    if(listScheduleRequest.isEmpty()){
+                        listUsersFree = listOf()
+                    } else {
+                        viewModel.getFreeUser(listScheduleRequest.map { gson.toJson(it) })
+//                    val t = listScheduleRequest.map { gson.toJson(it) }
+                    }
 
                 }
             }
             val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             var listMonth = mutableListOf<String>()
             justTry {
-                val calendar = Calendar.getInstance()
-                val s = format.parse(request.startDate)
-                val e = format.parse(request.endDate)
-                calendar.time = s
-                val i = calendar.get(Calendar.MONTH)
-                calendar.time = e
-                val u = calendar.get(Calendar.MONTH)
-                for(i in i..u){
-                    listMonth.add("Tháng ${i+1}")
-                }
+                listMonth = generateMonthYearList(request.startDate,request.endDate).toMutableList()
             }
             val adapterMonth = ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line,listMonth)
             edtMonth.setAdapter(adapterMonth)
             edtMonth.setOnItemClickListener { adapterView, view, i, l ->
-                month = (adapterView.getItemAtPosition(i) as String).substringAfter(" ").toInt()
+                Log.v("SOCKET","edtMonth.setOnItemClickListener")
+                month = (adapterView.getItemAtPosition(i) as String).substringBefore("-").toInt()
+                monthText = adapterView.getItemAtPosition(i) as String
                 if(millNow != ""){
                     shiftAdapter.code = command.code
                     tvTitleWorkScheduleInMonth.text = getString(R.string.title_work_schedule_month , month.toString())
+                    tvTitleWorkScheduleInMonth.isVisible = true
                     scheduleNow =  listSchedules.filter { it?.manufacturingMill == millNow  && isDateInMonth(it.month , month)}.firstOrNull()
                     if(scheduleNow?.turns != null && scheduleNow!!.turns.isNotEmpty()) {
                         shiftAdapter.data = scheduleNow!!.turns
                         tvNotData.isVisible = false
                     }
                     else {
+                        shiftAdapter.data = emptyList()
                         tvNotData.isVisible = true
                     }
+//                    listScheduleRequest = mutableListOf()
+//                    scheduleNow?.turns?.forEachIndexed { index, shift ->
+//                        shift.forEachIndexed { index2, day ->
+//                            if(day?.code == command.code) listScheduleRequest.add(WorkerScheduleRequest(index,index2 + 1,monthText))
+//                        }
+//                    }
+//                    if(listScheduleRequest.isEmpty()){
+//                        listUsersFree = listOf()
+//                    } else {
+//                        viewModel.getFreeUser(listScheduleRequest.map { gson.toJson(it) })
+////                    val t = listScheduleRequest.map { gson.toJson(it) }
+//                    }
                 }
             }
+            month = listMonth.first().substringBefore("-").toInt()
+            monthText = listMonth.first()
+            edtMonth.setText(listMonth.firstOrNull() ?: "",false)
+            edtMill.setText(listMillForGood.find { it._id == millNow }?.name,false)
+            if(month != 0 && millNow.isNotEmpty()) {
+                shiftAdapter.code = command.code
+                tvTitleWorkScheduleInMonth.text = getString(R.string.title_work_schedule_month , month.toString())
+                tvTitleWorkScheduleInMonth.isVisible = true
+                scheduleNow =  listSchedules.filter { it?.manufacturingMill == millNow  && isDateInMonth(it.month , month)}.firstOrNull()
+                if(scheduleNow?.turns != null && scheduleNow!!.turns.isNotEmpty()) {
+                    shiftAdapter.data = scheduleNow!!.turns
+                    tvNotData.isVisible = false
+                }
+                else {
+                    shiftAdapter.data = emptyList()
+                    tvNotData.isVisible = true
+                }
+                listScheduleRequest = mutableListOf()
+                scheduleNow?.turns?.forEachIndexed { index, shift ->
+                    shift.forEachIndexed { index2, day ->
+                        if(day?.code == command.code) listScheduleRequest.add(WorkerScheduleRequest(index,index2 ,monthText))
+                    }
+                }
+                if(listScheduleRequest.isEmpty()){
+                    listUsersFree = listOf()
+                } else {
+                    viewModel.getFreeUser(listScheduleRequest.map { gson.toJson(it) })
+//                    val t = listScheduleRequest.map { gson.toJson(it) }
+                }
+                edtUserResponsible.setText(getString(
+                    R.string.number_user,
+                    command.responsibles.size.toString()
+                ))
+            }
+
             shiftAdapter.onChooseShift2 = { s ,d,c ->
                 if(c) {
-                    listScheduleRequest.add(WorkerScheduleRequest(s,d,"0$month-2023"))
-                    scheduleNow?.turns?.get(s)
-                        ?.set(d-1, SubCommandInWorkSchedule(code = command.code))
+                    listScheduleRequest.add(WorkerScheduleRequest(s,d-1,monthText))
+                    if(!checkDateContinue(listScheduleRequest,scheduleNow?.turns?.size ?: 3)){
+                        showToast(EventToast(text = "Các ca phải liên tiếp! "))
+                        listScheduleRequest.removeIf {
+                            it.index1 == s && it.index2 == d-1
+                        }
+                    } else {
+                        scheduleNow?.turns?.get(s)
+                            ?.set(d - 1, SubCommandInWorkSchedule(code = command.code))
+                    }
+                } else justTry {
+                    listScheduleRequest.removeIf {
+                        it.index1 == s && it.index2 == d-1
+                    }
+                    scheduleNow?.turns?.get(s)?.set(d - 1, null)
                 }
-                else justTry {
-                    listScheduleRequest.removeIf { it.index1 == s && it.index2 == d
-
-                }
-                    scheduleNow?.turns?.get(s)
-                        ?.set(d-1, null)}
                 if(listScheduleRequest.isEmpty()){
                     listUsersFree = listOf()
                 } else {
@@ -760,7 +850,8 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
 //                    val t = listScheduleRequest.map { gson.toJson(it) }
                 }
                 shiftAdapter.notifyItemChanged(s+1)
-                listTempUsesResponsible = listOf()
+                listTempUsesResponsible = mutableListOf()
+                edtUserResponsible.setText("")
             }
             edtUserResponsible.setOnClickListener {
                 postNormal(
@@ -781,22 +872,45 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
                 }
                 else {
                     commandNowSchedule.responsibles = listTempUsesResponsible
-                    listScheduleRequest.sortBy { it.index2 }
-                    commandNowSchedule.startDate = "${listScheduleRequest.first().index2}-$month-2023"
-                    commandNowSchedule.endDate = "${listScheduleRequest.last().index2}-$month-2023"
-                    listScheduleRequest.sortBy { it.index1 }
+                    commandNowSchedule.manufacturingMill = millNow
+//                    listScheduleRequest.sortBy { it.index2 }
+                    listScheduleRequest = sort(listScheduleRequest).toMutableList()
+                    commandNowSchedule.startDate = listScheduleRequest.first().month
+                    commandNowSchedule.endDate = listScheduleRequest.last().month
+//                    listScheduleRequest.sortBy { it.index1 }
                     commandNowSchedule.startTurn = listScheduleRequest.first().index1
                     commandNowSchedule.endTurn = listScheduleRequest.last().index1
-                    request.listMillSchedules.add(scheduleNow!!)
-                    scheduleNow?.turns?.forEachIndexed { index2, k  ->
-                        k.forEachIndexed { index, subCommandInWorkSchedule ->
-                            if(subCommandInWorkSchedule?._id?.isEmpty() == true ){
-                                k[index]?.isSave = true
-                                request.arrayWorkerSchedules.add(ArrayWorkerSchedule(
-                                    index2,index,"$month-2023",subCommandInWorkSchedule.code, listTempUsesResponsible))
+//                    request.listMillSchedules.add(scheduleNow!!)
+                    request.arrayWorkerSchedules.removeIf { it.commandCode == commandNowSchedule.code }
+                    listSchedules.forEach {
+                        if(it?.manufacturingMill != commandNowSchedule.manufacturingMill) {
+                            it?.turns?.forEachIndexed { i,a ->
+                            a.forEachIndexed { j , b -> if(b?.code == commandNowSchedule.code) it.turns[i][j] = null }
+                            }
+                        }
+                        if(it?.manufacturingMill == commandNowSchedule.manufacturingMill) {
+                            it.turns.forEachIndexed { index2, k  ->
+                                k.forEachIndexed { index, subCommandInWorkSchedule ->
+                                    if(subCommandInWorkSchedule?._id?.isEmpty() == true ){
+                                        k[index]?.isSave = true
+                                        request.arrayWorkerSchedules.add(ArrayWorkerSchedule(
+                                            index2,index,getMonthSchedule(it.month),subCommandInWorkSchedule.code, listTempUsesResponsible))
+                                    }
+                                }
                             }
                         }
                     }
+                    val t = gson.toJson(listSchedules)
+                    listSchedulesRaw = gson.fromJson(t, object : TypeToken<List<WorkScheduleModel?>?>() {}.type)
+//                    scheduleNow?.turns?.forEachIndexed { index2, k  ->
+//                        k.forEachIndexed { index, subCommandInWorkSchedule ->
+//                            if(subCommandInWorkSchedule?._id?.isEmpty() == true ){
+//                                k[index]?.isSave = true
+//                                request.arrayWorkerSchedules.add(ArrayWorkerSchedule(
+//                                    index2,index,"$month-2023",subCommandInWorkSchedule.code, listTempUsesResponsible))
+//                            }
+//                        }
+//                    }
                     initForScreen3()
                 }
 
@@ -805,7 +919,18 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
 
             }
             btnSave.setOnClickListener {
-                println(request.toString())
+                listCommandTemp.forEach {
+                    if(it.responsibles.isEmpty()) {
+                        showToast(EventToast(text ="Vui lòng nhập đủ thông tin!"))
+                        return@setOnClickListener
+                    }
+                }
+                val l = listSchedulesRaw.filter { !it?.turns?.filter { !it?.filter { it?._id == "" }.isNullOrEmpty() }.isNullOrEmpty() }
+                request.listMillSchedules = mutableListOf()
+                l.forEach {
+                    if(it != null) request.listMillSchedules.add(it)
+                }
+                println(gson.toJson(request).toString())
                 viewModel.createManufacturingPlan(request)
             }
 
@@ -908,5 +1033,75 @@ class CreateManufacturingPlanFragment : BaseFragment<FragmentCreateManufacturing
 
     // khoi tao cac view cua screen 2
 
+    fun generateMonthYearList(startDate: String, endDate: String): List<String> {
+        val df = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val dayStart = format.parse(startDate)
+        val dayEnd = format.parse(endDate)
+        val formatter = SimpleDateFormat("MM-yyyy", Locale.getDefault())
+        val monthYearList: MutableList<String> = ArrayList()
+
+        val calendar = Calendar.getInstance()
+        calendar.time = dayStart
+
+        val endCalendar = Calendar.getInstance()
+        endCalendar.time = dayEnd
+
+        while (!calendar.after(endCalendar)) {
+            val monthYear = formatter.format(calendar.time)
+            monthYearList.add(monthYear)
+            calendar.add(Calendar.MONTH, 1)
+        }
+
+        return monthYearList
+    }
+
+    fun sort(l : MutableList<WorkerScheduleRequest>): List<WorkerScheduleRequest> {
+        val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        l.forEach { e ->
+            e.month = "${e.index2+1}-${e.month}"
+        }
+        return l.sortedWith(compareBy({formatter.parse(it.month)},{it.index1}))
+    }
+
+    fun checkDateContinue(l : MutableList<WorkerScheduleRequest>,numberTurns :Int) : Boolean {
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        if(l.size == 0 || l.size == 1) return true
+        val listSorted =  l.sortedWith(compareBy({dateFormat.parse("${it.index2+1}-${it.month}")},{it.index1}))
+        val t = listSorted[listSorted.size - 1]
+        val e = listSorted[listSorted.size-2]
+        val f = listSorted[0]
+        val f2 = listSorted[1]
+        var result = true
+        var tDay = dateFormat.parse("${t.index2}-${t.month}")
+        var eDay = dateFormat.parse("${e.index2}-${e.month}")
+        val tCalendar = Calendar.getInstance()
+        val eCalendar = Calendar.getInstance()
+        tCalendar.time = tDay
+        eCalendar.time = eDay
+        if(tCalendar.time == eCalendar.time){
+            result =  if(numberTurns == 1) t.index1 == e.index1
+            else (t.index1 - 1) == e.index1
+        }
+        tCalendar.add(Calendar.DAY_OF_MONTH, -1)
+        if(tCalendar.time == eCalendar.time){
+            result = if(numberTurns == 1)  t.index1 == e.index1
+            else  t.index1 == 0 && e.index1 == numberTurns-1
+        }
+        tDay = dateFormat.parse("${f2.index2}-${f2.month}")
+        eDay = dateFormat.parse("${f.index2}-${f.month}")
+        tCalendar.time = tDay
+        eCalendar.time = eDay
+        if(tCalendar.time == eCalendar.time){
+            result =  if(numberTurns == 1) f.index1 == f2.index1 && result
+            else (f2.index1 - 1) == f.index1 && result
+        }
+        tCalendar.add(Calendar.DAY_OF_MONTH, -1)
+        if(tCalendar.time == eCalendar.time){
+            result = if(numberTurns == 1)  f.index1 == f2.index1 && result
+            else  f2.index1 == 0 && f.index1 == numberTurns-1 && result
+        }
+        return result
+    }
 
 }

@@ -39,7 +39,7 @@ class NetworkModule {
 //        const val BASE_URL_DEV = "http://192.168.1.3:8000"
         const val BASE_URL_DEV = "http://119.17.214.105:8000"
         const val BASE_URL_MANUFACTURING_SERVICE = "119.17.214.105:8000/msf"
-        const val IS_LIVE = false
+        const val IS_LIVE = true
         private const val CONNECT_TIMEOUT = 120L
         private const val READ_TIMEOUT = 120L
         private const val WRITE_TIMEOUT = 120L

@@ -708,62 +708,64 @@ class WorkplaceFragment : BaseFragment<FragmentWorkplaceBinding>() {
                 url = "/change-role"
             )
         )
-        listMenu.add(
-            1,
-            MenuModel(
-                id = "report_overview",
-                category = "overview-report",
-                level = 2,
-                iconStart = R.drawable.ic_home,
-                desc = "Báo cáo tổng quan",
-                url = "",
-                iconEnd = R.drawable.ic_down_menu
+        if(!NetworkModule.IS_LIVE) {
+            listMenu.add(
+                1,
+                MenuModel(
+                    id = "report_overview",
+                    category = "overview-report",
+                    level = 2,
+                    iconStart = R.drawable.ic_home,
+                    desc = "Báo cáo tổng quan",
+                    url = "",
+                    iconEnd = R.drawable.ic_down_menu
+                )
             )
-        )
-        listMenu.add(
-            2,
-            MenuModel(
-                id = "report_financial",
-                category = "overview-report",
-                level = 3,
-                iconStart = R.drawable.ic_business_report,
-                desc = "Báo cáo tài chính",
-                url = "/report-financial"
+            listMenu.add(
+                2,
+                MenuModel(
+                    id = "report_financial",
+                    category = "overview-report",
+                    level = 3,
+                    iconStart = R.drawable.ic_business_report,
+                    desc = "Báo cáo tài chính",
+                    url = "/report-financial"
+                )
             )
-        )
-        listMenu.add(
-            2,
-            MenuModel(
-                id = "report_sale",
-                category = "overview-report",
-                level = 3,
-                iconStart = R.drawable.ic_sales_report,
-                desc = "Báo cáo kinh doanh",
-                url = "/report-sale"
+            listMenu.add(
+                2,
+                MenuModel(
+                    id = "report_sale",
+                    category = "overview-report",
+                    level = 3,
+                    iconStart = R.drawable.ic_sales_report,
+                    desc = "Báo cáo kinh doanh",
+                    url = "/report-sale"
+                )
             )
-        )
-        listMenu.add(
-            2,
-            MenuModel(
-                id = "report_manufacturing",
-                category = "overview-report",
-                level = 3,
-                iconStart = R.drawable.ic_report_manufacturing,
-                desc = "Báo cáo sản xuất",
-                url = "/report-manufacturing"
+            listMenu.add(
+                2,
+                MenuModel(
+                    id = "report_manufacturing",
+                    category = "overview-report",
+                    level = 3,
+                    iconStart = R.drawable.ic_report_manufacturing,
+                    desc = "Báo cáo sản xuất",
+                    url = "/report-manufacturing"
+                )
             )
-        )
-        listMenu.add(
-            2,
-            MenuModel(
-                id = "report_warehouse",
-                category = "overview-report",
-                level = 3,
-                iconStart = R.drawable.ic_report_warehouse,
-                desc = "Báo cáo kho hàng",
-                url = "/report-warehouse"
+            listMenu.add(
+                2,
+                MenuModel(
+                    id = "report_warehouse",
+                    category = "overview-report",
+                    level = 3,
+                    iconStart = R.drawable.ic_report_warehouse,
+                    desc = "Báo cáo kho hàng",
+                    url = "/report-warehouse"
+                )
             )
-        )
+        }
 
     }
 

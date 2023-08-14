@@ -531,7 +531,7 @@ class DashboardManufacturingCommandFragment : BaseFragment<FragmentDashboardManu
         } else {
             var data = listOf(
                 Pair(numberCommandProgress.arrayTrueCommands, "Đúng tiến độ"),
-                Pair(numberCommandProgress.arraySlowCommands, "Chậm tiến độ"),
+                Pair(numberCommandProgress.arrayslowCommands, "Chậm tiến độ"),
                 Pair(numberCommandProgress.arrayExpiredCommands, "Quá hạn"),
             ).filterNot { it.first.isNullOrEmpty() }
             adapterDetail.items = data

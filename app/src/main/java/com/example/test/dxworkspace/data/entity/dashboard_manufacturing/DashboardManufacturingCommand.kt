@@ -46,7 +46,7 @@ data class DashboardManufacturingCommandByProgress(
     var slowCommands : Int? = 0,
     var expiredCommands : Int? =0 ,
     var arrayTrueCommands : List<DashboardManufacturingCommandModel>? = emptyList(),
-    var arraySlowCommands : List<DashboardManufacturingCommandModel>? = emptyList(),
+    var arrayslowCommands : List<DashboardManufacturingCommandModel>? = emptyList(),
     var arrayExpiredCommands : List<DashboardManufacturingCommandModel>? = emptyList(),
 ) {
     override fun equals(other: Any?): Boolean {
